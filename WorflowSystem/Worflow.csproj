@@ -1,0 +1,36 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Migrations\20221227162955_Inicial.cs" />
+    <Compile Remove="Migrations\20221227162955_Inicial.Designer.cs" />
+    <Compile Remove="Migrations\20221227163651_Inicial.cs" />
+    <Compile Remove="Migrations\20221227163651_Inicial.Designer.cs" />
+    <Compile Remove="Migrations\20221227210604_Initial.cs" />
+    <Compile Remove="Migrations\20221227210604_Initial.Designer.cs" />
+    <Compile Remove="Migrations\20221227211756_Initial.cs" />
+    <Compile Remove="Migrations\20221227211756_Initial.Designer.cs" />
+    <Compile Remove="Migrations\20221227214341_Inicial.cs" />
+    <Compile Remove="Migrations\20221227214341_Inicial.Designer.cs" />
+    <Compile Remove="Migrations\20221227215942_Inicial.cs" />
+    <Compile Remove="Migrations\20221227215942_Inicial.Designer.cs" />
+    <Compile Remove="Migrations\20221227221432_Inicial.cs" />
+    <Compile Remove="Migrations\20221227221432_Inicial.Designer.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="3.0.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="3.1.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.InMemory" Version="3.1.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.1.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="3.1.0">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.Extensions.Logging.Console" Version="2.1.1" />
+  </ItemGroup>
+
+</Project>
