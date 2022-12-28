@@ -3,7 +3,17 @@
 namespace Worflow.Models
 {
     public class Produto
-    {       
+    {
+        public Produto()
+        {
+
+        }
+        public Produto(Segmento segmento, string descricao)
+        {
+            Segmento = segmento;
+            Descricao = descricao;
+            Ativo = true;
+        }
         public int Id { get; set; }        
 
         [Display(Name = "Descrição")]

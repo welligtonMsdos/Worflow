@@ -19,6 +19,8 @@
     <Compile Remove="Migrations\20221227215942_Inicial.Designer.cs" />
     <Compile Remove="Migrations\20221227221432_Inicial.cs" />
     <Compile Remove="Migrations\20221227221432_Inicial.Designer.cs" />
+    <Compile Remove="Migrations\20221227221712_Inicial.cs" />
+    <Compile Remove="Migrations\20221227221712_Inicial.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>
@@ -30,6 +32,10 @@
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Migrations\" />
   </ItemGroup>
 
 </Project>

@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Worflow.Migrations
 {
-    public partial class Inicial : Migration
+    public partial class Initial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -141,7 +141,6 @@ namespace Worflow.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     UsuarioId = table.Column<int>(nullable: false),
                     ClienteId = table.Column<int>(nullable: false),
-                    SegmentoId = table.Column<int>(nullable: false),
                     ProdutoId = table.Column<int>(nullable: false),
                     StatusId = table.Column<int>(nullable: false),
                     DataAgendada = table.Column<DateTime>(type: "datetime", nullable: false),
@@ -160,12 +159,6 @@ namespace Worflow.Migrations
                         name: "FK_Lead_Produto_ProdutoId",
                         column: x => x.ProdutoId,
                         principalTable: "Produto",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_Lead_Segmento_SegmentoId",
-                        column: x => x.SegmentoId,
-                        principalTable: "Segmento",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
@@ -262,11 +255,6 @@ namespace Worflow.Migrations
                 name: "IX_Lead_ProdutoId",
                 table: "Lead",
                 column: "ProdutoId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Lead_SegmentoId",
-                table: "Lead",
-                column: "SegmentoId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Lead_StatusId",

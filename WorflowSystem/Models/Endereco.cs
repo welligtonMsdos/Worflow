@@ -4,6 +4,20 @@ namespace Worflow.Models
 {
     public class Endereco
     {
+        public Endereco()
+        {
+
+        }
+
+        public Endereco(string cep, string logadouro,string numero,string bairro,string cidade,string uf)
+        {
+            CEP = cep;
+            Logadouro = logadouro;
+            Numero = numero;
+            Bairro = bairro;
+            Cidade = cidade;
+            UF = uf;
+        }
         public int Id { get; set; }
 
         [Required(ErrorMessage = "CEP é obrigatório")]

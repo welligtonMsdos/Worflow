@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Worflow.Seeding;
 
 namespace WorflowSystem
 {
@@ -13,6 +14,8 @@ namespace WorflowSystem
     {
         public static void Main(string[] args)
         {
+            DataBaseGenerator.Seed();
+
             CreateHostBuilder(args).Build().Run();
         }
 

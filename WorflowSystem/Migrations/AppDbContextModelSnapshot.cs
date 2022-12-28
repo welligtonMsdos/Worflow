@@ -133,9 +133,6 @@ namespace Worflow.Migrations
                     b.Property<int>("ProdutoId")
                         .HasColumnType("int");
 
-                    b.Property<int>("SegmentoId")
-                        .HasColumnType("int");
-
                     b.Property<int>("StatusId")
                         .HasColumnType("int");
 
@@ -147,8 +144,6 @@ namespace Worflow.Migrations
                     b.HasIndex("ClienteId");
 
                     b.HasIndex("ProdutoId");
-
-                    b.HasIndex("SegmentoId");
 
                     b.HasIndex("StatusId");
 
@@ -374,12 +369,6 @@ namespace Worflow.Migrations
                     b.HasOne("Worflow.Models.Produto", "Produto")
                         .WithMany()
                         .HasForeignKey("ProdutoId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Worflow.Models.Segmento", "Segmento")
-                        .WithMany()
-                        .HasForeignKey("SegmentoId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 

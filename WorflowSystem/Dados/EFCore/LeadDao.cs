@@ -18,8 +18,7 @@ namespace Worflow.Dados.EFCore
         {
             return _context.Lead
                 .Include(x => x.Usuario)
-                .Include(x => x.Cliente)
-                .Include(x => x.Segmento)
+                .Include(x => x.Cliente)               
                 .Include(x => x.Produto)
                 .Include(x => x.Status)
                 .First(x => x.Id == id);
@@ -29,8 +28,7 @@ namespace Worflow.Dados.EFCore
         {
             return _context.Lead
                 .Include(x => x.Usuario)
-                .Include(x => x.Cliente)
-                .Include(x => x.Segmento)
+                .Include(x => x.Cliente)               
                 .Include(x => x.Produto)
                 .Include(x => x.Status)
                 .OrderByDescending(x => x.Id)

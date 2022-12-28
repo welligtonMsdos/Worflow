@@ -3,7 +3,34 @@
 namespace Worflow.Models
 {
     public class Cliente
-    {       
+    {
+        public Cliente()
+        {
+
+        }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="endereco"></param>
+        /// <param name="cnpj"></param>
+        /// <param name="razaoSocial"></param>
+        /// <param name="fantasia"></param>
+        /// <param name="agencia"></param>
+        /// <param name="conta"></param>
+        /// <param name="email"></param>
+        /// <param name="telefone"></param>
+        public Cliente(Endereco endereco, string cnpj,string razaoSocial,string fantasia,string agencia,string conta,string email,string telefone)
+        {
+            Endereco = endereco;
+            CNPJ = cnpj;
+            RazaoSocial = razaoSocial;
+            Fantasia = fantasia;
+            Agencia = agencia;
+            Conta = conta;
+            Email = email;
+            Telefone = telefone;
+        }
+        
         public int Id { get; set; }
 
         [Required(ErrorMessage = "Endereço é obrigatório")]
