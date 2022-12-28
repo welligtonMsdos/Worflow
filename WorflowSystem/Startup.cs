@@ -1,14 +1,12 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Worflow.Dados.EFCore;
+using Worflow.Dados.Interfaces;
+using Worflow.Repository;
+using Worflow.Services;
 
 namespace WorflowSystem
 {
@@ -24,6 +22,17 @@ namespace WorflowSystem
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddTransient<IClienteDao, ClienteDao>();
+            services.AddTransient<IEnderecoDao, EnderecoDao>();
+            services.AddTransient<ILeadDao, LeadDao>();
+            services.AddTransient<IPerfilDao, PerfilDao>();
+            services.AddTransient<IProdutoDao, ProdutoDao>();
+            services.AddTransient<ISegmentoDao, SegmentoDao>();
+            services.AddTransient<IStatusDao, StatusDao>();
+            services.AddTransient<IUsuarioDao, UsuarioDao>();
+
+            services.AddTransient<IAdminService, AdminService>();
+
             services.AddDbContext<AppDbContext>();
             services.AddControllersWithViews()
                  .AddNewtonsoftJson(options =>

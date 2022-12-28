@@ -14,7 +14,7 @@ namespace WorflowSystem
     {
         public static void Main(string[] args)
         {
-            DataBaseGenerator.Seed();
+            //DataBaseGenerator.Seed();
 
             CreateHostBuilder(args).Build().Run();
         }

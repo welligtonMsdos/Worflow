@@ -13,7 +13,7 @@ namespace Worflow.Models
         }
         public int Id { get; set; }
 
-        [Display(Name = "Descrição")]
+        [Display(Name = "Perfil")]
         public string Descricao { get; set; }
 
         public bool Ativo { get; set; }

@@ -1,0 +1,15 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using Worflow.Models;
+
+namespace Worflow.Dados.Interfaces
+{
+    public interface IAdminService
+    {
+        ICollection<Usuario> BuscarUsuarios();
+        ICollection<Endereco> BuscarEnderecos();
+        ICollection<Cliente> BuscarClientes();
+    }
+}
