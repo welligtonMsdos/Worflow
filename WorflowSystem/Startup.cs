@@ -30,8 +30,8 @@ namespace WorflowSystem
             services.AddTransient<ISegmentoDao, SegmentoDao>();
             services.AddTransient<IStatusDao, StatusDao>();
             services.AddTransient<IUsuarioDao, UsuarioDao>();
-
-            services.AddTransient<IAdminService, AdminService>();
+         
+            services.AddTransient<IUsuarioService, UsuarioService>();
 
             services.AddDbContext<AppDbContext>();
             services.AddControllersWithViews()

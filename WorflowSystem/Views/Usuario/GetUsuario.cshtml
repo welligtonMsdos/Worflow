@@ -1,0 +1,53 @@
+﻿@model IEnumerable<Worflow.Models.Usuario>
+
+@{
+    ViewData["Title"] = "GetUsuario";    
+}
+
+<p>
+
+    <button type="button" class="btn btn-Acoes" onclick="location.href='@Url.Action("Create", "Usuario")'">Novo</button>
+
+</p>
+
+<div class="table-responsive">
+
+    <table class="table">
+        <thead class="tableCabecalho">
+            <tr>               
+                <th>
+                    @Html.DisplayNameFor(model => model.Nome)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Ativo)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Perfil.Descricao)
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>                    
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Nome)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Ativo)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Perfil.Descricao)
+                    </td>
+                    <td style="text-align:end">
+                        <button type="button" class="btn btn-Acoes" onclick="location.href='@Url.Action("Editar", "Usuario", new { id = item.Id })'">Editar</button>
+                        <button type="button" class="btn btn-Acoes" onclick="location.href='@Url.Action("Detalhes", "Usuario", new { id = item.Id })'">Detalhes</button>
+                        <button type="button" class="btn btn-Excluir" onclick="location.href='@Url.Action("Excluir", "Usuario", new { id = item.Id })'">Excluir</button>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+</div>

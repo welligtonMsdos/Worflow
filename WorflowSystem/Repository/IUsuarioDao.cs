@@ -5,5 +5,6 @@ namespace Worflow.Repository
 {
     public interface IUsuarioDao : IQuery<Usuario>, ICommand<Usuario>
     {
+        bool UsuarioExiste(Usuario obj);
     }
 }

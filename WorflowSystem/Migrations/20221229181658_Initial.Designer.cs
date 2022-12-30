@@ -10,7 +10,7 @@ using Worflow.Dados.EFCore;
 namespace Worflow.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20221228202629_Initial")]
+    [Migration("20221229181658_Initial")]
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -317,6 +317,9 @@ namespace Worflow.Migrations
 
                     b.Property<int>("PerfilId")
                         .HasColumnType("int");
+
+                    b.Property<string>("RACF")
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 

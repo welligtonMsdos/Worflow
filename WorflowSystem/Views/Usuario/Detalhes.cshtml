@@ -1,0 +1,53 @@
+﻿@model Worflow.Models.Usuario
+
+@{
+    ViewData["Title"] = "Detalhes";
+}
+
+<h4>Usuários</h4>
+
+<div class="card">    
+
+    <div class="card-body">
+        <form>
+            <fieldset disabled>
+
+                <div class="form-row">
+
+                    <div class="col mb-3">
+                        <label>Nome</label>
+                        <input type="text" class="form-control" value='@Model.Nome'>                       
+                    </div>                   
+
+                    <div class="col mb-3">
+                        <label>RACF</label>
+                        <input type="text" class="form-control" value=@Model.RACF />
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col mb-3">
+                        <div class="custom-control custom-checkbox">
+                            <input type="checkbox" class="custom-control-input" checked='@Model.Ativo'>
+                            <label class="custom-control-label">Ativo</label>
+                        </div>                        
+                    </div>
+                    <div class="col mb-3">
+                        <label>Perfil</label>
+                        <input type="text" class="form-control" value=@Model.Perfil.Descricao />                       
+                    </div>
+                </div>
+
+            </fieldset>
+                
+        </form>
+    </div>
+
+    <div class="card-footer" style="text-align:end">     
+        <button type="button" class="btn btn-Acoes" onclick="location.href='@Url.Action("GetUsuario", "Usuario")'">Voltar</button>
+    </div>
+
+</div>
+
+   
+

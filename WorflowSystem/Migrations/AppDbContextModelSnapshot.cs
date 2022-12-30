@@ -316,6 +316,9 @@ namespace Worflow.Migrations
                     b.Property<int>("PerfilId")
                         .HasColumnType("int");
 
+                    b.Property<string>("RACF")
+                        .HasColumnType("nvarchar(max)");
+
                     b.HasKey("Id");
 
                     b.HasIndex("Nome")

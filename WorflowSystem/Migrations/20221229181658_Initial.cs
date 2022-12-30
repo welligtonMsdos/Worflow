@@ -100,6 +100,7 @@ namespace Worflow.Migrations
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Nome = table.Column<string>(type: "varchar(150)", nullable: false),
+                    RACF = table.Column<string>(nullable: true),
                     Ativo = table.Column<bool>(type: "bit", nullable: false),
                     PerfilId = table.Column<int>(nullable: false)
                 },
@@ -203,18 +204,18 @@ namespace Worflow.Migrations
 
             migrationBuilder.InsertData(
                 table: "Usuario",
-                columns: new[] { "Id", "Ativo", "Nome", "PerfilId" },
-                values: new object[] { 1, true, "Lionel Messi", 1 });
+                columns: new[] { "Id", "Ativo", "Nome", "PerfilId", "RACF" },
+                values: new object[] { 1, true, "Lionel Messi", 1, null });
 
             migrationBuilder.InsertData(
                 table: "Usuario",
-                columns: new[] { "Id", "Ativo", "Nome", "PerfilId" },
-                values: new object[] { 2, true, "Cristiano Ronaldo", 1 });
+                columns: new[] { "Id", "Ativo", "Nome", "PerfilId", "RACF" },
+                values: new object[] { 2, true, "Cristiano Ronaldo", 1, null });
 
             migrationBuilder.InsertData(
                 table: "Usuario",
-                columns: new[] { "Id", "Ativo", "Nome", "PerfilId" },
-                values: new object[] { 3, true, "Neymar Junior", 1 });
+                columns: new[] { "Id", "Ativo", "Nome", "PerfilId", "RACF" },
+                values: new object[] { 3, true, "Neymar Junior", 1, null });
 
             migrationBuilder.CreateIndex(
                 name: "IX_Cliente_EnderecoId",

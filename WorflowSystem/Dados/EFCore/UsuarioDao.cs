@@ -47,5 +47,10 @@ namespace Worflow.Dados.EFCore
             _context.Add(obj);
             _context.SaveChanges();
         }
+
+        public bool UsuarioExiste(Usuario obj)
+        {
+            return _context.Usuarios.Where(x => x.RACF.Contains(obj.RACF)).Count() > 0 ? true : false;
+        }
     }
 }
