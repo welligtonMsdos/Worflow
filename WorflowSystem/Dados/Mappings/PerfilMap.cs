@@ -22,7 +22,10 @@ namespace Worflow.Dados.Mappings
                   .IsRequired();
 
             builder.HasData(
-                new Perfil(1, "Consultor")
+                new Perfil(1, "Consultor"),
+                new Perfil(2, "Cotação"),
+                new Perfil(3, "Implantação"),
+                new Perfil(4, "Subscrição")
             );
         }
     }

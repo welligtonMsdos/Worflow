@@ -179,6 +179,24 @@ namespace Worflow.Migrations
                             Id = 1,
                             Ativo = true,
                             Descricao = "Consultor"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Ativo = true,
+                            Descricao = "Cotação"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Ativo = true,
+                            Descricao = "Implantação"
+                        },
+                        new
+                        {
+                            Id = 4,
+                            Ativo = true,
+                            Descricao = "Subscrição"
                         });
                 });
 
@@ -317,6 +335,7 @@ namespace Worflow.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("RACF")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
@@ -334,21 +353,24 @@ namespace Worflow.Migrations
                             Id = 1,
                             Ativo = true,
                             Nome = "Lionel Messi",
-                            PerfilId = 1
+                            PerfilId = 1,
+                            RACF = "LIOMES"
                         },
                         new
                         {
                             Id = 2,
                             Ativo = true,
                             Nome = "Cristiano Ronaldo",
-                            PerfilId = 1
+                            PerfilId = 1,
+                            RACF = "CRISRO"
                         },
                         new
                         {
                             Id = 3,
                             Ativo = true,
                             Nome = "Neymar Junior",
-                            PerfilId = 1
+                            PerfilId = 1,
+                            RACF = "NEYJU"
                         });
                 });
 

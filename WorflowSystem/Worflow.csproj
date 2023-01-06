@@ -23,9 +23,16 @@
     <Compile Remove="Migrations\20221227221712_Inicial.Designer.cs" />
     <Compile Remove="Migrations\20221228202629_Initial.cs" />
     <Compile Remove="Migrations\20221228202629_Initial.Designer.cs" />
+    <Compile Remove="Migrations\20221229181658_Initial.cs" />
+    <Compile Remove="Migrations\20221229181658_Initial.Designer.cs" />
+    <Compile Remove="Migrations\20230105175751_Initial.cs" />
+    <Compile Remove="Migrations\20230105175751_Initial.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="bootstrap" Version="5.2.3" />
+    <PackageReference Include="bootstrap-select" Version="1.13.18" />
+    <PackageReference Include="Font.Awesome" Version="5.15.4" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="3.1.0" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="3.1.0" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.InMemory" Version="3.1.0" />

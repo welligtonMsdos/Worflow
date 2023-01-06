@@ -100,7 +100,7 @@ namespace Worflow.Migrations
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Nome = table.Column<string>(type: "varchar(150)", nullable: false),
-                    RACF = table.Column<string>(nullable: true),
+                    RACF = table.Column<string>(nullable: false),
                     Ativo = table.Column<bool>(type: "bit", nullable: false),
                     PerfilId = table.Column<int>(nullable: false)
                 },
@@ -179,7 +179,13 @@ namespace Worflow.Migrations
             migrationBuilder.InsertData(
                 table: "Perfil",
                 columns: new[] { "Id", "Ativo", "Descricao" },
-                values: new object[] { 1, true, "Consultor" });
+                values: new object[,]
+                {
+                    { 1, true, "Consultor" },
+                    { 2, true, "Cotação" },
+                    { 3, true, "Implantação" },
+                    { 4, true, "Subscrição" }
+                });
 
             migrationBuilder.InsertData(
                 table: "Segmento",
@@ -205,17 +211,17 @@ namespace Worflow.Migrations
             migrationBuilder.InsertData(
                 table: "Usuario",
                 columns: new[] { "Id", "Ativo", "Nome", "PerfilId", "RACF" },
-                values: new object[] { 1, true, "Lionel Messi", 1, null });
+                values: new object[] { 1, true, "Lionel Messi", 1, "LIOMES" });
 
             migrationBuilder.InsertData(
                 table: "Usuario",
                 columns: new[] { "Id", "Ativo", "Nome", "PerfilId", "RACF" },
-                values: new object[] { 2, true, "Cristiano Ronaldo", 1, null });
+                values: new object[] { 2, true, "Cristiano Ronaldo", 1, "CRISRO" });
 
             migrationBuilder.InsertData(
                 table: "Usuario",
                 columns: new[] { "Id", "Ativo", "Nome", "PerfilId", "RACF" },
-                values: new object[] { 3, true, "Neymar Junior", 1, null });
+                values: new object[] { 3, true, "Neymar Junior", 1, "NEYJU" });
 
             migrationBuilder.CreateIndex(
                 name: "IX_Cliente_EnderecoId",

@@ -1,11 +1,10 @@
 ﻿using Microsoft.AspNetCore.Mvc.Rendering;
 using System.Collections.Generic;
-using Worflow.Dados.Interfaces;
 using Worflow.Models;
 
-namespace Worflow.Repository
+namespace Worflow.Dados.Interfaces
 {
-    public interface IPerfilDao : IQuery<Perfil>, IQueryDescription<Perfil>
+    public interface IPerfilService
     {
         List<SelectListItem> BuscarPerfilSelectItem();
 

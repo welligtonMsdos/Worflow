@@ -27,9 +27,9 @@ namespace Worflow.Dados.Mappings
                 .OnDelete(DeleteBehavior.NoAction);          
 
             builder.HasData(
-               new Usuario(1,"Lionel Messi", 1),
-               new Usuario(2, "Cristiano Ronaldo", 1),
-               new Usuario(3, "Neymar Junior", 1)
+               new Usuario(1,"Lionel Messi","LIOMES", 1),
+               new Usuario(2, "Cristiano Ronaldo","CRISRO", 1),
+               new Usuario(3, "Neymar Junior", "NEYJU", 1)
            );
         }
     }

@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using Microsoft.AspNetCore.Mvc.Rendering;
+using System.Collections.Generic;
 using System.Linq;
 using Worflow.Models;
 using Worflow.Repository;
@@ -12,6 +13,20 @@ namespace Worflow.Dados.EFCore
         public PerfilDao(AppDbContext context)
         {
             _context = context;
+        }
+
+        public List<Perfil> BuscarPerfilList()
+        {
+            return _context.Perfis.ToList();
+        }
+
+        public List<SelectListItem> BuscarPerfilSelectItem()
+        {
+            return _context.Perfis.Select(x => new SelectListItem()
+            {
+                Value = x.Id.ToString(),
+                Text = x.Descricao
+            }).ToList();
         }
 
         public ICollection<Perfil> BuscarPorDescricao(string descricao)
