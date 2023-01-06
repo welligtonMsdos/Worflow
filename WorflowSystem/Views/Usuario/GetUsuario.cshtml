@@ -1,7 +1,7 @@
 ﻿@model IEnumerable<Worflow.Models.Usuario>
 
 @{
-    ViewData["Title"] = "GetUsuario";    
+    ViewData["Title"] = "GetUsuario";
 }
 
 <p>
@@ -14,7 +14,7 @@
 
     <table class="table">
         <thead class="tableCabecalho">
-            <tr>               
+            <tr>
                 <th>
                     @Html.DisplayNameFor(model => model.Nome)
                 </th>
@@ -30,7 +30,7 @@
         <tbody>
             @foreach (var item in Model)
             {
-                <tr>                    
+                <tr>
                     <td>
                         @Html.DisplayFor(modelItem => item.Nome)
                     </td>
@@ -41,9 +41,17 @@
                         @Html.DisplayFor(modelItem => item.Perfil.Descricao)
                     </td>
                     <td style="text-align:end">
+
                         <button type="button" class="btn btn-Acoes" onclick="location.href='@Url.Action("Editar", "Usuario", new { id = item.Id })'">Editar</button>
+
                         <button type="button" class="btn btn-Acoes" onclick="location.href='@Url.Action("Detalhes", "Usuario", new { id = item.Id })'">Detalhes</button>
-                        <button type="button" class="btn btn-Excluir" onclick="location.href='@Url.Action("Excluir", "Usuario", new { id = item.Id })'">Excluir</button>
+
+                        <button type="button"
+                                class="btn btn-Excluir delete"
+                                data-id = "@item.Id">
+                            Excluir
+                        </button>
+                       
                     </td>
                 </tr>
             }
@@ -51,3 +59,10 @@
     </table>
 
 </div>
+
+<div id="modal" class="modal fade" role="dialog" />
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
+
