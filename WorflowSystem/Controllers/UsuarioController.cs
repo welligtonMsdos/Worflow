@@ -79,21 +79,27 @@ namespace Worflow.Controllers
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
 
-        public ActionResult _Excluir(int id)
-        {
-            var usuario = _usuarioService.BuscarPorId(id);
-
-            return View(usuario);
-        }
-
-        [Route("Excluir/{id}")]
+        [Route("Excluir")]
         public ActionResult Excluir(int id)
         {
-            var usuario = _usuarioService.BuscarPorId(id);
+            if(id > 0) {
+                var usuario = _usuarioService.BuscarPorId(id);
 
-            _usuarioService.Excluir(usuario);
+                _usuarioService.Excluir(usuario);
 
-            return RedirectToAction("GetUsuario", "Usuario");
+                return RedirectToAction("GetUsuario", "Usuario");
+            }
+
+            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+        }
+
+        [Route("Pesquisar")]
+        public ActionResult Pesquisar(string pesquisar)
+        {
+            var usuarios = _usuarioService.Pesquisar(pesquisar);
+
+            return View("GetUsuario", usuarios);
         }
     }
 }
+

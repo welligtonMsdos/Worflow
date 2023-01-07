@@ -1,66 +1,44 @@
 ﻿@model IEnumerable<Worflow.Models.Usuario>
 
 @{
-    ViewData["Title"] = "GetUsuario";
+    ViewData["Title"] = "GetUsuario";   
 }
 
-<p>
+<form asp-action="Pesquisar">
 
-    <button type="button" class="btn btn-Acoes" onclick="location.href='@Url.Action("Create", "Usuario")'">Novo</button>
+    <div class="form-row align-items-center">
 
-</p>
+        <div class="col-8">
+            <div class="input-group mb-2">
+                <div class="input-group-prepend">
+                    <div class="input-group-text"><i class="fa-solid fa-magnifying-glass" style="color: var(--corPrincipal); margin-right: 5px"></i></div>
+                </div>
+                <input type="text" class="form-control" id="txtPesquisar" 
+                       name="pesquisar" placeholder="Nome, RACF">
+            </div>
+        </div>
+
+        <div class="col-2">
+            <button type="submit" class="btn btn-Pesquisa mb-2">Pesquisar</button>
+        </div>
+
+        <div class="col-2" style="text-align:end">
+            <button type="button" class="btn btn-Acoes mb-2" onclick="location.href='@Url.Action("Create", "Usuario")'">Novo</button>
+        </div>
+
+    </div>   
+
+</form>
 
 <div class="table-responsive">
 
-    <table class="table">
-        <thead class="tableCabecalho">
-            <tr>
-                <th>
-                    @Html.DisplayNameFor(model => model.Nome)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Ativo)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Perfil.Descricao)
-                </th>
-                <th></th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var item in Model)
-            {
-                <tr>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Nome)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Ativo)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Perfil.Descricao)
-                    </td>
-                    <td style="text-align:end">
-
-                        <button type="button" class="btn btn-Acoes" onclick="location.href='@Url.Action("Editar", "Usuario", new { id = item.Id })'">Editar</button>
-
-                        <button type="button" class="btn btn-Acoes" onclick="location.href='@Url.Action("Detalhes", "Usuario", new { id = item.Id })'">Detalhes</button>
-
-                        <button type="button"
-                                class="btn btn-Excluir delete"
-                                data-id = "@item.Id">
-                            Excluir
-                        </button>
-                       
-                    </td>
-                </tr>
-            }
-        </tbody>
-    </table>
+   <partial name="~/Views/Usuario/PartialViews/_TabelaUsuarios.cshtml" />
 
 </div>
 
-<div id="modal" class="modal fade" role="dialog" />
+@*<div id="modal" class="modal fade" role="dialog" />*@ 
+
+
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}

@@ -18,10 +18,5 @@ namespace Worflow.Services
         {
             return _perfilDao.BuscarPerfilList();
         }
-
-        public List<SelectListItem> BuscarPerfilSelectItem()
-        {
-            return _perfilDao.BuscarPerfilSelectItem();
-        }
     }
 }

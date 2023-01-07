@@ -1,0 +1,89 @@
+﻿@model IEnumerable<Worflow.Models.Usuario>
+@{
+
+}
+<table class="table">
+    <thead class="tableCabecalho">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Nome)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Ativo)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.RACF)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Perfil.Descricao)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Nome)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Ativo)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.RACF)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Perfil.Descricao)
+                </td>
+                <td style="text-align:end">
+
+                    <button type="button" class="btn btn-Acoes" onclick="location.href='@Url.Action("Editar", "Usuario", new { id = item.Id })'">Editar</button>
+
+                    <button type="button" class="btn btn-Acoes" onclick="location.href='@Url.Action("Detalhes", "Usuario", new { id = item.Id })'">Detalhes</button>                   
+
+                    <button type="button" class="btn btn-Excluir" data-toggle="modal" data-target="#modalExcluir" onclick="setIdExcluir(@item.Id)">
+                        Excluir
+                    </button>
+
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+
+<div class="modal fade" id="modalExcluir" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            
+            <div class="modal-header">
+                <h3 class="modal-title" id="exampleModalLabel">Excluir Usuários</h3>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+
+            <form asp-action="Excluir">
+                
+                <div class="modal-body">
+
+                    <h5>Deseja realmente excluir<i class="fa-regular fa-question ml-2" style="color: var(--corPrincipal); margin-right: 5px"></i></h5>
+
+                    <input type="text" name="id" id="id" hidden>
+
+                </div>
+
+                <div class="modal-footer">
+                    
+                    <button type="button" class="btn btn-Acoes mr-4" data-dismiss="modal">Não</button>
+
+                    <button type="submit" class="btn btn-Acoes">Sim</button>
+
+                </div>
+
+            </form>
+            
+        </div>
+    </div>
+</div>

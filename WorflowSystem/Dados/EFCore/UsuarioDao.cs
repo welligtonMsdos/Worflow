@@ -48,6 +48,18 @@ namespace Worflow.Dados.EFCore
             _context.SaveChanges();
         }
 
+        public ICollection<Usuario> Pesquisar(string value)
+        {
+            if (value == null)
+                return BuscarTodos();
+
+            return _context.Usuarios
+                 .Include(x => x.Perfil)
+                 .Where(x => x.Nome.Contains(value) || x.RACF.Contains(value)) 
+                 .OrderBy(x => x.Nome)
+                 .ToList();
+        }
+
         public bool UsuarioExiste(Usuario obj)
         {
             return _context.Usuarios.Where(x => x.RACF.Contains(obj.RACF)).Count() > 0 ? true : false;

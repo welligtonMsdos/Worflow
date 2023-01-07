@@ -6,8 +6,6 @@ namespace Worflow.Dados.Interfaces
 {
     public interface IPerfilService
     {
-        List<SelectListItem> BuscarPerfilSelectItem();
-
         List<Perfil> BuscarPerfilList();
     }
 }

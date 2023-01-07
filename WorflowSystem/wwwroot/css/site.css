@@ -83,6 +83,59 @@ body {
     color: var(--textoPrincipal);
 }
 
+.btn-Pesquisa {
+    color: var(--textoPrincipal);
+    background-color: var(--corSecundario);
+    border-color: var(--corSecundario);
+    font-weight: bold;
+}
+
+    .btn-Pesquisa:hover {
+        color: var(--textoPrincipal
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        );
+        background-color: var(--corSecundario);
+        border-color: var(--corSecundario);
+        font-weight: bold;
+    }
+
 .btn-Acoes {
     color: var(--textoSecundario);
     background-color: var(--corPrincipal);

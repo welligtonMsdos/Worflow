@@ -39,6 +39,11 @@ namespace Worflow.Services
             _usuarioDao.Incluir(obj);
         }
 
+        public ICollection<Usuario> Pesquisar(string value)
+        {
+            return _usuarioDao.Pesquisar(value);
+        }
+
         public bool UsuarioExiste(Usuario obj)
         {
             return _usuarioDao.UsuarioExiste(obj);
