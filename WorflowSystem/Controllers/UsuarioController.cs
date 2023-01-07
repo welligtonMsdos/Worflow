@@ -1,9 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
 using System.Diagnostics;
-using System.Linq;
-using System.Threading.Tasks;
 using Worflow.Dados.Interfaces;
 using Worflow.Models;
 using WorflowSystem.Models;
@@ -53,12 +49,13 @@ namespace Worflow.Controllers
             return View(usuario);
         }
 
-        [Route("Salvar")]
-        public ActionResult Salvar(Usuario usuario)
+        [Route("InserirUsuarios")]
+        public ActionResult InserirUsuarios(Usuario usuario)
         {           
             if (ModelState.IsValid)
             {
-                _usuarioService.Incluir(usuario);
+                if (!_usuarioService.UsuarioExiste(usuario))
+                    _usuarioService.Incluir(usuario);
 
                 return RedirectToAction("GetUsuario", "Usuario");
             }
@@ -66,8 +63,8 @@ namespace Worflow.Controllers
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
         
-        [Route("SalvarEditar")]
-        public ActionResult SalvarEditar(Usuario usuario)
+        [Route("AtualizarUsuarios")]
+        public ActionResult AtualizarUsuarios(Usuario usuario)
         {
             if (ModelState.IsValid)
             {
@@ -79,8 +76,8 @@ namespace Worflow.Controllers
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
 
-        [Route("Excluir")]
-        public ActionResult Excluir(int id)
+        [Route("ExcluirUsuarios")]
+        public ActionResult ExcluirUsuarios(int id)
         {
             if(id > 0) {
                 var usuario = _usuarioService.BuscarPorId(id);
@@ -93,8 +90,8 @@ namespace Worflow.Controllers
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
 
-        [Route("Pesquisar")]
-        public ActionResult Pesquisar(string pesquisar)
+        [Route("PesquisarUsuarios")]
+        public ActionResult PesquisarUsuarios(string pesquisar)
         {
             var usuarios = _usuarioService.Pesquisar(pesquisar);
 

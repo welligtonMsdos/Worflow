@@ -1,0 +1,101 @@
+﻿@model IEnumerable<Worflow.Models.Endereco>
+@{
+
+}
+<table class="table">
+    <thead class="tableCabecalho">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.CEP)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Logadouro)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Numero)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Bairro)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Cidade)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.UF)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.CEP)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Logadouro)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Numero)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Bairro)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Cidade)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.UF)
+            </td>
+            <td style="text-align:end">
+
+                <button type="button" class="btn btn-Acoes" onclick="location.href='@Url.Action("Editar", "Endereco", new { id = item.Id })'">Editar</button>
+
+                <button type="button" class="btn btn-Acoes" onclick="location.href='@Url.Action("Detalhes", "Endereco", new { id = item.Id })'">Detalhes</button>
+
+                <button type="button" class="btn btn-Excluir" data-toggle="modal" data-target="#modalExcluir" onclick="setIdExcluir(@item.Id)">
+                    Excluir
+                </button>
+
+            </td>
+        </tr>
+        }
+    </tbody>
+</table>
+
+
+<div class="modal fade" id="modalExcluir" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+
+            <div class="modal-header">
+                <h3 class="modal-title" id="exampleModalLabel">Excluir Endereços</h3>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+
+            <form asp-action="Excluir">
+
+                <div class="modal-body">
+
+                    <h5>Deseja realmente excluir<i class="fa-regular fa-question ml-2" style="color: var(--corPrincipal); margin-right: 5px"></i></h5>
+
+                    <input type="text" name="id" id="id" hidden>
+
+                </div>
+
+                <div class="modal-footer">
+
+                    <button type="button" class="btn btn-Acoes mr-4" data-dismiss="modal">Não</button>
+
+                    <button type="submit" class="btn btn-Acoes">Sim</button>
+
+                </div>
+
+            </form>
+
+        </div>
+    </div>
+</div>

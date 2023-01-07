@@ -42,5 +42,18 @@ namespace Worflow.Dados.EFCore
             _context.Add(obj);
             _context.SaveChanges();
         }
+
+        public ICollection<Endereco> Pesquisar(string value)
+        {
+            if (value == null)
+                return BuscarTodos();
+
+            return _context.Enderecos
+               .Where(x => x.Logadouro.Contains(value) || 
+                           x.Bairro.Contains(value) || 
+                           x.Cidade.Contains(value))
+               .OrderBy(x => x.Logadouro)
+               .ToList();
+        }
     }
 }

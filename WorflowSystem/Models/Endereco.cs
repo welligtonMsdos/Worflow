@@ -25,7 +25,7 @@ namespace Worflow.Models
         public string CEP { get; set; }
 
         [Required(ErrorMessage = "Logadouro é obrigatório")]
-        [Display(Name = "Logadouro", Prompt = "Digite o Logadouro")]
+        [Display(Name = "Rua/Av", Prompt = "Digite o Logadouro")]
         public string Logadouro { get; set; }
 
         [Required(ErrorMessage = "Número é obrigatório")]

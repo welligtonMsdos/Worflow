@@ -33,6 +33,7 @@ namespace WorflowSystem
          
             services.AddTransient<IUsuarioService, UsuarioService>();
             services.AddTransient<IPerfilService, PerfilService>();
+            services.AddTransient<IEnderecoService, EnderecoService>();
 
             services.AddDbContext<AppDbContext>();
             services.AddControllersWithViews()

@@ -1,10 +1,10 @@
-﻿@model IEnumerable<Worflow.Models.Usuario>
+﻿@model IEnumerable<Worflow.Models.Endereco>
 
 @{
-    ViewData["Title"] = "GetUsuario";   
+    ViewData["Title"] = "GetEndereco";
 }
 
-<form asp-action="PesquisarUsuarios">
+<form asp-action="PesquisarEnderecos">
 
     <div class="form-row align-items-center">
 
@@ -13,8 +13,8 @@
                 <div class="input-group-prepend">
                     <div class="input-group-text"><i class="fa-solid fa-magnifying-glass" style="color: var(--corPrincipal); margin-right: 5px"></i></div>
                 </div>
-                <input type="text" class="form-control" id="txtPesquisar" 
-                       name="pesquisar" placeholder="Nome, RACF">
+                <input type="text" class="form-control" id="txtPesquisar"
+                       name="pesquisar" placeholder="Rua, Bairro, Cidade">
             </div>
         </div>
 
@@ -23,16 +23,16 @@
         </div>
 
         <div class="col-2" style="text-align:end">
-            <button type="button" class="btn btn-Acoes mb-2" onclick="location.href='@Url.Action("Create", "Usuario")'">Novo</button>
+            <button type="button" class="btn btn-Acoes mb-2" onclick="location.href='@Url.Action("Create", "Endereco")'">Novo</button>
         </div>
 
-    </div>   
+    </div>
 
 </form>
 
 <div class="table-responsive">
 
-   <partial name="~/Views/Usuario/PartialViews/_TabelaUsuarios.cshtml" />
+    <partial name="~/Views/Endereco/PartialViews/_TabelaEnderecos.cshtml" />
 
 </div>
 
