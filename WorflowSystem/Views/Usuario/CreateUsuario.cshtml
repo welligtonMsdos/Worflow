@@ -4,9 +4,9 @@
     ViewData["Title"] = "Create";
 }
 
-<h3><i class="fa-regular fa-plus" style="color: var(--corPrincipal); margin-right: 5px"></i>Editar Usuários</h3>
+<h3><i class="fa-regular fa-plus" style="color: var(--corPrincipal); margin-right: 5px"></i>Novo Usuário</h3>
 
-<form asp-action="InserirUsuarios">
+<form asp-action="InserirUsuario">
 
     <div class="card">
         <div class="card-body">
@@ -50,7 +50,7 @@
 
         <div class="card-footer" style="text-align:end">
 
-            <button type="button" class="btn btn-Acoes" onclick="location.href='@Url.Action("GetUsuario", "Usuario")'">Voltar</button>
+            <button type="button" class="btn btn-Acoes" onclick="location.href='@Url.Action("ListarUsuarios", "Usuario")'">Voltar</button>
 
             <input type="submit" value="Salvar" class="btn btn-Acoes" />
 

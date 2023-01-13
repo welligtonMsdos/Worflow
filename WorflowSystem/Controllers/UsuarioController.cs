@@ -16,21 +16,29 @@ namespace Worflow.Controllers
             _usuarioService = usuarioService;
             _perfilService = perfilService;
         }
-        public IActionResult GetUsuario()
+        public IActionResult ListarUsuarios()
         {
             var usuarios = _usuarioService.BuscarUsuarios();
             return View(usuarios);
         }
 
-        [Route("Detalhes/{id}")]
-        public ActionResult Detalhes(int id)
+        [Route("PesquisarUsuarios")]
+        public ActionResult PesquisarUsuarios(string pesquisar)
+        {
+            var usuarios = _usuarioService.Pesquisar(pesquisar);
+
+            return View("ListarUsuarios", usuarios);
+        }
+
+        [Route("DetalhesUsuario/{id}")]
+        public ActionResult DetalhesUsuario(int id)
         {
             var usuario = _usuarioService.BuscarPorId(id);
             return View(usuario);
         }
 
-        [Route("Editar/{id}")]
-        public ActionResult Editar(int id)
+        [Route("EditarUsuario/{id}")]
+        public ActionResult EditarUsuario(int id)
         {
             var usuario = _usuarioService.BuscarPorId(id);
 
@@ -39,8 +47,21 @@ namespace Worflow.Controllers
             return View(usuario);
         }
 
-        [Route("Create")]
-        public ActionResult Create()
+        [Route("AtualizarUsuario")]
+        public ActionResult AtualizarUsuario(Usuario usuario)
+        {
+            if (ModelState.IsValid)
+            {
+                _usuarioService.Alterar(usuario);
+
+                return RedirectToAction("ListarUsuarios", "Usuario");
+            }
+
+            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+        }
+
+        [Route("CreateUsuario")]
+        public ActionResult CreateUsuario()
         {
             var usuario = new Usuario();
 
@@ -49,54 +70,35 @@ namespace Worflow.Controllers
             return View(usuario);
         }
 
-        [Route("InserirUsuarios")]
-        public ActionResult InserirUsuarios(Usuario usuario)
+        [Route("InserirUsuario")]
+        public ActionResult InserirUsuario(Usuario usuario)
         {           
             if (ModelState.IsValid)
             {
                 if (!_usuarioService.UsuarioExiste(usuario))
                     _usuarioService.Incluir(usuario);
 
-                return RedirectToAction("GetUsuario", "Usuario");
+                return RedirectToAction("ListarUsuarios", "Usuario");
             }
 
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
-        }
-        
-        [Route("AtualizarUsuarios")]
-        public ActionResult AtualizarUsuarios(Usuario usuario)
-        {
-            if (ModelState.IsValid)
-            {
-                _usuarioService.Alterar(usuario);
+        }  
 
-                return RedirectToAction("GetUsuario", "Usuario");
-            }
-
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
-        }
-
-        [Route("ExcluirUsuarios")]
-        public ActionResult ExcluirUsuarios(int id)
+        [Route("ExcluirUsuario")]
+        public ActionResult ExcluirUsuario(int id)
         {
             if(id > 0) {
                 var usuario = _usuarioService.BuscarPorId(id);
 
                 _usuarioService.Excluir(usuario);
 
-                return RedirectToAction("GetUsuario", "Usuario");
+                return RedirectToAction("ListarUsuarios", "Usuario");
             }
 
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
 
-        [Route("PesquisarUsuarios")]
-        public ActionResult PesquisarUsuarios(string pesquisar)
-        {
-            var usuarios = _usuarioService.Pesquisar(pesquisar);
-
-            return View("GetUsuario", usuarios);
-        }
+        
     }
 }
 
