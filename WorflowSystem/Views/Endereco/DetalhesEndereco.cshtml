@@ -1,0 +1,58 @@
+﻿@model Worflow.Models.Endereco
+
+@{
+    ViewData["Title"] = "DetalhesEndereco";
+}
+
+<h3><i class="fa-solid fa-list" style="color: var(--corPrincipal); margin-right: 5px"></i>Detalhes Endereços</h3>
+
+<div class="card">
+
+    <div class="card-body">
+        <form>
+            <fieldset disabled>
+                <div class="row mb-3">
+
+                    <div class="col-2">
+                        <label>CEP</label>
+                        <input type="text" class="form-control" value='@Model.CEP'>
+                    </div>
+
+                    <div class="col-8">
+                        <label>Logadouro</label>
+                        <input type="text" class="form-control" value='@Model.Logadouro' />
+                    </div>
+
+                    <div class="col-2">
+                        <label>Número</label>
+                        <input type="text" class="form-control" value='@Model.Numero' />
+                    </div>
+                </div>
+
+                <div class="row mb-3">
+                    <div class="col-5">
+                        <label>Bairro</label>
+                        <input type="text" class="form-control" value='@Model.Bairro' />
+                    </div>
+
+                    <div class="col-5">
+                        <label>Cidade</label>
+                        <input type="text" class="form-control" value='@Model.Cidade' />
+                    </div>
+
+                    <div class="col-2">
+                        <label>UF</label>
+                        <input type="text" class="form-control" value='@Model.UF' />
+                    </div>
+
+                </div>
+
+            </fieldset>
+        </form>
+    </div>
+
+    <div class="card-footer" style="text-align:end">
+        <button type="button" class="btn btn-Acoes" onclick="location.href='@Url.Action("ListarEnderecos", "Endereco")'">Voltar</button>
+    </div>
+
+</div>

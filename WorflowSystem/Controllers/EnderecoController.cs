@@ -15,7 +15,7 @@ namespace Worflow.Controllers
             _enderecoService = enderecoService;
         }
 
-        public IActionResult GetEndereco()
+        public IActionResult ListarEnderecos()
         {
             var enderecos = _enderecoService.BuscarEnderecos();
             return View(enderecos);
@@ -25,8 +25,70 @@ namespace Worflow.Controllers
         public ActionResult PesquisarEnderecos(string pesquisar)
         {
             var enderecos = _enderecoService.Pesquisar(pesquisar);
+            return View("ListarEnderecos", enderecos);
+        }
 
-            return View("GetEndereco", enderecos);
+        [Route("DetalhesEndereco/{id}")]
+        public ActionResult DetalhesEndereco(int id)
+        {
+            var endereco = _enderecoService.BuscarPorId(id);
+            return View(endereco);
+        }
+
+        [Route("EditarEndereco/{id}")]
+        public ActionResult EditarEndereco(int id)
+        {
+            var endereco = _enderecoService.BuscarPorId(id);
+            return View(endereco);
+        }
+
+        [Route("AtualizarEndereco")]
+        public ActionResult AtualizarEndereco(Endereco endereco)
+        {
+            if (ModelState.IsValid)
+            {
+                _enderecoService.Alterar(endereco);
+
+                return RedirectToAction("ListarEnderecos", "Endereco");
+            }
+
+            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+        }
+
+        [Route("CreateEndereco")]
+        public ActionResult CreateEndereco()
+        {
+            var endereco = new Endereco();
+
+            return View(endereco);
+        }
+
+        [Route("InserirEndereco")]
+        public ActionResult InserirEndereco(Endereco endereco)
+        {
+            if (ModelState.IsValid)
+            {
+               _enderecoService.Incluir(endereco);
+
+                return RedirectToAction("ListarEnderecos", "Endereco");
+            }
+
+            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+        }
+
+        [Route("ExcluirEndereco")]
+        public ActionResult ExcluirEndereco(int id)
+        {
+            if (id > 0)
+            {
+                var endereco = _enderecoService.BuscarPorId(id);
+
+                _enderecoService.Excluir(endereco);
+
+                return RedirectToAction("ListarEnderecos", "Endereco");
+            }
+
+            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
     }
 }

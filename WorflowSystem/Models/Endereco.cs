@@ -21,11 +21,13 @@ namespace Worflow.Models
         public int Id { get; set; }
 
         [Required(ErrorMessage = "CEP é obrigatório")]
-        [Display(Name = "CEP", Prompt = "Digite o CEP")]
+        [Display(Name = "CEP", Prompt = "Digite o CEP")]       
+        [MinLength(8, ErrorMessage = "CEP necessita de 8 caracteres.")]       
         public string CEP { get; set; }
 
         [Required(ErrorMessage = "Logadouro é obrigatório")]
         [Display(Name = "Rua/Av", Prompt = "Digite o Logadouro")]
+        [MinLength(5, ErrorMessage = "Logadouro necessita de 5 caracteres.")]     
         public string Logadouro { get; set; }
 
         [Required(ErrorMessage = "Número é obrigatório")]
@@ -34,14 +36,17 @@ namespace Worflow.Models
 
         [Required(ErrorMessage = "Bairro é obrigatório")]
         [Display(Name = "Bairro", Prompt = "Digite o Bairro")]
+        [MinLength(3, ErrorMessage = "Bairro necessita de 3 caracteres.")]       
         public string Bairro { get; set; }
 
         [Required(ErrorMessage = "Cidade é obrigatória")]
         [Display(Name = "Cidade", Prompt = "Digite a Cidade")]
+        [MinLength(5, ErrorMessage = "Cidade necessita de 5 caracteres.")]      
         public string Cidade { get; set; }
 
         [Required(ErrorMessage = "UF é obrigatória")]
         [Display(Name = "UF", Prompt = "Digite a UF")]
+        [MinLength(2, ErrorMessage = "UF necessita de 2 caracteres.")]        
         public string UF { get; set; }
     }
 }

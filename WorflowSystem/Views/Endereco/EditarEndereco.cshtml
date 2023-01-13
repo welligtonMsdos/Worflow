@@ -1,0 +1,79 @@
+﻿@model Worflow.Models.Endereco
+
+@{
+    ViewData["Title"] = "EditarEndereco";  
+}
+
+<h3><i class="fa-regular fa-pen-to-square" style="color: var(--corPrincipal); margin-right: 5px"></i>Editar Endereço</h3>
+
+<form asp-action="AtualizarEndereco">
+
+    <div class="card">
+
+        <div class="card-body">
+
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            @Html.HiddenFor(model => model.Id, new { @class = "hid-id" })
+
+            <div class="row mb-3">
+
+                <div class="col-2">
+                    <label asp-for="CEP" class="control-label"></label>
+                    <input asp-for="CEP" class="form-control" value='@Model.CEP' />
+                    <span asp-validation-for="CEP" class="text-danger"></span>
+                </div>
+
+                <div class="col-8">
+                    <label asp-for="Logadouro" class="control-label"></label>
+                    <input asp-for="Logadouro" class="form-control" value='@Model.Logadouro' />
+                    <span asp-validation-for="Logadouro" class="text-danger"></span>
+                </div>
+
+                <div class="col-2">
+                    <label asp-for="Numero" class="control-label"></label>
+                    <input asp-for="Numero" class="form-control" value='@Model.Numero' />
+                    <span asp-validation-for="Numero" class="text-danger"></span>
+                </div>
+
+            </div>
+
+            <div class="row mb-3">
+
+                <div class="col-5">
+                    <label asp-for="Bairro" class="control-label"></label>
+                    <input asp-for="Bairro" class="form-control" value='@Model.Bairro' />
+                    <span asp-validation-for="Bairro" class="text-danger"></span>
+                </div>
+
+                <div class="col-5">
+                    <label asp-for="Cidade" class="control-label"></label>
+                    <input asp-for="Cidade" class="form-control" value='@Model.Cidade' />
+                    <span asp-validation-for="Cidade" class="text-danger"></span>
+                </div>
+
+                <div class="col-2">
+                    <label asp-for="UF" class="control-label"></label>
+                    <input asp-for="UF" class="form-control" value='@Model.UF' />
+                    <span asp-validation-for="UF" class="text-danger"></span>
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="card-footer" style="text-align:end">
+
+            <button type="button" class="btn btn-Acoes" onclick="location.href='@Url.Action("ListarEnderecos", "Endereco")'">Voltar</button>
+
+            <input type="submit" value="Salvar" class="btn btn-Acoes" />
+
+        </div>
+
+    </div>
+
+</form>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

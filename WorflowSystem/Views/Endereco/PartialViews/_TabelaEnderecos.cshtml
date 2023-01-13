@@ -50,9 +50,9 @@
             </td>
             <td style="text-align:end">
 
-                <button type="button" class="btn btn-Acoes" onclick="location.href='@Url.Action("Editar", "Endereco", new { id = item.Id })'">Editar</button>
+                <button type="button" class="btn btn-Acoes" onclick="location.href='@Url.Action("EditarEndereco", "Endereco", new { id = item.Id })'">Editar</button>
 
-                <button type="button" class="btn btn-Acoes" onclick="location.href='@Url.Action("Detalhes", "Endereco", new { id = item.Id })'">Detalhes</button>
+                <button type="button" class="btn btn-Acoes" onclick="location.href='@Url.Action("DetalhesEndereco", "Endereco", new { id = item.Id })'">Detalhes</button>
 
                 <button type="button" class="btn btn-Excluir" data-toggle="modal" data-target="#modalExcluir" onclick="setIdExcluir(@item.Id)">
                     Excluir
@@ -76,7 +76,7 @@
                 </button>
             </div>
 
-            <form asp-action="Excluir">
+            <form asp-action="ExcluirEndereco">
 
                 <div class="modal-body">
 
