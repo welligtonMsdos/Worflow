@@ -16,8 +16,8 @@
 
                 <div class="col-2">
                     <label asp-for="CEP" class="control-label"></label>
-                    <input asp-for="CEP" class="form-control"/>
-                    <span asp-validation-for="CEP" class="text-danger"></span>
+                    <input asp-for="CEP" class="form-control" type="number"/>
+                    <span asp-validation-for="CEP" class="text-danger" ></span>
                 </div>
 
                 <div class="col-8">
@@ -50,7 +50,7 @@
 
                 <div class="col-2">
                     <label asp-for="UF" class="control-label"></label>
-                    <input asp-for="UF" class="form-control"/>
+                    <input asp-for="UF" class="form-control uppercase"/>
                     <span asp-validation-for="UF" class="text-danger"></span>
                 </div>
 

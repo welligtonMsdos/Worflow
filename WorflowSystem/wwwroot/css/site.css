@@ -91,46 +91,7 @@ body {
 }
 
     .btn-Pesquisa:hover {
-        color: var(--textoPrincipal
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        );
+        color: var(--textoPrincipal);
         background-color: var(--corSecundario);
         border-color: var(--corSecundario);
         font-weight: bold;
@@ -157,6 +118,9 @@ body {
     font-weight: bold;
 }
 
+.uppercase {
+    text-transform: uppercase;
+}
 
 
 
