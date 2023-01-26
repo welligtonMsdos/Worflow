@@ -46,7 +46,7 @@ namespace Worflow.Models
         public string Cidade { get; set; }
 
         [Required(ErrorMessage = "UF é obrigatória")]
-        [Display(Name = "UF", Prompt = "Digite a UF")]
+        [Display(Name = "UF", Prompt = "UF")]
         [MinLength(2, ErrorMessage = "UF necessita de 2 caracteres.")]
         [MaxLength(2)]
         [RegularExpression(@"[A-Za-záàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ ]+$", ErrorMessage = "Use apenas caracteres alfabéticos.")]

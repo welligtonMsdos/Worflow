@@ -34,8 +34,7 @@ namespace Worflow.Models
         [Required(ErrorMessage = "Data agendada é obrigatória")]
         [Display(Name = "Data Agendada", Prompt = "Digite a data agendada")]
         public DateTime DataAgendada { get; set; }
-
-        [Required(ErrorMessage = "Obsevação é obrigatório")]
+       
         [Display(Name = "Observação", Prompt = "Digite a observação")]
         public string Observacao { get; set; }
     }

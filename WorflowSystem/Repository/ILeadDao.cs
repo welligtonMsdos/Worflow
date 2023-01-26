@@ -3,7 +3,7 @@ using Worflow.Models;
 
 namespace Worflow.Repository
 {
-    public interface ILeadDao : IQuery<Lead>
+    public interface ILeadDao : IQuery<Lead>, ICommand<Lead>, IQueryPesquisa<Lead>
     {
     }
 }

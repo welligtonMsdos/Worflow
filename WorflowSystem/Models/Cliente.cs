@@ -34,19 +34,19 @@ namespace Worflow.Models
         public string CNPJ { get; set; }
 
         [Required(ErrorMessage = "Razão Social é obrigatória")]
-        [Display(Name ="Razão Social", Prompt = "Digite a Razão Social")]
+        [Display(Name ="Razão Social")]
         public string RazaoSocial { get; set; }
 
         [Required(ErrorMessage = "Fantasia é obrigatória")]
-        [Display(Name = "Fantasia", Prompt = "Digite a Fantasia")]
+        [Display(Name = "Fantasia")]
         public string Fantasia { get; set; }
 
         [Required(ErrorMessage = "Agência é obrigatória")]
-        [Display(Name = "Agência", Prompt = "Digite a agência")]
+        [Display(Name = "Agência")]
         public string Agencia { get; set; }
 
         [Required(ErrorMessage = "Conta é obrigatória")]
-        [Display(Name = "Conta", Prompt = "Digite a conta")]
+        [Display(Name = "Conta")]
         public string Conta { get; set; }
 
         public string Email { get; set; }

@@ -4,7 +4,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - WorflowSystem</title>
-    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />   
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" />
 
 </head>
@@ -22,6 +22,10 @@
 
                         <li class="nav-item">
                             <a class="nav-link text-light" asp-area="" asp-controller="Agenda" asp-action="Index">Agenda</a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link text-light" asp-area="" asp-controller="Lead" asp-action="CreateLead">Nova Indicação</a>
                         </li>
 
                         <li class="nav-item dropdown">
@@ -42,6 +46,7 @@
             </div>
         </nav>
     </header>
+
     <div class="container">
         <main role="main" class="pb-3">
             @RenderBody()
@@ -53,11 +58,12 @@
             &copy; @DateTime.Now.Year  - Worflow - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
         </div>
     </footer>
+
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
     <script src="https://kit.fontawesome.com/789acb90e4.js" crossorigin="anonymous"></script>
-   
+
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>
