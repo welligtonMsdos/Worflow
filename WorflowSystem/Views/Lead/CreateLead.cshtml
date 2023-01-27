@@ -13,10 +13,12 @@
         <div class="card-body">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
+            @Html.HiddenFor(model => model.StatusId)
+
             <div class="row mb-3">
                 <div class="col-4">
                     <label asp-for="Cliente.CNPJ" class="control-label"></label>
-                    <input asp-for="Cliente.CNPJ" class="form-control" />
+                    <input asp-for="Cliente.CNPJ" id="cnpj" class="form-control" onblur="buscarCliente()"/>
                     <span asp-validation-for="Cliente.CNPJ" class="text-danger"></span>
                 </div>
 
@@ -35,7 +37,12 @@
                 <div class="col-4">
                     <label class="control-label">Segmento</label>
                     @Html.DropDownListFor(model => model.Produto.SegmentoId, new SelectList(ViewBag.Segmentos, "Id", "Descricao")
-                      , new { @class = "form-control" })
+                      , new
+                           {
+                               @class = "form-control",
+                               @id = "comboSegmento",
+                               @onchange = "changeSegmento()"
+                           })
                 </div>
 
             </div>
@@ -123,13 +130,13 @@
             <hr />
 
             <div class="row mb-3">
+
                 <div class="col-3">
                     <label asp-for="DataAgendada" class="control-label"></label>
                     <div class="input-group date" id='datepicker'>
                         <input asp-for="DataAgendada"
                                type="text" class="form-control"
-                               value="@DateTime.Now.ToString("dd/MM/yyyy hh:mm")" 
-                               />
+                               value="@DateTime.Now.ToString("dd/MM/yyyy hh:mm")" />
 
                         <span class="input-group-addon">
                             <span class="glyphicon glyphicon-calendar"></span>
@@ -143,10 +150,19 @@
 
                 <div class="col-6">
                     <label asp-for="Observacao" class="control-label"></label>
-                    <textarea class="form-control" asp-for="Observacao" rows="3"></textarea>                   
+                    <textarea class="form-control" asp-for="Observacao" rows="3"></textarea>
                     <span asp-validation-for="Observacao" class="text-danger"></span>
                 </div>
-               
+
+            </div>
+
+            <div class="row mb-3">
+                <div class="col-auto gridProduto">
+
+                    <label class="control-label">Qual produto seu cliente precisa?</label>
+
+                    <div id="listaProdutos"></div>
+                </div>
             </div>
 
         </div>
@@ -179,4 +195,7 @@
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 
     @{await Html.RenderPartialAsync("_DatepickerScriptsPartial");}
+
+    @{await Html.RenderPartialAsync("_LeadScriptsPartial");}
+    
 }
