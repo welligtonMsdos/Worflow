@@ -1,6 +1,9 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using System.Collections.Generic;
+using System.Diagnostics;
 using Worflow.Dados.Interfaces;
 using Worflow.Models;
+using WorflowSystem.Models;
 
 namespace Worflow.Controllers
 {
@@ -9,13 +12,15 @@ namespace Worflow.Controllers
         ILeadService _leadService;
         ISegmentoService _segmentoService;
         IProdutoService _produtoService;
-        
+        IClienteService _clienteService;
 
-        public LeadController(ILeadService leadService, ISegmentoService segmentoService, IProdutoService produtoService)
+        public LeadController(ILeadService leadService, ISegmentoService segmentoService, 
+                              IProdutoService produtoService, IClienteService clienteService)
         {
             _leadService = leadService;
             _segmentoService = segmentoService;
             _produtoService = produtoService;
+            _clienteService = clienteService;
         }
 
         [Route("CreateLead")]      
@@ -25,6 +30,8 @@ namespace Worflow.Controllers
             var lead = new Lead();
 
             lead.StatusId = 1;
+            lead.UsuarioId = 1;
+            lead.ProdutoId = 2;
 
             ViewBag.Segmentos = _segmentoService.BuscarSegmentos();
 
@@ -33,9 +40,29 @@ namespace Worflow.Controllers
 
         public ActionResult _CarregaProdutos(int id)
         {
-            var produtos = _produtoService.BuscarProdutosPorSegmento(id);
+            ICollection<ProdutoSegmento> produtoSegmento = _produtoService.BuscarProdutosPorSegmento(id);
 
-            return PartialView(produtos);
+            return PartialView(produtoSegmento);
+        }
+
+        public ActionResult BuscarCliente(string cnpj)
+        {
+            var cliente = _clienteService.Pesquisar(cnpj);
+
+            return Json(cliente);
+        }
+
+        [Route("InserirLead")]
+        public ActionResult InserirLead(Lead lead)
+        {
+            if (ModelState.IsValid)
+            {
+                _leadService.Incluir(lead);
+
+                return RedirectToAction("Index", "Home");
+            }
+
+            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
     }
 }

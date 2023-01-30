@@ -18,25 +18,26 @@ namespace Worflow.Dados.EFCore
         public Produto BuscarPorId(int id)
         {
             return _context.Produtos
-                .Include(x => x.Segmento)
+                .Include(x => x.ProdutoSegmento)                
                 .First(x => x.Id == id);
         }
 
-        public ICollection<Produto> BuscarProdutosPorSegmento(int segmentoId)
+        public ICollection<ProdutoSegmento> BuscarProdutosPorSegmento(int segmentoId)
         {
-            return _context.Produtos
+            return _context.ProdutoSegmento
+                .Include(x=>x.produto)
                 .Include(x=>x.Segmento)
-                .Where(x => x.SegmentoId == segmentoId)
-                .OrderBy(x => x.Descricao)
+                .Where(x=>x.SegmentoId == segmentoId)
+                .OrderBy(x => x.produto.Descricao)
                 .ToList();
         }
 
         public ICollection<Produto> BuscarTodos()
         {
             return _context.Produtos
-                .Include(x => x.Segmento)
+                .Include(x => x.ProdutoSegmento)
                 .OrderBy(x => x.Descricao)
                 .ToList();
-        }
+        }      
     }
 }

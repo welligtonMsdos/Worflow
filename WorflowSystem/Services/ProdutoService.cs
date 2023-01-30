@@ -22,7 +22,7 @@ namespace Worflow.Services
             return _produtoDao.BuscarTodos();
         }
 
-        public ICollection<Produto> BuscarProdutosPorSegmento(int segmentoId)
+        public ICollection<ProdutoSegmento> BuscarProdutosPorSegmento(int segmentoId)
         {
             return _produtoDao.BuscarProdutosPorSegmento(segmentoId);
         }

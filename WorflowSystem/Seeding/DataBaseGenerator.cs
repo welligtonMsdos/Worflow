@@ -20,8 +20,6 @@ namespace Worflow.Seeding
 
                     AddCliente(ctx);
 
-                    AddProduto(ctx);
-
                     AddLead(ctx);
                 }
             }
@@ -64,25 +62,6 @@ namespace Worflow.Seeding
                     ctx.SaveChanges();
                 });
             }          
-        }
-
-        private static void AddProduto(AppDbContext ctx)
-        {
-            if(ctx.Produtos.ToList().Count() == 0)
-            {
-                List<Produto> ltsProduto = new List<Produto>();
-                ltsProduto.Add(new Produto(GetSegmentoAgro(ctx), "Garantia"));
-                ltsProduto.Add(new Produto(GetSegmentoAgro(ctx), "Vida em Grupo"));
-                ltsProduto.Add(new Produto(GetSegmentoAgro(ctx), "Patrimonial"));
-                ltsProduto.Add(new Produto(GetSegmentoCib(ctx), "Garantia"));
-                ltsProduto.Add(new Produto(GetSegmentoCib(ctx), "Vida em Grupo"));
-
-                ltsProduto.ForEach(delegate (Produto produto)
-                {
-                    ctx.Add(produto);
-                    ctx.SaveChanges();
-                });
-            }
         }
 
         private static void AddLead(AppDbContext ctx)

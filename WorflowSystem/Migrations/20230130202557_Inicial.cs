@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Worflow.Migrations
 {
-    public partial class Initial : Migration
+    public partial class Inicial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -13,12 +13,12 @@ namespace Worflow.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    CEP = table.Column<string>(type: "varchar(8)", nullable: false),
+                    CEP = table.Column<string>(type: "varchar(8)", maxLength: 8, nullable: false),
                     Logadouro = table.Column<string>(type: "varchar(150)", nullable: false),
                     Numero = table.Column<string>(type: "varchar(15)", nullable: false),
                     Bairro = table.Column<string>(type: "varchar(50)", nullable: false),
                     Cidade = table.Column<string>(type: "varchar(150)", nullable: false),
-                    UF = table.Column<string>(type: "varchar(2)", nullable: false)
+                    UF = table.Column<string>(type: "varchar(2)", maxLength: 2, nullable: false)
                 },
                 constraints: table =>
                 {
@@ -37,6 +37,20 @@ namespace Worflow.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Perfil", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Produto",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Descricao = table.Column<string>(type: "varchar(50)", nullable: false),
+                    Ativo = table.Column<bool>(type: "bit", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Produto", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -89,8 +103,7 @@ namespace Worflow.Migrations
                         name: "FK_Cliente_Endereco_EnderecoId",
                         column: x => x.EnderecoId,
                         principalTable: "Endereco",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "Id");
                 });
 
             migrationBuilder.CreateTable(
@@ -115,23 +128,29 @@ namespace Worflow.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Produto",
+                name: "ProdutoSegmento",
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Descricao = table.Column<string>(type: "varchar(50)", nullable: false),
-                    Ativo = table.Column<bool>(type: "bit", nullable: false),
+                    ProdutoId = table.Column<int>(nullable: false),
                     SegmentoId = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Produto", x => x.Id);
+                    table.PrimaryKey("PK_ProdutoSegmento", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Produto_Segmento_SegmentoId",
+                        name: "FK_ProdutoSegmento_Produto_ProdutoId",
+                        column: x => x.ProdutoId,
+                        principalTable: "Produto",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_ProdutoSegmento_Segmento_SegmentoId",
                         column: x => x.SegmentoId,
                         principalTable: "Segmento",
-                        principalColumn: "Id");
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -154,26 +173,22 @@ namespace Worflow.Migrations
                         name: "FK_Lead_Cliente_ClienteId",
                         column: x => x.ClienteId,
                         principalTable: "Cliente",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "Id");
                     table.ForeignKey(
                         name: "FK_Lead_Produto_ProdutoId",
                         column: x => x.ProdutoId,
                         principalTable: "Produto",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "Id");
                     table.ForeignKey(
                         name: "FK_Lead_Status_StatusId",
                         column: x => x.StatusId,
                         principalTable: "Status",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "Id");
                     table.ForeignKey(
                         name: "FK_Lead_Usuario_UsuarioId",
                         column: x => x.UsuarioId,
                         principalTable: "Usuario",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "Id");
                 });
 
             migrationBuilder.InsertData(
@@ -185,6 +200,17 @@ namespace Worflow.Migrations
                     { 2, true, "Cotação" },
                     { 3, true, "Implantação" },
                     { 4, true, "Subscrição" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "Produto",
+                columns: new[] { "Id", "Ativo", "Descricao" },
+                values: new object[,]
+                {
+                    { 1, true, "Garantia" },
+                    { 2, true, "Vida em Grupo" },
+                    { 3, true, "Patrimonial" },
+                    { 4, true, "Odonto" }
                 });
 
             migrationBuilder.InsertData(
@@ -209,19 +235,29 @@ namespace Worflow.Migrations
                 });
 
             migrationBuilder.InsertData(
-                table: "Usuario",
-                columns: new[] { "Id", "Ativo", "Nome", "PerfilId", "RACF" },
-                values: new object[] { 1, true, "Lionel Messi", 1, "LIOMES" });
+                table: "ProdutoSegmento",
+                columns: new[] { "Id", "ProdutoId", "SegmentoId" },
+                values: new object[,]
+                {
+                    { 1, 1, 1 },
+                    { 2, 2, 1 },
+                    { 3, 3, 1 },
+                    { 4, 1, 2 },
+                    { 5, 4, 2 },
+                    { 6, 1, 3 },
+                    { 7, 1, 4 },
+                    { 8, 2, 4 }
+                });
 
             migrationBuilder.InsertData(
                 table: "Usuario",
                 columns: new[] { "Id", "Ativo", "Nome", "PerfilId", "RACF" },
-                values: new object[] { 2, true, "Cristiano Ronaldo", 1, "CRISRO" });
-
-            migrationBuilder.InsertData(
-                table: "Usuario",
-                columns: new[] { "Id", "Ativo", "Nome", "PerfilId", "RACF" },
-                values: new object[] { 3, true, "Neymar Junior", 1, "NEYJU" });
+                values: new object[,]
+                {
+                    { 1, true, "Lionel Messi", 1, "LIOMES" },
+                    { 2, true, "Cristiano Ronaldo", 1, "CRISRO" },
+                    { 3, true, "Neymar Junior", 1, "NEYJU" }
+                });
 
             migrationBuilder.CreateIndex(
                 name: "IX_Cliente_EnderecoId",
@@ -284,8 +320,13 @@ namespace Worflow.Migrations
                 column: "Descricao");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Produto_SegmentoId",
-                table: "Produto",
+                name: "IX_ProdutoSegmento_ProdutoId",
+                table: "ProdutoSegmento",
+                column: "ProdutoId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_ProdutoSegmento_SegmentoId",
+                table: "ProdutoSegmento",
                 column: "SegmentoId");
 
             migrationBuilder.CreateIndex(
@@ -315,10 +356,10 @@ namespace Worflow.Migrations
                 name: "Lead");
 
             migrationBuilder.DropTable(
-                name: "Cliente");
+                name: "ProdutoSegmento");
 
             migrationBuilder.DropTable(
-                name: "Produto");
+                name: "Cliente");
 
             migrationBuilder.DropTable(
                 name: "Status");
@@ -327,10 +368,13 @@ namespace Worflow.Migrations
                 name: "Usuario");
 
             migrationBuilder.DropTable(
-                name: "Endereco");
+                name: "Produto");
 
             migrationBuilder.DropTable(
                 name: "Segmento");
+
+            migrationBuilder.DropTable(
+                name: "Endereco");
 
             migrationBuilder.DropTable(
                 name: "Perfil");

@@ -1,4 +1,6 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Worflow.Models
 {
@@ -21,6 +23,8 @@ namespace Worflow.Models
             Telefone = telefone;
         }
         
+        [Key]
+        [DatabaseGeneratedAttribute(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
 
         [Required(ErrorMessage = "Endereço é obrigatório")]
@@ -51,6 +55,7 @@ namespace Worflow.Models
 
         public string Email { get; set; }
 
-        public string Telefone { get; set; }      
+        public string Telefone { get; set; }       
+        public ICollection<Lead> Lead { get; set; }
     }
 }

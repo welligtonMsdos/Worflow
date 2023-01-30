@@ -19,7 +19,7 @@ namespace Worflow.Dados.Mappings
 
             builder.Property(p => p.Ativo)
                   .HasColumnType("bit")
-                  .IsRequired();           
+                  .IsRequired();
 
             builder.HasData(
                 new Segmento(1, "Agro"),

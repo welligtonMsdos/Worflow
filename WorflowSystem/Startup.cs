@@ -37,6 +37,7 @@ namespace WorflowSystem
             services.AddTransient<ILeadService, LeadService>();
             services.AddTransient<ISegmentoService, SegmentoService>();
             services.AddTransient<IProdutoService, ProdutoService>();
+            services.AddTransient<IClienteService, ClienteService>();
 
             services.AddDbContext<AppDbContext>();
             services.AddControllersWithViews()

@@ -44,5 +44,17 @@ namespace Worflow.Dados.EFCore
             _context.Clientes.Add(obj);
             _context.SaveChanges();
         }
+
+        public ICollection<Cliente> Pesquisar(string value)
+        {
+            if (value == null)
+                return BuscarTodos();
+
+            return _context.Clientes
+               .Include(x => x.Endereco)
+               .Where(x => x.CNPJ.Contains(value))
+               .OrderBy(x => x.RazaoSocial)
+               .ToList();
+        }
     }
 }

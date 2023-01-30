@@ -10,8 +10,8 @@ using Worflow.Dados.EFCore;
 namespace Worflow.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20230106001201_Initial")]
-    partial class Initial
+    [Migration("20230130202557_Inicial")]
+    partial class Inicial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -83,7 +83,8 @@ namespace Worflow.Migrations
 
                     b.Property<string>("CEP")
                         .IsRequired()
-                        .HasColumnType("varchar(8)");
+                        .HasColumnType("varchar(8)")
+                        .HasMaxLength(8);
 
                     b.Property<string>("Cidade")
                         .IsRequired()
@@ -99,7 +100,8 @@ namespace Worflow.Migrations
 
                     b.Property<string>("UF")
                         .IsRequired()
-                        .HasColumnType("varchar(2)");
+                        .HasColumnType("varchar(2)")
+                        .HasMaxLength(2);
 
                     b.HasKey("Id");
 
@@ -216,17 +218,110 @@ namespace Worflow.Migrations
                         .IsRequired()
                         .HasColumnType("varchar(50)");
 
-                    b.Property<int>("SegmentoId")
-                        .HasColumnType("int");
-
                     b.HasKey("Id");
 
                     b.HasIndex("Descricao")
                         .HasName("IX_PRODUTO_DESCRICAO");
 
+                    b.ToTable("Produto");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Ativo = true,
+                            Descricao = "Garantia"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Ativo = true,
+                            Descricao = "Vida em Grupo"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Ativo = true,
+                            Descricao = "Patrimonial"
+                        },
+                        new
+                        {
+                            Id = 4,
+                            Ativo = true,
+                            Descricao = "Odonto"
+                        });
+                });
+
+            modelBuilder.Entity("Worflow.Models.ProdutoSegmento", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("ProdutoId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("SegmentoId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ProdutoId");
+
                     b.HasIndex("SegmentoId");
 
-                    b.ToTable("Produto");
+                    b.ToTable("ProdutoSegmento");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            ProdutoId = 1,
+                            SegmentoId = 1
+                        },
+                        new
+                        {
+                            Id = 2,
+                            ProdutoId = 2,
+                            SegmentoId = 1
+                        },
+                        new
+                        {
+                            Id = 3,
+                            ProdutoId = 3,
+                            SegmentoId = 1
+                        },
+                        new
+                        {
+                            Id = 4,
+                            ProdutoId = 1,
+                            SegmentoId = 2
+                        },
+                        new
+                        {
+                            Id = 5,
+                            ProdutoId = 4,
+                            SegmentoId = 2
+                        },
+                        new
+                        {
+                            Id = 6,
+                            ProdutoId = 1,
+                            SegmentoId = 3
+                        },
+                        new
+                        {
+                            Id = 7,
+                            ProdutoId = 1,
+                            SegmentoId = 4
+                        },
+                        new
+                        {
+                            Id = 8,
+                            ProdutoId = 2,
+                            SegmentoId = 4
+                        });
                 });
 
             modelBuilder.Entity("Worflow.Models.Segmento", b =>
@@ -379,45 +474,51 @@ namespace Worflow.Migrations
             modelBuilder.Entity("Worflow.Models.Cliente", b =>
                 {
                     b.HasOne("Worflow.Models.Endereco", "Endereco")
-                        .WithMany()
+                        .WithMany("Cliente")
                         .HasForeignKey("EnderecoId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
                 });
 
             modelBuilder.Entity("Worflow.Models.Lead", b =>
                 {
                     b.HasOne("Worflow.Models.Cliente", "Cliente")
-                        .WithMany()
+                        .WithMany("Lead")
                         .HasForeignKey("ClienteId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.HasOne("Worflow.Models.Produto", "Produto")
-                        .WithMany()
+                        .WithMany("Lead")
+                        .HasForeignKey("ProdutoId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.HasOne("Worflow.Models.Status", "Status")
+                        .WithMany("Lead")
+                        .HasForeignKey("StatusId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.HasOne("Worflow.Models.Usuario", "Usuario")
+                        .WithMany("Lead")
+                        .HasForeignKey("UsuarioId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("Worflow.Models.ProdutoSegmento", b =>
+                {
+                    b.HasOne("Worflow.Models.Produto", "produto")
+                        .WithMany("ProdutoSegmento")
                         .HasForeignKey("ProdutoId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Worflow.Models.Status", "Status")
-                        .WithMany()
-                        .HasForeignKey("StatusId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Worflow.Models.Usuario", "Usuario")
-                        .WithMany()
-                        .HasForeignKey("UsuarioId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("Worflow.Models.Produto", b =>
-                {
                     b.HasOne("Worflow.Models.Segmento", "Segmento")
-                        .WithMany("Produtos")
+                        .WithMany("ProdutoSegmento")
                         .HasForeignKey("SegmentoId")
-                        .OnDelete(DeleteBehavior.NoAction)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
 

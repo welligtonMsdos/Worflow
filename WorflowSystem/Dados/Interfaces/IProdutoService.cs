@@ -9,7 +9,7 @@ namespace Worflow.Dados.Interfaces
     public interface IProdutoService
     {
         ICollection<Produto> BuscarProdutos();
-        ICollection<Produto> BuscarProdutosPorSegmento(int segmentoId);
+        ICollection<ProdutoSegmento> BuscarProdutosPorSegmento(int segmentoId);
         Produto BuscarPorId(int id);
     }
 }

@@ -20,10 +20,12 @@ namespace Worflow.Dados.Mappings
                   .HasColumnType("bit")
                   .IsRequired();
 
-            builder.HasOne(p => p.Segmento)
-                .WithMany(p => p.Produtos)
-                .HasForeignKey(p => p.SegmentoId)
-                .OnDelete(DeleteBehavior.NoAction);
+            builder.HasData(
+                new Produto(1, "Garantia"),
+                new Produto(2, "Vida em Grupo"),
+                new Produto(3, "Patrimonial"),
+                new Produto(4, "Odonto")
+            );      
         }
     }
 }

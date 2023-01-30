@@ -6,6 +6,6 @@ namespace Worflow.Repository
 {
     public interface IProdutoDao : IQuery<Produto>
     {
-        ICollection<Produto> BuscarProdutosPorSegmento(int segmentoId);
+        ICollection<ProdutoSegmento> BuscarProdutosPorSegmento(int segmentoId);
     }
 }

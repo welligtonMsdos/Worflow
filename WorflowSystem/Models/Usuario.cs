@@ -1,5 +1,7 @@
 ﻿
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Worflow.Models
 {
@@ -19,6 +21,7 @@ namespace Worflow.Models
         }
 
         [Key]
+        [DatabaseGeneratedAttribute(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
 
         [Required(ErrorMessage = "Nome é obrigatório!")]
@@ -36,5 +39,6 @@ namespace Worflow.Models
         public int PerfilId { get; set; }
 
         public Perfil Perfil { get; set; }      
+        public ICollection<Lead> Lead { get; set; }
     }
 }

@@ -14,29 +14,34 @@
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
             @Html.HiddenFor(model => model.StatusId)
+            @Html.HiddenFor(model => model.UsuarioId)
+            @Html.HiddenFor(model => model.ProdutoId)
+            @Html.HiddenFor(model => model.ClienteId, new { id = "LeadClienteId" })
+            @Html.HiddenFor(model => model.Cliente.Id, new { id = "clienteId" })
+            @Html.HiddenFor(model => model.Cliente.EnderecoId, new { id = "leadEnderecoId" })
 
             <div class="row mb-3">
                 <div class="col-4">
                     <label asp-for="Cliente.CNPJ" class="control-label"></label>
-                    <input asp-for="Cliente.CNPJ" id="cnpj" class="form-control" onblur="buscarCliente()"/>
+                    <input asp-for="Cliente.CNPJ" id="cnpj" class="form-control" onblur="buscarCliente()" />
                     <span asp-validation-for="Cliente.CNPJ" class="text-danger"></span>
                 </div>
 
                 <div class="col-2">
                     <label asp-for="Cliente.Agencia" class="control-label"></label>
-                    <input asp-for="Cliente.Agencia" class="form-control" readonly />
+                    <input asp-for="Cliente.Agencia" id="agencia" class="form-control" readonly />
                     <span asp-validation-for="Cliente.Agencia" class="text-danger"></span>
                 </div>
 
                 <div class="col-2">
                     <label asp-for="Cliente.Conta" class="control-label"></label>
-                    <input asp-for="Cliente.Conta" class="form-control" readonly />
+                    <input asp-for="Cliente.Conta" id="conta" class="form-control" readonly />
                     <span asp-validation-for="Cliente.Conta" class="text-danger"></span>
                 </div>
 
                 <div class="col-4">
                     <label class="control-label">Segmento</label>
-                    @Html.DropDownListFor(model => model.Produto.SegmentoId, new SelectList(ViewBag.Segmentos, "Id", "Descricao")
+                    @Html.DropDownListFor(model => model.Produto, new SelectList(ViewBag.Segmentos, "Id", "Descricao")
                       , new
                            {
                                @class = "form-control",
@@ -53,13 +58,13 @@
 
                 <div class="col-6">
                     <label asp-for="Cliente.RazaoSocial" class="control-label"></label>
-                    <input asp-for="Cliente.RazaoSocial" class="form-control" readonly />
+                    <input asp-for="Cliente.RazaoSocial" id="razaoSocial" class="form-control" readonly />
                     <span asp-validation-for="Cliente.RazaoSocial" class="text-danger"></span>
                 </div>
 
                 <div class="col-6">
                     <label asp-for="Cliente.Fantasia" class="control-label"></label>
-                    <input asp-for="Cliente.Fantasia" class="form-control" readonly />
+                    <input asp-for="Cliente.Fantasia" id="fantasia" class="form-control" readonly />
                     <span asp-validation-for="Cliente.Fantasia" class="text-danger"></span>
                 </div>
 
@@ -69,13 +74,13 @@
 
                 <div class="col-9">
                     <label asp-for="Cliente.Email" class="control-label"></label>
-                    <input asp-for="Cliente.Email" class="form-control" readonly />
+                    <input asp-for="Cliente.Email" id="email" class="form-control" readonly />
                     <span asp-validation-for="Cliente.Email" class="text-danger"></span>
                 </div>
 
                 <div class="col-3">
                     <label asp-for="Cliente.Telefone" class="control-label"></label>
-                    <input asp-for="Cliente.Telefone" class="form-control" readonly />
+                    <input asp-for="Cliente.Telefone" id="telefone" class="form-control" readonly />
                     <span asp-validation-for="Cliente.Telefone" class="text-danger"></span>
                 </div>
 
@@ -87,19 +92,19 @@
 
                 <div class="col-3">
                     <label asp-for="Cliente.Endereco.CEP" class="control-label"></label>
-                    <input asp-for="Cliente.Endereco.CEP" class="form-control" placeholder="" readonly />
+                    <input asp-for="Cliente.Endereco.CEP" id="cep" class="form-control" placeholder="" readonly />
                     <span asp-validation-for="Cliente.Endereco.CEP" class="text-danger"></span>
                 </div>
 
                 <div class="col-6">
                     <label asp-for="Cliente.Endereco.Logadouro" class="control-label"></label>
-                    <input asp-for="Cliente.Endereco.Logadouro" class="form-control" placeholder="" readonly />
+                    <input asp-for="Cliente.Endereco.Logadouro" id="logadouro" class="form-control" placeholder="" readonly />
                     <span asp-validation-for="Cliente.Endereco.Logadouro" class="text-danger"></span>
                 </div>
 
                 <div class="col-3">
                     <label asp-for="Cliente.Endereco.Numero" class="control-label"></label>
-                    <input asp-for="Cliente.Endereco.Numero" class="form-control" placeholder="" readonly />
+                    <input asp-for="Cliente.Endereco.Numero" id="numero" class="form-control" placeholder="" readonly />
                     <span asp-validation-for="Cliente.Endereco.Numero" class="text-danger"></span>
                 </div>
 
@@ -109,19 +114,19 @@
 
                 <div class="col-4">
                     <label asp-for="Cliente.Endereco.Bairro" class="control-label"></label>
-                    <input asp-for="Cliente.Endereco.Bairro" class="form-control" placeholder="" readonly />
+                    <input asp-for="Cliente.Endereco.Bairro" id="bairro" class="form-control" placeholder="" readonly />
                     <span asp-validation-for="Cliente.Endereco.Bairro" class="text-danger"></span>
                 </div>
 
                 <div class="col-7">
                     <label asp-for="Cliente.Endereco.Cidade" class="control-label"></label>
-                    <input asp-for="Cliente.Endereco.Cidade" class="form-control" placeholder="" readonly />
+                    <input asp-for="Cliente.Endereco.Cidade" id="cidade" class="form-control" placeholder="" readonly />
                     <span asp-validation-for="Cliente.Endereco.Cidade" class="text-danger"></span>
                 </div>
 
                 <div class="col-1">
                     <label asp-for="Cliente.Endereco.UF" class="control-label"></label>
-                    <input asp-for="Cliente.Endereco.UF" class="form-control" placeholder="" readonly />
+                    <input asp-for="Cliente.Endereco.UF" id="uf" class="form-control" placeholder="" readonly />
                     <span asp-validation-for="Cliente.Endereco.UF" class="text-danger"></span>
                 </div>
 

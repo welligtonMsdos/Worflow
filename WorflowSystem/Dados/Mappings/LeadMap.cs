@@ -16,7 +16,27 @@ namespace Worflow.Dados.Mappings
 
             builder.Property(p => p.Observacao)
                    .HasColumnType("varchar(300)")
-                   .IsRequired();           
+                   .IsRequired();
+
+            builder.HasOne(p => p.Cliente)
+              .WithMany(p => p.Lead)
+              .HasForeignKey(p => p.ClienteId)
+              .OnDelete(DeleteBehavior.NoAction);
+
+            builder.HasOne(p => p.Usuario)
+              .WithMany(p => p.Lead)
+              .HasForeignKey(p => p.UsuarioId)
+              .OnDelete(DeleteBehavior.NoAction);
+
+            builder.HasOne(p => p.Produto)
+              .WithMany(p => p.Lead)
+              .HasForeignKey(p => p.ProdutoId)
+              .OnDelete(DeleteBehavior.NoAction);
+
+            builder.HasOne(p => p.Status)
+              .WithMany(p => p.Lead)
+              .HasForeignKey(p => p.StatusId)
+              .OnDelete(DeleteBehavior.NoAction);
         }
     }
 }

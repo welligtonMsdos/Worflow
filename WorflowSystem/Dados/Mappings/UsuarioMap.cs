@@ -24,7 +24,7 @@ namespace Worflow.Dados.Mappings
             builder.HasOne(p => p.Perfil)
                 .WithMany(p => p.Usuario)
                 .HasForeignKey(p => p.PerfilId)
-                .OnDelete(DeleteBehavior.NoAction);          
+                .OnDelete(DeleteBehavior.NoAction);
 
             builder.HasData(
                new Usuario(1,"Lionel Messi","LIOMES", 1),

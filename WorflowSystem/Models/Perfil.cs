@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Worflow.Models
 {
@@ -11,6 +12,9 @@ namespace Worflow.Models
             Descricao = descricao;
             Ativo = true;
         }
+
+        [Key]
+        [DatabaseGeneratedAttribute(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
 
         [Display(Name = "Perfil")]

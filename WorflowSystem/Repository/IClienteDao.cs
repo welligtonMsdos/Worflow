@@ -3,7 +3,7 @@ using Worflow.Models;
 
 namespace Worflow.Repository
 {
-    public interface IClienteDao : IQuery<Cliente>, ICommand<Cliente>
+    public interface IClienteDao : IQuery<Cliente>, IQueryPesquisa<Cliente>, ICommand<Cliente>
     {
     }
 }

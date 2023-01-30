@@ -19,6 +19,7 @@ namespace Worflow.Dados.EFCore
         public DbSet<Endereco> Enderecos { get; set; }
         public DbSet<Cliente> Clientes { get; set; }
         public DbSet<Lead> Lead { get; set; }
+        public DbSet<ProdutoSegmento> ProdutoSegmento { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -35,6 +36,7 @@ namespace Worflow.Dados.EFCore
             modelBuilder.ApplyConfiguration(new EnderecoMap());
             modelBuilder.ApplyConfiguration(new ClienteMap());
             modelBuilder.ApplyConfiguration(new LeadMap());
+            modelBuilder.ApplyConfiguration(new ProdutoSegmentoMap());
         }
     }
 }

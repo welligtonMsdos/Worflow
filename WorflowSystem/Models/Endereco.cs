@@ -1,4 +1,6 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Worflow.Models
 {
@@ -18,6 +20,9 @@ namespace Worflow.Models
             Cidade = cidade;
             UF = uf;
         }
+
+        [Key]
+        [DatabaseGeneratedAttribute(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
 
         [Required(ErrorMessage = "CEP é obrigatório")]
@@ -51,5 +56,7 @@ namespace Worflow.Models
         [MaxLength(2)]
         [RegularExpression(@"[A-Za-záàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ ]+$", ErrorMessage = "Use apenas caracteres alfabéticos.")]
         public string UF { get; set; }
+
+        public ICollection<Cliente> Cliente { get; set; }
     }
 }

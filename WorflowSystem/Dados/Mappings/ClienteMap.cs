@@ -42,7 +42,10 @@ namespace Worflow.Dados.Mappings
             builder.Property(p => p.Telefone)
                  .HasColumnType("varchar(11)");
 
-           
+            builder.HasOne(p => p.Endereco)
+               .WithMany(p => p.Cliente)
+               .HasForeignKey(p => p.EnderecoId)
+               .OnDelete(DeleteBehavior.NoAction);
         }
     }
 }
