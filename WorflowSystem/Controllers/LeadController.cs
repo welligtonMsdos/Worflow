@@ -56,8 +56,8 @@ namespace Worflow.Controllers
         public ActionResult InserirLead(Lead lead)
         {
             if (ModelState.IsValid)
-            {
-                _leadService.Incluir(lead);
+            {      
+                _leadService.Incluir(lead, Request.Form["produtos"]);
 
                 return RedirectToAction("Index", "Home");
             }

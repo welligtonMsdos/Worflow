@@ -8,7 +8,7 @@ namespace Worflow.Dados.Interfaces
         ICollection<Lead> BuscarLeads();
         ICollection<Lead> Pesquisar(string value);
         Lead BuscarPorId(int id);
-        void Incluir(Lead obj);
+        void Incluir(Lead obj, string[] produtos);      
         void Alterar(Lead obj);
         void Excluir(Lead obj);        
     }

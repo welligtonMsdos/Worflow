@@ -15,3 +15,15 @@
         });
 
 }
+
+function verificarProdutos() {
+    var retorno = false;
+
+    $('input[name=produtos]').each(function () {
+        if ($(this).prop("checked")) {
+            retorno = true;
+        }
+    });
+
+    return retorno;
+}

@@ -50,9 +50,7 @@ namespace Worflow.Dados.EFCore
 
         public void Incluir(Lead obj)
         {
-            MudarStateCliente(ref obj);
-
-            SetObservacao(ref obj);
+            _context.Entry(obj.Cliente).State = EntityState.Modified;
 
             _context.Add(obj);
 
@@ -76,16 +74,6 @@ namespace Worflow.Dados.EFCore
                         )
                   .OrderBy(x => x.Id)
                   .ToList();
-        }
-
-        private void MudarStateCliente(ref Lead lead)
-        {
-            _context.Entry(lead.Cliente).State = EntityState.Modified;
-        }
-
-        private void SetObservacao(ref Lead lead)
-        {
-            lead.Observacao = lead.Observacao == null ? "" : lead.Observacao;
-        }
+        }       
     }
 }

@@ -33,14 +33,28 @@ namespace Worflow.Services
             _leadDao.Excluir(obj);
         }
 
-        public void Incluir(Lead obj)
+        public void Incluir(Lead obj, string[] produtos)
         {
-            _leadDao.Incluir(obj);
-        }
+            SetObservacao(ref obj);
+
+            foreach (var produtoId in produtos)
+            {
+                obj.ProdutoId = int.Parse(produtoId);
+
+                _leadDao.Incluir(obj);
+
+                obj.Id = 0;
+            }
+        }     
 
         public ICollection<Lead> Pesquisar(string value)
         {
             return _leadDao.Pesquisar(value);
+        }
+
+        private void SetObservacao(ref Lead lead)
+        {
+            lead.Observacao = lead.Observacao == null ? "" : lead.Observacao;
         }
     }
 }
