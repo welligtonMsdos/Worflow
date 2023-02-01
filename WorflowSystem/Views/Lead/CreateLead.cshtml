@@ -149,25 +149,20 @@
                     </div>
                     <span asp-validation-for="DataAgendada" class="text-danger"></span>
                 </div>
-            </div>
 
-            <div class="row mb-3">
-
-                <div class="col-6">
+                <div class="col-5">
                     <label asp-for="Observacao" class="control-label"></label>
                     <textarea class="form-control" asp-for="Observacao" rows="3"></textarea>
                     <span asp-validation-for="Observacao" class="text-danger"></span>
                 </div>
 
-            </div>
+                <div class="col-4 gridProduto">
 
-            <div class="row mb-3">
-                <div class="col-auto gridProduto">
-
-                    <label class="control-label">Qual produto seu cliente precisa?</label>
+                    <label class="control-label gridProduto__titulo">Qual produto?</label>
 
                     <div id="listaProdutos"></div>
                 </div>
+
             </div>
 
         </div>
@@ -178,7 +173,7 @@
 
                 <div class="col-6" style="text-align:start">
 
-                    <button type="button" class="btn btn-Acoes" onclick="location.href='@Url.Action("ListarLeads", "Lead")'">Voltar</button>
+                    <button type="button" class="btn btn-Acoes" onclick="location.href='@Url.Action("Index", "Home")'">Voltar</button>
 
                 </div>
 
@@ -195,12 +190,11 @@
     </div>
 </form>
 
-
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 
     @{await Html.RenderPartialAsync("_DatepickerScriptsPartial");}
 
     @{await Html.RenderPartialAsync("_LeadScriptsPartial");}
-    
+
 }

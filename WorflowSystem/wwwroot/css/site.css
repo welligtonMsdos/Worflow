@@ -62,13 +62,6 @@ body {
   /* Margin bottom by footer height */
   margin-bottom: 60px;
 }
-.footer {
-  position: absolute;
-  bottom: 0;
-  width: 100%;
-  white-space: nowrap;
-  line-height: 60px; /* Vertically center the text there */
-}
 
 :root {
     --corPrincipal: #F5A600;
@@ -121,6 +114,49 @@ body {
 .uppercase {
     text-transform: uppercase;
 }
+
+.form-check {
+    position: relative;
+    margin-bottom: 15px;
+    display: block;
+    padding-left: 1.25rem;
+}
+
+.chkPadrao + label {
+    display: block;
+    margin: 0em;
+    cursor: pointer;   
+}
+
+.chkPadrao + label {
+    display: block;
+    margin: 0em;
+    cursor: pointer;
+}
+
+.chkPadrao {
+    display: none;
+}
+
+    .chkPadrao + label:before {
+        content: "\2714";
+        border: 0.13em solid var(--textoSecundario);
+        padding-left: 0.1em;
+        margin-right: 0.2em;
+        color: transparent;
+        transition: .6s;
+    }
+
+    .chkPadrao + label:active:before {
+        transform: scale(0);
+    }
+
+    .chkPadrao:checked + label:before {
+        background-color: var(--corPrincipal);
+        color: var(--textoSecundario);
+    }
+
+  
 
 
 

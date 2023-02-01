@@ -1,12 +1,10 @@
 ﻿@model IEnumerable<Worflow.Models.ProdutoSegmento>
 
-@foreach(var item in Model)
+@foreach (var item in Model)
 {
-    <div class="form-check">
-        <input class="form-check-input" type="checkbox" id="chc_@item.produto.Id"/>
-        <label class="form-check-label ml-4" for="chkProdutos">
-            @Html.DisplayFor(modelItem => item.produto.Descricao)
-        </label>
+    <div class="form-check form-switch">
+        <input class="form-check-input chkPadrao" type="checkbox" id="chk_@item.produto.Id">
+        <label class="form-check-label gridProduto__itens_info" for="chk_@item.produto.Id">@Html.DisplayFor(modelItem => item.produto.Descricao)</label>
     </div>
-}
 
+}

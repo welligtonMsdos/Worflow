@@ -1,7 +1,7 @@
 ﻿@model IEnumerable<Worflow.Models.Usuario>
 
 @{
-    ViewData["Title"] = "GetUsuario";   
+    ViewData["Title"] = "GetUsuario";
 }
 
 <form asp-action="PesquisarUsuarios">
@@ -13,7 +13,7 @@
                 <div class="input-group-prepend">
                     <div class="input-group-text"><i class="fa-solid fa-magnifying-glass" style="color: var(--corPrincipal); margin-right: 5px"></i></div>
                 </div>
-                <input type="text" class="form-control" id="txtPesquisar" 
+                <input type="text" class="form-control" id="txtPesquisar"
                        name="pesquisar" placeholder="Nome, RACF">
             </div>
         </div>
@@ -26,13 +26,13 @@
             <button type="button" class="btn btn-Acoes mb-2" onclick="location.href='@Url.Action("CreateUsuario", "Usuario")'">Novo</button>
         </div>
 
-    </div>   
+    </div>
 
 </form>
 
 <div class="table-responsive">
 
-   <partial name="~/Views/Usuario/PartialViews/_TabelaUsuarios.cshtml" />
+    <partial name="~/Views/Usuario/PartialViews/_TabelaUsuarios.cshtml" />
 
 </div>
 

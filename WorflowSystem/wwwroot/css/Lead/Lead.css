@@ -1,7 +1,19 @@
 ﻿
-.gridProduto{
-    top:65%;
-    float:left;
-    position:absolute;
-    margin-left: 67.5%;   
+.gridProduto {
+    position: relative;
 }
+
+.gridProduto__titulo {
+    font-size: 25px;
+}
+
+.gridProduto__itens_info {
+    font-size: 20px;
+    margin-left: 40px;
+    cursor: pointer;
+    margin-top: 2px;
+}
+
+
+
+

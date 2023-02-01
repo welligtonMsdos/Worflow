@@ -36,7 +36,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="bootstrap" Version="5.2.3" />
+    <PackageReference Include="bootstrap" Version="5.0.0" />
     <PackageReference Include="bootstrap-select" Version="1.13.18" />
     <PackageReference Include="Bootstrap.v3.Datetimepicker" Version="4.17.49" />
     <PackageReference Include="Font.Awesome" Version="5.15.4" />
