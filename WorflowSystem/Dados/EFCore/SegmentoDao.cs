@@ -22,6 +22,7 @@ namespace Worflow.Dados.EFCore
         public ICollection<Segmento> BuscarTodos()
         {
             return _context.Segmentos
+                .Where(x => x.Ativo)
                 .OrderBy(x => x.Descricao)
                 .ToList();
         }

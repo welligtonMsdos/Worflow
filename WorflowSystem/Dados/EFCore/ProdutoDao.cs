@@ -27,7 +27,7 @@ namespace Worflow.Dados.EFCore
             return _context.ProdutoSegmento
                 .Include(x=>x.produto)
                 .Include(x=>x.Segmento)
-                .Where(x=>x.SegmentoId == segmentoId)
+                .Where(x=>x.Segmento.Ativo && x.produto.Ativo && x.SegmentoId == segmentoId)
                 .OrderBy(x => x.produto.Descricao)
                 .ToList();
         }
@@ -35,6 +35,7 @@ namespace Worflow.Dados.EFCore
         public ICollection<Produto> BuscarTodos()
         {
             return _context.Produtos
+                .Where(x => x.Ativo)
                 .Include(x => x.ProdutoSegmento)
                 .OrderBy(x => x.Descricao)
                 .ToList();

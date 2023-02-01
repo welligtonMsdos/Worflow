@@ -17,22 +17,15 @@ namespace Worflow.Dados.EFCore
 
         public List<Perfil> BuscarPerfilList()
         {
-            return _context.Perfis.ToList();
-        }
-
-        public List<SelectListItem> BuscarPerfilSelectItem()
-        {
-            return _context.Perfis.Select(x => new SelectListItem()
-            {
-                Value = x.Id.ToString(),
-                Text = x.Descricao
-            }).ToList();
+            return _context.Perfis
+                .Where(x => x.Ativo)
+                .ToList();
         }
 
         public ICollection<Perfil> BuscarPorDescricao(string descricao)
         {
             return _context.Perfis
-                .Where(x => x.Descricao.StartsWith(descricao))
+                .Where(x => x.Ativo && x.Descricao.StartsWith(descricao))
                 .OrderBy(x => x.Descricao)
                 .ToList();
         }
@@ -45,6 +38,7 @@ namespace Worflow.Dados.EFCore
         public ICollection<Perfil> BuscarTodos()
         {
             return _context.Perfis
+                .Where(x => x.Ativo)
                 .OrderBy(x => x.Descricao)
                 .ToList();
         }

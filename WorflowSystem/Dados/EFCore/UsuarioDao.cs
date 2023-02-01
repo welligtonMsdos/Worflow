@@ -32,6 +32,7 @@ namespace Worflow.Dados.EFCore
         {
             return _context.Usuarios
                 .Include(x => x.Perfil)
+                .Where(x=>x.Ativo)
                 .OrderBy(x => x.Nome)
                 .ToList();
         }
@@ -55,7 +56,7 @@ namespace Worflow.Dados.EFCore
 
             return _context.Usuarios
                  .Include(x => x.Perfil)
-                 .Where(x => x.Nome.Contains(value) || x.RACF.Contains(value)) 
+                 .Where(x=>x.Ativo && (x.Nome.Contains(value) || x.RACF.Contains(value))) 
                  .OrderBy(x => x.Nome)
                  .ToList();
         }

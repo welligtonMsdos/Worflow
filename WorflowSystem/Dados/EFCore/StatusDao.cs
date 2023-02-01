@@ -17,7 +17,7 @@ namespace Worflow.Dados.EFCore
         public ICollection<Status> BuscarPorDescricao(string descricao)
         {
             return _context.Status
-                .Where(x => x.Descricao.StartsWith(descricao))
+                .Where(x => x.Ativo && x.Descricao.StartsWith(descricao))
                 .OrderBy(x => x.Descricao)
                 .ToList();
         }
@@ -30,6 +30,7 @@ namespace Worflow.Dados.EFCore
         public ICollection<Status> BuscarTodos()
         {
             return _context.Status
+                .Where(x => x.Ativo)
                 .OrderBy(x => x.Descricao)
                 .ToList();
         }

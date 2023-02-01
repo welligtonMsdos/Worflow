@@ -7,8 +7,6 @@ namespace Worflow.Repository
 {
     public interface IPerfilDao : IQuery<Perfil>, IQueryDescription<Perfil>
     {
-        List<SelectListItem> BuscarPerfilSelectItem();
-
         List<Perfil> BuscarPerfilList();
     }
 }
