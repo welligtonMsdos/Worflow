@@ -57,6 +57,12 @@ namespace Worflow.Dados.EFCore
             _context.SaveChanges();
         }
 
+        public void Incluir(List<Lead> obj)
+        {
+            _context.Lead.AddRange(obj); 
+            _context.SaveChanges();
+        }
+
         public ICollection<Lead> Pesquisar(string value)
         {
             if (value == null)
