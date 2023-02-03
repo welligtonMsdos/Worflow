@@ -191,6 +191,33 @@ namespace Worflow.Migrations
                         principalColumn: "Id");
                 });
 
+            migrationBuilder.CreateTable(
+                name: "Agenda",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    DataAgendada = table.Column<DateTime>(type: "datetime", nullable: false),
+                    LeadId = table.Column<int>(nullable: false),
+                    UsuarioId = table.Column<int>(nullable: false),
+                    Comentario = table.Column<string>(type: "varchar(150)", nullable: false),
+                    Ativo = table.Column<bool>(type: "bit", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Agenda", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Agenda_Lead_LeadId",
+                        column: x => x.LeadId,
+                        principalTable: "Lead",
+                        principalColumn: "Id");
+                    table.ForeignKey(
+                        name: "FK_Agenda_Usuario_UsuarioId",
+                        column: x => x.UsuarioId,
+                        principalTable: "Usuario",
+                        principalColumn: "Id");
+                });
+
             migrationBuilder.InsertData(
                 table: "Perfil",
                 columns: new[] { "Id", "Ativo", "Descricao" },
@@ -258,6 +285,16 @@ namespace Worflow.Migrations
                     { 2, true, "Cristiano Ronaldo", 1, "CRISRO" },
                     { 3, true, "Neymar Junior", 1, "NEYJU" }
                 });
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Agenda_LeadId",
+                table: "Agenda",
+                column: "LeadId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Agenda_UsuarioId",
+                table: "Agenda",
+                column: "UsuarioId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Cliente_EnderecoId",
@@ -353,25 +390,28 @@ namespace Worflow.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "Lead");
+                name: "Agenda");
 
             migrationBuilder.DropTable(
                 name: "ProdutoSegmento");
 
             migrationBuilder.DropTable(
+                name: "Lead");
+
+            migrationBuilder.DropTable(
+                name: "Segmento");
+
+            migrationBuilder.DropTable(
                 name: "Cliente");
+
+            migrationBuilder.DropTable(
+                name: "Produto");
 
             migrationBuilder.DropTable(
                 name: "Status");
 
             migrationBuilder.DropTable(
                 name: "Usuario");
-
-            migrationBuilder.DropTable(
-                name: "Produto");
-
-            migrationBuilder.DropTable(
-                name: "Segmento");
 
             migrationBuilder.DropTable(
                 name: "Endereco");
