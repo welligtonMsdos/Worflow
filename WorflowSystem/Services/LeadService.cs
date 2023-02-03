@@ -37,15 +37,28 @@ namespace Worflow.Services
         {
             SetObservacao(ref obj);
 
+            _leadDao.Incluir(SetListaLeads(obj, produtos));
+        }
+
+        private List<Lead> SetListaLeads(Lead obj, string[] produtos)
+        {
+            List<Lead> lead = new List<Lead>();
+
             foreach (var produtoId in produtos)
             {
-                obj.ProdutoId = int.Parse(produtoId);
-
-                _leadDao.Incluir(obj);
-
-                obj.Id = 0;
+                lead.Add(new Lead()
+                {
+                    DataAgendada = obj.DataAgendada,
+                    ClienteId = obj.ClienteId,
+                    Observacao = obj.Observacao,
+                    StatusId = obj.StatusId,
+                    UsuarioId = obj.UsuarioId,
+                    ProdutoId = int.Parse(produtoId)
+                 });                
             }
-        }     
+
+            return lead;
+        }
 
         public ICollection<Lead> Pesquisar(string value)
         {
