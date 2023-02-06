@@ -2,6 +2,7 @@
 using Worflow.Dados.Interfaces;
 using Worflow.Models;
 using Worflow.Repository;
+using Worflow.Core;
 
 namespace Worflow.Services
 {
@@ -62,8 +63,8 @@ namespace Worflow.Services
 
         public ICollection<Lead> Pesquisar(string value)
         {
-            return _leadDao.Pesquisar(value);
-        }
+           return ConversaoTipos.IsNumber(value) ? _leadDao.PesquisarPorId(int.Parse(value)) : _leadDao.Pesquisar(value);           
+        }       
 
         private void SetObservacao(ref Lead lead)
         {

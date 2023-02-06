@@ -7,5 +7,6 @@ namespace Worflow.Repository
     public interface ILeadDao : IQuery<Lead>, ICommand<Lead>, IQueryPesquisa<Lead>
     {
         void Incluir(List<Lead> obj);
+        ICollection<Lead> PesquisarPorId(int value);
     }
 }

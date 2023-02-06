@@ -25,6 +25,7 @@ namespace Worflow.Models
 
         [Key]
         [DatabaseGeneratedAttribute(DatabaseGeneratedOption.Identity)]
+        [Display(Name = "Lead")]
         public int Id { get; set; }
         public int UsuarioId { get; set; }
         public Usuario Usuario { get; set; }
