@@ -6,7 +6,7 @@ namespace Worflow.Dados.Interfaces
     public interface ILeadService
     {
         ICollection<Lead> BuscarLeads();
-        ICollection<Lead> Pesquisar(string value);
+        ICollection<Lead> Pesquisar(string value);       
         Lead BuscarPorId(int id);
         void Incluir(Lead obj, string[] produtos);      
         void Alterar(Lead obj);

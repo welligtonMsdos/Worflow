@@ -64,5 +64,20 @@ namespace Worflow.Controllers
 
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
+
+        public IActionResult ListarLead()
+        {
+            var leads = _leadService.BuscarLeads();
+            return View(leads);
+        }
+
+        [Route("PesquisarLeads")]
+        public ActionResult PesquisarLeads(string pesquisar)
+        {
+            var leads = _leadService.Pesquisar(pesquisar);
+
+            return View("ListarLead", leads);
+        }
+
     }
 }

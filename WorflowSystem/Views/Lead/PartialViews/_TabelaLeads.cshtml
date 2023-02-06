@@ -1,0 +1,99 @@
+﻿@model IEnumerable<Worflow.Models.Lead>
+
+<table class="table">
+    <thead class="tableCabecalho">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Id)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DataAgendada)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Cliente.Fantasia)                
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Produto.Descricao)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Status.Descricao)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Observacao)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Id)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DataAgendada)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Cliente.Fantasia)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Produto.Descricao)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Status.Descricao)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Observacao)
+                </td>
+                <td style="text-align:end">
+
+                    <button type="button" class="btn btn-Acoes" onclick="location.href='@Url.Action("EditarLead", "Lead", new { id = item.Id })'">Editar</button>
+
+                    <button type="button" class="btn btn-Acoes" onclick="location.href='@Url.Action("DetalhesLead", "Lead", new { id = item.Id })'">Detalhes</button>
+
+                    <button type="button" class="btn btn-Excluir" data-toggle="modal" data-target="#modalExcluir" onclick="setIdExcluir(@item.Id)">
+                        Excluir
+                    </button>
+
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+
+<div class="modal fade" id="modalExcluir" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+
+            <div class="modal-header">
+                <h3 class="modal-title" id="exampleModalLabel">Excluir Usuário</h3>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+
+            <form asp-action="ExcluirLead">
+
+                <div class="modal-body">
+
+                    <h5>Deseja realmente excluir<i class="fa-regular fa-question ml-2" style="color: var(--corPrincipal); margin-right: 5px"></i></h5>
+
+                    <input type="text" name="id" id="id" hidden>
+
+                </div>
+
+                <div class="modal-footer">
+
+                    <button type="button" class="btn btn-Acoes mr-4" data-dismiss="modal">Não</button>
+
+                    <button type="submit" class="btn btn-Acoes">Sim</button>
+
+                </div>
+
+            </form>
+
+        </div>
+    </div>
+</div>
