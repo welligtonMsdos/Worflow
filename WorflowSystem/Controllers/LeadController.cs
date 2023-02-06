@@ -31,7 +31,7 @@ namespace Worflow.Controllers
 
             lead.StatusId = 1;
             lead.UsuarioId = 1;
-            lead.ProdutoId = 2;
+            lead.SegmentoId = 1;
 
             ViewBag.Segmentos = _segmentoService.BuscarSegmentos();
 
@@ -77,6 +77,14 @@ namespace Worflow.Controllers
             var leads = _leadService.Pesquisar(pesquisar);
 
             return View("ListarLead", leads);
+        }
+
+        [Route("EditarLead/{id}")]
+        public ActionResult EditarLead(int id)
+        {
+            var lead = _leadService.BuscarPorId(id);          
+
+            return View(lead);
         }
 
     }

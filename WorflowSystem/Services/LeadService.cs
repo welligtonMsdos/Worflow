@@ -54,7 +54,9 @@ namespace Worflow.Services
                     Observacao = obj.Observacao,
                     StatusId = obj.StatusId,
                     UsuarioId = obj.UsuarioId,
-                    ProdutoId = int.Parse(produtoId)
+                    ProdutoId = int.Parse(produtoId),
+                    SegmentoId = obj.SegmentoId
+                    
                  });                
             }
 
