@@ -16,7 +16,7 @@ namespace Worflow.Services
         public Segmento BuscarPorId(int id)
         {
             return _segmentoDao.BuscarPorId(id);
-        }
+        }       
 
         public ICollection<Segmento> BuscarSegmentos()
         {

@@ -33,6 +33,11 @@ namespace Worflow.Dados.Mappings
               .HasForeignKey(p => p.ProdutoId)
               .OnDelete(DeleteBehavior.NoAction);
 
+            builder.HasOne(p => p.Segmento)
+             .WithMany(p => p.Lead)
+             .HasForeignKey(p => p.SegmentoId)
+             .OnDelete(DeleteBehavior.NoAction);
+
             builder.HasOne(p => p.Status)
               .WithMany(p => p.Lead)
               .HasForeignKey(p => p.StatusId)

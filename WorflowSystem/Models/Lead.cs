@@ -13,11 +13,12 @@ namespace Worflow.Models
         {
         }
 
-        public Lead(Usuario usuario, Cliente cliente, Produto produto, Status status)
+        public Lead(Usuario usuario, Cliente cliente, Produto produto, Segmento segmento, Status status)
         {
             Usuario = usuario;
             Cliente = cliente;
             Produto = produto;
+            Segmento = segmento;
             Status = status;
             DataAgendada = DateTime.Now;
             Observacao = "Registro como fonte no Seed";
@@ -33,6 +34,8 @@ namespace Worflow.Models
         public Cliente Cliente { get; set; }      
         public int ProdutoId { get; set; }
         public Produto Produto { get; set; }
+        public int SegmentoId { get; set; }
+        public Segmento Segmento { get; set; }
         public int StatusId { get; set; }
         public Status Status { get; set; }
 

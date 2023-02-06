@@ -19,6 +19,7 @@ namespace Worflow.Models
         [Display(Name = "Descrição")]
         public string Descricao { get; set; }
         public bool Ativo { get; set; }
+        public ICollection<Lead> Lead { get; set; }
         public virtual ICollection<ProdutoSegmento> ProdutoSegmento { get; set; }
     }
 }

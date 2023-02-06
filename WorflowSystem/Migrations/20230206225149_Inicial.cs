@@ -162,6 +162,7 @@ namespace Worflow.Migrations
                     UsuarioId = table.Column<int>(nullable: false),
                     ClienteId = table.Column<int>(nullable: false),
                     ProdutoId = table.Column<int>(nullable: false),
+                    SegmentoId = table.Column<int>(nullable: false),
                     StatusId = table.Column<int>(nullable: false),
                     DataAgendada = table.Column<DateTime>(type: "datetime", nullable: false),
                     Observacao = table.Column<string>(type: "varchar(300)", nullable: false)
@@ -178,6 +179,11 @@ namespace Worflow.Migrations
                         name: "FK_Lead_Produto_ProdutoId",
                         column: x => x.ProdutoId,
                         principalTable: "Produto",
+                        principalColumn: "Id");
+                    table.ForeignKey(
+                        name: "FK_Lead_Segmento_SegmentoId",
+                        column: x => x.SegmentoId,
+                        principalTable: "Segmento",
                         principalColumn: "Id");
                     table.ForeignKey(
                         name: "FK_Lead_Status_StatusId",
@@ -298,6 +304,11 @@ namespace Worflow.Migrations
                 name: "IX_Lead_ProdutoId",
                 table: "Lead",
                 column: "ProdutoId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Lead_SegmentoId",
+                table: "Lead",
+                column: "SegmentoId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Lead_StatusId",

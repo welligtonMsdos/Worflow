@@ -2,6 +2,8 @@
 using System.Linq;
 using Worflow.Models;
 using Worflow.Repository;
+using Microsoft.EntityFrameworkCore;
+
 
 namespace Worflow.Dados.EFCore
 {

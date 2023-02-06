@@ -69,7 +69,7 @@ namespace Worflow.Seeding
             if(ctx.Lead.ToList().Count() == 0)
             {
                 List<Lead> ltsLead = new List<Lead>();
-                ltsLead.Add(new Lead(GetUsuario(ctx), GetCliente(ctx), GetProduto(ctx), GetStatus(ctx)));
+                ltsLead.Add(new Lead(GetUsuario(ctx), GetCliente(ctx), GetProduto(ctx),  GetSegmento(ctx), GetStatus(ctx)));
 
                 ltsLead.ForEach(delegate (Lead lead)
                 {
@@ -106,6 +106,11 @@ namespace Worflow.Seeding
         private static Produto GetProduto(AppDbContext ctx)
         {
             return ctx.Produtos.First(x => x.Id == 1);
+        }
+
+        private static Segmento GetSegmento(AppDbContext ctx)
+        {
+            return ctx.Segmentos.First(x => x.Id == 1);
         }
 
         private static Status GetStatus(AppDbContext ctx)
