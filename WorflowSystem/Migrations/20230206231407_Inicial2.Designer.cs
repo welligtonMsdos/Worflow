@@ -10,8 +10,8 @@ using Worflow.Dados.EFCore;
 namespace Worflow.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20230206225149_Inicial")]
-    partial class Inicial
+    [Migration("20230206231407_Inicial2")]
+    partial class Inicial2
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -20,6 +20,38 @@ namespace Worflow.Migrations
                 .HasAnnotation("ProductVersion", "3.1.0")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+            modelBuilder.Entity("Worflow.Models.Agenda", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<bool>("Ativo")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("Comentario")
+                        .IsRequired()
+                        .HasColumnType("varchar(150)");
+
+                    b.Property<DateTime>("DataAgendada")
+                        .HasColumnType("datetime");
+
+                    b.Property<int>("LeadId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("UsuarioId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("LeadId");
+
+                    b.HasIndex("UsuarioId");
+
+                    b.ToTable("Agenda");
+                });
 
             modelBuilder.Entity("Worflow.Models.Cliente", b =>
                 {
@@ -474,6 +506,21 @@ namespace Worflow.Migrations
                             PerfilId = 1,
                             RACF = "NEYJU"
                         });
+                });
+
+            modelBuilder.Entity("Worflow.Models.Agenda", b =>
+                {
+                    b.HasOne("Worflow.Models.Lead", "Lead")
+                        .WithMany("Agenda")
+                        .HasForeignKey("LeadId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.HasOne("Worflow.Models.Usuario", "Usuario")
+                        .WithMany("Agenda")
+                        .HasForeignKey("UsuarioId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("Worflow.Models.Cliente", b =>

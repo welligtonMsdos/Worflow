@@ -40,7 +40,9 @@
                 </div>
 
                 <div class="col-2">
-                    <label class="control-label">Segmento</label>
+                    <label asp-for="Segmento.Descricao" class="control-label"></label>
+                    <input asp-for="Segmento.Descricao" id="conta" class="form-control" value='@Model.Segmento.Descricao' />
+                    <span asp-validation-for="Segmento.Descricao" class="text-danger"></span>
                 </div>
             </div>
 
