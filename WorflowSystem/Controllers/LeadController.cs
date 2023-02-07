@@ -59,7 +59,7 @@ namespace Worflow.Controllers
             {      
                 _leadService.Incluir(lead, Request.Form["produtos"]);
 
-                return RedirectToAction("Index", "Home");
+                return RedirectToAction("ListarLead", "Lead");
             }
 
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
@@ -85,6 +85,21 @@ namespace Worflow.Controllers
             var lead = _leadService.BuscarPorId(id);          
 
             return View(lead);
+        }
+
+        [Route("ExcluirLead")]
+        public ActionResult ExcluirLead(int id)
+        {
+            if (id > 0)
+            {
+                var lead = _leadService.BuscarPorId(id);
+
+                _leadService.Excluir(lead);
+
+                return RedirectToAction("ListarLead", "Lead");
+            }
+
+            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
 
     }

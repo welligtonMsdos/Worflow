@@ -40,7 +40,7 @@
                 </div>
 
                 <div class="col-2">
-                    <label asp-for="Segmento.Descricao" class="control-label"></label>
+                    <label>Segmento</label>
                     <input asp-for="Segmento.Descricao" id="conta" class="form-control" value='@Model.Segmento.Descricao' />
                     <span asp-validation-for="Segmento.Descricao" class="text-danger"></span>
                 </div>
@@ -153,8 +153,6 @@
 
                 <div class="col-4">
 
-                    @*<label asp-for="Produto.Descricao" class="control-label"></label>*@
-
                     <label>Produto</label>
 
                     <input asp-for="Produto.Descricao" class="form-control" value="@Model.Produto.Descricao" />
@@ -174,13 +172,13 @@
 
                 <div class="col-6" style="text-align:start">
 
-                    <button type="button" class="btn btn-Acoes" onclick="location.href='@Url.Action("Index", "Home")'">Voltar</button>
+                    <button type="button" class="btn btn-Acoes" onclick="location.href='@Url.Action("ListarLead", "Lead")'">Voltar</button>
 
                 </div>
 
                 <div class="col-6" style="text-align:end">
 
-                    <input type="submit" value="Salvar" class="btn btn-Acoes" />
+                    <input type="submit" value="Salvar" class="btn btn-Acoes" disabled/>
 
                 </div>
 

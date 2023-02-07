@@ -511,7 +511,7 @@ namespace Worflow.Migrations
                     b.HasOne("Worflow.Models.Lead", "Lead")
                         .WithMany("Agenda")
                         .HasForeignKey("LeadId")
-                        .OnDelete(DeleteBehavior.NoAction)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("Worflow.Models.Usuario", "Usuario")

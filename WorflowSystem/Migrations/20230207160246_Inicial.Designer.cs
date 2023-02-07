@@ -10,7 +10,7 @@ using Worflow.Dados.EFCore;
 namespace Worflow.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20230203222249_Inicial")]
+    [Migration("20230207160246_Inicial")]
     partial class Inicial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -169,6 +169,9 @@ namespace Worflow.Migrations
                     b.Property<int>("ProdutoId")
                         .HasColumnType("int");
 
+                    b.Property<int>("SegmentoId")
+                        .HasColumnType("int");
+
                     b.Property<int>("StatusId")
                         .HasColumnType("int");
 
@@ -180,6 +183,8 @@ namespace Worflow.Migrations
                     b.HasIndex("ClienteId");
 
                     b.HasIndex("ProdutoId");
+
+                    b.HasIndex("SegmentoId");
 
                     b.HasIndex("StatusId");
 
@@ -508,7 +513,7 @@ namespace Worflow.Migrations
                     b.HasOne("Worflow.Models.Lead", "Lead")
                         .WithMany("Agenda")
                         .HasForeignKey("LeadId")
-                        .OnDelete(DeleteBehavior.NoAction)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("Worflow.Models.Usuario", "Usuario")
@@ -538,6 +543,12 @@ namespace Worflow.Migrations
                     b.HasOne("Worflow.Models.Produto", "Produto")
                         .WithMany("Lead")
                         .HasForeignKey("ProdutoId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.HasOne("Worflow.Models.Segmento", "Segmento")
+                        .WithMany("Lead")
+                        .HasForeignKey("SegmentoId")
                         .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 

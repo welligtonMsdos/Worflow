@@ -17,8 +17,7 @@ namespace Worflow.Dados.Mappings
 
             builder.HasOne(p => p.Lead)
              .WithMany(p => p.Agenda)
-             .HasForeignKey(p => p.LeadId)
-             .OnDelete(DeleteBehavior.NoAction);
+             .HasForeignKey(p => p.LeadId);
 
             builder.HasOne(p => p.Usuario)
             .WithMany(p => p.Agenda)

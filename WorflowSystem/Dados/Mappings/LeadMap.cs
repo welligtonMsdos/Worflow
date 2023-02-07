@@ -41,7 +41,7 @@ namespace Worflow.Dados.Mappings
             builder.HasOne(p => p.Status)
               .WithMany(p => p.Lead)
               .HasForeignKey(p => p.StatusId)
-              .OnDelete(DeleteBehavior.NoAction);
+              .OnDelete(DeleteBehavior.NoAction);         
         }
     }
 }
