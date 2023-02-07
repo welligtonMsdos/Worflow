@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using Worflow.Dados.Interfaces;
 using Worflow.Models;
+using Worflow.Services;
 using WorflowSystem.Models;
 
 namespace Worflow.Controllers
@@ -100,6 +101,13 @@ namespace Worflow.Controllers
             }
 
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+        }
+
+        [Route("DetalhesLead/{id}")]
+        public ActionResult DetalhesLead(int id)
+        {
+            var lead = _leadService.BuscarPorId(id);
+            return View(lead);
         }
 
     }

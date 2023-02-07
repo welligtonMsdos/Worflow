@@ -13,10 +13,7 @@ namespace Worflow.Dados.Mappings
             builder.Property(p => p.Nome)
                    .HasColumnType("varchar(150)")
                    .IsRequired();
-
-            builder.HasIndex(p => p.Nome)
-                  .HasName("IX_USUARIO_NOME");
-
+           
             builder.Property(p => p.Ativo)
                    .HasColumnType("bit")
                    .IsRequired();

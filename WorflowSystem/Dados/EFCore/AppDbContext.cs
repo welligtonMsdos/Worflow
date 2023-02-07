@@ -23,8 +23,9 @@ namespace Worflow.Dados.EFCore
         public DbSet<Agenda> Agenda { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        {
-            optionsBuilder.UseSqlServer("Data Source=localhost\\SQLEXPRESS;Initial Catalog=BDWorflow;Integrated Security=True");
+        {            
+           optionsBuilder.UseSqlServer("Data Source=DESKTOP-TK7GSO1\\SQLEXPRESS;Initial Catalog=BDWorflow;Integrated Security=True;Trust Server Certificate=true");
+           
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -39,6 +40,8 @@ namespace Worflow.Dados.EFCore
             modelBuilder.ApplyConfiguration(new LeadMap());
             modelBuilder.ApplyConfiguration(new ProdutoSegmentoMap());
             modelBuilder.ApplyConfiguration(new AgendaMap());
+
+            
         }
     }
 }

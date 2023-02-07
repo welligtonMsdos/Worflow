@@ -12,12 +12,8 @@
             <th>
                 @Html.DisplayNameFor(model => model.Cliente.Fantasia)                
             </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Produto.Descricao)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Status.Descricao)
-            </th>
+            <th scope="col">Produto</th>
+            <th scope="col">Status</th>
             <th>
                 @Html.DisplayNameFor(model => model.Observacao)
             </th>
@@ -48,11 +44,11 @@
                 </td>
                 <td style="text-align:end">
 
-                    <button type="button" class="btn btn-Acoes" onclick="location.href='@Url.Action("EditarLead", "Lead", new { id = item.Id })'">Editar</button>
+                    <button type="button" class="btn btn-Acoes mb-2" onclick="location.href='@Url.Action("EditarLead", "Lead", new { id = item.Id })'">Editar</button>
 
-                    <button type="button" class="btn btn-Acoes" onclick="location.href='@Url.Action("DetalhesLead", "Lead", new { id = item.Id })'" disabled>Detalhes</button>
+                    <button type="button" class="btn btn-Acoes mb-2" onclick="location.href='@Url.Action("DetalhesLead", "Lead", new { id = item.Id })'">Detalhes</button>
 
-                    <button type="button" class="btn btn-Excluir" data-toggle="modal" data-target="#modalExcluir" onclick="setIdExcluir(@item.Id)">
+                    <button type="button" class="btn btn-Excluir mb-2" data-toggle="modal" data-target="#modalExcluir" onclick="setIdExcluir(@item.Id)">
                         Excluir
                     </button>
 

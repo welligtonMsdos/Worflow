@@ -16,10 +16,7 @@ namespace Worflow.Dados.Mappings
 
             builder.Property(p => p.Logadouro)
                    .HasColumnType("varchar(150)")
-                   .IsRequired();
-
-            builder.HasIndex(p => p.Logadouro)
-                 .HasName("IX_ENDERECO_LOGADOURO");
+                   .IsRequired();           
 
             builder.Property(p => p.Numero)
                   .HasColumnType("varchar(15)")
@@ -33,15 +30,11 @@ namespace Worflow.Dados.Mappings
                   .HasColumnType("varchar(150)")
                   .IsRequired();
 
-            builder.HasIndex(p => p.Cidade)
-                 .HasName("IX_ENDERECO_CIDADE");
-
             builder.Property(p => p.UF)
                   .HasColumnType("varchar(2)")
                   .IsRequired();
 
-            builder.HasIndex(p => p.UF)
-                 .HasName("IX_ENDERECO_UF");
+            
         }
     }
 }

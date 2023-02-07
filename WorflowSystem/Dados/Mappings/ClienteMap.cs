@@ -16,17 +16,11 @@ namespace Worflow.Dados.Mappings
 
             builder.Property(p => p.RazaoSocial)
                  .HasColumnType("varchar(150)")
-                 .IsRequired();
-
-            builder.HasIndex(p => p.RazaoSocial)
-                .HasName("IX_CLIENTE_RAZAO_SOCIAL");
+                 .IsRequired();           
 
             builder.Property(p => p.Fantasia)
                  .HasColumnType("varchar(150)")
-                 .IsRequired();
-
-            builder.HasIndex(p => p.Fantasia)
-                .HasName("IX_CLIENTE_FANTASIA");
+                 .IsRequired();            
 
             builder.Property(p => p.Agencia)
                  .HasColumnType("varchar(4)")
