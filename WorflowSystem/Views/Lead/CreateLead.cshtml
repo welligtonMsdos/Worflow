@@ -10,7 +10,7 @@
 <form asp-action="InserirLead">
     <div class="card">
 
-        <div class="card-body">
+        <div class="card-body m-4">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
             @Html.HiddenFor(model => model.StatusId)
@@ -19,7 +19,7 @@
             @Html.HiddenFor(model => model.SegmentoId)
             @Html.HiddenFor(model => model.ClienteId, new { id = "LeadClienteId" })
             @Html.HiddenFor(model => model.Cliente.Id, new { id = "clienteId" })
-            @Html.HiddenFor(model => model.Cliente.EnderecoId, new { id = "leadEnderecoId" })
+            @Html.HiddenFor(model => model.Cliente.EnderecoId, new { id = "leadEnderecoId" })            
 
             <div class="row mb-3">
                 <div class="col-4">
@@ -41,14 +41,17 @@
                 </div>
 
                 <div class="col-4">
+                   
                     <label class="control-label">Segmento</label>
-                    @Html.DropDownListFor(model => model.Produto, new SelectList(ViewBag.Segmentos, "Id", "Descricao")
-                      , new
-                           {
-                               @class = "form-control",
-                               @id = "comboSegmento",
-                               @onchange = "changeSegmento()"
-                           })
+
+                    <select class="form-select form-select-lg mb-3" aria-label="select para segmentos" id="comboSegmento" onchange="changeSegmento()">
+                        <option selected>Selecione</option>
+                        @foreach (var item in ViewBag.Segmentos)
+                        {
+                            <option value="@item.Id">@item.Descricao</option>
+                        }                      
+                    </select>
+
                 </div>
 
             </div>
@@ -172,16 +175,20 @@
 
             <div class="row mb-3">
 
-                <div class="col-6" style="text-align:start">
+                <div class="col-12">
 
-                    <button type="button" class="btn btn-Acoes" onclick="location.href='@Url.Action("ListarLead", "Lead")'">Voltar</button>
+                    <div class="d-flex justify-content-between mt-2">
 
-                </div>
+                        <button type="button" class="btn btn-Acoes ms-4" onclick="location.href='@Url.Action("ListarLead", "Lead")'">
+                            Voltar
+                        </button>
 
-                <div class="col-6" style="text-align:end">
+                        <button type="submit" class="btn btn-Acoes me-4" onclick="return verificarProdutos()">
+                            Salvar
+                        </button>
 
-                    <input type="submit" onclick="return verificarProdutos()"  value="Salvar" class="btn btn-Acoes" />
-
+                    </div>
+                    
                 </div>
 
             </div>

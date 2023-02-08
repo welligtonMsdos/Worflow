@@ -10,7 +10,7 @@
                 @Html.DisplayNameFor(model => model.DataAgendada)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Cliente.Fantasia)                
+                @Html.DisplayNameFor(model => model.Cliente.Fantasia)
             </th>
             <th scope="col">Produto</th>
             <th scope="col">Status</th>
@@ -48,7 +48,7 @@
 
                     <button type="button" class="btn btn-Acoes mb-2" onclick="location.href='@Url.Action("DetalhesLead", "Lead", new { id = item.Id })'">Detalhes</button>
 
-                    <button type="button" class="btn btn-Excluir mb-2" data-toggle="modal" data-target="#modalExcluir" onclick="setIdExcluir(@item.Id)">
+                    <button type="button" class="btn btn-Excluir mb-2" data-bs-toggle="modal" data-bs-target="#modalExcluir" onclick="setIdExcluir(@item.Id)">
                         Excluir
                     </button>
 
@@ -58,34 +58,25 @@
     </tbody>
 </table>
 
-
-<div class="modal fade" id="modalExcluir" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
+<div class="modal fade" id="modalExcluir" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
         <div class="modal-content">
 
             <div class="modal-header">
-                <h3 class="modal-title" id="exampleModalLabel">Excluir Usuário</h3>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
+                <h3 class="modal-title" id="exampleModalLabel">Excluir Lead</h3>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
 
             <form asp-action="ExcluirLead">
 
                 <div class="modal-body">
-
                     <h5>Deseja realmente excluir<i class="fa-regular fa-question ml-2" style="color: var(--corPrincipal); margin-right: 5px"></i></h5>
-
                     <input type="text" name="id" id="id" hidden>
-
                 </div>
 
                 <div class="modal-footer">
-
-                    <button type="button" class="btn btn-Acoes mr-4" data-dismiss="modal">Não</button>
-
+                    <button type="button" class="btn btn-Acoes mr-4" data-bs-dismiss="modal">Não</button>
                     <button type="submit" class="btn btn-Acoes">Sim</button>
-
                 </div>
 
             </form>
@@ -93,3 +84,5 @@
         </div>
     </div>
 </div>
+
+

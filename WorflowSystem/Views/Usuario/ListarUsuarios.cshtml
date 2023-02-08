@@ -6,16 +6,21 @@
 
 <form asp-action="PesquisarUsuarios">
 
-    <div class="form-row align-items-center">
+    <div class="row mb-3">
 
         <div class="col-8">
-            <div class="input-group mb-2">
-                <div class="input-group-prepend">
-                    <div class="input-group-text"><i class="fa-solid fa-magnifying-glass" style="color: var(--corPrincipal); margin-right: 5px"></i></div>
-                </div>
-                <input type="text" class="form-control" id="txtPesquisar"
-                       name="pesquisar" placeholder="Nome, RACF">
+
+            <div class="input-group flex-nowrap mb-2">
+                <span class="input-group-text" id="addon-wrapping"><i class="fa-solid fa-magnifying-glass" style="color: var(--corPrincipal); margin-right: 5px"></i></span>
+                <input type="text" 
+                       class="form-control" 
+                       id="txtPesquisar" 
+                       name="pesquisar"
+                       placeholder="Nome, RACF, Perfil"
+                       aria-label="Username" 
+                       aria-describedby="addon-wrapping">
             </div>
+
         </div>
 
         <div class="col-2">

@@ -44,8 +44,16 @@
 
                 <div class="col-6">
 
-                    @Html.DropDownListFor(model => model.PerfilId, new SelectList(ViewBag.Perfil, "Id", "Descricao")
-                      , new { @class = "form-control" })
+                    <label class="control-label">Perfil</label>
+
+                    <select class="form-select form-select-lg mb-3" aria-label="select para perfil" asp-for="PerfilId">
+                        <option selected>Selecione</option>
+                        @foreach (var item in ViewBag.Perfil)
+                        {
+                            <option value="@item.Id">@item.Descricao</option>
+                        }
+                    </select>
+                    <span asp-validation-for="PerfilId" class="text-danger"></span>
 
                 </div>
             </div>

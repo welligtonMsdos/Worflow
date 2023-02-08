@@ -35,7 +35,9 @@ namespace Worflow.Models
         public string RACF { get; set; }
 
         public bool Ativo { get; set; }
-       
+
+        [Required(ErrorMessage = "Perfil é obrigatório!")]
+        [Range(1,4, ErrorMessage ="Selecione um perfil")]
         public int PerfilId { get; set; }
 
         public Perfil Perfil { get; set; }      
