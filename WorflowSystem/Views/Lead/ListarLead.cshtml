@@ -1,31 +1,26 @@
 ﻿@model IEnumerable<Worflow.Models.Lead>
 
 @{
-    ViewData["Title"] = "ListarLead";  
+    ViewData["Title"] = "ListarLead";
 }
 
 
 <form asp-action="PesquisarLeads">
 
-    <div class="form-row align-items-center">
+    <div class="row mb-3">
 
-        <div class="col-8">
-            <div class="input-group mb-2">
-                <div class="input-group-prepend">
-                    <div class="input-group-text"><i class="fa-solid fa-magnifying-glass" style="color: var(--corPrincipal); margin-right: 5px"></i></div>
-                </div>
-                <input type="text" class="form-control" id="txtPesquisar"
-                       name="pesquisar" placeholder="Lead, Razão Social, Fantasia, Produto, Status">
+        <div class="col-10">
+
+            <div class="input-group flex-nowrap mb-2">
+                <span class="input-group-text" id="addon-wrapping"><i class="fa-solid fa-magnifying-glass" style="color: var(--corPrincipal); margin-right: 5px"></i></span>
+                <input type="text" class="form-control" id="txtPesquisar" placeholder="Lead, Razão Social, Fantasia, Produto, Status" aria-label="Username" aria-describedby="addon-wrapping">
             </div>
+
         </div>
 
         <div class="col-2">
             <button type="submit" class="btn btn-Pesquisa mb-2">Pesquisar</button>
         </div>
-
-        @*<div class="col-2" style="text-align:end">
-            <button type="button" class="btn btn-Acoes mb-2" onclick="location.href='@Url.Action("CreateUsuario", "Usuario")'">Novo</button>
-        </div>*@
 
     </div>
 
@@ -38,5 +33,7 @@
 </div>
 
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
 }
