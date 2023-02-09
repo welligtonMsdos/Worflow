@@ -27,6 +27,14 @@ namespace Worflow.Dados.EFCore
             return _context.Status.First(x => x.Id == id);
         }
 
+        public ICollection<Status> BuscarProximoStatus(List<int> statusId)
+        {
+            return _context.Status
+                .Where(x => statusId.Contains(x.Id))
+                .OrderBy(x => x.Descricao)
+                .ToList();
+        }
+
         public ICollection<Status> BuscarTodos()
         {
             return _context.Status

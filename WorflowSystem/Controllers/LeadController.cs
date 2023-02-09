@@ -14,14 +14,17 @@ namespace Worflow.Controllers
         ISegmentoService _segmentoService;
         IProdutoService _produtoService;
         IClienteService _clienteService;
+        IStatusService _statusService;
 
         public LeadController(ILeadService leadService, ISegmentoService segmentoService, 
-                              IProdutoService produtoService, IClienteService clienteService)
+                              IProdutoService produtoService, IClienteService clienteService, 
+                              IStatusService statusService)
         {
             _leadService = leadService;
             _segmentoService = segmentoService;
             _produtoService = produtoService;
             _clienteService = clienteService;
+            _statusService = statusService;
         }
 
         [Route("CreateLead")]      
@@ -83,7 +86,9 @@ namespace Worflow.Controllers
         [Route("EditarLead/{id}")]
         public ActionResult EditarLead(int id)
         {
-            var lead = _leadService.BuscarPorId(id);          
+            var lead = _leadService.BuscarPorId(id);
+
+            ViewBag.Status = _statusService.BuscarStatus(lead);
 
             return View(lead);
         }

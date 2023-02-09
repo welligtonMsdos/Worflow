@@ -208,7 +208,34 @@
             </fieldset>
 
             <div class="row mb-3">
-                <strong>Status here ... </strong>
+
+                <div class="col-3">
+                    
+                    <button type="button" class="btn btn-primary position-relative mt-4">
+                        Status
+                        <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-dark">
+                            @Model.Status.Descricao                          
+                        </span>
+                    </button>
+
+                </div>
+
+                <div class="col-3">
+
+                    <label class="control-label">Status</label>
+
+                    <select class="form-select form-select-lg mb-3"
+                            aria-label="select para status"
+                            asp-for="StatusId">
+                        <option selected>Selecione</option>
+                        @foreach (var item in ViewBag.Status)
+                        {
+                            <option value="@item.Id">@item.Descricao</option>
+                        }
+                    </select>
+
+                </div>
+
             </div>
 
         </div>
