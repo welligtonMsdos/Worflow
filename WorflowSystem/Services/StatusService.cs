@@ -20,8 +20,6 @@ namespace Worflow.Services
         {
             RecuperaStatusAtual(lead.StatusId);
 
-            //lead.Status.ModoStatus = _statusLead.ModoStatus();
-
             return _statusDao.BuscarProximoStatus(_statusLead.ProximoStatus());           
         }
 
@@ -32,6 +30,8 @@ namespace Worflow.Services
                 case 1: _statusLead = new StatusAtivo(); break;
                 case 2: _statusLead = new StatusEmAndamento(); break;
                 case 3: _statusLead = new StatusFinalizao(); break;
+                case 4: _statusLead = new StatusCotacao(); break;
+                case 5: _statusLead = new StatusImplantacao(); break;
             }
         }
     }
