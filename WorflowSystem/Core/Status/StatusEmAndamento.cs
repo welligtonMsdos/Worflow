@@ -12,7 +12,9 @@ namespace Worflow.Core.Status
 
         public List<int> ProximoStatus()
         {
-            List<int> statusId = new List<int>();            
+            List<int> statusId = new List<int>();
+            statusId.Add((int)EStatusLead.Cotacao);
+            statusId.Add((int)EStatusLead.Implantacao);
             statusId.Add((int)EStatusLead.Finalizado);
 
             return statusId;

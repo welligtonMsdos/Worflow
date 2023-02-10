@@ -8,7 +8,7 @@ namespace Worflow.Dados.Mappings
     {
         public void Configure(EntityTypeBuilder<Lead> builder)
         {
-            builder.ToTable("Lead");
+            builder.ToTable("Lead");   
 
             builder.Property(p => p.DataAgendada)
                    .HasColumnType("datetime")

@@ -13,11 +13,12 @@
         <div class="card-body">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
-            @Html.HiddenFor(model => model.UsuarioId)
+            @Html.HiddenFor(model => model.Id, new { @class = "hid-id" })
+           @* @Html.HiddenFor(model => model.UsuarioId)
             @Html.HiddenFor(model => model.ProdutoId)
-            @Html.HiddenFor(model => model.ClienteId, new { id = "LeadClienteId" })
-            @Html.HiddenFor(model => model.Cliente.Id, new { id = "clienteId" })
-            @Html.HiddenFor(model => model.Cliente.EnderecoId, new { id = "leadEnderecoId" })
+            @Html.HiddenFor(model => model.ClienteId)
+            @Html.HiddenFor(model => model.Cliente.Id)
+            @Html.HiddenFor(model => model.Cliente.EnderecoId, new { id = "leadEnderecoId" })*@
 
 
             <div class="accordion mb-3" id="acc">
@@ -33,9 +34,9 @@
                             <fieldset disabled>
 
                                 <div class="row mb-3">
-                                    <div class="col-4">
+                                    <div class="col-4">                                      
                                         <label asp-for="Cliente.CNPJ" class="control-label"></label>
-                                        <input asp-for="Cliente.CNPJ" id="cnpj" class="form-control" value='@Model.Cliente.CNPJ' />
+                                        <input asp-for="Cliente.CNPJ" class="form-control" value='@Model.Cliente.CNPJ' />
                                         <span asp-validation-for="Cliente.CNPJ" class="text-danger"></span>
                                     </div>
 
@@ -80,13 +81,13 @@
 
                                     <div class="col-9">
                                         <label asp-for="Cliente.Email" class="control-label"></label>
-                                        <input asp-for="Cliente.Email" id="email" class="form-control" value="@Model.Cliente.Email" />
+                                        <input asp-for="Cliente.Email" id="email" class="form-control" value='@Model.Cliente.Email' />
                                         <span asp-validation-for="Cliente.Email" class="text-danger"></span>
                                     </div>
 
                                     <div class="col-3">
                                         <label asp-for="Cliente.Telefone" class="control-label"></label>
-                                        <input asp-for="Cliente.Telefone" id="telefone" class="form-control" value="@Model.Cliente.Telefone" />
+                                        <input asp-for="Cliente.Telefone" id="telefone" class="form-control" value='@Model.Cliente.Telefone' />
                                         <span asp-validation-for="Cliente.Telefone" class="text-danger"></span>
                                     </div>
 
@@ -164,7 +165,23 @@
                     </h2>
                     <div id="acc_arquivo_lead" class="accordion-collapse collapse show" aria-labelledby="acc_arquivo" data-bs-parent="#acc">
                         <div class="accordion-body">
-                            <strong>Files here ... </strong>
+
+                            <div class="row mb-3">
+
+                                <div class="col-11">
+                                    <div class="mb-3">
+                                        <input class="form-control" name="ListFiles" type="file" id="formFileMultiple" multiple>
+                                    </div>
+                                </div>
+
+                                <div class="col-1">
+                                    <button id="btnEnviarAnexo" type="button" class="btn btn-Pesquisa">Anexar</button>
+                                </div>
+
+                            </div>
+
+
+
                         </div>
                     </div>
                 </div>
@@ -210,11 +227,11 @@
             <div class="row mb-3">
 
                 <div class="col-3">
-                    
+
                     <button type="button" class="btn btn-primary position-relative mt-4">
                         Status
                         <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-dark">
-                            @Model.Status.Descricao                          
+                            @Model.Status.Descricao
                         </span>
                     </button>
 
@@ -252,7 +269,7 @@
 
                 <div class="col-6" style="text-align:end">
 
-                    <input type="submit" value="Salvar" class="btn btn-Acoes" disabled />
+                    <input type="submit" value="Salvar" class="btn btn-Acoes" />
 
                 </div>
 

@@ -1,6 +1,9 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.IO;
+using System.Threading.Tasks;
 using Worflow.Dados.Interfaces;
 using Worflow.Models;
 using Worflow.Services;
@@ -16,8 +19,8 @@ namespace Worflow.Controllers
         IClienteService _clienteService;
         IStatusService _statusService;
 
-        public LeadController(ILeadService leadService, ISegmentoService segmentoService, 
-                              IProdutoService produtoService, IClienteService clienteService, 
+        public LeadController(ILeadService leadService, ISegmentoService segmentoService,
+                              IProdutoService produtoService, IClienteService clienteService,
                               IStatusService statusService)
         {
             _leadService = leadService;
@@ -27,7 +30,7 @@ namespace Worflow.Controllers
             _statusService = statusService;
         }
 
-        [Route("CreateLead")]      
+        [Route("CreateLead")]
 
         public ActionResult CreateLead()
         {
@@ -60,7 +63,7 @@ namespace Worflow.Controllers
         public ActionResult InserirLead(Lead lead)
         {
             if (ModelState.IsValid)
-            {      
+            {
                 _leadService.Incluir(lead, Request.Form["produtos"]);
 
                 return RedirectToAction("ListarLead", "Lead");
@@ -73,7 +76,7 @@ namespace Worflow.Controllers
         {
             var leads = _leadService.BuscarLeads();
             return View(leads);
-        }
+        }       
 
         [Route("PesquisarLeads")]
         public ActionResult PesquisarLeads(string pesquisar)
@@ -113,6 +116,19 @@ namespace Worflow.Controllers
         {
             var lead = _leadService.BuscarPorId(id);
             return View(lead);
+        }      
+
+        [Route("AtualizarLead")]
+        public ActionResult AtualizarLead(Lead lead)
+        {
+            if (ModelState.IsValid)
+            {
+                _leadService.Alterar(lead);
+
+                return RedirectToAction("ListarLead", "Lead");
+            }
+
+            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
 
     }

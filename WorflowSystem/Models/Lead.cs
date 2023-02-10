@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Http;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -45,6 +46,6 @@ namespace Worflow.Models
        
         [Display(Name = "Observação", Prompt = "Digite a observação")]
         public string Observacao { get; set; }
-        public ICollection<Agenda> Agenda { get; set; }
+        public ICollection<Agenda> Agenda { get; set; }        
     }
 }

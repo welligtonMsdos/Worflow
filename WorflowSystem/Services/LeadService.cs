@@ -16,6 +16,8 @@ namespace Worflow.Services
         }
         public void Alterar(Lead obj)
         {
+            var lead = _leadDao.BuscarPorId(obj.Id);
+            lead.StatusId = obj.StatusId;
             _leadDao.Alterar(obj);
         }
 
@@ -71,6 +73,6 @@ namespace Worflow.Services
         private void SetObservacao(ref Lead lead)
         {
             lead.Observacao = lead.Observacao == null ? "" : lead.Observacao;
-        }
+        }       
     }
 }
