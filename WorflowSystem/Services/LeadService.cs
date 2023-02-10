@@ -18,7 +18,7 @@ namespace Worflow.Services
         {
             var lead = _leadDao.BuscarPorId(obj.Id);
             lead.StatusId = obj.StatusId;
-            _leadDao.Alterar(obj);
+            _leadDao.Alterar(lead);
         }
 
         public ICollection<Lead> BuscarLeads()

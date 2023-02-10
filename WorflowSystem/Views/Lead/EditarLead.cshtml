@@ -13,13 +13,7 @@
         <div class="card-body">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
-            @Html.HiddenFor(model => model.Id, new { @class = "hid-id" })
-           @* @Html.HiddenFor(model => model.UsuarioId)
-            @Html.HiddenFor(model => model.ProdutoId)
-            @Html.HiddenFor(model => model.ClienteId)
-            @Html.HiddenFor(model => model.Cliente.Id)
-            @Html.HiddenFor(model => model.Cliente.EnderecoId, new { id = "leadEnderecoId" })*@
-
+            @Html.HiddenFor(model => model.Id, new { @class = "hid-id" })   
 
             <div class="accordion mb-3" id="acc">
 
@@ -175,7 +169,7 @@
                                 </div>
 
                                 <div class="col-1">
-                                    <button id="btnEnviarAnexo" type="button" class="btn btn-Pesquisa">Anexar</button>
+                                    <button id="btnEnviarAnexo" type="button" class="btn btn-Acoes-v2">Anexar</button>
                                 </div>
 
                             </div>
@@ -250,6 +244,7 @@
                             <option value="@item.Id">@item.Descricao</option>
                         }
                     </select>
+                    <span asp-validation-for="StatusId" class="text-danger"></span>
 
                 </div>
 

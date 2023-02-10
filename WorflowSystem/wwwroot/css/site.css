@@ -76,14 +76,14 @@ body {
     color: var(--textoPrincipal);
 }
 
-.btn-Pesquisa {
+.btn-Acoes-v2 {
     color: var(--textoPrincipal);
     background-color: var(--corSecundario);
     border-color: var(--corSecundario);
     font-weight: bold;
 }
 
-    .btn-Pesquisa:hover {
+    .btn-Acoes-v2:hover {
         color: var(--textoPrincipal);
         background-color: var(--corSecundario);
         border-color: var(--corSecundario);

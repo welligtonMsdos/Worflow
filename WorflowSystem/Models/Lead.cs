@@ -37,6 +37,8 @@ namespace Worflow.Models
         public Produto Produto { get; set; }
         public int SegmentoId { get; set; }
         public Segmento Segmento { get; set; }
+        [Required(ErrorMessage = "Status é obrigatório!")]
+        [Range(1, 5, ErrorMessage = "Selecione um status")]
         public int StatusId { get; set; }
         public Status Status { get; set; }
 
