@@ -34,6 +34,7 @@ namespace Worflow.Controllers
         public ActionResult DetalhesUsuario(int id)
         {
             var usuario = _usuarioService.BuscarPorId(id);
+
             return View(usuario);
         }
 
