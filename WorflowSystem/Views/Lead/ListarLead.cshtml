@@ -1,9 +1,10 @@
-﻿@model IEnumerable<Worflow.Models.Lead>
+﻿@using X.PagedList.Mvc.Core;
+@using X.PagedList.Web.Common;
+@model X.PagedList.IPagedList<Worflow.Models.Lead>;
 
 @{
     ViewData["Title"] = "ListarLead";
 }
-
 
 <form asp-action="PesquisarLeads">
 
@@ -29,6 +30,28 @@
 <div class="table-responsive">
 
     <partial name="~/Views/Lead/PartialViews/_TabelaLeads.cshtml" />
+
+</div>
+
+<div class="row mb-3">
+
+    <div class="col-12">
+
+        <div class="d-flex justify-content-between mt-2">
+
+            @Html.PagedListPager(Model, pagina => Url.Action("ListarLead", new { pagina }),
+            new PagedListRenderOptions {
+            LiElementClasses = new string[] { "page-item" },
+            PageClasses = new string[] { "page-link" }
+            })
+
+            <span class="pull-right">
+                Listando @Model.FirstItemOnPage a @Model.LastItemOnPage de um total de @Model.TotalItemCount
+            </span>
+
+        </div>
+
+    </div>
 
 </div>
 

@@ -156,7 +156,17 @@ body {
         color: var(--textoSecundario);
     }
 
-  
+
+
+.page-link {
+    background-color: var(--corPrincipal);
+    color: var(--textoSecundario);
+}
+
+    .page-link:active {
+        background-color: var(--corPrincipal);
+        color: var(--textoSecundario);
+    }
 
 
 

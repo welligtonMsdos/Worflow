@@ -1,22 +1,22 @@
-﻿@model IEnumerable<Worflow.Models.Lead>
+﻿@using X.PagedList.Mvc.Core;
+@using X.PagedList.Web.Common;
+@model X.PagedList.IPagedList<Worflow.Models.Lead>;
 
 <table class="table">
     <thead class="tableCabecalho">
         <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Id)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.DataAgendada)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Cliente.Fantasia)
-            </th>
+            <th scope="col">Lead</th>
+
+            <th scope="col">Data Agendada</th>
+
+            <th scope="col">Fantasia</th>
+
             <th scope="col">Produto</th>
-            <th scope="col">Status</th>
-            <th>
-                @Html.DisplayNameFor(model => model.Observacao)
-            </th>
+
+            <th scope="col">Status</th>          
+
+            <th scope="col">Observação</th>
+
             <th></th>
         </tr>
     </thead>

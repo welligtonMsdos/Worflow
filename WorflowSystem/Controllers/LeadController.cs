@@ -72,16 +72,21 @@ namespace Worflow.Controllers
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
 
-        public IActionResult ListarLead()
+        public IActionResult ListarLead(int pagina = 1)
         {
-            var leads = _leadService.BuscarLeads();
+            //var leads = _leadService.BuscarLeads();
+
+            var leads = _leadService.BuscarLeadsByPageList(pagina);
+
             return View(leads);
         }       
 
         [Route("PesquisarLeads")]
-        public ActionResult PesquisarLeads(string pesquisar)
+        public ActionResult PesquisarLeads(string pesquisar, int pagina = 1)
         {
-            var leads = _leadService.Pesquisar(pesquisar);
+            //var leads = _leadService.Pesquisar(pesquisar);
+
+            var leads = _leadService.PesquisarByPageList(pesquisar, pagina);
 
             return View("ListarLead", leads);
         }
