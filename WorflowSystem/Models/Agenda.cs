@@ -19,6 +19,10 @@ namespace Worflow.Models
         [Display(Name = "Data Agendada", Prompt = "Digite a data agendada")]
         public DateTime DataAgendada { get; set; }
 
+        [Required(ErrorMessage = "{0} é obrigatória")]
+        [DataType(DataType.Time)]
+        public string Horario { get; set; }
+
         public int LeadId { get; set; }
         public Lead Lead { get; set; }
         public int UsuarioId { get; set; }

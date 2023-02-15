@@ -1,6 +1,87 @@
-﻿@{
+﻿@model IEnumerable<Worflow.Models.DatasAgenda>
+
+@{
     ViewData["Title"] = "Agenda";
 }
-<h1>@ViewData["Title"]</h1>
 
-<p>Page about Agenda in progresss.</p>
+<div class="card">
+
+    <div class="card-body">
+
+        <div class="accordion mb-3" id="acc">
+
+            <div class="accordion-item">
+
+                <h2 class="accordion-header" id="acc_datas">
+
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#acc_datas_mes" aria-expanded="false" aria-controls="collapseOne">
+                        Mês atual
+                    </button>
+
+                </h2>
+
+                <div id="acc_datas_mes" class="accordion-collapse collapse" aria-labelledby="acc_datas" data-bs-parent="#acc">
+                    <div class="accordion-body">
+
+                        <strong>Datas aqui</strong>
+
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="accordion-item">
+
+                <h2 class="accordion-header" id="acc_semana">
+
+                    <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#acc_semana_atual" aria-expanded="true" aria-controls="collapseThree">
+                        Semanal
+                    </button>
+
+                </h2>
+
+                <div id="acc_semana_atual" class="accordion-collapse collapse show" aria-labelledby="acc_semana" data-bs-parent="#acc">
+
+                    <div class="accordion-body">
+
+                        @foreach (var item in Model)
+                        {
+                            <div class="accordion" id="painelTarefas">
+
+                                <div class="card">
+                                    <div class="card-header">
+                                        <div class="row">
+                                            <div class="col-10">
+                                                <button class="btn btn-block text-left texto__padrao" data-bs-toggle="collapse" data-bs-target="#@item.Identificadores">
+                                                    @item.Datas
+                                                </button>
+                                            </div>
+
+                                            <div class="col-2">
+                                                <a asp-action="CriarTarefa" asp-route-dataTarefa="@item.Datas" class="btn btn-sm btn-Acoes">Nova Tarefa</a>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div id="@item.Identificadores" class="collapse" data-bs-parent="#painelTarefas">
+                                        <div class="card-body">
+                                            <strong>view</strong>
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                            </div>
+                        }
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>

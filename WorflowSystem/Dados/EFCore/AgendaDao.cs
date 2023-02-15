@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using Worflow.Models;
@@ -13,6 +14,15 @@ namespace Worflow.Dados.EFCore
         public AgendaDao(AppDbContext context)
         {
             _context = context;
+        }
+
+        public ICollection<Agenda> BuscarAgendaList()
+        {
+            return _context.Agenda
+                .Skip(0)
+                .Take(4)
+                .OrderBy(x => x.DataAgendada)
+                .ToList();
         }
         public Agenda BuscarPorId(int id)
         {

@@ -12,8 +12,12 @@ namespace Worflow.Dados.Mappings
             builder.ToTable("Agenda");
 
             builder.Property(p => p.DataAgendada)
-                    .HasColumnType("datetime")
+                    .HasColumnType("DateTime")
                     .IsRequired();
+
+            builder.Property(p => p.Horario)
+                .HasColumnType("varchar(5)")
+                .IsRequired();
 
             builder.HasOne(p => p.Lead)
              .WithMany(p => p.Agenda)

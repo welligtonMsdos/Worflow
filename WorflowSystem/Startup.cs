@@ -30,6 +30,7 @@ namespace WorflowSystem
             services.AddTransient<ISegmentoDao, SegmentoDao>();
             services.AddTransient<IStatusDao, StatusDao>();
             services.AddTransient<IUsuarioDao, UsuarioDao>();
+            services.AddTransient<IAgendaDao, AgendaDao>();
          
             services.AddTransient<IUsuarioService, UsuarioService>();
             services.AddTransient<IPerfilService, PerfilService>();
@@ -39,6 +40,7 @@ namespace WorflowSystem
             services.AddTransient<IProdutoService, ProdutoService>();
             services.AddTransient<IClienteService, ClienteService>();
             services.AddTransient<IStatusService, StatusService>();
+            services.AddTransient<IAgendaService, AgendaService>();
 
             services.AddDbContext<AppDbContext>();
             services.AddControllersWithViews()

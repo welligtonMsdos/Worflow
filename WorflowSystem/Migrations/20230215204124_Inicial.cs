@@ -1,17 +1,23 @@
 ﻿using System;
 using Microsoft.EntityFrameworkCore.Migrations;
 
+#nullable disable
+
+#pragma warning disable CA1814 // Prefer jagged arrays over multidimensional
+
 namespace Worflow.Migrations
 {
+    /// <inheritdoc />
     public partial class Inicial : Migration
     {
+        /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
                 name: "Endereco",
                 columns: table => new
                 {
-                    Id = table.Column<int>(nullable: false)
+                    Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     CEP = table.Column<string>(type: "varchar(8)", maxLength: 8, nullable: false),
                     Logadouro = table.Column<string>(type: "varchar(150)", nullable: false),
@@ -29,7 +35,7 @@ namespace Worflow.Migrations
                 name: "Perfil",
                 columns: table => new
                 {
-                    Id = table.Column<int>(nullable: false)
+                    Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Descricao = table.Column<string>(type: "varchar(50)", nullable: false),
                     Ativo = table.Column<bool>(type: "bit", nullable: false)
@@ -43,7 +49,7 @@ namespace Worflow.Migrations
                 name: "Produto",
                 columns: table => new
                 {
-                    Id = table.Column<int>(nullable: false)
+                    Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Descricao = table.Column<string>(type: "varchar(50)", nullable: false),
                     Ativo = table.Column<bool>(type: "bit", nullable: false)
@@ -57,7 +63,7 @@ namespace Worflow.Migrations
                 name: "Segmento",
                 columns: table => new
                 {
-                    Id = table.Column<int>(nullable: false)
+                    Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Descricao = table.Column<string>(type: "varchar(50)", nullable: false),
                     Ativo = table.Column<bool>(type: "bit", nullable: false)
@@ -71,7 +77,7 @@ namespace Worflow.Migrations
                 name: "Status",
                 columns: table => new
                 {
-                    Id = table.Column<int>(nullable: false)
+                    Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Descricao = table.Column<string>(type: "varchar(50)", nullable: false),
                     Ativo = table.Column<bool>(type: "bit", nullable: false)
@@ -85,9 +91,9 @@ namespace Worflow.Migrations
                 name: "Cliente",
                 columns: table => new
                 {
-                    Id = table.Column<int>(nullable: false)
+                    Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    EnderecoId = table.Column<int>(nullable: false),
+                    EnderecoId = table.Column<int>(type: "int", nullable: false),
                     CNPJ = table.Column<string>(type: "varchar(14)", nullable: false),
                     RazaoSocial = table.Column<string>(type: "varchar(150)", nullable: false),
                     Fantasia = table.Column<string>(type: "varchar(150)", nullable: false),
@@ -110,12 +116,12 @@ namespace Worflow.Migrations
                 name: "Usuario",
                 columns: table => new
                 {
-                    Id = table.Column<int>(nullable: false)
+                    Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Nome = table.Column<string>(type: "varchar(150)", nullable: false),
-                    RACF = table.Column<string>(nullable: false),
+                    RACF = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Ativo = table.Column<bool>(type: "bit", nullable: false),
-                    PerfilId = table.Column<int>(nullable: false)
+                    PerfilId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -131,10 +137,10 @@ namespace Worflow.Migrations
                 name: "ProdutoSegmento",
                 columns: table => new
                 {
-                    Id = table.Column<int>(nullable: false)
+                    Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    ProdutoId = table.Column<int>(nullable: false),
-                    SegmentoId = table.Column<int>(nullable: false)
+                    ProdutoId = table.Column<int>(type: "int", nullable: false),
+                    SegmentoId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -157,13 +163,13 @@ namespace Worflow.Migrations
                 name: "Lead",
                 columns: table => new
                 {
-                    Id = table.Column<int>(nullable: false)
+                    Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    UsuarioId = table.Column<int>(nullable: false),
-                    ClienteId = table.Column<int>(nullable: false),
-                    ProdutoId = table.Column<int>(nullable: false),
-                    SegmentoId = table.Column<int>(nullable: false),
-                    StatusId = table.Column<int>(nullable: false),
+                    UsuarioId = table.Column<int>(type: "int", nullable: false),
+                    ClienteId = table.Column<int>(type: "int", nullable: false),
+                    ProdutoId = table.Column<int>(type: "int", nullable: false),
+                    SegmentoId = table.Column<int>(type: "int", nullable: false),
+                    StatusId = table.Column<int>(type: "int", nullable: false),
                     DataAgendada = table.Column<DateTime>(type: "datetime", nullable: false),
                     Observacao = table.Column<string>(type: "varchar(300)", nullable: false)
                 },
@@ -201,11 +207,12 @@ namespace Worflow.Migrations
                 name: "Agenda",
                 columns: table => new
                 {
-                    Id = table.Column<int>(nullable: false)
+                    Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    DataAgendada = table.Column<DateTime>(type: "datetime", nullable: false),
-                    LeadId = table.Column<int>(nullable: false),
-                    UsuarioId = table.Column<int>(nullable: false),
+                    DataAgendada = table.Column<DateTime>(type: "DateTime", nullable: false),
+                    Horario = table.Column<string>(type: "varchar(5)", nullable: false),
+                    LeadId = table.Column<int>(type: "int", nullable: false),
+                    UsuarioId = table.Column<int>(type: "int", nullable: false),
                     Comentario = table.Column<string>(type: "varchar(150)", nullable: false),
                     Ativo = table.Column<bool>(type: "bit", nullable: false)
                 },
@@ -309,31 +316,6 @@ namespace Worflow.Migrations
                 column: "EnderecoId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_CLIENTE_FANTASIA",
-                table: "Cliente",
-                column: "Fantasia");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_CLIENTE_RAZAO_SOCIAL",
-                table: "Cliente",
-                column: "RazaoSocial");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_ENDERECO_CIDADE",
-                table: "Endereco",
-                column: "Cidade");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_ENDERECO_LOGADOURO",
-                table: "Endereco",
-                column: "Logadouro");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_ENDERECO_UF",
-                table: "Endereco",
-                column: "UF");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_Lead_ClienteId",
                 table: "Lead",
                 column: "ClienteId");
@@ -359,16 +341,6 @@ namespace Worflow.Migrations
                 column: "UsuarioId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_PERFIL_DESCRICAO",
-                table: "Perfil",
-                column: "Descricao");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_PRODUTO_DESCRICAO",
-                table: "Produto",
-                column: "Descricao");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_ProdutoSegmento_ProdutoId",
                 table: "ProdutoSegmento",
                 column: "ProdutoId");
@@ -379,26 +351,12 @@ namespace Worflow.Migrations
                 column: "SegmentoId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_SEGMENTO_DESCRICAO",
-                table: "Segmento",
-                column: "Descricao");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_STATUS_DESCRICAO",
-                table: "Status",
-                column: "Descricao");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_USUARIO_NOME",
-                table: "Usuario",
-                column: "Nome");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_Usuario_PerfilId",
                 table: "Usuario",
                 column: "PerfilId");
         }
 
+        /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(

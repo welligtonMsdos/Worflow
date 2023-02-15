@@ -7,26 +7,31 @@ using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Worflow.Dados.EFCore;
 
+#nullable disable
+
 namespace Worflow.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20230207160246_Inicial")]
+    [Migration("20230215204124_Inicial")]
     partial class Inicial
     {
+        /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "3.1.0")
-                .HasAnnotation("Relational:MaxIdentifierLength", 128)
-                .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                .HasAnnotation("ProductVersion", "7.0.3")
+                .HasAnnotation("Relational:MaxIdentifierLength", 128);
+
+            SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
             modelBuilder.Entity("Worflow.Models.Agenda", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<bool>("Ativo")
                         .HasColumnType("bit");
@@ -36,7 +41,11 @@ namespace Worflow.Migrations
                         .HasColumnType("varchar(150)");
 
                     b.Property<DateTime>("DataAgendada")
-                        .HasColumnType("datetime");
+                        .HasColumnType("DateTime");
+
+                    b.Property<string>("Horario")
+                        .IsRequired()
+                        .HasColumnType("varchar(5)");
 
                     b.Property<int>("LeadId")
                         .HasColumnType("int");
@@ -50,15 +59,16 @@ namespace Worflow.Migrations
 
                     b.HasIndex("UsuarioId");
 
-                    b.ToTable("Agenda");
+                    b.ToTable("Agenda", (string)null);
                 });
 
             modelBuilder.Entity("Worflow.Models.Cliente", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("Agencia")
                         .IsRequired()
@@ -93,21 +103,16 @@ namespace Worflow.Migrations
 
                     b.HasIndex("EnderecoId");
 
-                    b.HasIndex("Fantasia")
-                        .HasName("IX_CLIENTE_FANTASIA");
-
-                    b.HasIndex("RazaoSocial")
-                        .HasName("IX_CLIENTE_RAZAO_SOCIAL");
-
-                    b.ToTable("Cliente");
+                    b.ToTable("Cliente", (string)null);
                 });
 
             modelBuilder.Entity("Worflow.Models.Endereco", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("Bairro")
                         .IsRequired()
@@ -115,8 +120,8 @@ namespace Worflow.Migrations
 
                     b.Property<string>("CEP")
                         .IsRequired()
-                        .HasColumnType("varchar(8)")
-                        .HasMaxLength(8);
+                        .HasMaxLength(8)
+                        .HasColumnType("varchar(8)");
 
                     b.Property<string>("Cidade")
                         .IsRequired()
@@ -132,29 +137,21 @@ namespace Worflow.Migrations
 
                     b.Property<string>("UF")
                         .IsRequired()
-                        .HasColumnType("varchar(2)")
-                        .HasMaxLength(2);
+                        .HasMaxLength(2)
+                        .HasColumnType("varchar(2)");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("Cidade")
-                        .HasName("IX_ENDERECO_CIDADE");
-
-                    b.HasIndex("Logadouro")
-                        .HasName("IX_ENDERECO_LOGADOURO");
-
-                    b.HasIndex("UF")
-                        .HasName("IX_ENDERECO_UF");
-
-                    b.ToTable("Endereco");
+                    b.ToTable("Endereco", (string)null);
                 });
 
             modelBuilder.Entity("Worflow.Models.Lead", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<int>("ClienteId")
                         .HasColumnType("int");
@@ -190,15 +187,19 @@ namespace Worflow.Migrations
 
                     b.HasIndex("UsuarioId");
 
-                    b.ToTable("Lead");
+                    b.ToTable("Lead", null, t =>
+                        {
+                            t.HasTrigger("addNaAgenda");
+                        });
                 });
 
             modelBuilder.Entity("Worflow.Models.Perfil", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<bool>("Ativo")
                         .HasColumnType("bit");
@@ -209,10 +210,7 @@ namespace Worflow.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("Descricao")
-                        .HasName("IX_PERFIL_DESCRICAO");
-
-                    b.ToTable("Perfil");
+                    b.ToTable("Perfil", (string)null);
 
                     b.HasData(
                         new
@@ -245,8 +243,9 @@ namespace Worflow.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<bool>("Ativo")
                         .HasColumnType("bit");
@@ -257,10 +256,7 @@ namespace Worflow.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("Descricao")
-                        .HasName("IX_PRODUTO_DESCRICAO");
-
-                    b.ToTable("Produto");
+                    b.ToTable("Produto", (string)null);
 
                     b.HasData(
                         new
@@ -293,8 +289,9 @@ namespace Worflow.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<int>("ProdutoId")
                         .HasColumnType("int");
@@ -308,7 +305,7 @@ namespace Worflow.Migrations
 
                     b.HasIndex("SegmentoId");
 
-                    b.ToTable("ProdutoSegmento");
+                    b.ToTable("ProdutoSegmento", (string)null);
 
                     b.HasData(
                         new
@@ -365,8 +362,9 @@ namespace Worflow.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<bool>("Ativo")
                         .HasColumnType("bit");
@@ -377,10 +375,7 @@ namespace Worflow.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("Descricao")
-                        .HasName("IX_SEGMENTO_DESCRICAO");
-
-                    b.ToTable("Segmento");
+                    b.ToTable("Segmento", (string)null);
 
                     b.HasData(
                         new
@@ -413,8 +408,9 @@ namespace Worflow.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<bool>("Ativo")
                         .HasColumnType("bit");
@@ -425,10 +421,7 @@ namespace Worflow.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("Descricao")
-                        .HasName("IX_STATUS_DESCRICAO");
-
-                    b.ToTable("Status");
+                    b.ToTable("Status", (string)null);
 
                     b.HasData(
                         new
@@ -455,8 +448,9 @@ namespace Worflow.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<bool>("Ativo")
                         .HasColumnType("bit");
@@ -474,12 +468,9 @@ namespace Worflow.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("Nome")
-                        .HasName("IX_USUARIO_NOME");
-
                     b.HasIndex("PerfilId");
 
-                    b.ToTable("Usuario");
+                    b.ToTable("Usuario", (string)null);
 
                     b.HasData(
                         new
@@ -521,6 +512,10 @@ namespace Worflow.Migrations
                         .HasForeignKey("UsuarioId")
                         .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
+
+                    b.Navigation("Lead");
+
+                    b.Navigation("Usuario");
                 });
 
             modelBuilder.Entity("Worflow.Models.Cliente", b =>
@@ -530,6 +525,8 @@ namespace Worflow.Migrations
                         .HasForeignKey("EnderecoId")
                         .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
+
+                    b.Navigation("Endereco");
                 });
 
             modelBuilder.Entity("Worflow.Models.Lead", b =>
@@ -563,6 +560,16 @@ namespace Worflow.Migrations
                         .HasForeignKey("UsuarioId")
                         .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
+
+                    b.Navigation("Cliente");
+
+                    b.Navigation("Produto");
+
+                    b.Navigation("Segmento");
+
+                    b.Navigation("Status");
+
+                    b.Navigation("Usuario");
                 });
 
             modelBuilder.Entity("Worflow.Models.ProdutoSegmento", b =>
@@ -578,6 +585,10 @@ namespace Worflow.Migrations
                         .HasForeignKey("SegmentoId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("Segmento");
+
+                    b.Navigation("produto");
                 });
 
             modelBuilder.Entity("Worflow.Models.Usuario", b =>
@@ -587,6 +598,54 @@ namespace Worflow.Migrations
                         .HasForeignKey("PerfilId")
                         .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
+
+                    b.Navigation("Perfil");
+                });
+
+            modelBuilder.Entity("Worflow.Models.Cliente", b =>
+                {
+                    b.Navigation("Lead");
+                });
+
+            modelBuilder.Entity("Worflow.Models.Endereco", b =>
+                {
+                    b.Navigation("Cliente");
+                });
+
+            modelBuilder.Entity("Worflow.Models.Lead", b =>
+                {
+                    b.Navigation("Agenda");
+                });
+
+            modelBuilder.Entity("Worflow.Models.Perfil", b =>
+                {
+                    b.Navigation("Usuario");
+                });
+
+            modelBuilder.Entity("Worflow.Models.Produto", b =>
+                {
+                    b.Navigation("Lead");
+
+                    b.Navigation("ProdutoSegmento");
+                });
+
+            modelBuilder.Entity("Worflow.Models.Segmento", b =>
+                {
+                    b.Navigation("Lead");
+
+                    b.Navigation("ProdutoSegmento");
+                });
+
+            modelBuilder.Entity("Worflow.Models.Status", b =>
+                {
+                    b.Navigation("Lead");
+                });
+
+            modelBuilder.Entity("Worflow.Models.Usuario", b =>
+                {
+                    b.Navigation("Agenda");
+
+                    b.Navigation("Lead");
                 });
 #pragma warning restore 612, 618
         }

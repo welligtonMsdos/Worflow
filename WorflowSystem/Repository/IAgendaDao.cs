@@ -6,5 +6,6 @@ namespace Worflow.Repository
     public interface IAgendaDao : IQuery<Agenda>, IQueryPesquisa<Agenda>
     {
         ICollection<Agenda> BuscarPorUsuarioId(int usuarioId);
+        ICollection<Agenda> BuscarAgendaList();
     }
 }
