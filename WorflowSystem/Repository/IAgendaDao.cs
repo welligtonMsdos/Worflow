@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Worflow.Dados.Interfaces;
 using Worflow.Models;
 namespace Worflow.Repository
@@ -7,5 +8,6 @@ namespace Worflow.Repository
     {
         ICollection<Agenda> BuscarPorUsuarioId(int usuarioId);
         ICollection<Agenda> BuscarAgendaList();
+        ICollection<Agenda> BuscarHorarios(DateTime data);
     }
 }

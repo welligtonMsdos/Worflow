@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Worflow.Dados.Interfaces;
 using Worflow.Models;
 using Worflow.Repository;
@@ -22,6 +23,11 @@ namespace Worflow.Services
         public List<DatasAgenda> BuscarAgendaList()
         {
             return SetarDatasAgenda(ListarDatas());
+        }
+
+        public ICollection<Agenda> BuscarHorarios(DateTime data)
+        {
+            return _agendaDao.BuscarHorarios(data);
         }
 
         private List<Agenda> ListarDatas()

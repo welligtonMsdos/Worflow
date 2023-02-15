@@ -24,6 +24,15 @@ namespace Worflow.Dados.EFCore
                 .OrderBy(x => x.DataAgendada)
                 .ToList();
         }
+
+        public ICollection<Agenda> BuscarHorarios(DateTime data)
+        {
+            return _context.Agenda                 
+                 .OrderBy(x => x.Horario)
+                 .Where(x => x.DataAgendada == data)
+                 .ToList();
+        }
+
         public Agenda BuscarPorId(int id)
         {
             return _context.Agenda

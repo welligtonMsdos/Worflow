@@ -65,7 +65,7 @@
 
                                     <div id="@item.Identificadores" class="collapse" data-bs-parent="#painelTarefas">
                                         <div class="card-body">
-                                            <strong>view</strong>
+                                            @await Component.InvokeAsync("ListaTarefas", item.Datas)
                                         </div>
                                     </div>
 
