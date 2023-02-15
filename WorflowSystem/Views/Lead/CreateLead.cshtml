@@ -16,7 +16,7 @@
             @Html.HiddenFor(model => model.StatusId)
             @Html.HiddenFor(model => model.UsuarioId)
             @Html.HiddenFor(model => model.ProdutoId)
-            @Html.HiddenFor(model => model.SegmentoId)
+           @* @Html.HiddenFor(model => model.SegmentoId)*@
             @Html.HiddenFor(model => model.ClienteId, new { id = "LeadClienteId" })
             @Html.HiddenFor(model => model.Cliente.Id, new { id = "clienteId" })
             @Html.HiddenFor(model => model.Cliente.EnderecoId, new { id = "leadEnderecoId" })            
@@ -44,7 +44,11 @@
                    
                     <label class="control-label">Segmento</label>
 
-                    <select class="form-select form-select-lg mb-3" aria-label="select para segmentos" id="comboSegmento" onchange="changeSegmento()">
+                    <select class="form-select form-select-lg mb-3" 
+                            asp-for="SegmentoId"
+                            aria-label="select para segmentos" 
+                            id="comboSegmento" 
+                            onchange="changeSegmento()">
                         <option selected>Selecione</option>
                         @foreach (var item in ViewBag.Segmentos)
                         {

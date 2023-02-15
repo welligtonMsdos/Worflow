@@ -37,8 +37,7 @@ namespace Worflow.Controllers
             var lead = new Lead();
 
             lead.StatusId = 1;
-            lead.UsuarioId = 1;
-            lead.SegmentoId = 1;
+            lead.UsuarioId = 1;            
 
             ViewBag.Segmentos = _segmentoService.BuscarSegmentos();
 

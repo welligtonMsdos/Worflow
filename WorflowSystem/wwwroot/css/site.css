@@ -71,6 +71,10 @@ body {
     --textoSecundario: #000;
 }
 
+.texto__padrao{
+    color: var(--corPrincipal);
+}
+
 .tableCabecalho {
     background-color: var(--corSecundario);
     color: var(--textoPrincipal);

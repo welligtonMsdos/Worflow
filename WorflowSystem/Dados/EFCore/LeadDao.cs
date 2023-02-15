@@ -36,10 +36,11 @@ namespace Worflow.Dados.EFCore
                   .Where(x => x.Cliente.RazaoSocial.Contains(value) ||
                               x.Cliente.Fantasia.Contains(value) ||
                               x.Produto.Descricao.Contains(value) ||
-                              x.Status.Descricao.Contains(value)
+                              x.Status.Descricao.Contains(value) ||
+                              x.Segmento.Descricao.Contains(value)
                         )
-                  .OrderBy(x => x.Id)
-                  .ToPagedList(pagina, 5);
+                  .OrderByDescending(x => x.Id)
+                  .ToPagedList(pagina, 10);
         }
 
         public IPagedList<Lead> BuscarLeadsByPageList(int pagina)
@@ -50,7 +51,8 @@ namespace Worflow.Dados.EFCore
                .Include(x => x.Produto)
                .Include(x => x.Segmento)
                .Include(x => x.Status)
-               .ToPagedList(pagina, 5);
+               .OrderByDescending(x => x.Id)
+               .ToPagedList(pagina, 10);
         }
 
         public Lead BuscarPorId(int id)
@@ -115,9 +117,10 @@ namespace Worflow.Dados.EFCore
                   .Where(x => x.Cliente.RazaoSocial.Contains(value) ||
                               x.Cliente.Fantasia.Contains(value) ||
                               x.Produto.Descricao.Contains(value) ||
-                              x.Status.Descricao.Contains(value)
+                              x.Status.Descricao.Contains(value) ||
+                              x.Segmento.Descricao.Contains(value)
                         )
-                  .OrderBy(x => x.Id)
+                  .OrderByDescending(x => x.Id)
                   .ToList();
         }
 
@@ -130,7 +133,7 @@ namespace Worflow.Dados.EFCore
                   .Include(x => x.Segmento)
                   .Include(x => x.Status)
                   .Where(x => x.Id.Equals(value))
-                  .OrderBy(x => x.Id)
+                  .OrderByDescending(x => x.Id)
                   .ToList();
         }
     }
