@@ -26,14 +26,14 @@ namespace Worflow.Controllers
         {
             var enderecos = _enderecoService.Pesquisar(pesquisar);
 
-            return View(nameof(ListarEnderecos), enderecos);
-            //return View("ListarEnderecos", enderecos);
+            return View(nameof(ListarEnderecos), enderecos);            
         }
 
         [Route("DetalhesEndereco/{id}")]
         public ActionResult DetalhesEndereco(int id)
         {
             var endereco = _enderecoService.BuscarPorId(id);
+
             return View(endereco);
         }
 
@@ -41,6 +41,7 @@ namespace Worflow.Controllers
         public ActionResult EditarEndereco(int id)
         {
             var endereco = _enderecoService.BuscarPorId(id);
+
             return View(endereco);
         }
 
@@ -50,8 +51,7 @@ namespace Worflow.Controllers
             if (ModelState.IsValid)
             {
                 _enderecoService.Alterar(endereco);
-
-                //return RedirectToAction("ListarEnderecos", "Endereco");
+               
                 return RedirectToAction(nameof(ListarEnderecos));
             }
 
@@ -72,8 +72,7 @@ namespace Worflow.Controllers
             if (ModelState.IsValid)
             {
                _enderecoService.Incluir(endereco);
-
-                //return RedirectToAction("ListarEnderecos", "Endereco");
+              
                 return RedirectToAction(nameof(ListarEnderecos));
             }
 
@@ -88,8 +87,7 @@ namespace Worflow.Controllers
                 var endereco = _enderecoService.BuscarPorId(id);
 
                 _enderecoService.Excluir(endereco);
-
-                //return RedirectToAction("ListarEnderecos", "Endereco");
+               
                 return RedirectToAction(nameof(ListarEnderecos));
             }
 

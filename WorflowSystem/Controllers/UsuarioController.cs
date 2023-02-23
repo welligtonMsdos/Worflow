@@ -19,6 +19,7 @@ namespace Worflow.Controllers
         public IActionResult ListarUsuarios()
         {
             var usuarios = _usuarioService.BuscarUsuarios();
+
             return View(usuarios);
         }
 
@@ -27,7 +28,7 @@ namespace Worflow.Controllers
         {
             var usuarios = _usuarioService.Pesquisar(pesquisar);
 
-            return View("ListarUsuarios", usuarios);
+            return View(nameof(ListarUsuarios), usuarios);            
         }
 
         [Route("DetalhesUsuario/{id}")]
@@ -55,7 +56,7 @@ namespace Worflow.Controllers
             {
                 _usuarioService.Alterar(usuario);
 
-                return RedirectToAction("ListarUsuarios", "Usuario");
+                return RedirectToAction(nameof(ListarUsuarios));
             }
 
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
@@ -79,7 +80,7 @@ namespace Worflow.Controllers
                 if (!_usuarioService.UsuarioExiste(usuario))
                     _usuarioService.Incluir(usuario);
 
-                return RedirectToAction("ListarUsuarios", "Usuario");
+                return RedirectToAction(nameof(ListarUsuarios));
             }
 
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
@@ -93,7 +94,7 @@ namespace Worflow.Controllers
 
                 _usuarioService.Excluir(usuario);
 
-                return RedirectToAction("ListarUsuarios", "Usuario");
+                return RedirectToAction(nameof(ListarUsuarios));
             }
 
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });

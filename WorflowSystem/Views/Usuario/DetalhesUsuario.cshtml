@@ -15,27 +15,35 @@
                 <div class="row mb-3">
 
                     <div class="col-6">
-                        <label>Nome</label>
-                        <input type="text" class="form-control" value='@Model.Nome'>
+
+                        <label asp-for="Nome" class="control-label"></label>
+                        <input asp-for="Nome" class="form-control" />
+
                     </div>
 
                     <div class="col-6">
-                        <label>RACF</label>
-                        <input type="text" class="form-control" value=@Model.RACF />
+                        
+                        <label asp-for="RACF" class="control-label"></label>
+                        <input asp-for="RACF" class="form-control" />
+
                     </div>
                 </div>
 
                 <div class="row mb-3">
                     <div class="col-6">
-                        <div class="custom-control custom-checkbox">
-                            <input type="checkbox" class="custom-control-input" checked='@Model.Ativo'>
-                            <label class="custom-control-label">Ativo</label>
+                        <div class="custom-control custom-checkbox">                           
+                            
+                            <input type="checkbox" asp-for="Ativo" class="custom-control-input" />
+                            <label asp-for="Ativo" class="custom-control-label"></label>
+
                         </div>
                     </div>
-                   
-                    <div class="col-6">
-                        <label>Perfil</label>
-                        <input type="text" class="form-control" value=@Model.Perfil.Descricao />
+
+                    <div class="col-6">                      
+                        
+                        <label asp-for="Perfil.Descricao" class="control-label"></label>
+                        <input asp-for="Perfil.Descricao" class="form-control" />
+
                     </div>
                 </div>
 
