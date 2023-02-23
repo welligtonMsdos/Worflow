@@ -57,7 +57,7 @@
                                                 </button>
                                             </div>
 
-                                            <div class="col-2"> 
+                                            <div class="col-2 d-grid gap-2 d-md-flex justify-content-md-end">
 
                                                 <a asp-action="CreateAgenda" asp-route-dataTarefa="@item.Datas" class="btn btn-Acoes">Nova Tarefa</a>
 
@@ -87,3 +87,9 @@
     </div>
 
 </div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

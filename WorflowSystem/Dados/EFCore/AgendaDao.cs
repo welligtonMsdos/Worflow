@@ -17,7 +17,7 @@ namespace Worflow.Dados.EFCore
         }
 
         public void Alterar(Agenda obj)
-        {
+        {          
             _context.Update(obj);
             _context.SaveChanges();
         }

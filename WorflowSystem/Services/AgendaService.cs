@@ -18,6 +18,8 @@ namespace Worflow.Services
 
         public void Alterar(Agenda obj)
         {
+            AgendaDefault(ref obj);
+            
             _agendaDao.Alterar(obj);
         }
 
@@ -34,6 +36,11 @@ namespace Worflow.Services
         public ICollection<Agenda> BuscarHorarios(DateTime data)
         {
             return _agendaDao.BuscarHorarios(data);
+        }
+
+        public Agenda BuscarPorId(int id)
+        {
+            return _agendaDao.BuscarPorId(id);
         }
 
         public void Excluir(Agenda obj)

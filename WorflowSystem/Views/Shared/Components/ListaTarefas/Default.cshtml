@@ -14,25 +14,25 @@
                 <li class="list-group-item">
                     <div class="row">
                         <div class="col-2">
-                          
+
                             <span class="badge rounded-pill bg-success">
                                 @Html.DisplayFor(modelItem => item.Horario)
                             </span>
 
                         </div>
 
-                        <div class="col-6">                          
-                           <label>@item.Comentario</label>
+                        <div class="col-6">
+                            <label>@item.Comentario</label>
                         </div>
 
-                        <div class="col-4">
-                            <a asp-action="AtualizarTarefa" asp-route-tarefaId="@item.Id" class="btn btn-sm btn-outline-primary rounded-circle">
+                        <div class="col-4 col-md-4 col-sm-1 d-grid gap-2 d-sm-flex d-md-flex justify-content-md-end">
+                            <a asp-action="EditarAgenda" asp-route-agendaID="@item.Id" class="btn btn-sm btn-outline-primary rounded-circle">
                                 <i class="fa fa-pencil-square"></i>
                             </a>
 
-                            <a class="btn btn-sm btn-outline-danger rounded-circle">
-                                <i class="fa fa-times-circle"></i>
-                            </a>
+                            <button class="btn btn-sm btn-outline-danger rounded-circle">
+                                <i class="fa fa-times-circle" disable></i>
+                            </button>
 
                         </div>
                     </div>
@@ -40,5 +40,5 @@
             }
         </ul>
     }
-  
+
 </div>

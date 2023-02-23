@@ -25,7 +25,9 @@ namespace Worflow.Controllers
         public ActionResult PesquisarEnderecos(string pesquisar)
         {
             var enderecos = _enderecoService.Pesquisar(pesquisar);
-            return View("ListarEnderecos", enderecos);
+
+            return View(nameof(ListarEnderecos), enderecos);
+            //return View("ListarEnderecos", enderecos);
         }
 
         [Route("DetalhesEndereco/{id}")]
@@ -49,7 +51,8 @@ namespace Worflow.Controllers
             {
                 _enderecoService.Alterar(endereco);
 
-                return RedirectToAction("ListarEnderecos", "Endereco");
+                //return RedirectToAction("ListarEnderecos", "Endereco");
+                return RedirectToAction(nameof(ListarEnderecos));
             }
 
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
@@ -70,7 +73,8 @@ namespace Worflow.Controllers
             {
                _enderecoService.Incluir(endereco);
 
-                return RedirectToAction("ListarEnderecos", "Endereco");
+                //return RedirectToAction("ListarEnderecos", "Endereco");
+                return RedirectToAction(nameof(ListarEnderecos));
             }
 
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
@@ -85,7 +89,8 @@ namespace Worflow.Controllers
 
                 _enderecoService.Excluir(endereco);
 
-                return RedirectToAction("ListarEnderecos", "Endereco");
+                //return RedirectToAction("ListarEnderecos", "Endereco");
+                return RedirectToAction(nameof(ListarEnderecos));
             }
 
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });

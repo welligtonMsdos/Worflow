@@ -1,10 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System;
-using System.Collections.Generic;
 using System.Diagnostics;
 using Worflow.Dados.Interfaces;
 using Worflow.Models;
-using Worflow.Services;
 using WorflowSystem.Models;
 
 namespace Worflow.Controllers
@@ -40,7 +38,43 @@ namespace Worflow.Controllers
             {
                 _agendaService.Incluir(agenda);
 
-                return RedirectToAction("ListarAgendas", "Agenda");
+                return RedirectToAction(nameof(ListarAgendas));
+            }
+
+            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+        }
+
+        [HttpGet]
+        public ActionResult EditarAgenda(int agendaID)
+        {
+            var agenda = _agendaService.BuscarPorId(agendaID);
+
+            return View(agenda);
+        }
+
+        [Route("AtualizarAgenda")]      
+        public ActionResult AtualizarAgenda(Agenda agenda)
+        {
+            if (ModelState.IsValid)
+            {
+                _agendaService.Alterar(agenda);
+
+                return RedirectToAction(nameof(ListarAgendas));
+            }
+
+            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+        }
+
+        [Route("ExcluirAgenda")]
+        public ActionResult ExcluirAgenda(int id)
+        {
+            if (id > 0)
+            {
+                var agenda = _agendaService.BuscarPorId(id);
+
+                _agendaService.Excluir(agenda);
+
+                return RedirectToAction(nameof(ListarAgendas));
             }
 
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });

@@ -1,0 +1,77 @@
+﻿@model Worflow.Models.Agenda
+
+<form asp-action="AtualizarAgenda">
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+    @Html.HiddenFor(model => model.Id, new { @class = "hid-id" })
+    @Html.HiddenFor(model => model.LeadId, new { @class = "hid-id" })
+    @Html.HiddenFor(model => model.UsuarioId, new { @class = "hid-id" })
+
+    <div class="card" style="width: 40rem;">
+
+        <div class="card-body">
+
+            <div class="row mb-3">
+                <div class="col-6">                  
+
+                    <label asp-for="DataAgendada" class="control-label"></label>
+                    <input asp-for="DataAgendada" class="form-control" asp-format="{0:yyyy-MM-dd}" type="date" readonly />
+                    <span asp-validation-for="DataAgendada" class="text-danger"></span>
+
+                </div>
+
+                <div class="col-6">
+                    <label asp-for="Horario" class="control-label"></label>
+                    <input asp-for="Horario" type="time" class="form-control"/>
+                    <span asp-validation-for="Horario" class="text-danger"></span>
+                </div>
+
+            </div>
+
+            <div class="row mb-3">
+                <div class="col-12">
+
+                    <label asp-for="Comentario" class="control-label"></label>
+                    <textarea class="form-control" asp-for="Comentario" rows="3"></textarea>
+                    <span asp-validation-for="Comentario" class="text-danger"></span>
+
+                </div>
+            </div>
+
+        </div>
+
+        <div class="card-footer">
+
+            <div class="row mb-3">
+
+                <div class="col-12">
+
+                    <div class="d-flex justify-content-between mt-2">
+
+                        <button type="button" class="btn btn-Acoes ms-4" onclick="location.href='@Url.Action("ListarAgendas", "Agenda")'">
+                            Voltar
+                        </button>
+
+                        <button type="submit" class="btn btn-Acoes me-4">
+                            Salvar
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</form>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
+
+
