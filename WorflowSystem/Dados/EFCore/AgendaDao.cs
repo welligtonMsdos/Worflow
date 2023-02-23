@@ -16,20 +16,27 @@ namespace Worflow.Dados.EFCore
             _context = context;
         }
 
-        public ICollection<Agenda> BuscarAgendaList()
+        public void Alterar(Agenda obj)
+        {
+            _context.Update(obj);
+            _context.SaveChanges();
+        }
+
+        public IQueryable<IGrouping<DateTime, Agenda>> BuscarDatas()
         {
             return _context.Agenda
-                .Skip(0)
-                .Take(4)
-                .OrderBy(x => x.DataAgendada)
-                .ToList();
+                .Where(x => x.DataAgendada >= DateTime.Now.Date &&
+                           x.DataAgendada <= DateTime.Now.AddDays(7).Date &&
+                           x.Ativo)
+                .GroupBy(x => x.DataAgendada);
         }
 
         public ICollection<Agenda> BuscarHorarios(DateTime data)
         {
-            return _context.Agenda                 
+            return _context.Agenda
                  .OrderBy(x => x.Horario)
-                 .Where(x => x.DataAgendada == data)
+                 .Where(x => x.DataAgendada == data &&
+                             x.Ativo)
                  .ToList();
         }
 
@@ -59,6 +66,18 @@ namespace Worflow.Dados.EFCore
               .Where(x => x.Ativo)
               .OrderBy(x => x.Id)
               .ToList();
+        }
+
+        public void Excluir(Agenda obj)
+        {
+            _context.Remove(obj);
+            _context.SaveChanges();
+        }
+
+        public void Incluir(Agenda obj)
+        {
+            _context.Add(obj);
+            _context.SaveChanges();
         }
 
         public ICollection<Agenda> Pesquisar(string value)

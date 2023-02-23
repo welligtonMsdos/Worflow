@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using Worflow.Dados.Interfaces;
 using Worflow.Models;
 using Worflow.Repository;
@@ -15,12 +16,17 @@ namespace Worflow.Services
             _agendaDao = agendaDao;
         }
 
+        public void Alterar(Agenda obj)
+        {
+            _agendaDao.Alterar(obj);
+        }
+
         public ICollection<Agenda> BuscarAgenda()
         {
             return _agendaDao.BuscarTodos();
         }
 
-        public List<DatasAgenda> BuscarAgendaList()
+        public List<DatasAgenda> BuscarDatas()
         {
             return SetarDatasAgenda(ListarDatas());
         }
@@ -30,9 +36,41 @@ namespace Worflow.Services
             return _agendaDao.BuscarHorarios(data);
         }
 
+        public void Excluir(Agenda obj)
+        {
+            _agendaDao.Excluir(obj);
+        }
+
+        public void Incluir(Agenda obj)
+        {
+            AgendaDefault(ref obj);
+
+            _agendaDao.Incluir(obj);
+        }
+
+        private void AgendaDefault(ref Agenda agenda)
+        {
+            agenda.Ativo = true;
+            agenda.LeadId = 1;
+            agenda.UsuarioId = 1;
+        }
+
         private List<Agenda> ListarDatas()
         {
-            return (List<Agenda>)_agendaDao.BuscarAgendaList();
+            var query = _agendaDao.BuscarDatas();
+
+            List<Agenda> listaAgenda = new List<Agenda>();
+
+            foreach (IGrouping<DateTime, Agenda> group in query)
+            {
+                foreach (Agenda agenda in group)
+                {
+                    listaAgenda.Add(new Agenda(agenda.DataAgendada));
+                    break;
+                }
+            }
+
+            return listaAgenda;
         }
 
         private List<DatasAgenda> SetarDatasAgenda(List<Agenda> listaAgenda)

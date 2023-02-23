@@ -8,6 +8,9 @@ namespace Worflow.Dados.Interfaces
     {
         ICollection<Agenda> BuscarAgenda();
         ICollection<Agenda> BuscarHorarios(DateTime data);
-        List<DatasAgenda> BuscarAgendaList();
+        List<DatasAgenda> BuscarDatas();
+        void Incluir(Agenda obj);
+        void Alterar(Agenda obj);
+        void Excluir(Agenda obj);
     }
 }

@@ -5,6 +5,7 @@
 }
 
 <div class="border border-light shadow rounded rounded-lg p-4">
+
     @if (Model.Count() > 0)
     {
         <ul class="list-group">
@@ -20,9 +21,8 @@
 
                         </div>
 
-                        <div class="col-6">
-                           @* @Html.DisplayFor(modelItem => item.Comentario + " [ " + item.Id + " ] ") *@
-                           <label>@item.Comentario [ @item.Id ]</label>
+                        <div class="col-6">                          
+                           <label>@item.Comentario</label>
                         </div>
 
                         <div class="col-4">
@@ -40,8 +40,5 @@
             }
         </ul>
     }
-    else
-    {
-        <p class="alert alert-warning">Sem tarefas ainda</p>
-    }
+  
 </div>
