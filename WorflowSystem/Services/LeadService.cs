@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
+using Worflow.Core;
 using Worflow.Dados.Interfaces;
 using Worflow.Models;
 using Worflow.Repository;
-using Worflow.Core;
 using X.PagedList;
 
 namespace Worflow.Services

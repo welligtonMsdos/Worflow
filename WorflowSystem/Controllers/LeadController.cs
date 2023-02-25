@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -8,6 +9,7 @@ using Worflow.Dados.Interfaces;
 using Worflow.Models;
 using Worflow.Services;
 using WorflowSystem.Models;
+using X.PagedList;
 
 namespace Worflow.Controllers
 {
@@ -27,7 +29,7 @@ namespace Worflow.Controllers
             _segmentoService = segmentoService;
             _produtoService = produtoService;
             _clienteService = clienteService;
-            _statusService = statusService;
+            _statusService = statusService;           
         }
 
         [Route("CreateLead")]

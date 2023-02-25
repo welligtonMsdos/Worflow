@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Linq;
+using Worflow.Dto;
 using Worflow.Models;
 using Worflow.Repository;
 using X.PagedList;
@@ -135,6 +136,6 @@ namespace Worflow.Dados.EFCore
                   .Where(x => x.Id.Equals(value))
                   .OrderByDescending(x => x.Id)
                   .ToList();
-        }
+        }       
     }
 }
