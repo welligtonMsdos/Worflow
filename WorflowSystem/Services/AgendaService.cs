@@ -9,23 +9,23 @@ namespace Worflow.Services
 {
     public class AgendaService : IAgendaService
     {
-        IAgendaRepository _agendaDao;
+        IAgendaRepository _agendaRepository;
 
-        public AgendaService(IAgendaRepository agendaDao)
+        public AgendaService(IAgendaRepository agendaRepository)
         {
-            _agendaDao = agendaDao;
+            _agendaRepository = agendaRepository;
         }
 
         public void Alterar(Agenda obj)
         {
             AgendaDefault(ref obj);
-            
-            _agendaDao.Alterar(obj);
+
+            _agendaRepository.Alterar(obj);
         }
 
         public ICollection<Agenda> BuscarAgenda()
         {
-            return _agendaDao.BuscarTodos();
+            return _agendaRepository.BuscarTodos();
         }
 
         public List<DatasAgenda> BuscarDatas()
@@ -35,24 +35,24 @@ namespace Worflow.Services
 
         public ICollection<Agenda> BuscarHorarios(DateTime data)
         {
-            return _agendaDao.BuscarHorarios(data);
+            return _agendaRepository.BuscarHorarios(data);
         }
 
         public Agenda BuscarPorId(int id)
         {
-            return _agendaDao.BuscarPorId(id);
+            return _agendaRepository.BuscarPorId(id);
         }
 
         public void Excluir(Agenda obj)
         {
-            _agendaDao.Excluir(obj);
+            _agendaRepository.Excluir(obj);
         }
 
         public void Incluir(Agenda obj)
         {
             AgendaDefault(ref obj);
 
-            _agendaDao.Incluir(obj);
+            _agendaRepository.Incluir(obj);
         }
 
         private void AgendaDefault(ref Agenda agenda)
@@ -64,7 +64,7 @@ namespace Worflow.Services
 
         private List<Agenda> ListarDatas()
         {
-            var query = _agendaDao.BuscarDatas();
+            var query = _agendaRepository.BuscarDatas();
 
             List<Agenda> listaAgenda = new List<Agenda>();
 

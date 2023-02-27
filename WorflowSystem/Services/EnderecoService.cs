@@ -7,40 +7,40 @@ namespace Worflow.Services
 {
     public class EnderecoService : IEnderecoService
     {
-        IEnderecoRepository _enderecoDao;
+        IEnderecoRepository _enderecoRepository;
 
-        public EnderecoService(IEnderecoRepository enderecoDao)
+        public EnderecoService(IEnderecoRepository enderecoRepository)
         {
-            _enderecoDao = enderecoDao;
+            _enderecoRepository = enderecoRepository;
         }
         public void Alterar(Endereco obj)
         {
-            _enderecoDao.Alterar(obj);
+            _enderecoRepository.Alterar(obj);
         }
 
         public ICollection<Endereco> BuscarEnderecos()
         {
-            return _enderecoDao.BuscarTodos();
+            return _enderecoRepository.BuscarTodos();
         }
 
         public Endereco BuscarPorId(int id)
         {
-            return _enderecoDao.BuscarPorId(id);
+            return _enderecoRepository.BuscarPorId(id);
         }
 
         public void Excluir(Endereco obj)
         {
-            _enderecoDao.Excluir(obj);
+            _enderecoRepository.Excluir(obj);
         }
 
         public void Incluir(Endereco obj)
         {
-            _enderecoDao.Incluir(obj);
+            _enderecoRepository.Incluir(obj);
         }
 
         public ICollection<Endereco> Pesquisar(string value)
         {
-            return _enderecoDao.Pesquisar(value);
+            return _enderecoRepository.Pesquisar(value);
         }
     }
 }

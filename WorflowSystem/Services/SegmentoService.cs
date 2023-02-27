@@ -7,20 +7,20 @@ namespace Worflow.Services
 {
     public class SegmentoService : ISegmentoService
     {
-        ISegmentoRepository _segmentoDao;
+        ISegmentoRepository _segmentoRepository;
 
-        public SegmentoService(ISegmentoRepository segmentoDao)
+        public SegmentoService(ISegmentoRepository segmentoRepository)
         {
-            _segmentoDao = segmentoDao;
+            _segmentoRepository = segmentoRepository;
         }
         public Segmento BuscarPorId(int id)
         {
-            return _segmentoDao.BuscarPorId(id);
+            return _segmentoRepository.BuscarPorId(id);
         }       
 
         public ICollection<Segmento> BuscarSegmentos()
         {
-            return _segmentoDao.BuscarTodos();
+            return _segmentoRepository.BuscarTodos();
         }
     }
 }

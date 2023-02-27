@@ -7,25 +7,25 @@ namespace Worflow.Services
 {
     public class ClienteService : IClienteService
     {
-        IClienteRepository _clienteDao;
+        IClienteRepository _clienteRepository;
 
-        public ClienteService(IClienteRepository clienteDao)
+        public ClienteService(IClienteRepository clienteRepository)
         {
-            _clienteDao = clienteDao;
+            _clienteRepository = clienteRepository;
         }
         public ICollection<Cliente> BuscarClientes()
         {
-            return _clienteDao.BuscarTodos();
+            return _clienteRepository.BuscarTodos();
         }
 
         public Cliente BuscarPorId(int id)
         {
-            return _clienteDao.BuscarPorId(id);
+            return _clienteRepository.BuscarPorId(id);
         }
 
         public ICollection<Cliente> Pesquisar(string value)
         {
-            return _clienteDao.Pesquisar(value);
+            return _clienteRepository.Pesquisar(value);
         }
     }
 }

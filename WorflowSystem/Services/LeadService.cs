@@ -9,39 +9,39 @@ namespace Worflow.Services
 {
     public class LeadService : ILeadService
     {
-        ILeadRepository _leadDao;
+        ILeadRepository _leadRepository;
 
-        public LeadService(ILeadRepository leadDao)
+        public LeadService(ILeadRepository leadRepository)
         {
-            _leadDao = leadDao;
+            _leadRepository = leadRepository;
         }
         public void Alterar(Lead obj)
         {
-            var lead = _leadDao.BuscarPorId(obj.Id);
+            var lead = _leadRepository.BuscarPorId(obj.Id);
             lead.StatusId = obj.StatusId;
-            _leadDao.Alterar(lead);
+            _leadRepository.Alterar(lead);
         }
 
         public ICollection<Lead> BuscarLeads()
         {
-            return _leadDao.BuscarTodos();
+            return _leadRepository.BuscarTodos();
         }
 
         public Lead BuscarPorId(int id)
         {
-            return _leadDao.BuscarPorId(id);
+            return _leadRepository.BuscarPorId(id);
         }
 
         public void Excluir(Lead obj)
         {
-            _leadDao.Excluir(obj);
+            _leadRepository.Excluir(obj);
         }
 
         public void Incluir(Lead obj, string[] produtos)
         {
             SetObservacao(ref obj);
 
-            _leadDao.Incluir(SetListaLeads(obj, produtos));
+            _leadRepository.Incluir(SetListaLeads(obj, produtos));
         }
 
         private List<Lead> SetListaLeads(Lead obj, string[] produtos)
@@ -68,7 +68,7 @@ namespace Worflow.Services
 
         public ICollection<Lead> Pesquisar(string value)
         {
-           return ConversaoTipos.IsNumber(value) ? _leadDao.PesquisarPorId(int.Parse(value)) : _leadDao.Pesquisar(value);           
+           return ConversaoTipos.IsNumber(value) ? _leadRepository.PesquisarPorId(int.Parse(value)) : _leadRepository.Pesquisar(value);           
         }       
 
         private void SetObservacao(ref Lead lead)
@@ -78,12 +78,12 @@ namespace Worflow.Services
 
         public IPagedList<Lead> BuscarLeadsByPageList(int pagina)
         {
-            return _leadDao.BuscarLeadsByPageList(pagina);
+            return _leadRepository.BuscarLeadsByPageList(pagina);
         }
 
         public IPagedList<Lead> PesquisarByPageList(string value, int pagina)
         {
-            return _leadDao.PesquisarByPageList(value, pagina);
+            return _leadRepository.PesquisarByPageList(value, pagina);
         }
     }
 }

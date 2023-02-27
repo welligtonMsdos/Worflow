@@ -7,24 +7,24 @@ namespace Worflow.Services
 {
     public class ProdutoService : IProdutoService
     {
-        IProdutoRepository _produtoDao;
-        public ProdutoService(IProdutoRepository produtoDao)
+        IProdutoRepository _produtoRepository;
+        public ProdutoService(IProdutoRepository produtoRepository)
         {
-            _produtoDao = produtoDao;
+            _produtoRepository = produtoRepository;
         }
         public Produto BuscarPorId(int id)
         {
-            return _produtoDao.BuscarPorId(id);
+            return _produtoRepository.BuscarPorId(id);
         }
 
         public ICollection<Produto> BuscarProdutos()
         {
-            return _produtoDao.BuscarTodos();
+            return _produtoRepository.BuscarTodos();
         }
 
         public ICollection<ProdutoSegmento> BuscarProdutosPorSegmento(int segmentoId)
         {
-            return _produtoDao.BuscarProdutosPorSegmento(segmentoId);
+            return _produtoRepository.BuscarProdutosPorSegmento(segmentoId);
         }
     }
 }

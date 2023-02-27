@@ -6,46 +6,46 @@ namespace Worflow.Services
 {
     public class UsuarioService : IUsuarioService
     {
-        IUsuarioRepository _usuarioDao;
+        IUsuarioRepository _usuarioRepository;
 
-        public UsuarioService(IUsuarioRepository usuarioDao)
+        public UsuarioService(IUsuarioRepository usuarioRepository)
         {
-            _usuarioDao = usuarioDao;
+            _usuarioRepository = usuarioRepository;
         }
 
         public void Alterar(Usuario obj)
         {
-            _usuarioDao.Alterar(obj);
+            _usuarioRepository.Alterar(obj);
         }
 
         public Usuario BuscarPorId(int id)
         {
-            return _usuarioDao.BuscarPorId(id);
+            return _usuarioRepository.BuscarPorId(id);
         }
 
         public ICollection<Usuario> BuscarUsuarios()
         {
-            return _usuarioDao.BuscarTodos();
+            return _usuarioRepository.BuscarTodos();
         }
 
         public void Excluir(Usuario obj)
         {
-            _usuarioDao.Excluir(obj);
+            _usuarioRepository.Excluir(obj);
         }
 
         public void Incluir(Usuario obj)
         {
-            _usuarioDao.Incluir(obj);
+            _usuarioRepository.Incluir(obj);
         }
 
         public ICollection<Usuario> Pesquisar(string value)
         {
-            return _usuarioDao.Pesquisar(value);
+            return _usuarioRepository.Pesquisar(value);
         }
 
         public bool UsuarioExiste(Usuario obj)
         {
-            return _usuarioDao.UsuarioExiste(obj);
+            return _usuarioRepository.UsuarioExiste(obj);
         }
     }
 }
