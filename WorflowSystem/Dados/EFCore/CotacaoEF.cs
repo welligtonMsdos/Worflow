@@ -23,17 +23,17 @@ namespace Worflow.Dados.EFCore
 
         public Cotacao BuscarPorId(int id)
         {
-            return _context.Cotacao
-                .Include(x => x.Lead)
+            return _context.Cotacoes               
                 .Include(x => x.Seguradora)
+                .Include(x => x.Lead)
                 .First(x=>x.Id == id);
         }
 
         public ICollection<Cotacao> BuscarTodos()
         {
-            return _context.Cotacao
-                .Include(x => x.Lead)
+            return _context.Cotacoes                
                 .Include(x => x.Seguradora)
+                .Include(x => x.Lead)
                 .Where(x => x.Ativo)
                 .OrderBy(x => x.DataEmissao)
                 .ToList();

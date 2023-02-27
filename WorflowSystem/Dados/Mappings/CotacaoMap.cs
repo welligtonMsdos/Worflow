@@ -22,19 +22,21 @@ namespace Worflow.Dados.Mappings
                 .HasColumnType("decimal(10,2)")
                 .IsRequired();
 
-            builder.HasOne(p => p.Seguradora)
-                .WithMany(p => p.Cotacao)
-                .HasForeignKey(p => p.SeguradoraId)
-                .OnDelete(DeleteBehavior.NoAction);
-
             builder.HasOne(p => p.Lead)
             .WithMany(p => p.Cotacao)
             .HasForeignKey(p => p.LeadId);
 
+            builder.HasOne(p => p.Seguradora)
+               .WithMany(p => p.Cotacao)
+               .HasForeignKey(p => p.SeguradoraId);
+
             builder.Property(p => p.Ativo)
                  .HasColumnType("bit")
                  .IsRequired();
-            
+
+            builder.Property(p => p.StatusFinalizada)
+                .HasColumnType("bit")
+                .IsRequired();
         }
     }
 }

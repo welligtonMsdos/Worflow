@@ -21,8 +21,8 @@ namespace Worflow.Dados.EFCore
         public DbSet<Lead> Lead { get; set; }
         public DbSet<ProdutoSegmento> ProdutoSegmento { get; set; }
         public DbSet<Agenda> Agenda { get; set; }   
-        public DbSet<Seguradora> Seguradora { get; set; }
-        public DbSet<Cotacao> Cotacao { get; set; }
+        public DbSet<Seguradora> Seguradoras { get; set; }
+        public DbSet<Cotacao> Cotacoes { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {            

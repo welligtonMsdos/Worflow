@@ -20,6 +20,8 @@ namespace Worflow.Models
 
         public bool Ativo { get; set; }
 
+        public bool StatusFinalizada { get; set; }
+
         public int SeguradoraId { get; set; }
 
         public Seguradora Seguradora { get; set; }

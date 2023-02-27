@@ -28,7 +28,8 @@ namespace Worflow.Dados.EFCore
 
         public ICollection<Cliente> BuscarTodos()
         {
-            return _context.Clientes.Include(e => e.Endereco)
+            return _context.Clientes
+                .Include(e => e.Endereco)
                 .OrderBy(x => x.Fantasia)
                 .ToList();
         }

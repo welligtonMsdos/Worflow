@@ -16,7 +16,7 @@ namespace Worflow.Dados.Mappings
 
             builder.Property(p => p.Ativo)
                   .HasColumnType("bit")
-                  .IsRequired();
+                  .IsRequired();          
 
             builder.HasData(
                 new Seguradora(1, "Catu"),

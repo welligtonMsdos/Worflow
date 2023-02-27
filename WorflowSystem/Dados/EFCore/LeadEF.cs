@@ -1,7 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Linq;
-using Worflow.Dto;
 using Worflow.Models;
 using Worflow.Repository;
 using X.PagedList;
@@ -66,9 +65,9 @@ namespace Worflow.Dados.EFCore
                 .Include(x => x.Segmento)
                 .Include(x => x.Produto.ProdutoSegmento)
                 .Include(x => x.Status)
-                .Include(x => x.Cotacao)
-                
-                .First(x => x.Id == id);
+                .Include(x => x.Cotacao)                
+                .Include(x => x.Cotacao).ThenInclude(c => c.Seguradora)
+                .First(x => x.Id == id);            
         }
 
         public ICollection<Lead> BuscarTodos()

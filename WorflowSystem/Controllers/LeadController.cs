@@ -1,15 +1,10 @@
-﻿using AutoMapper;
-using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using System.Diagnostics;
-using System.IO;
-using System.Threading.Tasks;
 using Worflow.Dados.Interfaces;
 using Worflow.Models;
-using Worflow.Services;
 using WorflowSystem.Models;
-using X.PagedList;
 
 namespace Worflow.Controllers
 {
@@ -20,16 +15,18 @@ namespace Worflow.Controllers
         IProdutoService _produtoService;
         IClienteService _clienteService;
         IStatusService _statusService;
+        ICotacaoService _cotacaoService;       
 
         public LeadController(ILeadService leadService, ISegmentoService segmentoService,
                               IProdutoService produtoService, IClienteService clienteService,
-                              IStatusService statusService)
+                              IStatusService statusService, ICotacaoService cotacaoService)
         {
             _leadService = leadService;
             _segmentoService = segmentoService;
             _produtoService = produtoService;
             _clienteService = clienteService;
-            _statusService = statusService;           
+            _statusService = statusService;
+            _cotacaoService = cotacaoService;           
         }
 
         [Route("CreateLead")]

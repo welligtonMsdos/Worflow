@@ -51,5 +51,6 @@ namespace Worflow.Models
         public ICollection<Agenda> Agenda { get; set; }
 
         public ICollection<Cotacao> Cotacao { get; set; }
+        
     }
 }

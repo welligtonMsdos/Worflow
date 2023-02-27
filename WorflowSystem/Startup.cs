@@ -32,8 +32,9 @@ namespace WorflowSystem
             services.AddTransient<IStatusRepository, StatusEF>();
             services.AddTransient<IUsuarioRepository, UsuarioEF>();
             services.AddTransient<IAgendaRepository, AgendaEF>();
-            services.AddTransient<ISeguradoraRepository, SeguradoraEF>();
             services.AddTransient<ICotacaoRepository, CotacaoEF>();
+            services.AddTransient<ISeguradoraRepository, SeguradoraEF>();
+           
 
             //services.AddTransient<ILeadDao, LeadDapper>();
             //services.AddTransient<IUsuarioDao, UsuarioDapper>();
@@ -47,8 +48,8 @@ namespace WorflowSystem
             services.AddTransient<IClienteService, ClienteService>();
             services.AddTransient<IStatusService, StatusService>();
             services.AddTransient<IAgendaService, AgendaService>();
-            services.AddTransient<ISeguradoraService, SeguradoraService>();
             services.AddTransient<ICotacaoService, CotacaoService>();
+            services.AddTransient<ISeguradoraService, SeguradoraService>();           
 
             services.AddDbContext<AppDbContext>();
             services.AddControllersWithViews()
