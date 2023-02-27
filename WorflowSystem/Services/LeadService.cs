@@ -9,9 +9,9 @@ namespace Worflow.Services
 {
     public class LeadService : ILeadService
     {
-        ILeadDao _leadDao;
+        ILeadRepository _leadDao;
 
-        public LeadService(ILeadDao leadDao)
+        public LeadService(ILeadRepository leadDao)
         {
             _leadDao = leadDao;
         }

@@ -6,9 +6,9 @@ namespace Worflow.Services
 {
     public class UsuarioService : IUsuarioService
     {
-        IUsuarioDao _usuarioDao;
+        IUsuarioRepository _usuarioDao;
 
-        public UsuarioService(IUsuarioDao usuarioDao)
+        public UsuarioService(IUsuarioRepository usuarioDao)
         {
             _usuarioDao = usuarioDao;
         }

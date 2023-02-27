@@ -7,8 +7,8 @@ namespace Worflow.Services
 {
     public class ProdutoService : IProdutoService
     {
-        IProdutoDao _produtoDao;
-        public ProdutoService(IProdutoDao produtoDao)
+        IProdutoRepository _produtoDao;
+        public ProdutoService(IProdutoRepository produtoDao)
         {
             _produtoDao = produtoDao;
         }

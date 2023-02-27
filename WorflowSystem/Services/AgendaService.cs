@@ -9,9 +9,9 @@ namespace Worflow.Services
 {
     public class AgendaService : IAgendaService
     {
-        IAgendaDao _agendaDao;
+        IAgendaRepository _agendaDao;
 
-        public AgendaService(IAgendaDao agendaDao)
+        public AgendaService(IAgendaRepository agendaDao)
         {
             _agendaDao = agendaDao;
         }

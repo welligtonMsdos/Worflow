@@ -4,7 +4,7 @@ using Worflow.Models;
 
 namespace Worflow.Repository
 {
-    public interface IProdutoDao : IQuery<Produto>
+    public interface IProdutoRepository : IQuery<Produto>
     {
         ICollection<ProdutoSegmento> BuscarProdutosPorSegmento(int segmentoId);
     }

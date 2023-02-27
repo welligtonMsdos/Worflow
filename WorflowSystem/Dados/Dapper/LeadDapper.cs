@@ -12,7 +12,7 @@ using X.PagedList;
 
 namespace Worflow.Dados.Dapper
 {
-    public class LeadDapper : ILeadDao
+    public class LeadDapper : ILeadRepository
     {
         private IDbConnection _connection;
         IConfiguration _configuration;

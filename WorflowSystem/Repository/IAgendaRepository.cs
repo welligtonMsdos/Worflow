@@ -5,7 +5,7 @@ using Worflow.Dados.Interfaces;
 using Worflow.Models;
 namespace Worflow.Repository
 {
-    public interface IAgendaDao : IQuery<Agenda>, IQueryPesquisa<Agenda>,ICommand<Agenda>
+    public interface IAgendaRepository : IQuery<Agenda>, IQueryPesquisa<Agenda>,ICommand<Agenda>
     {
         ICollection<Agenda> BuscarPorUsuarioId(int usuarioId);        
         ICollection<Agenda> BuscarHorarios(DateTime data);

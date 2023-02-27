@@ -7,8 +7,8 @@ namespace Worflow.Services
 {
     public class PerfilService : IPerfilService
     {
-        IPerfilDao _perfilDao;
-        public PerfilService(IPerfilDao perfilDao)
+        IPerfilRepository _perfilDao;
+        public PerfilService(IPerfilRepository perfilDao)
         {
             _perfilDao = perfilDao;
         }

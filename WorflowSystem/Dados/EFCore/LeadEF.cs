@@ -8,11 +8,11 @@ using X.PagedList;
 
 namespace Worflow.Dados.EFCore
 {
-    public class LeadDao : ILeadDao
+    public class LeadEF : ILeadRepository
     {
         AppDbContext _context;
 
-        public LeadDao(AppDbContext context)
+        public LeadEF(AppDbContext context)
         {
             _context = context;
         }

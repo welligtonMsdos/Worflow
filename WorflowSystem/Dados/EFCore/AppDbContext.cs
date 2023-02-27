@@ -20,12 +20,13 @@ namespace Worflow.Dados.EFCore
         public DbSet<Cliente> Clientes { get; set; }
         public DbSet<Lead> Lead { get; set; }
         public DbSet<ProdutoSegmento> ProdutoSegmento { get; set; }
-        public DbSet<Agenda> Agenda { get; set; }       
+        public DbSet<Agenda> Agenda { get; set; }   
+        public DbSet<Seguradora> Seguradora { get; set; }
+        public DbSet<Cotacao> Cotacao { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {            
-           optionsBuilder.UseSqlServer("Data Source=DESKTOP-TK7GSO1\\SQLEXPRESS;Initial Catalog=BDWorflow;Integrated Security=True;Trust Server Certificate=true");
-           
+           optionsBuilder.UseSqlServer("Data Source=DESKTOP-TK7GSO1\\SQLEXPRESS;Initial Catalog=BDWorflow;Integrated Security=True;Trust Server Certificate=true");         
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -40,8 +41,9 @@ namespace Worflow.Dados.EFCore
             modelBuilder.ApplyConfiguration(new LeadMap());
             modelBuilder.ApplyConfiguration(new ProdutoSegmentoMap());
             modelBuilder.ApplyConfiguration(new AgendaMap());
+            modelBuilder.ApplyConfiguration(new SeguradoraMap());
+            modelBuilder.ApplyConfiguration(new CotacaoMap());
 
-            
         }
     }
 }

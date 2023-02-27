@@ -11,7 +11,7 @@ using Worflow.Repository;
 
 namespace Worflow.Dados.Dapper
 {
-    public class UsuarioDapper : IUsuarioDao
+    public class UsuarioDapper : IUsuarioRepository
     {
         IDbConnection _connection;
         IConfiguration _configuration;

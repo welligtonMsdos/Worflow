@@ -7,11 +7,11 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Worflow.Dados.EFCore
 {
-    public class SegmentoDao : ISegmentoDao
+    public class SegmentoEF : ISegmentoRepository
     {
         AppDbContext _context;
 
-        public SegmentoDao(AppDbContext context)
+        public SegmentoEF(AppDbContext context)
         {
             _context = context;
         }

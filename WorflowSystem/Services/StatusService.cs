@@ -8,10 +8,10 @@ namespace Worflow.Services
 {
     public class StatusService : IStatusService
     {
-        IStatusDao _statusDao;
+        IStatusRepository _statusDao;
         IStatusLead _statusLead;
 
-        public StatusService(IStatusDao statusDao)
+        public StatusService(IStatusRepository statusDao)
         {
             _statusDao = statusDao;
         }

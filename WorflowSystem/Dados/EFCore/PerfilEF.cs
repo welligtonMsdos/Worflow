@@ -6,11 +6,11 @@ using Worflow.Repository;
 
 namespace Worflow.Dados.EFCore
 {
-    public class PerfilDao : IPerfilDao
+    public class PerfilEF : IPerfilRepository
     {
         AppDbContext _context;
 
-        public PerfilDao(AppDbContext context)
+        public PerfilEF(AppDbContext context)
         {
             _context = context;
         }

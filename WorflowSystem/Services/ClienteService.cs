@@ -7,9 +7,9 @@ namespace Worflow.Services
 {
     public class ClienteService : IClienteService
     {
-        IClienteDao _clienteDao;
+        IClienteRepository _clienteDao;
 
-        public ClienteService(IClienteDao clienteDao)
+        public ClienteService(IClienteRepository clienteDao)
         {
             _clienteDao = clienteDao;
         }

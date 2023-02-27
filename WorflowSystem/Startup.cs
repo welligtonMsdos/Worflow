@@ -23,15 +23,15 @@ namespace WorflowSystem
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddTransient<IClienteDao, ClienteDao>();
-            services.AddTransient<IEnderecoDao, EnderecoDao>();
-            services.AddTransient<ILeadDao, LeadDao>();
-            services.AddTransient<IPerfilDao, PerfilDao>();
-            services.AddTransient<IProdutoDao, ProdutoDao>();
-            services.AddTransient<ISegmentoDao, SegmentoDao>();
-            services.AddTransient<IStatusDao, StatusDao>();
-            services.AddTransient<IUsuarioDao, UsuarioDao>();
-            services.AddTransient<IAgendaDao, AgendaDao>();
+            services.AddTransient<IClienteRepository, ClienteEF>();
+            services.AddTransient<IEnderecoRepository, EnderecoEF>();
+            services.AddTransient<ILeadRepository, LeadEF>();
+            services.AddTransient<IPerfilRepository, PerfilEF>();
+            services.AddTransient<IProdutoRepository, ProdutoEF>();
+            services.AddTransient<ISegmentoRepository, SegmentoEF>();
+            services.AddTransient<IStatusRepository, StatusEF>();
+            services.AddTransient<IUsuarioRepository, UsuarioEF>();
+            services.AddTransient<IAgendaRepository, AgendaEF>();
 
             //services.AddTransient<ILeadDao, LeadDapper>();
             //services.AddTransient<IUsuarioDao, UsuarioDapper>();

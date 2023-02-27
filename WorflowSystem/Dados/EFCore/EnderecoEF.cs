@@ -5,11 +5,11 @@ using Worflow.Repository;
 
 namespace Worflow.Dados.EFCore
 {
-    public class EnderecoDao : IEnderecoDao
+    public class EnderecoEF : IEnderecoRepository
     {
         AppDbContext _context;
 
-        public EnderecoDao(AppDbContext context)
+        public EnderecoEF(AppDbContext context)
         {
             _context = context;
         }

@@ -7,11 +7,11 @@ using Worflow.Repository;
 
 namespace Worflow.Dados.EFCore
 {
-    public class AgendaDao : IAgendaDao
+    public class AgendaEF : IAgendaRepository
     {
         AppDbContext _context;
 
-        public AgendaDao(AppDbContext context)
+        public AgendaEF(AppDbContext context)
         {
             _context = context;
         }

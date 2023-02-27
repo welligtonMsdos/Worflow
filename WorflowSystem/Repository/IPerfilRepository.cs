@@ -5,7 +5,7 @@ using Worflow.Models;
 
 namespace Worflow.Repository
 {
-    public interface IPerfilDao : IQuery<Perfil>, IQueryDescription<Perfil>
+    public interface IPerfilRepository : IQuery<Perfil>, IQueryDescription<Perfil>
     {
         List<Perfil> BuscarPerfilList();
     }

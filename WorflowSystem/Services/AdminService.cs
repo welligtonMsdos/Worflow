@@ -7,11 +7,11 @@ namespace Worflow.Services
 {
     public class AdminService : IAdminService
     {
-        IClienteDao _clienteDao;
-        IEnderecoDao _enderecoDao;
-        IUsuarioDao _usuarioDao;
+        IClienteRepository _clienteDao;
+        IEnderecoRepository _enderecoDao;
+        IUsuarioRepository _usuarioDao;
 
-        public AdminService(IClienteDao clienteDao, IEnderecoDao enderecoDao, IUsuarioDao usuarioDao)
+        public AdminService(IClienteRepository clienteDao, IEnderecoRepository enderecoDao, IUsuarioRepository usuarioDao)
         {
             _clienteDao = clienteDao;
             _enderecoDao = enderecoDao;

@@ -6,11 +6,11 @@ using Worflow.Repository;
 
 namespace Worflow.Dados.EFCore
 {
-    public class ProdutoDao : IProdutoDao
+    public class ProdutoEF : IProdutoRepository
     {
         AppDbContext _context;
 
-        public ProdutoDao(AppDbContext context)
+        public ProdutoEF(AppDbContext context)
         {
             _context = context;
         }

@@ -7,9 +7,9 @@ namespace Worflow.Services
 {
     public class SegmentoService : ISegmentoService
     {
-        ISegmentoDao _segmentoDao;
+        ISegmentoRepository _segmentoDao;
 
-        public SegmentoService(ISegmentoDao segmentoDao)
+        public SegmentoService(ISegmentoRepository segmentoDao)
         {
             _segmentoDao = segmentoDao;
         }

@@ -7,9 +7,9 @@ namespace Worflow.Services
 {
     public class EnderecoService : IEnderecoService
     {
-        IEnderecoDao _enderecoDao;
+        IEnderecoRepository _enderecoDao;
 
-        public EnderecoService(IEnderecoDao enderecoDao)
+        public EnderecoService(IEnderecoRepository enderecoDao)
         {
             _enderecoDao = enderecoDao;
         }

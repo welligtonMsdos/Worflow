@@ -48,6 +48,8 @@ namespace Worflow.Models
        
         [Display(Name = "Observação", Prompt = "Digite a observação")]
         public string Observacao { get; set; }
-        public ICollection<Agenda> Agenda { get; set; }        
+        public ICollection<Agenda> Agenda { get; set; }
+
+        public ICollection<Cotacao> Cotacao { get; set; }
     }
 }

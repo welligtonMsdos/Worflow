@@ -3,7 +3,7 @@ using Worflow.Models;
 
 namespace Worflow.Repository
 {
-    public interface ISegmentoDao : IQuery<Segmento>
-    {      
+    public interface ICotacaoRepository: IQuery<Cotacao>, ICommand<Cotacao>
+    {
     }
 }

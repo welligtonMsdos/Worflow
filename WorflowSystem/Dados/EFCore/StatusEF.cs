@@ -5,11 +5,11 @@ using Worflow.Repository;
 
 namespace Worflow.Dados.EFCore
 {
-    public class StatusDao : IStatusDao
+    public class StatusEF : IStatusRepository
     {
         AppDbContext _context;
 
-        public StatusDao(AppDbContext context)
+        public StatusEF(AppDbContext context)
         {
             _context = context;
         }
