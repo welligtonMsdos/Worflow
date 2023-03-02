@@ -20,6 +20,7 @@ namespace Worflow.Models
         public string Descricao { get; set; }
 
         public bool Ativo { get; set; }      
-        public ICollection<Lead> Lead { get; set; }        
+        public ICollection<Lead> Lead { get; set; }   
+        public ICollection<Historico> Historico { get; set; }
     }
 }

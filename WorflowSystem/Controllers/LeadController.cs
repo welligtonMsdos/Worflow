@@ -16,7 +16,7 @@ namespace Worflow.Controllers
         IClienteService _clienteService;
         IStatusService _statusService;
         ICotacaoService _cotacaoService;
-        ISeguradoraService _seguradoraService;
+        ISeguradoraService _seguradoraService;       
 
         public LeadController(ILeadService leadService, ISegmentoService segmentoService,
                               IProdutoService produtoService, IClienteService clienteService,
@@ -29,7 +29,7 @@ namespace Worflow.Controllers
             _clienteService = clienteService;
             _statusService = statusService;
             _cotacaoService = cotacaoService;
-            _seguradoraService = seguradoraService;
+            _seguradoraService = seguradoraService;           
         }
 
         [Route("CreateLead")]

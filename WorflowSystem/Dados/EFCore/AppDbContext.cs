@@ -23,6 +23,7 @@ namespace Worflow.Dados.EFCore
         public DbSet<Agenda> Agenda { get; set; }   
         public DbSet<Seguradora> Seguradoras { get; set; }
         public DbSet<Cotacao> Cotacoes { get; set; }
+        public DbSet<Historico> Historico { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {            
@@ -43,7 +44,7 @@ namespace Worflow.Dados.EFCore
             modelBuilder.ApplyConfiguration(new AgendaMap());
             modelBuilder.ApplyConfiguration(new SeguradoraMap());
             modelBuilder.ApplyConfiguration(new CotacaoMap());
-
+            modelBuilder.ApplyConfiguration(new HistoricoMap());
         }
     }
 }

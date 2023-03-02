@@ -67,6 +67,8 @@ namespace Worflow.Dados.EFCore
                 .Include(x => x.Status)
                 .Include(x => x.Cotacao)                
                 .Include(x => x.Cotacao).ThenInclude(c => c.Seguradora)
+                .Include(x => x.Historico)
+                .Include(x => x.Historico).ThenInclude(c => c.Status)
                 .First(x => x.Id == id);            
         }
 

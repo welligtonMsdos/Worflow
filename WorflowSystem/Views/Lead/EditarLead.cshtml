@@ -13,7 +13,7 @@
         <div class="card-body">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
-            @Html.HiddenFor(model => model.Lead.Id, new { @class = "hid-id" })   
+            @Html.HiddenFor(model => model.Lead.Id, new { @class = "hid-id" })
 
             <div class="accordion mb-3" id="acc">
 
@@ -28,7 +28,7 @@
                             <fieldset disabled>
 
                                 <div class="row mb-3">
-                                    <div class="col-4">                                      
+                                    <div class="col-4">
                                         <label asp-for="Lead.Cliente.CNPJ" class="control-label"></label>
                                         <input asp-for="Lead.Cliente.CNPJ" class="form-control" />
                                         <span asp-validation-for="Lead.Cliente.CNPJ" class="text-danger"></span>
@@ -152,8 +152,35 @@
                 </div>
 
                 <div class="accordion-item">
+                    <h2 class="accordion-header" id="acc_historico">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#acc_historico_lead" aria-expanded="false" aria-controls="collapseTwo">
+                            Histórico
+                        </button>
+                    </h2>
 
-                     <h2 class="accordion-header" id="acc_cotacao">
+                    <div id="acc_historico_lead" class="accordion-collapse collapse" aria-labelledby="acc_historico" data-bs-parent="#acc">
+                        <div class="accordion-body">
+                            <div class="row mb-3">
+                                <div class="col-12">
+                                    <ul class="timeline">
+                                        @foreach(var itemHistorico in Model.Lead.Historico.OrderByDescending(x => x.Id))
+                                        {
+                                            <li>
+                                                <label class="historico__status ms-1">@itemHistorico.Status.Descricao</label>
+                                                <label class="float-start historico_data">@itemHistorico.Data</label>
+                                                <p>@itemHistorico.Mensagem</p>
+                                            </li>
+                                        }
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="accordion-item">
+
+                    <h2 class="accordion-header" id="acc_cotacao">
                         <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#acc_cotacao_item" aria-expanded="false" aria-controls="collapseTwo">
                             Cotação
                         </button>

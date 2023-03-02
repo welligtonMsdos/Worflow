@@ -33,8 +33,7 @@ namespace WorflowSystem
             services.AddTransient<IUsuarioRepository, UsuarioEF>();
             services.AddTransient<IAgendaRepository, AgendaEF>();
             services.AddTransient<ICotacaoRepository, CotacaoEF>();
-            services.AddTransient<ISeguradoraRepository, SeguradoraEF>();
-           
+            services.AddTransient<ISeguradoraRepository, SeguradoraEF>();          
 
             //services.AddTransient<ILeadDao, LeadDapper>();
             //services.AddTransient<IUsuarioDao, UsuarioDapper>();

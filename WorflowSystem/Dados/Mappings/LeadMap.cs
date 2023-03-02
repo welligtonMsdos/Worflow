@@ -44,6 +44,8 @@ namespace Worflow.Dados.Mappings
               .OnDelete(DeleteBehavior.NoAction);          
 
             builder.ToTable(x => x.HasTrigger("addNaAgenda"));
+
+            builder.ToTable(x => x.HasTrigger("addHistorico"));
         }
     }
 }
