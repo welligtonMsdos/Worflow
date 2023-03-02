@@ -9,10 +9,12 @@ namespace Worflow.Models
         [Key] 
         public int Id { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "{0} é obrigatória")]
+        [Display(Name = "Data Emissão", Prompt = "Digite a data de emissão")]
         public DateTime DataEmissao { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "{0} é obrigatória")]
+        [Display(Name = "Data Vencimento", Prompt = "Digite a data de vencimento")]
         public DateTime DataVencimento { get; set; }
 
         [Required]
@@ -22,6 +24,8 @@ namespace Worflow.Models
 
         public bool StatusFinalizada { get; set; }
 
+        [Required(ErrorMessage = "Seguradora é obrigatória!")]
+        [Range(1, 4, ErrorMessage = "Selecione uma seguradora")]
         public int SeguradoraId { get; set; }
 
         public Seguradora Seguradora { get; set; }

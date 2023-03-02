@@ -1,14 +1,11 @@
-﻿using Microsoft.AspNetCore.Http;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace Worflow.Models
 {
-    public class Lead
+    public class Lead 
     {
         public Lead()
         {
@@ -51,6 +48,5 @@ namespace Worflow.Models
         public ICollection<Agenda> Agenda { get; set; }
 
         public ICollection<Cotacao> Cotacao { get; set; }
-        
     }
 }

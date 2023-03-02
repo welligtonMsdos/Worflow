@@ -1,4 +1,4 @@
-﻿@model Worflow.Models.Lead
+﻿@model Worflow.Models.LeadCotacao
 
 @{
     ViewData["Title"] = "EditarLead";
@@ -13,7 +13,7 @@
         <div class="card-body">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
-            @Html.HiddenFor(model => model.Id, new { @class = "hid-id" })   
+            @Html.HiddenFor(model => model.Lead.Id, new { @class = "hid-id" })   
 
             <div class="accordion mb-3" id="acc">
 
@@ -29,27 +29,27 @@
 
                                 <div class="row mb-3">
                                     <div class="col-4">                                      
-                                        <label asp-for="Cliente.CNPJ" class="control-label"></label>
-                                        <input asp-for="Cliente.CNPJ" class="form-control" value='@Model.Cliente.CNPJ' />
-                                        <span asp-validation-for="Cliente.CNPJ" class="text-danger"></span>
+                                        <label asp-for="Lead.Cliente.CNPJ" class="control-label"></label>
+                                        <input asp-for="Lead.Cliente.CNPJ" class="form-control" />
+                                        <span asp-validation-for="Lead.Cliente.CNPJ" class="text-danger"></span>
                                     </div>
 
                                     <div class="col-2">
-                                        <label asp-for="Cliente.Agencia" class="control-label"></label>
-                                        <input asp-for="Cliente.Agencia" id="agencia" class="form-control" value='@Model.Cliente.Agencia' />
-                                        <span asp-validation-for="Cliente.Agencia" class="text-danger"></span>
+                                        <label asp-for="Lead.Cliente.Agencia" class="control-label"></label>
+                                        <input asp-for="Lead.Cliente.Agencia" id="agencia" class="form-control" />
+                                        <span asp-validation-for="Lead.Cliente.Agencia" class="text-danger"></span>
                                     </div>
 
                                     <div class="col-2">
-                                        <label asp-for="Cliente.Conta" class="control-label"></label>
-                                        <input asp-for="Cliente.Conta" id="conta" class="form-control" value='@Model.Cliente.Conta' />
-                                        <span asp-validation-for="Cliente.Conta" class="text-danger"></span>
+                                        <label asp-for="Lead.Cliente.Conta" class="control-label"></label>
+                                        <input asp-for="Lead.Cliente.Conta" id="conta" class="form-control" />
+                                        <span asp-validation-for="Lead.Cliente.Conta" class="text-danger"></span>
                                     </div>
 
                                     <div class="col-2">
                                         <label>Segmento</label>
-                                        <input asp-for="Segmento.Descricao" id="conta" class="form-control" value='@Model.Segmento.Descricao' />
-                                        <span asp-validation-for="Segmento.Descricao" class="text-danger"></span>
+                                        <input asp-for="Lead.Segmento.Descricao" id="conta" class="form-control" />
+                                        <span asp-validation-for="Lead.Segmento.Descricao" class="text-danger"></span>
                                     </div>
                                 </div>
 
@@ -58,15 +58,15 @@
                                 <div class="row mb-3">
 
                                     <div class="col-6">
-                                        <label asp-for="Cliente.RazaoSocial" class="control-label"></label>
-                                        <input asp-for="Cliente.RazaoSocial" id="razaoSocial" class="form-control" value='@Model.Cliente.RazaoSocial' />
-                                        <span asp-validation-for="Cliente.RazaoSocial" class="text-danger"></span>
+                                        <label asp-for="Lead.Cliente.RazaoSocial" class="control-label"></label>
+                                        <input asp-for="Lead.Cliente.RazaoSocial" id="razaoSocial" class="form-control" />
+                                        <span asp-validation-for="Lead.Cliente.RazaoSocial" class="text-danger"></span>
                                     </div>
 
                                     <div class="col-6">
-                                        <label asp-for="Cliente.Fantasia" class="control-label"></label>
-                                        <input asp-for="Cliente.Fantasia" id="fantasia" class="form-control" value='@Model.Cliente.Fantasia' />
-                                        <span asp-validation-for="Cliente.Fantasia" class="text-danger"></span>
+                                        <label asp-for="Lead.Cliente.Fantasia" class="control-label"></label>
+                                        <input asp-for="Lead.Cliente.Fantasia" id="fantasia" class="form-control" />
+                                        <span asp-validation-for="Lead.Cliente.Fantasia" class="text-danger"></span>
                                     </div>
 
                                 </div>
@@ -74,15 +74,15 @@
                                 <div class="row mb-3">
 
                                     <div class="col-9">
-                                        <label asp-for="Cliente.Email" class="control-label"></label>
-                                        <input asp-for="Cliente.Email" id="email" class="form-control" value='@Model.Cliente.Email' />
-                                        <span asp-validation-for="Cliente.Email" class="text-danger"></span>
+                                        <label asp-for="Lead.Cliente.Email" class="control-label"></label>
+                                        <input asp-for="Lead.Cliente.Email" id="email" class="form-control" />
+                                        <span asp-validation-for="Lead.Cliente.Email" class="text-danger"></span>
                                     </div>
 
                                     <div class="col-3">
-                                        <label asp-for="Cliente.Telefone" class="control-label"></label>
-                                        <input asp-for="Cliente.Telefone" id="telefone" class="form-control" value='@Model.Cliente.Telefone' />
-                                        <span asp-validation-for="Cliente.Telefone" class="text-danger"></span>
+                                        <label asp-for="Lead.Cliente.Telefone" class="control-label"></label>
+                                        <input asp-for="Lead.Cliente.Telefone" id="telefone" class="form-control" />
+                                        <span asp-validation-for="Lead.Cliente.Telefone" class="text-danger"></span>
                                     </div>
 
                                 </div>
@@ -105,21 +105,21 @@
                                 <div class="row mb-3">
 
                                     <div class="col-3">
-                                        <label asp-for="Cliente.Endereco.CEP" class="control-label"></label>
-                                        <input asp-for="Cliente.Endereco.CEP" id="cep" class="form-control" value="@Model.Cliente.Endereco.CEP" />
-                                        <span asp-validation-for="Cliente.Endereco.CEP" class="text-danger"></span>
+                                        <label asp-for="Lead.Cliente.Endereco.CEP" class="control-label"></label>
+                                        <input asp-for="Lead.Cliente.Endereco.CEP" id="cep" class="form-control" />
+                                        <span asp-validation-for="Lead.Cliente.Endereco.CEP" class="text-danger"></span>
                                     </div>
 
                                     <div class="col-6">
-                                        <label asp-for="Cliente.Endereco.Logadouro" class="control-label"></label>
-                                        <input asp-for="Cliente.Endereco.Logadouro" id="logadouro" class="form-control" value="@Model.Cliente.Endereco.Logadouro" />
-                                        <span asp-validation-for="Cliente.Endereco.Logadouro" class="text-danger"></span>
+                                        <label asp-for="Lead.Cliente.Endereco.Logadouro" class="control-label"></label>
+                                        <input asp-for="Lead.Cliente.Endereco.Logadouro" id="logadouro" class="form-control" />
+                                        <span asp-validation-for="Lead.Cliente.Endereco.Logadouro" class="text-danger"></span>
                                     </div>
 
                                     <div class="col-3">
-                                        <label asp-for="Cliente.Endereco.Numero" class="control-label"></label>
-                                        <input asp-for="Cliente.Endereco.Numero" id="numero" class="form-control" values="@Model.Cliente.Endereco.Numero" />
-                                        <span asp-validation-for="Cliente.Endereco.Numero" class="text-danger"></span>
+                                        <label asp-for="Lead.Cliente.Endereco.Numero" class="control-label"></label>
+                                        <input asp-for="Lead.Cliente.Endereco.Numero" id="numero" class="form-control" />
+                                        <span asp-validation-for="Lead.Cliente.Endereco.Numero" class="text-danger"></span>
                                     </div>
 
                                 </div>
@@ -127,21 +127,21 @@
                                 <div class="row mb-3">
 
                                     <div class="col-4">
-                                        <label asp-for="Cliente.Endereco.Bairro" class="control-label"></label>
-                                        <input asp-for="Cliente.Endereco.Bairro" id="bairro" class="form-control" value="@Model.Cliente.Endereco.Bairro" />
-                                        <span asp-validation-for="Cliente.Endereco.Bairro" class="text-danger"></span>
+                                        <label asp-for="Lead.Cliente.Endereco.Bairro" class="control-label"></label>
+                                        <input asp-for="Lead.Cliente.Endereco.Bairro" id="bairro" class="form-control" />
+                                        <span asp-validation-for="Lead.Cliente.Endereco.Bairro" class="text-danger"></span>
                                     </div>
 
                                     <div class="col-7">
-                                        <label asp-for="Cliente.Endereco.Cidade" class="control-label"></label>
-                                        <input asp-for="Cliente.Endereco.Cidade" id="cidade" class="form-control" value="@Model.Cliente.Endereco.Cidade" />
-                                        <span asp-validation-for="Cliente.Endereco.Cidade" class="text-danger"></span>
+                                        <label asp-for="Lead.Cliente.Endereco.Cidade" class="control-label"></label>
+                                        <input asp-for="Lead.Cliente.Endereco.Cidade" id="cidade" class="form-control" />
+                                        <span asp-validation-for="Lead.Cliente.Endereco.Cidade" class="text-danger"></span>
                                     </div>
 
                                     <div class="col-1">
-                                        <label asp-for="Cliente.Endereco.UF" class="control-label"></label>
-                                        <input asp-for="Cliente.Endereco.UF" id="uf" class="form-control" value="@Model.Cliente.Endereco.UF" />
-                                        <span asp-validation-for="Cliente.Endereco.UF" class="text-danger"></span>
+                                        <label asp-for="Lead.Cliente.Endereco.UF" class="control-label"></label>
+                                        <input asp-for="Lead.Cliente.Endereco.UF" id="uf" class="form-control" />
+                                        <span asp-validation-for="Lead.Cliente.Endereco.UF" class="text-danger"></span>
                                     </div>
 
                                 </div>
@@ -205,30 +205,30 @@
                 <div class="row mb-3">
 
                     <div class="col-3">
-                        <label asp-for="DataAgendada" class="control-label"></label>
+                        <label asp-for="Lead.DataAgendada" class="control-label"></label>
                         <div class="input-group date" id='datepicker'>
-                            <input asp-for="DataAgendada"
+                            <input asp-for="Lead.DataAgendada"
                                    type="text" class="form-control"
-                                   value="@Model.DataAgendada.ToString("dd/MM/yyyy hh:mm")" />
+                                   value="@Model.Lead.DataAgendada.ToString("dd/MM/yyyy hh:mm")" />
                             <span class="input-group-addon">
                                 <span class="glyphicon glyphicon-calendar"></span>
                             </span>
                         </div>
-                        <span asp-validation-for="DataAgendada" class="text-danger"></span>
+                        <span asp-validation-for="Lead.DataAgendada" class="text-danger"></span>
                     </div>
 
                     <div class="col-5">
-                        <label asp-for="Observacao" class="control-label"></label>
-                        <textarea class="form-control" asp-for="Observacao" rows="3">'@Model.Observacao'</textarea>
-                        <span asp-validation-for="Observacao" class="text-danger"></span>
+                        <label asp-for="Lead.Observacao" class="control-label"></label>
+                        <textarea class="form-control" asp-for="Lead.Observacao" rows="3"></textarea>
+                        <span asp-validation-for="Lead.Observacao" class="text-danger"></span>
                     </div>
 
                     <div class="col-4">
 
                         <label>Produto</label>
 
-                        <input asp-for="Produto.Descricao" class="form-control" value="@Model.Produto.Descricao" />
-                        <span asp-validation-for="Produto.Descricao" class="text-danger"></span>
+                        <input asp-for="Lead.Produto.Descricao" class="form-control" />
+                        <span asp-validation-for="Lead.Produto.Descricao" class="text-danger"></span>
 
                     </div>
 
@@ -243,7 +243,7 @@
                     <button type="button" class="btn btn-primary position-relative mt-4">
                         Status
                         <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-dark">
-                            @Model.Status.Descricao
+                            @Model.Lead.Status.Descricao
                         </span>
                     </button>
 
@@ -255,14 +255,14 @@
 
                     <select class="form-select form-select-lg mb-3"
                             aria-label="select para status"
-                            asp-for="StatusId">
+                            asp-for="Lead.StatusId">
                         <option selected>Selecione</option>
                         @foreach (var item in ViewBag.Status)
                         {
                             <option value="@item.Id">@item.Descricao</option>
                         }
                     </select>
-                    <span asp-validation-for="StatusId" class="text-danger"></span>
+                    <span asp-validation-for="Lead.StatusId" class="text-danger"></span>
 
                 </div>
 

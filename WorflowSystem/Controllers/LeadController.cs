@@ -15,18 +15,21 @@ namespace Worflow.Controllers
         IProdutoService _produtoService;
         IClienteService _clienteService;
         IStatusService _statusService;
-        ICotacaoService _cotacaoService;       
+        ICotacaoService _cotacaoService;
+        ISeguradoraService _seguradoraService;
 
         public LeadController(ILeadService leadService, ISegmentoService segmentoService,
                               IProdutoService produtoService, IClienteService clienteService,
-                              IStatusService statusService, ICotacaoService cotacaoService)
+                              IStatusService statusService, ICotacaoService cotacaoService, 
+                              ISeguradoraService seguradoraService)
         {
             _leadService = leadService;
             _segmentoService = segmentoService;
             _produtoService = produtoService;
             _clienteService = clienteService;
             _statusService = statusService;
-            _cotacaoService = cotacaoService;           
+            _cotacaoService = cotacaoService;
+            _seguradoraService = seguradoraService;
         }
 
         [Route("CreateLead")]
@@ -94,9 +97,13 @@ namespace Worflow.Controllers
         {
             var lead = _leadService.BuscarPorId(id);
 
+            LeadCotacao leadCotacao = new LeadCotacao(lead, new Cotacao());
+
             ViewBag.Status = _statusService.BuscarStatus(lead);
 
-            return View(lead);
+            ViewBag.Seguradoras = _seguradoraService.BuscarSeguradoras();
+
+            return View(leadCotacao);
         }
 
         [Route("ExcluirLead")]

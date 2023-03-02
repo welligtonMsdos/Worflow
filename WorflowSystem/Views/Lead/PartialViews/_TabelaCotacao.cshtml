@@ -1,56 +1,89 @@
-﻿@model Worflow.Models.Lead
+﻿@model Worflow.Models.LeadCotacao
 
-<table class="table">
+<div class="row mb-3">
 
-    <thead class="tableCabecalho">
-        <tr>
-            <th scope="col">Data Emissão</th>
+    <div class="col-6">
+        <div class="card bg-success text-light mb-0 text-center" style="max-width: 12rem;">
+            <div class="card-header">Seguradora</div>
+            <div class="card-body">
+                <h5 class="card-title">Comissão</h5>
+                <p class="card-text">
+                    R$ 5200,00
+                </p>
+            </div>
+        </div>
+    </div>
 
-            <th scope="col">Data Vencimento</th>
+    <div class="col-6 d-grid gap-2 d-md-flex justify-content-md-end">
+      
+        <button type="button" class="btn btn-Acoes btn-cotacao mb-2" data-bs-toggle="modal" data-bs-target="#modalNovo">
+            Novo
+        </button>
 
-            <th scope="col">Valor</th>
+    </div>
 
-            <th scope="col">Seguradora</th>
+</div>
 
-            <th></th>
-        </tr>
-    </thead>
+<div class="row mb-3">
 
-    <tbody>
-        @if (Model.Cotacao.Count > 0)
-        {
-            @foreach (var item in Model.Cotacao)
-            {
+    <div class="col-12">
+
+        <table class="table">
+
+            <thead class="tableCabecalho">
                 <tr>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.DataEmissao)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.DataVencimento)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Valor)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Seguradora.Nome)
-                    </td>
-                    <td style="text-align:end">
+                    <th scope="col">Data Emissão</th>
 
-                        <button type="button" class="btn btn-Acoes mb-2" onclick="location.href='@Url.Action("EditarCotacao", "Cotacao", new { id = item.Id })'">Editar</button>
+                    <th scope="col">Data Vencimento</th>
 
-                        <button type="button" class="btn btn-Acoes mb-2" onclick="location.href='@Url.Action("DetalhesCotacao", "Cotacao", new { id = item.Id })'">Detalhes</button>
+                    <th scope="col">Valor</th>
 
-                        <button type="button" class="btn btn-Excluir mb-2" data-bs-toggle="modal" data-bs-target="#modalExcluir" onclick="setIdExcluir(@item.Id)">
-                            Excluir
-                        </button>
+                    <th scope="col">Seguradora</th>
 
-                    </td>
+                    <th></th>
                 </tr>
-            }
-        }
-    </tbody>
+            </thead>
 
-</table>
+            <tbody>
+                @if (Model.Lead.Cotacao.Count > 0)
+                {
+                    @foreach (var item in Model.Lead.Cotacao)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.DataEmissao)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.DataVencimento)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Valor)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Seguradora.Nome)
+                            </td>
+                            <td style="text-align:end">
+
+                                <button type="button" class="btn btn-Acoes mb-2" onclick="location.href='@Url.Action("EditarCotacao", "Cotacao", new { id = item.Id })'">Editar</button>
+
+                                <button type="button" class="btn btn-Acoes mb-2" onclick="location.href='@Url.Action("DetalhesCotacao", "Cotacao", new { id = item.Id })'">Detalhes</button>
+
+                                <button type="button" class="btn btn-Excluir mb-2" data-bs-toggle="modal" data-bs-target="#modalExcluir" onclick="setIdExcluir(@item.Id)">
+                                    Excluir
+                                </button>
+
+                            </td>
+                        </tr>
+                    }
+                }
+            </tbody>
+
+        </table>
+
+    </div>
+
+</div>
+
 
 <div class="modal fade" id="modalExcluir" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
@@ -75,6 +108,75 @@
 
             </form>
 
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="modalNovo" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+
+            <div class="modal-header">
+                <h3><i class="fa-regular fa-plus" style="color: var(--corPrincipal); margin-right: 5px"></i>Novo Cotação</h3>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+
+            <form asp-controller="Cotacao" asp-action="InserirCotacao">
+
+                <div class="modal-body">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                    <div class="row mb-3">
+
+                        <div class="col-6">
+                            <label asp-for="Cotacao.DataEmissao" class="control-label"></label>
+                            <input asp-for="Cotacao.DataEmissao" class="form-control" type="date"/>
+                            <span asp-validation-for="Cotacao.DataEmissao" class="text-danger"></span>
+                        </div>
+
+                        <div class="col-6">
+                            <label asp-for="Cotacao.DataVencimento" class="control-label"></label>
+                            <input asp-for="Cotacao.DataVencimento" class="form-control" type="date" />
+                            <span asp-validation-for="Cotacao.DataVencimento" class="text-danger"></span>
+                        </div>
+
+                    </div>
+
+                    <div class="row mb-3">
+
+                        <div class="col-6">
+                            <label asp-for="Cotacao.Valor" class="control-label"></label>
+                            <input asp-for="Cotacao.Valor" class="form-control" />
+                            <span asp-validation-for="Cotacao.Valor" class="text-danger"></span>
+                        </div>
+
+                        <div class="col-6">
+                            <label class="control-label">Seguradoras</label>
+
+                            <select class="form-select form-select-lg mb-3"
+                                    aria-label="select para seguradoras"
+                                    asp-for="Cotacao.SeguradoraId">
+                                <option selected>Selecione</option>
+                                @foreach (var item in ViewBag.Seguradoras)
+                                {
+                                    <option value="@item.Id">@item.Nome</option>
+                                }
+                            </select>
+                            <span asp-validation-for="Cotacao.SeguradoraId" class="text-danger"></span>
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <div class="card-footer" style="text-align:end">
+
+                    <input type="submit" value="Salvar" class="btn btn-Acoes" />
+
+                </div>
+
+            </form>
+           
         </div>
     </div>
 </div>
