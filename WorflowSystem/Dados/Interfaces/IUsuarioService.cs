@@ -8,9 +8,8 @@ namespace Worflow.Dados.Interfaces
         ICollection<Usuario> BuscarUsuarios();
         ICollection<Usuario> Pesquisar(string value);
         Usuario BuscarPorId(int id);
-        void Incluir(Usuario obj);
-        void Alterar(Usuario obj);
-        void Excluir(Usuario obj);
-        bool UsuarioExiste(Usuario obj);
+        bool Incluir(Usuario obj);
+        bool Alterar(Usuario obj);
+        bool Excluir(Usuario obj);       
     }
 }

@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using Microsoft.CodeAnalysis.Elfie.Serialization;
+using System.Collections.Generic;
 using Worflow.Core;
 using Worflow.Dados.Interfaces;
 using Worflow.Models;
@@ -25,11 +26,6 @@ namespace Worflow.Services
         public ICollection<Lead> BuscarLeads()
         {
             return _leadRepository.BuscarTodos();
-        }
-
-        public Lead BuscarPorId(int id)
-        {
-            return _leadRepository.BuscarPorId(id);
         }
 
         public void Excluir(Lead obj)
@@ -68,7 +64,7 @@ namespace Worflow.Services
 
         public ICollection<Lead> Pesquisar(string value)
         {
-           return ConversaoTipos.IsNumber(value) ? _leadRepository.PesquisarPorId(int.Parse(value)) : _leadRepository.Pesquisar(value);           
+           return ConversaoTipos.IsNumber(value) ? _leadRepository.PesquisarPorId(int.Parse(value)) : _leadRepository.Pesquisar(value);         
         }       
 
         private void SetObservacao(ref Lead lead)
@@ -84,6 +80,18 @@ namespace Worflow.Services
         public IPagedList<Lead> PesquisarByPageList(string value, int pagina)
         {
             return _leadRepository.PesquisarByPageList(value, pagina);
+        }
+
+        public LeadCotacao BuscarLeadCotacaoPorId(int id)
+        {
+            LeadCotacao leadCotacao = new LeadCotacao(_leadRepository.BuscarPorId(id), new Cotacao());
+
+            return leadCotacao;
+        }
+
+        public Lead BuscarPorId(int id)
+        {
+            return _leadRepository.BuscarPorId(id);
         }
     }
 }

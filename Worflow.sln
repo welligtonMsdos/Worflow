@@ -5,6 +5,10 @@ VisualStudioVersion = 17.4.33213.308
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Worflow", "WorflowSystem\Worflow.csproj", "{A42B7254-2001-4D44-8D0F-5281EF5B30B6}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{03A5D6CB-5BD0-48F6-8362-D2A74364B1BB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Worflow.Tests", "Worflow.Tests\Worflow.Tests.csproj", "{1DF07E18-0F0D-4F1F-8534-69B56DDFAF1F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,9 +19,16 @@ Global
 		{A42B7254-2001-4D44-8D0F-5281EF5B30B6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A42B7254-2001-4D44-8D0F-5281EF5B30B6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A42B7254-2001-4D44-8D0F-5281EF5B30B6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1DF07E18-0F0D-4F1F-8534-69B56DDFAF1F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1DF07E18-0F0D-4F1F-8534-69B56DDFAF1F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1DF07E18-0F0D-4F1F-8534-69B56DDFAF1F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1DF07E18-0F0D-4F1F-8534-69B56DDFAF1F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{1DF07E18-0F0D-4F1F-8534-69B56DDFAF1F} = {03A5D6CB-5BD0-48F6-8362-D2A74364B1BB}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {AE96B88D-3C67-46E8-9CB9-AA3FBBA84FF7}

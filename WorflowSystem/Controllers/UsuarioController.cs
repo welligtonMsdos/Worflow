@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using System;
 using System.Diagnostics;
 using Worflow.Dados.Interfaces;
 using Worflow.Models;
@@ -34,6 +35,8 @@ namespace Worflow.Controllers
         [Route("DetalhesUsuario/{id}")]
         public ActionResult DetalhesUsuario(int id)
         {
+            id = 0;
+
             var usuario = _usuarioService.BuscarPorId(id);
 
             return View(usuario);
@@ -76,9 +79,8 @@ namespace Worflow.Controllers
         public ActionResult InserirUsuario(Usuario usuario)
         {           
             if (ModelState.IsValid)
-            {
-                if (!_usuarioService.UsuarioExiste(usuario))
-                    _usuarioService.Incluir(usuario);
+            {               
+                _usuarioService.Incluir(usuario);
 
                 return RedirectToAction(nameof(ListarUsuarios));
             }

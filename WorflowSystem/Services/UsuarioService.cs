@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using Worflow.Dados.Interfaces;
 using Worflow.Models;
 using Worflow.Repository;
@@ -13,13 +15,20 @@ namespace Worflow.Services
             _usuarioRepository = usuarioRepository;
         }
 
-        public void Alterar(Usuario obj)
+        public bool Alterar(Usuario obj)
         {
+            Validator.ValidateObject(obj, new ValidationContext(obj), true);
+
             _usuarioRepository.Alterar(obj);
+
+            return obj.Id > 0 ? true : false;
         }
 
         public Usuario BuscarPorId(int id)
         {
+            if (id == 0)
+                throw new Exception("Erro ao buscar usuário por id: Detalhes: Id não pode ser zerado");
+
             return _usuarioRepository.BuscarPorId(id);
         }
 
@@ -28,24 +37,33 @@ namespace Worflow.Services
             return _usuarioRepository.BuscarTodos();
         }
 
-        public void Excluir(Usuario obj)
+        public bool Excluir(Usuario obj)
         {
+            if (obj.Id == 0)
+                throw new Exception("Erro ao excluir usuário: Detalhes: Id não pode ser zerado");
+
             _usuarioRepository.Excluir(obj);
+
+            return obj.Id > 0 ? true : false;
         }
 
-        public void Incluir(Usuario obj)
+        public bool Incluir(Usuario obj)
         {
-            _usuarioRepository.Incluir(obj);
+            if (!_usuarioRepository.UsuarioExiste(obj))
+            {
+                Validator.ValidateObject(obj, new ValidationContext(obj), true);
+
+                _usuarioRepository.Incluir(obj);
+
+                return true;
+            }
+            else
+                return false;               
         }
 
         public ICollection<Usuario> Pesquisar(string value)
         {
             return _usuarioRepository.Pesquisar(value);
-        }
-
-        public bool UsuarioExiste(Usuario obj)
-        {
-            return _usuarioRepository.UsuarioExiste(obj);
         }
     }
 }

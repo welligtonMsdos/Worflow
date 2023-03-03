@@ -95,11 +95,9 @@ namespace Worflow.Controllers
         [Route("EditarLead/{id}")]
         public ActionResult EditarLead(int id)
         {
-            var lead = _leadService.BuscarPorId(id);
+            var leadCotacao = _leadService.BuscarLeadCotacaoPorId(id);           
 
-            LeadCotacao leadCotacao = new LeadCotacao(lead, new Cotacao());
-
-            ViewBag.Status = _statusService.BuscarStatus(lead);
+            ViewBag.Status = _statusService.BuscarStatus(leadCotacao.Lead);
 
             ViewBag.Seguradoras = _seguradoraService.BuscarSeguradoras();
 

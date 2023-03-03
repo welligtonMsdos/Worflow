@@ -10,6 +10,7 @@ namespace Worflow.Dados.Interfaces
         IPagedList<Lead> BuscarLeadsByPageList(int pagina);
         ICollection<Lead> Pesquisar(string value);
         IPagedList<Lead> PesquisarByPageList(string value, int pagina);
+        LeadCotacao BuscarLeadCotacaoPorId(int id);
         Lead BuscarPorId(int id);
         void Incluir(Lead obj, string[] produtos);      
         void Alterar(Lead obj);       

@@ -6,6 +6,12 @@ namespace Worflow.Models
 {
     public class Cotacao
     {
+        public Cotacao()
+        {
+            DataEmissao = DateTime.Now;
+            DataVencimento = DateTime.Now.AddDays(30);
+        }
+
         [Key] 
         public int Id { get; set; }
 
@@ -17,7 +23,8 @@ namespace Worflow.Models
         [Display(Name = "Data Vencimento", Prompt = "Digite a data de vencimento")]
         public DateTime DataVencimento { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "{0} é obrigatório")]
+        [Range(10,1000, ErrorMessage = "Valor deve estar entre 10,00 e 1000,00.")]
         public decimal Valor { get; set; }
 
         public bool Ativo { get; set; }
