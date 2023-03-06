@@ -57,6 +57,9 @@ namespace Worflow.Dados.EFCore
 
         public Lead BuscarPorId(int id)
         {
+            if (id == 0)
+                return new Lead();
+
             return _context.Lead
                 .Include(x => x.Usuario)
                 .Include(x => x.Cliente)

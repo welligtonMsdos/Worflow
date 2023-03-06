@@ -163,7 +163,7 @@
                             <div class="row mb-3">
                                 <div class="col-12">
                                     <ul class="timeline">
-                                        @foreach(var itemHistorico in Model.Lead.Historico.OrderByDescending(x => x.Id))
+                                        @foreach (var itemHistorico in Model.Lead.Historico.OrderByDescending(x => x.Id))
                                         {
                                             <li>
                                                 <label class="historico__status ms-1">@itemHistorico.Status.Descricao</label>
@@ -189,7 +189,39 @@
                     <div id="acc_cotacao_item" class="accordion-collapse collapse" aria-labelledby="acc_cotacao" data-bs-parent="#acc">
 
                         <div class="accordion-body">
-                            <partial name="~/Views/Lead/PartialViews/_TabelaCotacao.cshtml" />
+
+                            <div class="row mb-3">
+
+                                <div class="col-6">
+                                    <div class="card bg-success text-light mb-0 text-center" style="max-width: 12rem;">
+                                        <div class="card-header">Seguradora</div>
+                                        <div class="card-body">
+                                            <h5 class="card-title">Comissão</h5>
+                                            <p class="card-text">
+                                                R$ 5200,00
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-6 d-grid gap-2 d-md-flex justify-content-md-end">
+
+                                    <button type="button" class="btn btn-Acoes btn-cotacao mb-2" data-bs-toggle="modal" data-bs-target="#cotacoes">
+                                        Nova Cotação
+                                    </button>
+
+                                </div>
+
+                            </div>    
+
+                            <div id="partialCotacoes">
+
+                                @*<partial name="~/Views/Lead/PartialViews/_TabelaCotacoes.cshtml" />*@
+
+                               @* @await Html.PartialAsync("~/Views/Lead/PartialViews/_TabelaCotacoes.cshtml", Model.Lead.Cotacao)*@
+
+                            </div>
+
                         </div>
 
                     </div>
@@ -320,6 +352,12 @@
     </div>
 
 </form>
+
+<div class="modal fade" id="cotacoes" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">         
+
+    @await Html.PartialAsync("~/Views/Lead/PartialViews/_NovaCotacao.cshtml", Model)
+
+</div>
 
 @section Scripts {
     @{

@@ -10,11 +10,11 @@ namespace Worflow.Services
 {
     public class LeadService : ILeadService
     {
-        ILeadRepository _leadRepository;
+        ILeadRepository _leadRepository;      
 
         public LeadService(ILeadRepository leadRepository)
         {
-            _leadRepository = leadRepository;
+            _leadRepository = leadRepository;           
         }
         public void Alterar(Lead obj)
         {
@@ -84,13 +84,16 @@ namespace Worflow.Services
 
         public LeadCotacao BuscarLeadCotacaoPorId(int id)
         {
-            LeadCotacao leadCotacao = new LeadCotacao(_leadRepository.BuscarPorId(id), new Cotacao());
+            LeadCotacao leadCotacao = new LeadCotacao(_leadRepository.BuscarPorId(id), new Cotacao(id));
 
             return leadCotacao;
         }
 
         public Lead BuscarPorId(int id)
         {
+            if (id == 0)
+                return new Lead();
+
             return _leadRepository.BuscarPorId(id);
         }
     }

@@ -7,8 +7,9 @@ namespace Worflow.Dados.Interfaces
     {
         ICollection<Cotacao> BuscarCotacoes();
         Cotacao BuscarPorId(int id);
-        void Incluir(Cotacao obj);
-        void Alterar(Cotacao obj);
-        void Excluir(Cotacao obj);       
+        ICollection<Cotacao> BuscarCotacoesPorLeadId(int leadId); 
+        bool Incluir(Cotacao obj);
+        bool Alterar(Cotacao obj);
+        bool Excluir(Cotacao obj);       
     }
 }

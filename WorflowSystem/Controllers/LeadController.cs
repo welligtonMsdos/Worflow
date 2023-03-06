@@ -1,9 +1,12 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using Worflow.Dados.EFCore;
 using Worflow.Dados.Interfaces;
 using Worflow.Models;
+using Worflow.Services;
 using WorflowSystem.Models;
 
 namespace Worflow.Controllers
@@ -139,5 +142,22 @@ namespace Worflow.Controllers
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
 
+        public IActionResult InserirCotacao(DateTime dataEmissao,DateTime dataVencimento, decimal valor,int leadId, int seguradoraId)
+        {
+            Cotacao cotacao = new Cotacao(dataEmissao, dataVencimento,valor,leadId, seguradoraId);
+
+            _cotacaoService.Incluir(cotacao);
+
+            var cotacoes = _cotacaoService.BuscarCotacoesPorLeadId(leadId);            
+
+            return PartialView("~/Views/Lead/PartialViews/_TabelaCotacoes.cshtml", cotacoes);
+        }
+
+        public IActionResult BuscarCotacao(int leadId)
+        {
+            var cotacoes = _cotacaoService.BuscarCotacoesPorLeadId(leadId);
+
+            return PartialView("~/Views/Lead/PartialViews/_TabelaCotacoes.cshtml", cotacoes);
+        }
     }
 }

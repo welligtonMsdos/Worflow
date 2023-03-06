@@ -1,5 +1,5 @@
-﻿using System.Collections.Generic;
-using System.Data.Entity;
+﻿using Microsoft.EntityFrameworkCore;
+using System.Collections.Generic;
 using System.Linq;
 using Worflow.Models;
 using Worflow.Repository;
@@ -19,6 +19,16 @@ namespace Worflow.Dados.EFCore
         {
             _context.Update(obj);
             _context.SaveChanges();
+        }
+
+        public ICollection<Cotacao> BuscarCotacoesPorLeadId(int leadId)
+        {
+            return _context.Cotacoes                
+                .Include(x => x.Lead)
+                .Include(x => x.Seguradora)
+                .Where(x => x.Ativo && x.LeadId == leadId)
+                .OrderByDescending(x => x.DataEmissao)
+                .ToList();
         }
 
         public Cotacao BuscarPorId(int id)

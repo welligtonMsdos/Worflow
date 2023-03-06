@@ -13,9 +13,11 @@ namespace Worflow.Services
             _cotacaoRepository = cotacaoRepository;
         }
 
-        public void Alterar(Cotacao obj)
+        public bool Alterar(Cotacao obj)
         {
             _cotacaoRepository.Alterar(obj);
+
+            return true;
         }
 
         public ICollection<Cotacao> BuscarCotacoes()
@@ -23,19 +25,30 @@ namespace Worflow.Services
             return _cotacaoRepository.BuscarTodos();
         }
 
+        public ICollection<Cotacao> BuscarCotacoesPorLeadId(int leadId)
+        {
+            return _cotacaoRepository.BuscarCotacoesPorLeadId(leadId);
+        }
+
         public Cotacao BuscarPorId(int id)
         {
             return _cotacaoRepository.BuscarPorId(id);
         }
 
-        public void Excluir(Cotacao obj)
+        public bool Excluir(Cotacao obj)
         {
             _cotacaoRepository.Excluir(obj);
+
+            return true;
         }
 
-        public void Incluir(Cotacao obj)
+        public bool Incluir(Cotacao obj)
         {
+            obj.Ativo = true;
+
             _cotacaoRepository.Incluir(obj);
-        }
+
+            return true;
+        }        
     }
 }

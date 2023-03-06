@@ -6,6 +6,23 @@ namespace Worflow.Models
 {
     public class Cotacao
     {
+        public Cotacao(DateTime dataEmissao, DateTime dataVencimento, decimal valor, int leadid, int seguradoraId)
+        {
+            Ativo = true;
+            StatusFinalizada = false;
+            DataEmissao = dataEmissao;
+            DataVencimento = dataVencimento;
+            Valor = valor;
+            LeadId = leadid;
+            SeguradoraId = seguradoraId;
+        }
+        public Cotacao(int leadId)
+        {
+            DataEmissao = DateTime.Now;
+            DataVencimento = DateTime.Now.AddDays(30);
+            LeadId = leadId;
+        }
+
         public Cotacao()
         {
             DataEmissao = DateTime.Now;
@@ -17,10 +34,12 @@ namespace Worflow.Models
 
         [Required(ErrorMessage = "{0} é obrigatória")]
         [Display(Name = "Data Emissão", Prompt = "Digite a data de emissão")]
+        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
         public DateTime DataEmissao { get; set; }
 
         [Required(ErrorMessage = "{0} é obrigatória")]
         [Display(Name = "Data Vencimento", Prompt = "Digite a data de vencimento")]
+        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
         public DateTime DataVencimento { get; set; }
 
         [Required(ErrorMessage = "{0} é obrigatório")]

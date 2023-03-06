@@ -14,6 +14,6 @@ namespace Worflow.Dados.Interfaces
         Lead BuscarPorId(int id);
         void Incluir(Lead obj, string[] produtos);      
         void Alterar(Lead obj);       
-        void Excluir(Lead obj);        
+        void Excluir(Lead obj);       
     }
 }
