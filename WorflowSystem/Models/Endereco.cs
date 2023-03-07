@@ -21,6 +21,11 @@ namespace Worflow.Models
             UF = uf;
         }
 
+        public Endereco(int id, string cep, string logadouro, string numero, string bairro, string cidade, string uf):this(cep, logadouro, numero,bairro,cidade,uf)
+        {
+            this.Id = id;            
+        }
+
         [Key]
         [DatabaseGeneratedAttribute(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }

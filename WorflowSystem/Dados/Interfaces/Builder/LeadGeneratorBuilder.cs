@@ -1,4 +1,5 @@
 ﻿using Worflow.Models;
+using X.PagedList;
 
 namespace Worflow.Dados.Interfaces.Builder
 {
@@ -16,16 +17,28 @@ namespace Worflow.Dados.Interfaces.Builder
             Usuario();
         }
 
-        public Lead LeadNew()
+        public Lead LeadPost()
         {
             return _lead;
         }
 
+        public Lead LeadPut(int leadId = 0)
+        {
+            _lead.Id = leadId;
+            return _lead;
+        }
+
+        public Lead LeadGet()
+        {
+            _lead.Id = 1;
+            return _lead;   
+        }
+
         public void Cliente()
         {
-            Endereco endereco = new Endereco("01310200", "Av.Paulista", "1578", "Bela Vista", "São Paulo", "SP");
+            Endereco endereco = new Endereco(1, "01310200", "Av.Paulista", "1578", "Bela Vista", "São Paulo", "SP");
 
-            Cliente cliente = new Cliente(
+            Cliente cliente = new Cliente(1,
                     endereco,
                     "60664745000187",
                     "Museu de arte moderna de São Paulo Assis Chateubriand",
@@ -66,6 +79,6 @@ namespace Worflow.Dados.Interfaces.Builder
             Usuario usuario = new Usuario(1,"João Silva","JOAVA",1);
             _lead.Usuario = usuario;
             _lead.UsuarioId = 1;
-        }
+        }     
     }
 }

@@ -1,5 +1,8 @@
 ﻿using Microsoft.CodeAnalysis.Elfie.Serialization;
+using Microsoft.SqlServer.Server;
+using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using Worflow.Core;
 using Worflow.Dados.Interfaces;
 using Worflow.Models;
@@ -16,11 +19,13 @@ namespace Worflow.Services
         {
             _leadRepository = leadRepository;           
         }
-        public void Alterar(Lead obj)
+        public bool Alterar(Lead obj)
         {
             var lead = _leadRepository.BuscarPorId(obj.Id);
             lead.StatusId = obj.StatusId;
             _leadRepository.Alterar(lead);
+
+            return obj.Id > 0 ? true : false;
         }
 
         public ICollection<Lead> BuscarLeads()
@@ -28,16 +33,32 @@ namespace Worflow.Services
             return _leadRepository.BuscarTodos();
         }
 
-        public void Excluir(Lead obj)
+        public bool Excluir(Lead obj)
         {
+            if (obj.Id == 0)
+                throw new Exception("Erro ao excluir Lead: Detalhes: Id não pode ser zerado");
+
             _leadRepository.Excluir(obj);
+
+            return obj.Id > 0 ? true : false;
         }
 
-        public void Incluir(Lead obj, string[] produtos)
+        public bool Incluir(Lead obj, string[] produtos)
         {
-            SetObservacao(ref obj);
+            try
+            {
+                Validator.ValidateObject(obj, new ValidationContext(obj), true);
 
-            _leadRepository.Incluir(SetListaLeads(obj, produtos));
+                SetObservacao(ref obj);
+
+                _leadRepository.Incluir(SetListaLeads(obj, produtos));
+
+                return true;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Erro ao incluir Lead");               
+            }            
         }
 
         private List<Lead> SetListaLeads(Lead obj, string[] produtos)
@@ -72,12 +93,12 @@ namespace Worflow.Services
             lead.Observacao = lead.Observacao == null ? "" : lead.Observacao;
         }
 
-        public IPagedList<Lead> BuscarLeadsByPageList(int pagina)
+        public IPagedList<Lead> BuscarLeadsByPageList(int pagina = 1)
         {
             return _leadRepository.BuscarLeadsByPageList(pagina);
         }
 
-        public IPagedList<Lead> PesquisarByPageList(string value, int pagina)
+        public IPagedList<Lead> PesquisarByPageList(string value, int pagina = 1)
         {
             return _leadRepository.PesquisarByPageList(value, pagina);
         }
@@ -92,9 +113,9 @@ namespace Worflow.Services
         public Lead BuscarPorId(int id)
         {
             if (id == 0)
-                return new Lead();
+                throw new Exception("Erro ao buscar Lead por id: Detalhes: Id não pode ser zerado");
 
             return _leadRepository.BuscarPorId(id);
-        }
+        }      
     }
 }

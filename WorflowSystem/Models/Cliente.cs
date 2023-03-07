@@ -22,7 +22,13 @@ namespace Worflow.Models
             Email = email;
             Telefone = telefone;
         }
-        
+
+        public Cliente(int id, Endereco endereco, string cnpj, string razaoSocial, string fantasia, string agencia, string conta, string email, string telefone): this(endereco,cnpj,razaoSocial,fantasia,agencia,conta,email,telefone)
+        {
+            this.Id = id;
+            this.EnderecoId = endereco.Id;
+        }
+
         [Key]
         [DatabaseGeneratedAttribute(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
