@@ -1,0 +1,66 @@
+﻿@model Worflow.Models.Cotacao
+
+<div class="modal-dialog">
+
+    <div class="modal-content">
+
+        <div class="modal-header">
+            <h3><i class="fa-regular fa-pen-to-square" style="color: var(--corPrincipal); margin-right: 5px"></i>Detalhes Cotação</h3>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+
+        <div class="modal-body">
+
+            <fieldset disabled>
+
+                <div class="row mb-3">
+
+                    <div class="col-6">
+
+                        <label asp-for="DataEmissao" class="control-label" ></label>
+                        
+                        <input asp-for="DataEmissao"
+                               type="text" class="form-control"
+                               value="@Model.DataEmissao.ToString("dd/MM/yyyy")" />
+
+                    </div>
+
+                    <div class="col-6">
+
+                        <label asp-for="DataVencimento" class="control-label"></label>
+
+                        <input asp-for="DataVencimento"
+                               type="text" class="form-control"
+                               value="@Model.DataVencimento.ToString("dd/MM/yyyy")" />
+
+                    </div>
+
+                </div>
+
+                <div class="row mb-3">
+
+                    <div class="col-6">
+                        <label asp-for="Valor" class="control-label"></label>
+                        <input asp-for="Valor" class="form-control" />
+                    </div>
+
+                    <div class="col-6">
+                        <label asp-for="Seguradora.Nome" class="control-label"></label>
+                        <input asp-for="Seguradora.Nome" class="form-control" />
+                    </div>
+
+                </div>
+
+
+            </fieldset>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+
+
+

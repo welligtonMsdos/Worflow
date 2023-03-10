@@ -126,6 +126,7 @@ namespace Worflow.Controllers
         public ActionResult DetalhesLead(int id)
         {
             var lead = _leadService.BuscarPorId(id);
+
             return View(lead);
         }      
 
@@ -142,15 +143,56 @@ namespace Worflow.Controllers
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
 
-        public IActionResult InserirCotacao(DateTime dataEmissao,DateTime dataVencimento, decimal valor,int leadId, int seguradoraId)
+        #region Cotação
+
+        
+        public IActionResult InserirCotacao(DateTime dataEmissao, DateTime dataVencimento, decimal valor, int leadId, int seguradoraId)
+        {  
+            if (ModelState.IsValid)
+            {
+                var cotacao = new Cotacao(dataEmissao, dataVencimento, valor, leadId, seguradoraId);
+
+                _cotacaoService.Incluir(cotacao);
+
+                var cotacoes = _cotacaoService.BuscarCotacoesPorLeadId(cotacao.LeadId);
+
+                return PartialView("~/Views/Lead/PartialViews/_TabelaCotacoes.cshtml", cotacoes);
+            }
+
+            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });           
+        }
+        
+        public IActionResult AtualizarCotacao(DateTime dataEmissao, DateTime dataVencimento, decimal valor, int leadId, int seguradoraId, int cotacaoId)
         {
-            Cotacao cotacao = new Cotacao(dataEmissao, dataVencimento,valor,leadId, seguradoraId);
+            if (ModelState.IsValid)
+            {
+                var cotacao = new Cotacao(dataEmissao, dataVencimento, valor, leadId, seguradoraId);
+                cotacao.Id = cotacaoId;
 
-            _cotacaoService.Incluir(cotacao);
+                _cotacaoService.Alterar(cotacao);
 
-            var cotacoes = _cotacaoService.BuscarCotacoesPorLeadId(leadId);            
+                var cotacoes = _cotacaoService.BuscarCotacoesPorLeadId(leadId);
 
-            return PartialView("~/Views/Lead/PartialViews/_TabelaCotacoes.cshtml", cotacoes);
+                return PartialView("~/Views/Lead/PartialViews/_TabelaCotacoes.cshtml", cotacoes);
+            }
+
+            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+        }
+
+        public IActionResult ExcluirCotacao(int cotacaoId, int leadId)
+        {
+            if (cotacaoId > 0)
+            {
+                var cotacao = _cotacaoService.BuscarPorId(cotacaoId);
+
+                _cotacaoService.Excluir(cotacao);
+
+                var cotacoes = _cotacaoService.BuscarCotacoesPorLeadId(leadId);
+
+                return PartialView("~/Views/Lead/PartialViews/_TabelaCotacoes.cshtml", cotacoes);
+            }
+
+            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
 
         public IActionResult BuscarCotacao(int leadId)
@@ -159,5 +201,35 @@ namespace Worflow.Controllers
 
             return PartialView("~/Views/Lead/PartialViews/_TabelaCotacoes.cshtml", cotacoes);
         }
+
+        public IActionResult BuscarDetalheCotacao(int cotacaoId)
+        {
+            var cotacao = _cotacaoService.BuscarPorId(cotacaoId);
+
+            return PartialView("~/Views/Lead/PartialViews/_DetalhesCotacao.cshtml", cotacao);
+        }
+
+        public IActionResult BuscarEditarCotacao(int cotacaoId)
+        {
+            var cotacao = _cotacaoService.BuscarPorId(cotacaoId);
+
+            ViewBag.Seguradoras = _seguradoraService.BuscarSeguradoras();
+
+            return PartialView("~/Views/Lead/PartialViews/_EditarCotacao.cshtml", cotacao);
+        }
+
+        public IActionResult BuscarExcluirCotacao(int cotacaoId)
+        {
+            var cotacao = _cotacaoService.BuscarPorId(cotacaoId);
+
+            ViewBag.Seguradoras = _seguradoraService.BuscarSeguradoras();
+
+            return PartialView("~/Views/Lead/PartialViews/_ExcluirCotacao.cshtml", cotacao);
+        }
+
+
+
+        #endregion
+
     }
 }

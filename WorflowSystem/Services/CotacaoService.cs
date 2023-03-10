@@ -2,6 +2,7 @@
 using Worflow.Dados.Interfaces;
 using Worflow.Models;
 using Worflow.Repository;
+using X.PagedList;
 
 namespace Worflow.Services
 {
@@ -23,6 +24,11 @@ namespace Worflow.Services
         public ICollection<Cotacao> BuscarCotacoes()
         {
             return _cotacaoRepository.BuscarTodos();
+        }
+
+        public IPagedList<Cotacao> BuscarCotacoesByPageList(int leadId,int pagina = 1)
+        {
+            return _cotacaoRepository.BuscarCotacoesByPageList(leadId, pagina);
         }
 
         public ICollection<Cotacao> BuscarCotacoesPorLeadId(int leadId)

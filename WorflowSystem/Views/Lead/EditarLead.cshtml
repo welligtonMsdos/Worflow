@@ -214,13 +214,9 @@
 
                             </div>    
 
-                            <div id="partialCotacoes">
+                            <div id="partialCotacoes">                               
 
-                                @*<partial name="~/Views/Lead/PartialViews/_TabelaCotacoes.cshtml" />*@
-
-                               @* @await Html.PartialAsync("~/Views/Lead/PartialViews/_TabelaCotacoes.cshtml", Model.Lead.Cotacao)*@
-
-                            </div>
+                            </div>                           
 
                         </div>
 
@@ -250,8 +246,6 @@
                                 </div>
 
                             </div>
-
-
 
                         </div>
                     </div>
@@ -355,7 +349,7 @@
 
 <div class="modal fade" id="cotacoes" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">         
 
-    @await Html.PartialAsync("~/Views/Lead/PartialViews/_NovaCotacao.cshtml", Model)
+    @await Html.PartialAsync("~/Views/Lead/PartialViews/_NovaCotacao.cshtml", Model.Cotacao)
 
 </div>
 

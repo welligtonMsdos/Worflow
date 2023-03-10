@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Worflow.Models;
 using Worflow.Repository;
+using X.PagedList;
 
 namespace Worflow.Dados.EFCore
 {
@@ -19,6 +20,16 @@ namespace Worflow.Dados.EFCore
         {
             _context.Update(obj);
             _context.SaveChanges();
+        }
+
+        public IPagedList<Cotacao> BuscarCotacoesByPageList(int leadId, int pagina)
+        {
+            return _context.Cotacoes
+                .Include(x => x.Lead)
+                .Include(x => x.Seguradora)
+                .Where(x => x.Ativo && x.LeadId == leadId)
+                .OrderByDescending(x => x.DataEmissao)
+                .ToPagedList(pagina, 4);
         }
 
         public ICollection<Cotacao> BuscarCotacoesPorLeadId(int leadId)

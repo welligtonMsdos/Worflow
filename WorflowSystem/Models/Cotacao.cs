@@ -34,7 +34,7 @@ namespace Worflow.Models
 
         [Required(ErrorMessage = "{0} é obrigatória")]
         [Display(Name = "Data Emissão", Prompt = "Digite a data de emissão")]
-        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
+        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]        
         public DateTime DataEmissao { get; set; }
 
         [Required(ErrorMessage = "{0} é obrigatória")]

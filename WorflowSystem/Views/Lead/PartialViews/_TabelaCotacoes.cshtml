@@ -39,14 +39,18 @@
                         </td>
                         <td style="text-align:end">
 
-                            <button type="button" class="btn btn-Acoes mb-2" onclick="location.href='@Url.Action("EditarCotacao", "Cotacao", new { id = item.Id })'">Editar</button>
-
-                            <button type="button" class="btn btn-Acoes mb-2" onclick="location.href='@Url.Action("DetalhesCotacao", "Cotacao", new { id = item.Id })'">Detalhes</button>
-
-                            <button type="button" class="btn btn-Excluir mb-2" data-bs-toggle="modal" data-bs-target="#modalExcluir" onclick="setIdExcluir(@item.Id)">
-                                Excluir
+                            <button type="button" class="btn btn-Acoes mb-2" onclick="abrirEditarCotacao(@item.Id)">
+                                Editar
                             </button>
 
+                            <button type="button" class="btn btn-Acoes mb-2" onclick="abrirDetalheCotacao(@item.Id)">
+                                Detalhes
+                            </button>
+
+                            <button type="button" class="btn btn-Excluir mb-2" onclick="abrirExcluirCotacao(@item.Id)">
+                                Excluir
+                            </button>
+                         
                         </td>
                     </tr>
                 }
@@ -59,32 +63,23 @@
 
 </div>
 
+<div class="modal fade" id="ExcluirCotacao" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
 
-<div class="modal fade" id="modalExcluir" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-
-            <div class="modal-header">
-                <h3 class="modal-title" id="exampleModalLabel">Excluir Cotação</h3>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-
-            <form asp-action="ExcluirCotacao">
-
-                <div class="modal-body">
-                    <h5>Deseja realmente excluir<i class="fa-regular fa-question ml-2" style="color: var(--corPrincipal); margin-right: 5px"></i></h5>
-                    <input type="text" name="id" id="id" hidden>
-                </div>
-
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-Acoes mr-4" data-bs-dismiss="modal">Não</button>
-                    <button type="submit" class="btn btn-Acoes">Sim</button>
-                </div>
-
-            </form>
-
-        </div>
+    <div id="partialExcluirCotacao">
     </div>
+
 </div>
 
+<div class="modal fade" id="EditarCotacao" tabindex="-2" aria-labelledby="exampleModalLabel2" aria-hidden="true">
 
+    <div id="partialEditarCotacao">
+    </div>
+
+</div>
+
+<div class="modal fade" id="DetalhesCotacoes" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">   
+   
+    <div id="partialDetalhesCotacoes">
+    </div>
+
+</div>

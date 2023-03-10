@@ -1,10 +1,66 @@
 ﻿$(document).ready(function () {
-    var LeadId = $('#LeadId').val();
+    var leadId = $('#LeadId').val();
 
-    BuscarCotacao(LeadId);
+    buscarCotacao(leadId);   
 })
 
-function BuscarCotacao(leadId) {
+function abrirDetalheCotacao(cotacaoId) {    
+
+    $.ajax({
+        type: "GET",
+        url: '/Lead/BuscarDetalheCotacao',
+        data: {
+            cotacaoId: cotacaoId
+        },
+        cache: false,
+        async: false,
+        success: function (data) {          
+
+            $('#partialDetalhesCotacoes').html(data);
+
+            $('#DetalhesCotacoes').modal('show');
+        }
+    })
+}
+
+function abrirEditarCotacao(cotacaoId) {
+
+    $.ajax({
+        type: "GET",
+        url: '/Lead/BuscarEditarCotacao',
+        data: {
+            cotacaoId: cotacaoId
+        },
+        cache: false,
+        async: false,
+        success: function (data) {
+
+            $('#partialEditarCotacao').html(data);
+
+            $('#EditarCotacao').modal('show');         
+        }
+    })
+}
+
+function abrirExcluirCotacao(cotacaoId) {
+    $.ajax({
+        type: "GET",
+        url: '/Lead/BuscarExcluirCotacao',
+        data: {
+            cotacaoId: cotacaoId
+        },
+        cache: false,
+        async: false,
+        success: function (data) {
+
+            $('#partialExcluirCotacao').html(data);
+
+            $('#ExcluirCotacao').modal('show');
+        }
+    })
+}
+
+function buscarCotacao(leadId) {
     $.ajax({
         type: "GET",
         url: '/Lead/BuscarCotacao',
@@ -14,12 +70,14 @@ function BuscarCotacao(leadId) {
         cache: false,
         async: false,
         success: function (data) {
+
             $('#partialCotacoes').html(data);
+
         }
     })
 }
 
-function InserirCotacao(leadId) {
+function inserirCotacao(leadId) {
 
     var DataEmissao = $('#DataEmissao').val();
     var DataVencimento = $('#DataVencimento').val();
@@ -43,3 +101,55 @@ function InserirCotacao(leadId) {
         }
     })
 }
+
+function atualizarCotacao(leadId) {
+    var DataEmissao = $('#DataEmissao').val();
+    var DataVencimento = $('#DataVencimento').val();
+    var Valor = $('#Valor').val();
+    var SeguradoraId = $('#SeguradoraId').val();
+    var CotacaoId = $('#CotacaoId').val();
+
+    $.ajax({
+        type: "GET",
+        url: '/Lead/AtualizarCotacao',
+        data: {
+            dataEmissao: DataEmissao,
+            dataVencimento: DataVencimento,
+            valor: Valor,
+            leadId: leadId,
+            seguradoraId: SeguradoraId,
+            cotacaoId: CotacaoId
+        },
+        cache: false,
+        async: false,
+        success: function (data) {
+            $('#partialCotacoes').html(data);
+        },
+        error: function (data) {
+            alert('erro');           
+        }
+    })
+}
+
+function excluirCotacao(cotacaoId) {
+
+    var leadId = $('#LeadId').val();
+
+    $.ajax({
+        type: "GET",
+        url: '/Lead/ExcluirCotacao',
+        data: {            
+            cotacaoId: cotacaoId,
+            leadId: leadId
+        },
+        cache: false,
+        async: false,
+        success: function (data) {
+            $('#partialCotacoes').html(data);
+        },
+        error: function (data) {
+            alert('erro');
+        }
+    })
+}
+

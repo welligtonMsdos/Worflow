@@ -95,10 +95,10 @@ body {
     }
 
 .btn-Acoes {
-    color: var(--textoSecundario);
+    color: var(--textoPrincipal);
     background-color: var(--corPrincipal);
     border-color: var(--corPrincipal);
-    font-weight: bold;
+    font-weight: normal;
 }
 
     .btn-Acoes:hover {
@@ -112,8 +112,15 @@ body {
     color: var(--textoPrincipal);
     background-color: var(--corTercearia);
     border-color: var(--corTercearia);
-    font-weight: bold;
+    font-weight: normal;
 }
+
+    .btn-Excluir:hover {
+        color: var(--textoSecundario);
+        background-color: var(--corTercearia);
+        border-color: var(--corTercearia);
+        font-weight: bold;
+    }
 
 .uppercase {
     text-transform: uppercase;
