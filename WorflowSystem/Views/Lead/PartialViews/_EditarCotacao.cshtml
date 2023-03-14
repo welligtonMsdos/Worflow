@@ -1,5 +1,10 @@
 ﻿@model Worflow.Models.Cotacao
 
+@{
+    ViewData["Title"] = "EditarLead";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
 <div class="modal-dialog">
     <div class="modal-content">
 
@@ -11,67 +16,83 @@
 
         <div class="modal-body">
 
-            <form>
 
-                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
-                @Html.HiddenFor(model => Model.LeadId, new { @class = "hid-id", @id="LeadId" })
-                @Html.HiddenFor(model => Model.Id, new { @class = "hid-id", @id="CotacaoId" })
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
-                <div class="row mb-3">
+            @Html.HiddenFor(model => Model.LeadId, new { @class = "hid-id", @id="LeadId" })
+            @Html.HiddenFor(model => Model.Id, new { @class = "hid-id", @id="CotacaoId" })
+            @Html.HiddenFor(model => Model.StatusFinalizada, new { @class = "hid-id", @id="StatusFinalizada" })
 
-                    <div class="col-6">
-                        <label asp-for="DataEmissao" class="control-label"></label>
-                        <input asp-for="DataEmissao" id="DataEmissao" class="form-control" type="text" />
-                        <span asp-validation-for="DataEmissao" class="text-danger"></span>
+            <div class="row mb-3">
 
-                    </div>
-
-                    <div class="col-6">
-                        <label asp-for="DataVencimento" class="control-label"></label>
-                        <input asp-for="DataVencimento" id="DataVencimento" class="form-control" type="text" />
-                        <span asp-validation-for="DataVencimento" class="text-danger"></span>
-                    </div>
+                <div class="col-6">
+                    <label asp-for="DataEmissao" class="control-label"></label>
+                    <input asp-for="DataEmissao" id="DataEmissao" class="form-control" type="text" />
+                    <span asp-validation-for="DataEmissao" class="text-danger"></span>
 
                 </div>
 
-                <div class="row mb-3">
+                <div class="col-6">
+                    <label asp-for="DataVencimento" class="control-label"></label>
+                    <input asp-for="DataVencimento" id="DataVencimento" class="form-control" type="text" />
+                    <span asp-validation-for="DataVencimento" class="text-danger"></span>
+                </div>
 
-                    <div class="col-6">
-                        <label asp-for="Valor" class="control-label"></label>
-                        <input asp-for="Valor" id="Valor" class="form-control" />
-                        <span asp-validation-for="Valor" class="text-danger"></span>
-                    </div>
+            </div>
 
-                    <div class="col-6">
-                        <label class="control-label">Seguradoras</label>
+            <div class="row mb-3">
 
-                        <select class="form-select form-select-lg mb-3"
-                                aria-label="select para seguradoras"
-                                asp-for="SeguradoraId"
-                                id="SeguradoraId">
-                            <option selected>Selecione</option>
-                            @foreach (var item in ViewBag.Seguradoras)
-                            {
-                                <option value="@item.Id">@item.Nome</option>
-                            }
-                        </select>
-                        <span asp-validation-for="SeguradoraId" class="text-danger"></span>
-                    </div>
+                <div class="col-6">
+                    <label asp-for="Valor" class="control-label"></label>
+                    <input asp-for="Valor" id="Valor" class="form-control" />
+                    <span asp-validation-for="Valor" class="text-danger"></span>
+                </div>
+
+                <div class="col-6">
+                    <label class="control-label">Seguradoras</label>
+
+                    <select class="form-select form-select-lg p-1"
+                            aria-label="select para seguradoras"
+                            asp-for="SeguradoraId"
+                            id="SeguradoraId">
+                        <option selected>Selecione</option>
+                        @foreach (var item in ViewBag.Seguradoras)
+                        {
+                            <option value="@item.Id">@item.Nome</option>
+                        }
+                    </select>
+                    <span asp-validation-for="SeguradoraId" class="text-danger"></span>
+                </div>
+
+            </div>
+
+            <div class="row mb-3">
+                <div class="col-6">
+                    <label class="control-label">Status Seguradora</label>
+
+                    <select class="form-select form-select-lg p-1"
+                            aria-label="select para opções"
+                            id="Opcoes">
+                        <option selected>Selecione</option>
+                        @foreach (var item in ViewBag.Opcoes)
+                        {
+                            <option value="@item.Id">@item.Descricao</option>
+                        }
+                    </select>
+
+                </div>
+            </div>
+
+            <div class="row mb-3">
+
+                <div class="col-12 d-grid gap-2 d-md-flex justify-content-md-end">
+
+                    <input type="button" value="Salvar" class="btn btn-Acoes" onclick="atualizarCotacao(@Model.LeadId)" data-bs-dismiss="modal" />
 
                 </div>
 
-                <div class="row mb-3">
-
-                    <div class="col-12 d-grid gap-2 d-md-flex justify-content-md-end">
-
-                        <input type="submit" value="Salvar" class="btn btn-Acoes" onclick="atualizarCotacao(@Model.LeadId)" data-bs-dismiss="modal" />
-
-                    </div>
-
-                </div>
-
-            </form>
+            </div>
 
         </div>
 

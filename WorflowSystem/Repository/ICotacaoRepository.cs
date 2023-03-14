@@ -7,7 +7,6 @@ namespace Worflow.Repository
 {
     public interface ICotacaoRepository: IQuery<Cotacao>, ICommand<Cotacao>
     {
-        ICollection<Cotacao> BuscarCotacoesPorLeadId(int leadId);
-        IPagedList<Cotacao> BuscarCotacoesByPageList(int leadId, int pagina);
+        ICollection<Cotacao> BuscarCotacoesPorLeadId(int leadId);       
     }
 }

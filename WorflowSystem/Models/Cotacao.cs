@@ -6,7 +6,7 @@ namespace Worflow.Models
 {
     public class Cotacao
     {
-        public Cotacao(DateTime dataEmissao, DateTime dataVencimento, decimal valor, int leadid, int seguradoraId)
+        public Cotacao(DateTime dataEmissao, DateTime dataVencimento, decimal valor, int leadid, int seguradoraId, string statusCotacao = "")
         {
             Ativo = true;
             StatusFinalizada = false;
@@ -15,6 +15,8 @@ namespace Worflow.Models
             Valor = valor;
             LeadId = leadid;
             SeguradoraId = seguradoraId;
+
+            StatusFinalizada = statusCotacao.Equals("1") ? true : false;
         }
         public Cotacao(int leadId)
         {
@@ -59,5 +61,7 @@ namespace Worflow.Models
         public int LeadId { get; set; }
 
         public Lead Lead { get; set; }
+
+
     }
 }

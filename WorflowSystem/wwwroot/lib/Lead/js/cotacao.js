@@ -24,7 +24,7 @@ function abrirDetalheCotacao(cotacaoId) {
 }
 
 function abrirEditarCotacao(cotacaoId) {
-
+  
     $.ajax({
         type: "GET",
         url: '/Lead/BuscarEditarCotacao',
@@ -36,6 +36,16 @@ function abrirEditarCotacao(cotacaoId) {
         success: function (data) {
 
             $('#partialEditarCotacao').html(data);
+
+            var opcao = $('#StatusFinalizada').val();         
+
+            if (opcao == "True") {
+                document.getElementById('Opcoes').value = 1;
+                $('#Opcoes').css("boder-color", "green");
+            } else {
+                document.getElementById('Opcoes').value = 2;
+                $('#Opcoes').css("boder-color", "red");
+            }
 
             $('#EditarCotacao').modal('show');         
         }
@@ -102,12 +112,14 @@ function inserirCotacao(leadId) {
     })
 }
 
-function atualizarCotacao(leadId) {
+function atualizarCotacao(leadId) {  
+   
     var DataEmissao = $('#DataEmissao').val();
     var DataVencimento = $('#DataVencimento').val();
     var Valor = $('#Valor').val();
     var SeguradoraId = $('#SeguradoraId').val();
-    var CotacaoId = $('#CotacaoId').val();
+    var CotacaoId = $('#CotacaoId').val();    
+    var StatusCotacao = $('#Opcoes').val();
 
     $.ajax({
         type: "GET",
@@ -118,7 +130,8 @@ function atualizarCotacao(leadId) {
             valor: Valor,
             leadId: leadId,
             seguradoraId: SeguradoraId,
-            cotacaoId: CotacaoId
+            cotacaoId: CotacaoId,
+            statusCotacao: StatusCotacao
         },
         cache: false,
         async: false,

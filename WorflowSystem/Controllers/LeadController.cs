@@ -3,6 +3,8 @@ using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using Worflow.Core;
+using Worflow.Core.Status;
 using Worflow.Dados.EFCore;
 using Worflow.Dados.Interfaces;
 using Worflow.Models;
@@ -68,7 +70,7 @@ namespace Worflow.Controllers
         {
             if (ModelState.IsValid)
             {
-                _leadService.Incluir(lead, Request.Form["produtos"]);
+                _leadService.Incluir(lead, Request.Form["caixaSelecao"]);
 
                 return RedirectToAction("ListarLead", "Lead");
             }
@@ -77,9 +79,7 @@ namespace Worflow.Controllers
         }
 
         public IActionResult ListarLead(int pagina = 1)
-        {
-            //var leads = _leadService.BuscarLeads();
-
+        {  
             var leads = _leadService.BuscarLeadsByPageList(pagina);
 
             return View(leads);
@@ -88,8 +88,6 @@ namespace Worflow.Controllers
         [Route("PesquisarLeads")]
         public ActionResult PesquisarLeads(string pesquisar, int pagina = 1)
         {
-            //var leads = _leadService.Pesquisar(pesquisar);
-
             var leads = _leadService.PesquisarByPageList(pesquisar, pagina);
 
             return View("ListarLead", leads);
@@ -98,6 +96,8 @@ namespace Worflow.Controllers
         [Route("EditarLead/{id}")]
         public ActionResult EditarLead(int id)
         {
+            if (id == 0) return View(new LeadCotacao(new Lead(), new Cotacao()));
+
             var leadCotacao = _leadService.BuscarLeadCotacaoPorId(id);           
 
             ViewBag.Status = _statusService.BuscarStatus(leadCotacao.Lead);
@@ -144,7 +144,6 @@ namespace Worflow.Controllers
         }
 
         #region Cotação
-
         
         public IActionResult InserirCotacao(DateTime dataEmissao, DateTime dataVencimento, decimal valor, int leadId, int seguradoraId)
         {  
@@ -159,14 +158,15 @@ namespace Worflow.Controllers
                 return PartialView("~/Views/Lead/PartialViews/_TabelaCotacoes.cshtml", cotacoes);
             }
 
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });           
+            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
         
-        public IActionResult AtualizarCotacao(DateTime dataEmissao, DateTime dataVencimento, decimal valor, int leadId, int seguradoraId, int cotacaoId)
+        public IActionResult AtualizarCotacao(string dataEmissao, string dataVencimento, decimal valor, int leadId, int seguradoraId, int cotacaoId, string statusCotacao)
         {
             if (ModelState.IsValid)
             {
-                var cotacao = new Cotacao(dataEmissao, dataVencimento, valor, leadId, seguradoraId);
+                var cotacao = new Cotacao(DateTime.Parse(dataEmissao), DateTime.Parse(dataVencimento), valor, leadId, seguradoraId, statusCotacao);
+
                 cotacao.Id = cotacaoId;
 
                 _cotacaoService.Alterar(cotacao);
@@ -215,6 +215,8 @@ namespace Worflow.Controllers
 
             ViewBag.Seguradoras = _seguradoraService.BuscarSeguradoras();
 
+            ViewBag.Opcoes = Util.GetOpcoesAprovadaNegada();
+
             return PartialView("~/Views/Lead/PartialViews/_EditarCotacao.cshtml", cotacao);
         }
 
@@ -227,9 +229,6 @@ namespace Worflow.Controllers
             return PartialView("~/Views/Lead/PartialViews/_ExcluirCotacao.cshtml", cotacao);
         }
 
-
-
         #endregion
-
     }
 }

@@ -3,7 +3,7 @@
 @foreach (var item in Model)
 {
     <div class="form-check form-switch">
-        <input class="form-check-input chkPadrao" type="checkbox" name="produtos" value="@item.produto.Id" id="chk_@item.produto.Id">
+        <input class="form-check-input chkPadrao" type="checkbox" name="caixaSelecao" value="@item.produto.Id" id="chk_@item.produto.Id">
         <label class="form-check-label gridProduto__itens_info" for="chk_@item.produto.Id">@Html.DisplayFor(modelItem => item.produto.Descricao)</label>
     </div>
 

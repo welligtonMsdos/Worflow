@@ -19,7 +19,7 @@
 function verificarProdutos() {
     var retorno = false;
 
-    $('input[name=produtos]').each(function () {
+    $('input[name=caixaSelecao]').each(function () {
         if ($(this).prop("checked")) {
             retorno = true;
         }
