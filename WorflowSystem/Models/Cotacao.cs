@@ -1,23 +1,27 @@
-﻿using Microsoft.VisualBasic;
-using System;
+﻿using System;
 using System.ComponentModel.DataAnnotations;
 
 namespace Worflow.Models
 {
     public class Cotacao
     {
-        public Cotacao(DateTime dataEmissao, DateTime dataVencimento, decimal valor, int leadid, int seguradoraId, string statusCotacao = "")
+        public Cotacao(string dataEmissao, string dataVencimento, decimal valor, int leadid, int seguradoraId, string statusCotacao = "")
         {
             Ativo = true;
             StatusFinalizada = false;
-            DataEmissao = dataEmissao;
-            DataVencimento = dataVencimento;
+            DataEmissao = DateTime.Parse(dataEmissao);
+            DataVencimento = DateTime.Parse(dataVencimento);
             Valor = valor;
             LeadId = leadid;
             SeguradoraId = seguradoraId;
-
             StatusFinalizada = statusCotacao.Equals("1") ? true : false;
         }
+
+        public Cotacao(int cotacaoId, string dataEmissao, string dataVencimento, decimal valor, int leadid, int seguradoraId, string statusCotacao = ""): this(dataEmissao, dataVencimento, valor, leadid, seguradoraId, statusCotacao)
+        {
+            Id = cotacaoId;
+        }
+
         public Cotacao(int leadId)
         {
             DataEmissao = DateTime.Now;
@@ -61,7 +65,5 @@ namespace Worflow.Models
         public int LeadId { get; set; }
 
         public Lead Lead { get; set; }
-
-
     }
 }

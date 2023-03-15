@@ -1,14 +1,10 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using Worflow.Core;
-using Worflow.Core.Status;
-using Worflow.Dados.EFCore;
 using Worflow.Dados.Interfaces;
 using Worflow.Models;
-using Worflow.Services;
 using WorflowSystem.Models;
 
 namespace Worflow.Controllers
@@ -21,11 +17,11 @@ namespace Worflow.Controllers
         IClienteService _clienteService;
         IStatusService _statusService;
         ICotacaoService _cotacaoService;
-        ISeguradoraService _seguradoraService;       
+        ISeguradoraService _seguradoraService;
 
         public LeadController(ILeadService leadService, ISegmentoService segmentoService,
                               IProdutoService produtoService, IClienteService clienteService,
-                              IStatusService statusService, ICotacaoService cotacaoService, 
+                              IStatusService statusService, ICotacaoService cotacaoService,
                               ISeguradoraService seguradoraService)
         {
             _leadService = leadService;
@@ -34,7 +30,7 @@ namespace Worflow.Controllers
             _clienteService = clienteService;
             _statusService = statusService;
             _cotacaoService = cotacaoService;
-            _seguradoraService = seguradoraService;           
+            _seguradoraService = seguradoraService;
         }
 
         [Route("CreateLead")]
@@ -44,7 +40,7 @@ namespace Worflow.Controllers
             var lead = new Lead();
 
             lead.StatusId = 1;
-            lead.UsuarioId = 1;            
+            lead.UsuarioId = 1;
 
             ViewBag.Segmentos = _segmentoService.BuscarSegmentos();
 
@@ -79,11 +75,11 @@ namespace Worflow.Controllers
         }
 
         public IActionResult ListarLead(int pagina = 1)
-        {  
+        {
             var leads = _leadService.BuscarLeadsByPageList(pagina);
 
             return View(leads);
-        }       
+        }
 
         [Route("PesquisarLeads")]
         public ActionResult PesquisarLeads(string pesquisar, int pagina = 1)
@@ -98,7 +94,7 @@ namespace Worflow.Controllers
         {
             if (id == 0) return View(new LeadCotacao(new Lead(), new Cotacao()));
 
-            var leadCotacao = _leadService.BuscarLeadCotacaoPorId(id);           
+            var leadCotacao = _leadService.BuscarLeadCotacaoPorId(id);
 
             ViewBag.Status = _statusService.BuscarStatus(leadCotacao.Lead);
 
@@ -128,7 +124,7 @@ namespace Worflow.Controllers
             var lead = _leadService.BuscarPorId(id);
 
             return View(lead);
-        }      
+        }
 
         [Route("AtualizarLead")]
         public ActionResult AtualizarLead(Lead lead)
@@ -144,9 +140,9 @@ namespace Worflow.Controllers
         }
 
         #region Cotação
-        
-        public IActionResult InserirCotacao(DateTime dataEmissao, DateTime dataVencimento, decimal valor, int leadId, int seguradoraId)
-        {  
+
+        public IActionResult InserirCotacao(string dataEmissao, string dataVencimento, decimal valor, int leadId, int seguradoraId)
+        {
             if (ModelState.IsValid)
             {
                 var cotacao = new Cotacao(dataEmissao, dataVencimento, valor, leadId, seguradoraId);
@@ -160,23 +156,16 @@ namespace Worflow.Controllers
 
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
-        
+
         public IActionResult AtualizarCotacao(string dataEmissao, string dataVencimento, decimal valor, int leadId, int seguradoraId, int cotacaoId, string statusCotacao)
         {
-            if (ModelState.IsValid)
-            {
-                var cotacao = new Cotacao(DateTime.Parse(dataEmissao), DateTime.Parse(dataVencimento), valor, leadId, seguradoraId, statusCotacao);
+            string result = _cotacaoService.IsCotacaoValid(dataEmissao, dataVencimento, valor, leadId, seguradoraId, cotacaoId, statusCotacao);
+            
+            if (!result.Equals("OK")) return Json(new { IsCreated = false, ErrorMessage = result });
+            
+            var cotacoes = _cotacaoService.BuscarCotacoesPorLeadId(leadId);
 
-                cotacao.Id = cotacaoId;
-
-                _cotacaoService.Alterar(cotacao);
-
-                var cotacoes = _cotacaoService.BuscarCotacoesPorLeadId(leadId);
-
-                return PartialView("~/Views/Lead/PartialViews/_TabelaCotacoes.cshtml", cotacoes);
-            }
-
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+            return PartialView("~/Views/Lead/PartialViews/_TabelaCotacoes.cshtml", cotacoes);            
         }
 
         public IActionResult ExcluirCotacao(int cotacaoId, int leadId)

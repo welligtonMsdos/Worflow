@@ -117,7 +117,7 @@ function atualizarCotacao(leadId) {
    
     var DataEmissao = $('#DataEmissao').val();
     var DataVencimento = $('#DataVencimento').val();
-    var Valor = $('#Valor').val().replace('.','').replace(',','.');
+    var Valor = $('#Valor').val();
     var SeguradoraId = $('#SeguradoraId').val();
     var CotacaoId = $('#CotacaoId').val();    
     var StatusCotacao = $('#Opcoes').val();
@@ -137,12 +137,18 @@ function atualizarCotacao(leadId) {
         cache: false,
         async: false,
         success: function (data) {
-            $('#partialCotacoes').html(data);
 
-            toastr.success('Cotação salva com sucesso!');
+            if (data.isCreated == undefined) {
+                $('#partialCotacoes').html(data);
+
+                toastr.success('Cotação salva com sucesso!');
+            } else if (!data.isCreated) {
+                toastr.error(data.errorMessage);       
+            }
+
         },
         error: function (data) {
-            toastr.error('Erro.', 'Cotação');       
+            toastr.error('Erro');       
         }
     })
 }

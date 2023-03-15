@@ -31,6 +31,6 @@ public class CotacaoGeneratorBuilder : ICotacaoBuilder
 
     public void DadosCotacao()
     {
-        _cotacao = new Cotacao(DateTime.Now,DateTime.Now,100,1,1);
+        _cotacao = new Cotacao(DateTime.Now.ToString("dd/MM/yyyy"), DateTime.Now.ToString("dd/MM/yyyy"),100,1,1);
     }
 }

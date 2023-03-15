@@ -1,8 +1,9 @@
-﻿using System.Collections.Generic;
+﻿using FluentValidation.Results;
+using System.Collections.Generic;
 using Worflow.Dados.Interfaces;
+using Worflow.Dto;
 using Worflow.Models;
 using Worflow.Repository;
-using X.PagedList;
 
 namespace Worflow.Services
 {
@@ -50,6 +51,21 @@ namespace Worflow.Services
             _cotacaoRepository.Incluir(obj);
 
             return true;
-        }        
+        }
+
+        public string IsCotacaoValid(string dataEmissao, string dataVencimento, decimal valor, int leadId, int seguradoraId, int cotacaoId, string statusCotacao)
+        {
+            Cotacao cotacao = new Cotacao(cotacaoId, dataEmissao, dataVencimento, valor, leadId, seguradoraId, statusCotacao);
+
+            CotacaoValidator validator = new CotacaoValidator();
+
+            ValidationResult results = validator.Validate(cotacao);
+
+            if (!results.IsValid) return results.ToString("~");
+
+            Alterar(cotacao);
+
+            return "OK";
+        }
     }
 }

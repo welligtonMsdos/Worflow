@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using Worflow.Models;
-using X.PagedList;
 
 namespace Worflow.Dados.Interfaces
 {
@@ -11,6 +10,7 @@ namespace Worflow.Dados.Interfaces
         ICollection<Cotacao> BuscarCotacoesPorLeadId(int leadId);       
         bool Incluir(Cotacao obj);
         bool Alterar(Cotacao obj);
-        bool Excluir(Cotacao obj);       
+        bool Excluir(Cotacao obj);
+        string IsCotacaoValid(string dataEmissao, string dataVencimento, decimal valor, int leadId, int seguradoraId, int cotacaoId, string statusCotacao);
     }
 }
