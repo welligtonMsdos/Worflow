@@ -1,9 +1,9 @@
 ﻿using FluentValidation.Results;
 using System.Collections.Generic;
 using Worflow.Dados.Interfaces;
-using Worflow.Dto;
 using Worflow.Models;
 using Worflow.Repository;
+using Worflow.ValidatorFluent;
 
 namespace Worflow.Services
 {

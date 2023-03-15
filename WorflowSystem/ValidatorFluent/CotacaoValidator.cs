@@ -1,12 +1,12 @@
 ﻿using FluentValidation;
 using Worflow.Models;
 
-namespace Worflow.Dto;
+namespace Worflow.ValidatorFluent;
 
 public class CotacaoValidator : AbstractValidator<Cotacao>
 {
     public CotacaoValidator()
-    {       
-        RuleFor(c => c.Valor).GreaterThan(0);      
+    {
+        RuleFor(c => c.Valor).GreaterThan(0);
     }
 }
