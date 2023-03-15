@@ -40,11 +40,9 @@ function abrirEditarCotacao(cotacaoId) {
             var opcao = $('#StatusFinalizada').val();         
 
             if (opcao == "True") {
-                document.getElementById('Opcoes').value = 1;
-                $('#Opcoes').css("boder-color", "green");
+                document.getElementById('Opcoes').value = 1;               
             } else {
-                document.getElementById('Opcoes').value = 2;
-                $('#Opcoes').css("boder-color", "red");
+                document.getElementById('Opcoes').value = 2;              
             }
 
             $('#EditarCotacao').modal('show');         
@@ -107,6 +105,9 @@ function inserirCotacao(leadId) {
         cache: false,
         async: false,
         success: function (data) {
+
+            toastr.success('Cotação salva com sucesso!');
+
             $('#partialCotacoes').html(data);
         }
     })
@@ -116,7 +117,7 @@ function atualizarCotacao(leadId) {
    
     var DataEmissao = $('#DataEmissao').val();
     var DataVencimento = $('#DataVencimento').val();
-    var Valor = $('#Valor').val();
+    var Valor = $('#Valor').val().replace('.','').replace(',','.');
     var SeguradoraId = $('#SeguradoraId').val();
     var CotacaoId = $('#CotacaoId').val();    
     var StatusCotacao = $('#Opcoes').val();
@@ -137,9 +138,11 @@ function atualizarCotacao(leadId) {
         async: false,
         success: function (data) {
             $('#partialCotacoes').html(data);
+
+            toastr.success('Cotação salva com sucesso!');
         },
         error: function (data) {
-            alert('erro');           
+            toastr.error('Erro.', 'Cotação');       
         }
     })
 }
@@ -159,9 +162,10 @@ function excluirCotacao(cotacaoId) {
         async: false,
         success: function (data) {
             $('#partialCotacoes').html(data);
+            toastr.success('Cotação excluída com sucesso!');
         },
         error: function (data) {
-            alert('erro');
+            toastr.error('Erro.', 'Cotação');   
         }
     })
 }
