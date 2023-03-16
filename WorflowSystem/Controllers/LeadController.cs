@@ -18,6 +18,7 @@ namespace Worflow.Controllers
         IStatusService _statusService;
         ICotacaoService _cotacaoService;
         ISeguradoraService _seguradoraService;
+       
 
         public LeadController(ILeadService leadService, ISegmentoService segmentoService,
                               IProdutoService produtoService, IClienteService clienteService,
@@ -30,7 +31,7 @@ namespace Worflow.Controllers
             _clienteService = clienteService;
             _statusService = statusService;
             _cotacaoService = cotacaoService;
-            _seguradoraService = seguradoraService;
+            _seguradoraService = seguradoraService;           
         }
 
         [Route("CreateLead")]
@@ -98,7 +99,9 @@ namespace Worflow.Controllers
 
             ViewBag.Status = _statusService.BuscarStatus(leadCotacao.Lead);
 
-            ViewBag.Seguradoras = _seguradoraService.BuscarSeguradoras();
+            ViewBag.Seguradoras = _seguradoraService.BuscarSeguradoras();           
+
+            ViewBag.StatusSeguradora = _cotacaoService.BuscarDadosSeguradora(id);
 
             return View(leadCotacao);
         }
@@ -204,7 +207,7 @@ namespace Worflow.Controllers
 
             ViewBag.Seguradoras = _seguradoraService.BuscarSeguradoras();
 
-            ViewBag.Opcoes = Util.GetOpcoesAprovadaNegada();
+            ViewBag.Opcoes = Util.GetOpcoesAprovadaNegada();            
 
             return PartialView("~/Views/Lead/PartialViews/_EditarCotacao.cshtml", cotacao);
         }

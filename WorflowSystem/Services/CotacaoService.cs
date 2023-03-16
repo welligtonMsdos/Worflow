@@ -1,6 +1,8 @@
 ﻿using FluentValidation.Results;
 using System.Collections.Generic;
+using System.Linq;
 using Worflow.Dados.Interfaces;
+using Worflow.Dtos;
 using Worflow.Models;
 using Worflow.Repository;
 using Worflow.ValidatorFluent;
@@ -30,6 +32,19 @@ namespace Worflow.Services
         public ICollection<Cotacao> BuscarCotacoesPorLeadId(int leadId)
         {
             return _cotacaoRepository.BuscarCotacoesPorLeadId(leadId);
+        }
+
+        public SeguradoraDto BuscarDadosSeguradora(int leadId)
+        {
+            var listaCotacoes = _cotacaoRepository.BuscarCotacoesPorLeadId(leadId);
+
+            var cotacao = listaCotacoes.Where(x => x.StatusFinalizada).FirstOrDefault();   
+
+            SeguradoraDto seguradoraDto = cotacao == null ? 
+                                                          new SeguradoraDto("Seguradora","0,00") :
+                                                          new SeguradoraDto(cotacao.Seguradora.Nome, cotacao.Valor.ToString());
+
+            return seguradoraDto;
         }
 
         public Cotacao BuscarPorId(int id)

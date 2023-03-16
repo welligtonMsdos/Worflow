@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Worflow.Dtos;
 using Worflow.Models;
 
 namespace Worflow.Dados.Interfaces
@@ -12,5 +13,6 @@ namespace Worflow.Dados.Interfaces
         bool Alterar(Cotacao obj);
         bool Excluir(Cotacao obj);
         string IsCotacaoValid(string dataEmissao, string dataVencimento, decimal valor, int leadId, int seguradoraId, int cotacaoId, string statusCotacao);
+        SeguradoraDto BuscarDadosSeguradora(int leadId);
     }
 }

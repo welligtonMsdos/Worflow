@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using Worflow.Core.Status;
+using Worflow.Core.StatusState;
 using Worflow.Dados.Interfaces;
 using Worflow.Models;
 using Worflow.Repository;

@@ -114,6 +114,6 @@ namespace Worflow.Services
                 throw new Exception("Erro ao buscar Lead por id: Detalhes: Id não pode ser zerado");
 
             return _leadRepository.BuscarPorId(id);
-        }      
+        }       
     }
 }

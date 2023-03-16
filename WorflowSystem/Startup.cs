@@ -48,7 +48,7 @@ namespace WorflowSystem
             services.AddTransient<IStatusService, StatusService>();
             services.AddTransient<IAgendaService, AgendaService>();
             services.AddTransient<ICotacaoService, CotacaoService>();
-            services.AddTransient<ISeguradoraService, SeguradoraService>();           
+            services.AddTransient<ISeguradoraService, SeguradoraService>();
 
             services.AddDbContext<AppDbContext>();
             services.AddControllersWithViews()
