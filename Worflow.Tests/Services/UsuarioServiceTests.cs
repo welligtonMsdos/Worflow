@@ -1,5 +1,6 @@
 ﻿using Moq;
 using System.ComponentModel.DataAnnotations;
+using Worflow.Dados.Interfaces.Builder;
 using Worflow.Models;
 using Worflow.Repository;
 using Worflow.Services;
@@ -19,17 +20,15 @@ namespace Worflow.Tests.Services
         [Fact]
         public void Incluir_AddUsuarioValido()
         {
-            Usuario usuario = new Usuario(1, "João da Silva", "JOAVA", 1);
-
-            var result = _usuarioService.Incluir(usuario);
-
-            Assert.True(result);
+            Assert.True(_usuarioService.Incluir(new UsuarioGeneratorBuilder().Post()));
         }
 
         [Fact]
         public void Incluir_AddUsuarioInvalidoPerfilZerado()
         {
-            Usuario usuario = new Usuario(1, "João da Silva", "JOAVA", 0);
+            Usuario usuario = new UsuarioGeneratorBuilder().Post();
+
+            usuario.PerfilId = 0;
 
             var exception = Assert.Throws<ValidationException>(() => _usuarioService.Incluir(usuario));
 
@@ -38,18 +37,16 @@ namespace Worflow.Tests.Services
 
         [Fact]
         public void Alterar_AlterandoUsuarioValido()
-        {
-            Usuario usuario = new Usuario(1, "João da Silva", "JOAVA", 1);
-
-            var result = _usuarioService.Alterar(usuario);
-
-            Assert.True(result);
+        {   
+            Assert.True(_usuarioService.Alterar(new UsuarioGeneratorBuilder().Put()));
         }
 
         [Fact]
         public void Alterar_AlterandoUsuarioInvalidoPerfilZerado()
         {
-            Usuario usuario = new Usuario(1, "João da Silva", "JOAVA", 0);
+            Usuario usuario = new UsuarioGeneratorBuilder().Put();
+
+            usuario.PerfilId = 0;
 
             var exception = Assert.Throws<ValidationException>(() => _usuarioService.Alterar(usuario));
 
@@ -59,7 +56,7 @@ namespace Worflow.Tests.Services
         [Fact]
         public void Excluir_EnviandoIdZero()
         {
-            Usuario usuario = new Usuario(0, "João da Silva", "JOAVA", 1);
+            Usuario usuario = new UsuarioGeneratorBuilder().DeleteNotValid();
 
             var exception = Assert.Throws<Exception>(() => _usuarioService.Excluir(usuario));
 
@@ -69,7 +66,7 @@ namespace Worflow.Tests.Services
         [Fact]
         public void Excluir_ExcluindoUsuarioValido()
         {
-            Usuario usuario = new Usuario(1, "João da Silva", "JOAVA", 1);
+            Usuario usuario = new UsuarioGeneratorBuilder().DeleteValid();
 
             var result = _usuarioService.Excluir(usuario);
 
@@ -87,7 +84,7 @@ namespace Worflow.Tests.Services
         [Fact]
         public void BuscarPorId_EnviandoIdValido()
         {
-            Usuario usuarios = new Usuario(1, "João da Silva","JOAVA",1);            
+            Usuario usuarios = new UsuarioGeneratorBuilder().Get();    
 
             var _usuarioRepository = new Mock<IUsuarioRepository>();
            
@@ -105,7 +102,7 @@ namespace Worflow.Tests.Services
         {
             List<Usuario> usuarios = new List<Usuario>();
             
-            usuarios.Add(new Usuario { Id = 1, Nome = "João da Silva", RACF = "JOAVA", PerfilId = 1, Ativo = true });
+            usuarios.Add(new UsuarioGeneratorBuilder().Get());
 
             var _usuarioRepository = new Mock<IUsuarioRepository>();
 
@@ -123,15 +120,15 @@ namespace Worflow.Tests.Services
         {
             List<Usuario> usuarios = new List<Usuario>();
 
-            usuarios.Add(new Usuario { Id = 1, Nome = "João da Silva", RACF = "JOAVA", PerfilId = 1, Ativo = true });
+            usuarios.Add(new UsuarioGeneratorBuilder().Get());
 
             var _usuarioRepository = new Mock<IUsuarioRepository>();
 
-            _usuarioRepository.Setup(x => x.Pesquisar("João")).Returns(usuarios);
+            _usuarioRepository.Setup(x => x.Pesquisar(usuarios.First().Nome)).Returns(usuarios);
 
             _usuarioService = new UsuarioService(_usuarioRepository.Object);
 
-            var result = _usuarioService.Pesquisar("João");
+            var result = _usuarioService.Pesquisar(usuarios.First().Nome);
 
             Assert.True(result.Count > 0);
         }
