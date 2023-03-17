@@ -3,10 +3,9 @@ using System.Collections.Generic;
 using Worflow.Dados.Interfaces;
 using Worflow.Models;
 
-namespace Worflow.Repository
+namespace Worflow.Repository;
+
+public interface IPerfilRepository : IQuery<Perfil>, IQueryDescription<Perfil>, ICommand<Perfil>, IQueryPesquisa<Perfil>
 {
-    public interface IPerfilRepository : IQuery<Perfil>, IQueryDescription<Perfil>
-    {
-        List<Perfil> BuscarPerfilList();
-    }
+    List<Perfil> BuscarPerfilList();
 }

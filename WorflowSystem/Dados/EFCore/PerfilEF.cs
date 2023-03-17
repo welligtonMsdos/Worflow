@@ -15,6 +15,12 @@ namespace Worflow.Dados.EFCore
             _context = context;
         }
 
+        public void Alterar(Perfil obj)
+        {
+            _context.Update(obj);
+            _context.SaveChanges();
+        }
+
         public List<Perfil> BuscarPerfilList()
         {
             return _context.Perfis
@@ -40,6 +46,28 @@ namespace Worflow.Dados.EFCore
             return _context.Perfis
                 .Where(x => x.Ativo)
                 .OrderBy(x => x.Descricao)
+                .ToList();
+        }
+
+        public void Excluir(Perfil obj)
+        {
+            _context.Remove(obj);
+            _context.SaveChanges();
+        }
+
+        public void Incluir(Perfil obj)
+        {
+            _context.Add(obj);
+            _context.SaveChanges();
+        }
+
+        public ICollection<Perfil> Pesquisar(string value)
+        {
+            if (value == null)
+                return BuscarTodos();
+
+            return _context.Perfis
+                .Where(x => x.Descricao.Contains(value))
                 .ToList();
         }
     }

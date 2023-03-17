@@ -7,7 +7,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Worflow", "WorflowSystem\Wo
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{03A5D6CB-5BD0-48F6-8362-D2A74364B1BB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Worflow.Tests", "Worflow.Tests\Worflow.Tests.csproj", "{1DF07E18-0F0D-4F1F-8534-69B56DDFAF1F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Worflow.Tests", "Worflow.Tests\Worflow.Tests.csproj", "{1DF07E18-0F0D-4F1F-8534-69B56DDFAF1F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WFAPI", "WFAPI\WFAPI.csproj", "{2EBA8EA1-46D8-49F2-BFA9-7F3BFF5E3687}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -23,6 +25,10 @@ Global
 		{1DF07E18-0F0D-4F1F-8534-69B56DDFAF1F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1DF07E18-0F0D-4F1F-8534-69B56DDFAF1F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1DF07E18-0F0D-4F1F-8534-69B56DDFAF1F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2EBA8EA1-46D8-49F2-BFA9-7F3BFF5E3687}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2EBA8EA1-46D8-49F2-BFA9-7F3BFF5E3687}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2EBA8EA1-46D8-49F2-BFA9-7F3BFF5E3687}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2EBA8EA1-46D8-49F2-BFA9-7F3BFF5E3687}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
