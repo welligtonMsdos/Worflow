@@ -6,6 +6,7 @@ using WorflowSystem.Models;
 
 namespace Worflow.Controllers
 {
+    [ApiExplorerSettings(IgnoreApi = true)]
     public class EnderecoController : Controller
     {
         IEnderecoService _enderecoService;

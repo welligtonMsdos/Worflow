@@ -7,6 +7,7 @@ using WorflowSystem.Models;
 
 namespace Worflow.Controllers
 {
+    [ApiExplorerSettings(IgnoreApi = true)]
     public class AgendaController : Controller
     {
         IAgendaService _agendaService;
@@ -22,15 +23,14 @@ namespace Worflow.Controllers
 
             return View(datas);
         }
-
-        [HttpGet]
+     
         public IActionResult CreateAgenda(string dataTarefa)
         {
             Agenda agenda = new Agenda(DateTime.Parse(dataTarefa));
 
             return View(agenda);
         }
-
+      
         [Route("InserirAgenda")]
         public ActionResult InserirAgenda(Agenda agenda)
         {
@@ -43,15 +43,14 @@ namespace Worflow.Controllers
 
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
-
-        [HttpGet]
+     
         public ActionResult EditarAgenda(int agendaID)
         {
             var agenda = _agendaService.BuscarPorId(agendaID);
 
             return View(agenda);
         }
-
+      
         [Route("AtualizarAgenda")]      
         public ActionResult AtualizarAgenda(Agenda agenda)
         {
@@ -64,7 +63,7 @@ namespace Worflow.Controllers
 
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
-
+       
         [Route("ExcluirAgenda")]
         public ActionResult ExcluirAgenda(int id)
         {

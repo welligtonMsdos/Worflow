@@ -7,6 +7,7 @@ using WorflowSystem.Models;
 
 namespace Worflow.Controllers
 {
+    [ApiExplorerSettings(IgnoreApi = true)]
     public class UsuarioController : Controller
     {
         IUsuarioService _usuarioService;

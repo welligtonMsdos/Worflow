@@ -9,6 +9,7 @@ using WorflowSystem.Models;
 
 namespace Worflow.Controllers
 {
+    [ApiExplorerSettings(IgnoreApi = true)]
     public class LeadController : Controller
     {
         ILeadService _leadService;
