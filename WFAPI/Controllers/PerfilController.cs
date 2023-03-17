@@ -60,7 +60,7 @@ public class PerfilController : Controller
     /// <response code="201">Inserção com sucesso</response>
     [HttpPost]
     [ProducesResponseType(StatusCodes.Status201Created)]
-    public IActionResult Incluir([FromBody] ReadPerfilDto dto)
+    public IActionResult Incluir([FromBody] CreatePerfilDto dto)
     {
         var perfil = _mapper.Map<Perfil>(dto);
 

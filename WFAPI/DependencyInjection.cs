@@ -15,6 +15,9 @@ public static class DependencyInjection
         services.AddTransient<IPerfilRepository, PerfilEF>();
         services.AddTransient<IPerfilService, PerfilService>();
 
+        services.AddTransient<IUsuarioRepository, UsuarioEF>();
+        services.AddTransient<IUsuarioService, UsuarioService>();
+
         return services;
     }
 }
