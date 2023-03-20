@@ -1,5 +1,4 @@
-﻿using System.Data.Entity;
-using Worflow.Dados.EFCore;
+﻿using Worflow.Dados.EFCore;
 using Worflow.Dados.Interfaces;
 using Worflow.Repository;
 using Worflow.Services;
@@ -17,6 +16,9 @@ public static class DependencyInjection
 
         services.AddTransient<IUsuarioRepository, UsuarioEF>();
         services.AddTransient<IUsuarioService, UsuarioService>();
+
+        services.AddTransient<IStatusRepository, StatusEF>();
+        services.AddTransient<IStatusService, StatusService>();
 
         return services;
     }

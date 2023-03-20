@@ -5,6 +5,7 @@ namespace Worflow.Dados.Interfaces
 {
     public interface IStatusService
     {
+        ICollection<Status> BuscarTodos();
         ICollection<Status> BuscarStatus(Lead lead);
         ICollection<Status> Pesquisar(string value);
         Status BuscarPorId(int id);

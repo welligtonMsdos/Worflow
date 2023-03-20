@@ -42,6 +42,11 @@ namespace Worflow.Services
             return _statusRepository.BuscarProximoStatus(_statusLeadRepository.ProximoStatus()); 
         }
 
+        public ICollection<Status> BuscarTodos()
+        {
+            return _statusRepository.BuscarTodos();
+        }
+
         public bool Excluir(Status obj)
         {
             if (obj.Id == 0)
