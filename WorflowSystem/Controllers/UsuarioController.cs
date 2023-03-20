@@ -35,9 +35,7 @@ namespace Worflow.Controllers
 
         [Route("DetalhesUsuario/{id}")]
         public ActionResult DetalhesUsuario(int id)
-        {
-            id = 0;
-
+        {   
             var usuario = _usuarioService.BuscarPorId(id);
 
             return View(usuario);
