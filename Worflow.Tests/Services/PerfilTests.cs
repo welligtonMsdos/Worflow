@@ -99,7 +99,7 @@ public class PerfilTests
     }
 
     [Fact]
-    public void Excluir_ExcluindoUsuarioValido()
+    public void Excluir_ExcluindoPerfilValido()
     {
         Perfil perfil = new PerfilGeneratorBuilder().DeleteValid();       
 

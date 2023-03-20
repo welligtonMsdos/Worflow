@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Worflow.Core.StatusState;
 using Worflow.Dados.Dapper;
 using Worflow.Dados.EFCore;
 using Worflow.Dados.Interfaces;
@@ -33,8 +34,7 @@ namespace WorflowSystem
             services.AddTransient<IUsuarioRepository, UsuarioEF>();
             services.AddTransient<IAgendaRepository, AgendaEF>();
             services.AddTransient<ICotacaoRepository, CotacaoEF>();
-            services.AddTransient<ISeguradoraRepository, SeguradoraEF>();          
-
+            services.AddTransient<ISeguradoraRepository, SeguradoraEF>();                      
             //services.AddTransient<ILeadDao, LeadDapper>();
             //services.AddTransient<IUsuarioDao, UsuarioDapper>();
 

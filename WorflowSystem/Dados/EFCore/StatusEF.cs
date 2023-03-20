@@ -14,6 +14,12 @@ namespace Worflow.Dados.EFCore
             _context = context;
         }
 
+        public void Alterar(Status obj)
+        {
+            _context.Update(obj);
+            _context.SaveChanges();
+        }
+
         public ICollection<Status> BuscarPorDescricao(string descricao)
         {
             return _context.Status
@@ -40,6 +46,25 @@ namespace Worflow.Dados.EFCore
             return _context.Status
                 .Where(x => x.Ativo)
                 .OrderBy(x => x.Descricao)
+                .ToList();
+        }
+
+        public void Excluir(Status obj)
+        {
+            _context.Remove(obj);
+            _context.SaveChanges();
+        }
+
+        public void Incluir(Status obj)
+        {
+            _context.Add(obj);
+            _context.SaveChanges();
+        }
+
+        public ICollection<Status> Pesquisar(string value)
+        {
+            return _context.Status
+                .Where(x=>x.Ativo && x.Descricao.Contains(value))
                 .ToList();
         }
     }
