@@ -1,9 +1,6 @@
 ﻿using FluentValidation;
 using System;
-using System.Runtime.ConstrainedExecution;
-using Worflow.Dados.EFCore;
 using Worflow.Models;
-using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace Worflow.ValidatorFluent;
 
