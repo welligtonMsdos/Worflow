@@ -9,8 +9,15 @@ namespace Worflow.Models
         {
             Ativo = true;
             StatusFinalizada = false;
-            DataEmissao = DateTime.Parse(dataEmissao);
-            DataVencimento = DateTime.Parse(dataVencimento);
+
+            DateTime dtEmissao;
+
+            DataEmissao = DateTime.TryParse(dataEmissao, out dtEmissao) ? dtEmissao : DateTime.MinValue;
+
+            DateTime dtVencimento;
+
+            DataVencimento = DateTime.TryParse(dataVencimento, out dtVencimento) ? dtVencimento : DateTime.MinValue;
+
             Valor = valor;
             LeadId = leadid;
             SeguradoraId = seguradoraId;
