@@ -26,7 +26,7 @@ namespace Worflow.Dados.Mappings
             builder.HasOne(p => p.Lead)
               .WithMany(p => p.Historico)
               .HasForeignKey(p => p.LeadId)
-              .OnDelete(DeleteBehavior.NoAction);
+              .OnDelete(DeleteBehavior.Cascade);
         }
     }
 }
