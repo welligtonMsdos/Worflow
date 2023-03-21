@@ -7,5 +7,9 @@ namespace Worflow.Dados.Interfaces
     {
         ICollection<Seguradora> BuscarSeguradoras();
         Seguradora BuscarPorId(int id);
+        ICollection<Seguradora> Pesquisar(string value);        
+        bool Incluir(Seguradora obj);
+        bool Alterar(Seguradora obj);
+        bool Excluir(Seguradora obj);
     }
 }

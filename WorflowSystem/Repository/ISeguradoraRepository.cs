@@ -3,7 +3,7 @@ using Worflow.Models;
 
 namespace Worflow.Repository
 {
-    public interface ISeguradoraRepository: IQuery<Seguradora>
+    public interface ISeguradoraRepository: IQuery<Seguradora>, ICommand<Seguradora>, IQueryPesquisa<Seguradora>
     {
     }
 }
