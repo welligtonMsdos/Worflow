@@ -19,6 +19,9 @@ public static class DependencyInjection
 
         services.AddTransient<IStatusRepository, StatusEF>();
         services.AddTransient<IStatusService, StatusService>();
+     
+        services.AddTransient<ISeguradoraRepository, SeguradoraEF>();
+        services.AddTransient<ISeguradoraService, SeguradoraService>();
 
         return services;
     }
