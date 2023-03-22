@@ -12,10 +12,7 @@ public class SeguradoraGeneratorBuilder : ISeguradoraBuilder, IDadosBuilder<Segu
     }
     public int Id => 1;
 
-    public void DadosSeguradora()
-    {
-        seguradora = new Seguradora(Id, "Porto");
-    }
+    public void DadosSeguradora() => seguradora = new Seguradora(Id, "Porto");    
 
     public Seguradora DeleteNotValid()
     {
@@ -23,24 +20,15 @@ public class SeguradoraGeneratorBuilder : ISeguradoraBuilder, IDadosBuilder<Segu
         return seguradora;
     }
 
-    public Seguradora DeleteValid()
-    {
-        return Get();
-    }
-
+    public Seguradora DeleteValid() => Get();
+    
     public Seguradora Get()
     {
         seguradora.Id = Id;
         return seguradora;
     }
 
-    public Seguradora Post()
-    {
-        return seguradora;
-    }
+    public Seguradora Post() => seguradora;
 
-    public Seguradora Put()
-    {
-        return Get();
-    }
+    public Seguradora Put() => Get();    
 }

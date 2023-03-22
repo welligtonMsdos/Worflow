@@ -13,10 +13,7 @@ public class PerfilGeneratorBuilder : IPerfilBuilder, IDadosBuilder<Perfil>
 
     public int Id { get => 1; }
 
-    public void DadosPerfil()
-    {
-        perfil = new Perfil(Id, "Admin");
-    }
+    public void DadosPerfil() => perfil = new Perfil(Id, "Admin");    
 
     public Perfil DeleteNotValid()
     {
@@ -24,11 +21,7 @@ public class PerfilGeneratorBuilder : IPerfilBuilder, IDadosBuilder<Perfil>
         return perfil;
     }
 
-    public Perfil DeleteValid()
-    {
-        perfil.Id = Id;
-        return perfil;
-    }
+    public Perfil DeleteValid() => Get();    
 
     public Perfil Get()
     {
@@ -36,14 +29,7 @@ public class PerfilGeneratorBuilder : IPerfilBuilder, IDadosBuilder<Perfil>
         return perfil;
     }
 
-    public Perfil Post()
-    {
-        return perfil;
-    }
+    public Perfil Post() => perfil;
 
-    public Perfil Put()
-    {
-        perfil.Id = Id;
-        return perfil;
-    }
+    public Perfil Put() => Get();    
 }
