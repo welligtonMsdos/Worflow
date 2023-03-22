@@ -24,7 +24,7 @@ public class StatusServiceTests
     }
 
     [Fact]
-    public void Buscar_GetTodos() => Assert.True(_tests.GetTodos() > 0);    
+    public void Buscar_GetTodos() => Assert.True(_tests.GetTodos() > 0);
 
     [Fact]
     public void BuscarPorId_EnviandoZero() => Assert.Equal(buscar, _tests.BuscarIdZerado());
@@ -47,17 +47,17 @@ public class StatusServiceTests
     [Fact]
     public void Pesquisar_PesquisandoValido()
     {
-        List<Status> status = new List<Status>();
+        var entidade = new List<Status>();
 
-        status.Add(new StatusGeneratorBuilder().Get());
+        entidade.Add(new StatusGeneratorBuilder().Get());
 
         var repository = new Mock<IStatusRepository>();
 
-        repository.Setup(x => x.Pesquisar(status.First().Descricao)).Returns(status);
+        repository.Setup(x => x.Pesquisar(entidade.First().Descricao)).Returns(entidade);
 
         service = new StatusService(repository.Object);
 
-        var result = service.Pesquisar(status.First().Descricao);
+        var result = service.Pesquisar(entidade.First().Descricao);
 
         Assert.True(result.Count > 0);
     }

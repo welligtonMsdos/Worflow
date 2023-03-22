@@ -4,25 +4,65 @@ using Worflow.Dados.Interfaces.Builder;
 using Worflow.Models;
 using Worflow.Repository;
 using Worflow.Services;
+using Worflow.Tests.Business;
+using Worflow.Tests.Enum;
+using Worflow.Tests.Interfaces;
 using Xunit;
 
 namespace Worflow.Tests.Services
 {
     public class UsuarioServiceTests
     {
-        private UsuarioService _usuarioService;
+        private readonly ITests _tests;
+        private UsuarioService service;
+        private string buscar = Mensagens.UsuarioEditarIdZerado;
+        private string excluir = Mensagens.UsuarioExcluirIdZerado;
 
         public UsuarioServiceTests()
         {
-            _usuarioService = new UsuarioService(new Mock<IUsuarioRepository>().Object);
+            _tests = new UsuarioBusiness();
+            service = new UsuarioService(new Mock<IUsuarioRepository>().Object);
         }
 
         [Fact]
-        public void Incluir_AddUsuarioValido()
-        {
-            Assert.True(_usuarioService.Incluir(new UsuarioGeneratorBuilder().Post()));
-        }
+        public void Buscar_GetTodos() => Assert.True(_tests.GetTodos() > 0);
 
+        [Fact]
+        public void BuscarPorId_EnviandoZero() => Assert.Equal(buscar, _tests.BuscarIdZerado());
+
+        [Fact]
+        public void BuscarPorId_EnviandoIdValido() => Assert.True(_tests.BuscarIdValido());
+
+        [Fact]
+        public void Incluir_AddValido() => Assert.True(_tests.Incluir());
+
+        [Fact]
+        public void Alterar_AlterandoValido() => Assert.True(_tests.Alterar());
+
+        [Fact]
+        public void Excluir_EnviandoIdZero() => Assert.Equal(excluir, _tests.ExcluirIdZerado());
+
+        [Fact]
+        public void Excluir_ExcluindoValido() => Assert.True(_tests.ExcluirIdValido());
+
+        [Fact]
+        public void Pesquisar_PesquisandoValido()
+        {
+            var entidade = new List<Usuario>();
+
+            entidade.Add(new UsuarioGeneratorBuilder().Get());
+
+            var repository = new Mock<IUsuarioRepository>();
+
+            repository.Setup(x => x.Pesquisar(entidade.First().Nome)).Returns(entidade);
+
+            service = new UsuarioService(repository.Object);
+
+            var result = service.Pesquisar(entidade.First().Nome);
+
+            Assert.True(result.Count > 0);
+        }
+       
         [Fact]
         public void Incluir_AddUsuarioInvalidoPerfilZerado()
         {
@@ -30,15 +70,9 @@ namespace Worflow.Tests.Services
 
             usuario.PerfilId = 0;
 
-            var exception = Assert.Throws<ValidationException>(() => _usuarioService.Incluir(usuario));
+            var exception = Assert.Throws<ValidationException>(() => service.Incluir(usuario));
 
-            Assert.Equal("Selecione um perfil", exception.Message);
-        }
-
-        [Fact]
-        public void Alterar_AlterandoUsuarioValido()
-        {   
-            Assert.True(_usuarioService.Alterar(new UsuarioGeneratorBuilder().Put()));
+            Assert.Equal(Mensagens.UsuarioSelecionePerfil, exception.Message);
         }
 
         [Fact]
@@ -48,89 +82,9 @@ namespace Worflow.Tests.Services
 
             usuario.PerfilId = 0;
 
-            var exception = Assert.Throws<ValidationException>(() => _usuarioService.Alterar(usuario));
+            var exception = Assert.Throws<ValidationException>(() => service.Alterar(usuario));
 
-            Assert.Equal("Selecione um perfil", exception.Message);
-        }
-
-        [Fact]
-        public void Excluir_EnviandoIdZero()
-        {
-            Usuario usuario = new UsuarioGeneratorBuilder().DeleteNotValid();
-
-            var exception = Assert.Throws<Exception>(() => _usuarioService.Excluir(usuario));
-
-            Assert.Equal("Erro ao excluir usuário: Detalhes: Id não pode ser zerado", exception.Message);
-        }
-
-        [Fact]
-        public void Excluir_ExcluindoUsuarioValido()
-        {
-            Usuario usuario = new UsuarioGeneratorBuilder().DeleteValid();
-
-            var result = _usuarioService.Excluir(usuario);
-
-            Assert.True(result);
-        }
-
-        [Fact]
-        public void BuscarPorId_EnviandoIdZero()
-        {
-            var exception = Assert.Throws<Exception>(() => _usuarioService.BuscarPorId(0));
-
-            Assert.Equal("Erro ao buscar usuário por id: Detalhes: Id não pode ser zerado", exception.Message);
-        }
-
-        [Fact]
-        public void BuscarPorId_EnviandoIdValido()
-        {
-            Usuario usuarios = new UsuarioGeneratorBuilder().Get();    
-
-            var _usuarioRepository = new Mock<IUsuarioRepository>();
-           
-            _usuarioRepository.Setup(x => x.BuscarPorId(usuarios.Id)).Returns(usuarios);
-
-            _usuarioService = new UsuarioService(_usuarioRepository.Object);
-
-            var result = _usuarioService.BuscarPorId(usuarios.Id);
-
-            Assert.True(result.Id > 0);
-        }
-
-        [Fact]
-        public void BuscarUsuarios_GetTodos()
-        {
-            List<Usuario> usuarios = new List<Usuario>();
-            
-            usuarios.Add(new UsuarioGeneratorBuilder().Get());
-
-            var _usuarioRepository = new Mock<IUsuarioRepository>();
-
-            _usuarioRepository.Setup(x => x.BuscarTodos()).Returns(usuarios);
-
-            _usuarioService = new UsuarioService(_usuarioRepository.Object);
-
-            var result = _usuarioService.BuscarUsuarios();
-
-            Assert.True(result.Count > 0);
-        }
-
-        [Fact]
-        public void Pesquisar_PesquisandoValido()
-        {
-            List<Usuario> usuarios = new List<Usuario>();
-
-            usuarios.Add(new UsuarioGeneratorBuilder().Get());
-
-            var _usuarioRepository = new Mock<IUsuarioRepository>();
-
-            _usuarioRepository.Setup(x => x.Pesquisar(usuarios.First().Nome)).Returns(usuarios);
-
-            _usuarioService = new UsuarioService(_usuarioRepository.Object);
-
-            var result = _usuarioService.Pesquisar(usuarios.First().Nome);
-
-            Assert.True(result.Count > 0);
-        }
+            Assert.Equal(Mensagens.UsuarioSelecionePerfil, exception.Message);
+        }      
     }
 }

@@ -47,9 +47,7 @@ public class StatusBusiness : ITests
 
         repository.Setup(x => x.BuscarTodos()).Returns(status);
 
-        service = new StatusService(repository.Object);
-
-        var lead = new LeadGeneratorBuilder().Get();
+        service = new StatusService(repository.Object);      
 
         return service.BuscarTodos().Count;
     }
