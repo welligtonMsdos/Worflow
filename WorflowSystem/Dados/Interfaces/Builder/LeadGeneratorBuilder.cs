@@ -2,7 +2,7 @@
 
 namespace Worflow.Dados.Interfaces.Builder;
 
-public class LeadGeneratorBuilder : ILeadBuilder
+public class LeadGeneratorBuilder : ILeadBuilder, IDadosBuilder<Lead>
 {
     private Lead _lead;
 
@@ -16,22 +16,7 @@ public class LeadGeneratorBuilder : ILeadBuilder
         Usuario();
     }
 
-    public Lead LeadPost()
-    {
-        return _lead;
-    }
-
-    public Lead LeadPut(int leadId = 0)
-    {
-        _lead.Id = leadId;
-        return _lead;
-    }
-
-    public Lead LeadGet()
-    {
-        _lead.Id = 1;
-        return _lead;   
-    }
+    public int Id => 1;   
 
     public void Cliente()
     {
@@ -51,6 +36,22 @@ public class LeadGeneratorBuilder : ILeadBuilder
         _lead.ClienteId = 1;
     }
 
+    public Lead DeleteNotValid()
+    {
+        _lead.Id = 0;
+        return _lead;
+    }
+
+    public Lead DeleteValid() => Get();
+
+    public Lead Get()
+    {
+        _lead.Id = Id;
+        return _lead;
+    }
+
+    public Lead Post() => _lead;
+
     public void Produto()
     {
         Produto produto = new Produto(1, "Garantia");
@@ -58,6 +59,8 @@ public class LeadGeneratorBuilder : ILeadBuilder
         _lead.Produto = produto;
         _lead.ProdutoId = 1;
     }
+
+    public Lead Put() => Get(); 
 
     public void Segmento()
     {

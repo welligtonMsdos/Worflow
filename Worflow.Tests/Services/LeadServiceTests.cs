@@ -3,138 +3,64 @@ using Worflow.Dados.Interfaces.Builder;
 using Worflow.Models;
 using Worflow.Repository;
 using Worflow.Services;
+using Worflow.Tests.Business;
+using Worflow.Tests.Enum;
+using Worflow.Tests.Interfaces;
 using Xunit;
 
 namespace Worflow.Tests.Services
 {
     public class LeadServiceTests
     {
-        private LeadService _leadService;
+        private readonly ITests _tests;
+        private LeadService service;
         public LeadServiceTests()
         {
-            _leadService = new LeadService(new Mock<ILeadRepository>().Object);
+            _tests = new LeadBusiness();
+            service = new LeadService(new Mock<ILeadRepository>().Object);
         }
 
         [Fact]
-        public void BuscarLeads_GetTodos()
-        {
-            List<Lead> leads = new List<Lead>();
-            
-            leads.Add(new LeadGeneratorBuilder().LeadGet());
-
-            var _leadRepository = new Mock<ILeadRepository>();
-
-            _leadRepository.Setup(x => x.BuscarTodos()).Returns(leads);
-
-            _leadService = new LeadService(_leadRepository.Object);
-
-            var result = _leadService.BuscarLeads();
-
-            Assert.True(result.Count > 0);
-        }
+        public void BuscarLead_GetTodos() => Assert.True(_tests.GetTodos() > 0);
 
         [Fact]
-        public void BuscarPorId_EnviandoIdZero()
-        {
-            var exception = Assert.Throws<Exception>(() => _leadService.BuscarPorId(0));
-
-            Assert.Equal("Erro ao buscar Lead por id: Detalhes: Id não pode ser zerado", exception.Message);
-        }
+        public void BuscarPorId_EnviandoZero() => Assert.Equal(Mensagens.LeadEditarIdZerado, _tests.BuscarIdZerado());
 
         [Fact]
-        public void BuscarPorId_EnviandoIdValido()
-        {
-            Lead lead = new LeadGeneratorBuilder().LeadPut(1);
-
-            var _leadRepository = new Mock<ILeadRepository>();
-
-            _leadRepository.Setup(x => x.BuscarPorId(lead.Id)).Returns(lead);
-
-            _leadService = new LeadService(_leadRepository.Object);
-
-            var result = _leadService.BuscarPorId(lead.Id);
-
-            Assert.True(result.Id > 0);
-        }
+        public void BuscarPorId_EnviandoIdValido() => Assert.True(_tests.BuscarIdValido());
 
         [Fact]
-        public void Incluir_AddLeadValido()
-        {
-            Lead lead = new LeadGeneratorBuilder().LeadPost();
-
-            string[] produtos = new string[1];
-            produtos[0] = "1";
-
-            var result = _leadService.Incluir(lead,produtos);
-
-            Assert.True(result);
-        }
+        public void Incluir_AddLeadValido() => Assert.True(_tests.Incluir());
 
         [Fact]
-        public void Incluir_AddProdutoNull()
-        {
-            Lead lead = new LeadGeneratorBuilder().LeadPost();         
-
-            var exception = Assert.Throws<Exception>(() => _leadService.Incluir(lead,null));
-
-            Assert.Equal("Erro ao incluir Lead", exception.Message);           
-        }
+        public void Excluir_EnviandoIdZero() => Assert.Equal(Mensagens.LeadExcluirIdZerado, _tests.ExcluirIdZerado());
 
         [Fact]
-        public void Excluir_EnviandoIdZero()
-        {
-            Lead lead = new LeadGeneratorBuilder().LeadPost();
-
-            lead.Id = 0;
-
-            var exception = Assert.Throws<Exception>(() => _leadService.Excluir(lead));
-
-            Assert.Equal("Erro ao excluir Lead: Detalhes: Id não pode ser zerado", exception.Message);
-        }
+        public void Excluir_ExcluindoIdValido() => Assert.True(_tests.ExcluirIdValido());
 
         [Fact]
-        public void Alterar_IdNaoEncontrado()
-        {
-            Lead lead = new LeadGeneratorBuilder().LeadPut();          
-
-            var exception = Assert.Throws<NullReferenceException>(() => _leadService.Alterar(lead));
-
-            Assert.Equal("Object reference not set to an instance of an object.", exception.Message);
-        }
-
+        public void Incluir_AddProdutoNull() => Assert.Equal(Mensagens.LeadInclurirErro, Assert.Throws<Exception>(() => service.Incluir(new LeadGeneratorBuilder().Post(), null)).Message);
+        
         [Fact]
-        public void Alterar_LeadValido()
-        {
-            Lead lead = new LeadGeneratorBuilder().LeadPut(1);
-
-            var _leadRepository = new Mock<ILeadRepository>();
-
-            _leadRepository.Setup(x => x.BuscarPorId(lead.Id)).Returns(lead);
-
-            _leadService = new LeadService(_leadRepository.Object);
-
-            var result = _leadService.Alterar(lead);
-
-            Assert.True(result);
-        }
+        public void Alterar_IdNaoEncontrado() => Assert.Equal(Mensagens.Reference, Assert.Throws<NullReferenceException>(() => service.Alterar(new LeadGeneratorBuilder().Put())).Message);
 
         [Fact]
         public void Pesquisar_EnviandoValueNull()
         {
             List<Lead> leads = new List<Lead>();
 
-            leads.Add(new LeadGeneratorBuilder().LeadGet());
+            leads.Add(new LeadGeneratorBuilder().Get());
 
             string[] produtos = new string[1];
             produtos[0] = "1";
 
-            var _leadRepository = new Mock<ILeadRepository>();            
+            var repository = new Mock<ILeadRepository>();
 
-            _leadRepository.Setup(x => x.Pesquisar(null)).Returns(leads);
+            repository.Setup(x => x.Pesquisar(null)).Returns(leads);
 
-            _leadService = new LeadService(_leadRepository.Object);
+            service = new LeadService(repository.Object);
 
-            var result = _leadService.Pesquisar(null);
+            var result = service.Pesquisar(null);
 
             Assert.True(result.Count > 0);
         }
@@ -144,7 +70,7 @@ namespace Worflow.Tests.Services
         {
             List<Lead> leads = new List<Lead>();
 
-            leads.Add(new LeadGeneratorBuilder().LeadGet());
+            leads.Add(new LeadGeneratorBuilder().Get());
 
             string[] produtos = new string[1];
             produtos[0] = "1";
@@ -153,9 +79,9 @@ namespace Worflow.Tests.Services
 
             _leadRepository.Setup(x => x.Pesquisar("")).Returns(leads);
 
-            _leadService = new LeadService(_leadRepository.Object);
+            service = new LeadService(_leadRepository.Object);
 
-            var result = _leadService.Pesquisar("");
+            var result = service.Pesquisar("");
 
             Assert.True(result.Count > 0);
         }
@@ -165,7 +91,7 @@ namespace Worflow.Tests.Services
         {
             List<Lead> leads = new List<Lead>();
 
-            leads.Add(new LeadGeneratorBuilder().LeadGet());
+            leads.Add(new LeadGeneratorBuilder().Get());
 
             string[] produtos = new string[1];
             produtos[0] = "1";
@@ -174,11 +100,11 @@ namespace Worflow.Tests.Services
 
             _leadRepository.Setup(x => x.Pesquisar("a")).Returns(leads);
 
-            _leadService = new LeadService(_leadRepository.Object);
+            service = new LeadService(_leadRepository.Object);
 
-            var result = _leadService.Pesquisar("a");
+            var result = service.Pesquisar("a");
 
             Assert.True(result.Count > 0);
-        }       
+        }
     }
 }
