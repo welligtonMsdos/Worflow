@@ -5,7 +5,6 @@ using Worflow.Core;
 using Worflow.Dados.Interfaces;
 using Worflow.Models;
 using Worflow.Repository;
-using X.PagedList;
 
 namespace Worflow.Services
 {
@@ -89,16 +88,6 @@ namespace Worflow.Services
         private void SetObservacao(ref Lead lead)
         {
             lead.Observacao = lead.Observacao == null ? "" : lead.Observacao;
-        }
-
-        public IPagedList<Lead> BuscarLeadsByPageList(int pagina = 1)
-        {
-            return _leadRepository.BuscarLeadsByPageList(pagina);
-        }
-
-        public IPagedList<Lead> PesquisarByPageList(string value, int pagina = 1)
-        {
-            return _leadRepository.PesquisarByPageList(value, pagina);
         }
 
         public LeadCotacao BuscarLeadCotacaoPorId(int id)

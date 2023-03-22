@@ -167,19 +167,6 @@ body {
         color: var(--textoSecundario);
     }
 
-
-
-.page-link {
-    background-color: var(--corPrincipal);
-    color: var(--textoSecundario);
-}
-
-    .page-link:active {
-        background-color: var(--corPrincipal);
-        color: var(--textoSecundario);
-    }
-
-
 ul.timeline{
     list-style: none;
     position: relative;
@@ -222,3 +209,25 @@ ul.timeline > li:before{
     color: var(--corPrincipal);
 }
 
+.dataTables_info, dataTables_length {
+    color: var(--corPrincipal);
+}
+
+.dataTables_length {
+    color: var(--corPrincipal);
+}
+
+.page-link {
+    color: var(--textoPrincipal);
+    background-color: var(--corPrincipal);
+}
+
+    .page-link:hover {
+        color: var(--textoSecundario);       
+        background-color: var(--corPrincipal);
+    }
+
+    .page-link:active {
+        background-color: var(--corPrincipal);
+        color: var(--textoSecundario);
+    }

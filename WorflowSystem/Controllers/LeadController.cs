@@ -77,16 +77,16 @@ namespace Worflow.Controllers
         }
 
         public IActionResult ListarLead(int pagina = 1)
-        {
-            var leads = _leadService.BuscarLeadsByPageList(pagina);
+        {       
+            var leads = _leadService.BuscarLeads();
 
             return View(leads);
         }
 
         [Route("PesquisarLeads")]
         public ActionResult PesquisarLeads(string pesquisar, int pagina = 1)
-        {
-            var leads = _leadService.PesquisarByPageList(pesquisar, pagina);
+        {          
+            var leads = _leadService.Pesquisar(pesquisar);
 
             return View("ListarLead", leads);
         }

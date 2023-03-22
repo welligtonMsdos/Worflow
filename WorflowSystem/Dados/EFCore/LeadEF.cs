@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using Worflow.Models;
 using Worflow.Repository;
-using X.PagedList;
 
 namespace Worflow.Dados.EFCore
 {
@@ -20,40 +19,7 @@ namespace Worflow.Dados.EFCore
         {
             _context.Update(obj);
             _context.SaveChanges();
-        }
-
-        public IPagedList<Lead> PesquisarByPageList(string value, int pagina)
-        {
-            if (value == null)
-                return BuscarLeadsByPageList(pagina);
-
-            return _context.Lead
-                  .Include(x => x.Usuario)
-                  .Include(x => x.Cliente)
-                  .Include(x => x.Produto)
-                  .Include(x => x.Segmento)
-                  .Include(x => x.Status)
-                  .Where(x => x.Cliente.RazaoSocial.Contains(value) ||
-                              x.Cliente.Fantasia.Contains(value) ||
-                              x.Produto.Descricao.Contains(value) ||
-                              x.Status.Descricao.Contains(value) ||
-                              x.Segmento.Descricao.Contains(value)
-                        )
-                  .OrderByDescending(x => x.Id)
-                  .ToPagedList(pagina, 10);
-        }
-
-        public IPagedList<Lead> BuscarLeadsByPageList(int pagina)
-        {
-            return _context.Lead
-               .Include(x => x.Usuario)
-               .Include(x => x.Cliente)
-               .Include(x => x.Produto)
-               .Include(x => x.Segmento)
-               .Include(x => x.Status)
-               .OrderByDescending(x => x.Id)
-               .ToPagedList(pagina, 10);
-        }
+        }    
 
         public Lead BuscarPorId(int id)
         {
@@ -82,9 +48,7 @@ namespace Worflow.Dados.EFCore
                 .Include(x => x.Cliente)
                 .Include(x => x.Produto)
                 .Include(x => x.Segmento)
-                .Include(x => x.Status)
-                .Skip(0)
-                .Take(20)
+                .Include(x => x.Status)             
                 .OrderByDescending(x => x.Id)
                 .ToList();
         }

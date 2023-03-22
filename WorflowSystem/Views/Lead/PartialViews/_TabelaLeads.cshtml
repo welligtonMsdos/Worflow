@@ -1,8 +1,8 @@
 ﻿@using X.PagedList.Mvc.Core;
 @using X.PagedList.Web.Common;
-@model X.PagedList.IPagedList<Worflow.Models.Lead>;
+@model IEnumerable<Worflow.Models.Lead>
 
-<table class="table">
+<table class="table table-striped" id="tabela-leads">
     <thead class="tableCabecalho">
         <tr>
             <th scope="col">Lead</th>
