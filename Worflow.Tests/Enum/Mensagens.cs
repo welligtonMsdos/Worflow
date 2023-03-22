@@ -8,4 +8,6 @@ public static class Mensagens
     public const string LeadExcluirIdZerado = "Erro ao excluir Lead: Detalhes: Id não pode ser zerado";
     public const string LeadInclurirErro = "Erro ao incluir Lead";
     public const string Reference = "Object reference not set to an instance of an object.";
+    public const string PerfilEditarIdZerado = "Erro ao buscar perfil por id: Detalhes: Id não pode ser zerado";
+    public const string PerfilExcluirIdZerado = "Erro ao excluir perfil: Detalhes: Id não pode ser zerado";
 }
