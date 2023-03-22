@@ -12,4 +12,6 @@ public static class Mensagens
     public const string PerfilExcluirIdZerado = "Erro ao excluir perfil: Detalhes: Id não pode ser zerado";
     public const string SeguradoraEditarIdZerado = "Erro ao buscar seguradora por id: Detalhes: Id não pode ser zerado";
     public const string SeguradoraExcluirIdZerado = "Erro ao excluir seguradora: Detalhes: Id não pode ser zerado";
+    public const string StatusEditarIdZerado = "Erro ao buscar status por id: Detalhes: Id não pode ser zerado";
+    public const string StatusExcluirIdZerado = "Erro ao excluir status: Detalhes: Id não pode ser zerado";
 }

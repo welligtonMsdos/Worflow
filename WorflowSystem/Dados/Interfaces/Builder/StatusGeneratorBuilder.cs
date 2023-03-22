@@ -13,22 +13,15 @@ public class StatusGeneratorBuilder : IStatusBuilder, IDadosBuilder<Status>
 
     public int Id => 1;
 
-    public void DadosStatus()
-    {
-        status = new Status(Id, "Inicio");
-    }
-
+    public void DadosStatus() => status = new Status(Id, "Inicio");
+    
     public Status DeleteNotValid()
     {
         status.Id = 0;
         return status;
     }
 
-    public Status DeleteValid()
-    {
-        status.Id = Id;
-        return status;
-    }
+    public Status DeleteValid() => Get();    
 
     public Status Get()
     {
@@ -36,14 +29,7 @@ public class StatusGeneratorBuilder : IStatusBuilder, IDadosBuilder<Status>
         return status;
     }
 
-    public Status Post()
-    {        
-        return status;
-    }
+    public Status Post() => status;
 
-    public Status Put()
-    {
-        status.Id = Id;
-        return status;
-    }
+    public Status Put() => Get();    
 }
