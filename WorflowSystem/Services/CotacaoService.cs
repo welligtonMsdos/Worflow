@@ -1,4 +1,5 @@
 ﻿using FluentValidation.Results;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using Worflow.Dados.Interfaces;
@@ -49,11 +50,17 @@ namespace Worflow.Services
 
         public Cotacao BuscarPorId(int id)
         {
+            if (id == 0)
+                throw new Exception("Erro ao buscar cotação por id: Detalhes: Id não pode ser zerado");
+
             return _cotacaoRepository.BuscarPorId(id);
         }
 
         public bool Excluir(Cotacao obj)
         {
+            if (obj.Id == 0)
+                throw new Exception("Erro ao excluir cotação: Detalhes: Id não pode ser zerado");
+
             _cotacaoRepository.Excluir(obj);
 
             return true;

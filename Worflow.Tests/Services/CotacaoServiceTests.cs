@@ -1,37 +1,38 @@
-﻿using Moq;
-using Worflow.Dados.Interfaces.Builder;
-using Worflow.Models;
-using Worflow.Repository;
-using Worflow.Services;
+﻿using Worflow.Tests.Bussines;
+using Worflow.Tests.Enum;
+using Worflow.Tests.Interfaces;
 using Xunit;
 
 namespace Worflow.Tests.Services
 {
     public class CotacaoServiceTests
-    {
-        private CotacaoService _cotacaoService;
+    {       
+        private readonly ITests _tests;       
 
         public CotacaoServiceTests()
-        {
-            _cotacaoService = new CotacaoService(new Mock<ICotacaoRepository>().Object);
+        {  
+            _tests = new CotacaoBusiness();
         }
 
-        [Fact]
-        public void BuscarCotacoes_GetTodos()
-        {
-            List<Cotacao> cotacoes = new List<Cotacao>();
+        [Fact]       
+        public void BuscarCotacoes_GetTodos() => Assert.True(_tests.GetTodos() > 0);      
 
-            cotacoes.Add(new CotacaoGeneratorBuilder().Get());
+        [Fact]      
+        public void BuscarPorId_EnviandoZero() => Assert.Equal(Mensagens.CotacaoEditarIdZerado, _tests.BuscarIdZerado());        
 
-            var _cotacaoRepository = new Mock<ICotacaoRepository>();
+        [Fact]       
+        public void BuscarPorId_EnviandoIdValido() => Assert.True(_tests.BuscarIdValido());                
 
-            _cotacaoRepository.Setup(x => x.BuscarTodos()).Returns(cotacoes);
+        [Fact]       
+        public void Incluir_AddCotacaoValida() => Assert.True(_tests.Incluir());        
 
-            _cotacaoService = new CotacaoService(_cotacaoRepository.Object);
+        [Fact]      
+        public void Alterar_AlterandoCotacaoValido() => Assert.True(_tests.Alterar());        
 
-            var result = _cotacaoService.BuscarCotacoes();
-
-            Assert.True(result.Count > 0);
-        }
+        [Fact]      
+        public void Excluir_EnviandoIdZero() => Assert.Equal(Mensagens.CotacaoExcluirIdZerado, _tests.ExcluirIdZerado());
+        
+        [Fact]       
+        public void Excluir_ExcluindoIdValido() => Assert.True(_tests.ExcluirIdValido());        
     }
 }

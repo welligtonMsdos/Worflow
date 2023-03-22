@@ -3,7 +3,7 @@ using Worflow.Models;
 
 namespace Worflow.Dados.Interfaces.Builder;
 
-public class CotacaoGeneratorBuilder : ICotacaoBuilder
+public class CotacaoGeneratorBuilder : ICotacaoBuilder, IDadosBuilder<Cotacao>
 {
     private Cotacao _cotacao;
 
@@ -12,25 +12,25 @@ public class CotacaoGeneratorBuilder : ICotacaoBuilder
         DadosCotacao();
     }
 
-    public Cotacao Post()
-    {
-        return _cotacao;
-    }
+    public int Id => 1;
 
-    public Cotacao Put(int id)
+    public void DadosCotacao() => _cotacao = new Cotacao(DateTime.Now.ToString("dd/MM/yyyy"), DateTime.Now.ToString("dd/MM/yyyy"), 100, 1, 1);
+    
+    public Cotacao DeleteValid() => Get();
+    
+    public Cotacao Post() => _cotacao;
+
+    public Cotacao Put() => Get();
+
+    public Cotacao DeleteNotValid()
     {
-        _cotacao.Id = id;
+        _cotacao.Id = 0;
         return _cotacao;
     }
 
     public Cotacao Get()
     {
-        _cotacao.Id = 1;
+        _cotacao.Id = Id;
         return _cotacao;
-    }
-
-    public void DadosCotacao()
-    {
-        _cotacao = new Cotacao(DateTime.Now.ToString("dd/MM/yyyy"), DateTime.Now.ToString("dd/MM/yyyy"),100,1,1);
     }
 }
