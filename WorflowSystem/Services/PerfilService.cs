@@ -2,68 +2,56 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using Worflow.Dados.Interfaces;
+using Worflow.Enum;
 using Worflow.Models;
 using Worflow.Repository;
 
-namespace Worflow.Services
+namespace Worflow.Services;
+
+public class PerfilService : IPerfilService
 {
-    public class PerfilService : IPerfilService
+    private readonly IPerfilRepository _repository;
+    public PerfilService(IPerfilRepository perfilRepository) => (_repository) = (perfilRepository);    
+
+    public bool Alterar(Perfil obj)
     {
-        IPerfilRepository _perfilRepository;
-        public PerfilService(IPerfilRepository perfilRepository)
-        {
-            _perfilRepository = perfilRepository;
-        }
+        Validator.ValidateObject(obj, new ValidationContext(obj), true);
 
-        public bool Alterar(Perfil obj)
-        {
-            Validator.ValidateObject(obj, new ValidationContext(obj), true);
+        _repository.Alterar(obj);
 
-            _perfilRepository.Alterar(obj);
-
-            return obj.Id > 0 ? true : false;
-        }
-
-        public ICollection<Perfil> BuscarPerfil()
-        {
-            return _perfilRepository.BuscarTodos();
-        }
-
-        public List<Perfil> BuscarPerfilList()
-        {
-            return _perfilRepository.BuscarPerfilList();
-        }
-
-        public Perfil BuscarPorId(int id)
-        {
-            if (id == 0)
-                throw new Exception("Erro ao buscar perfil por id: Detalhes: Id não pode ser zerado");
-
-            return _perfilRepository.BuscarPorId(id);
-        }
-
-        public bool Excluir(Perfil obj)
-        {
-            if (obj.Id == 0)
-                throw new Exception("Erro ao excluir perfil: Detalhes: Id não pode ser zerado");
-
-            _perfilRepository.Excluir(obj);
-
-            return obj.Id > 0 ? true : false;
-        }
-
-        public bool Incluir(Perfil obj)
-        {
-            Validator.ValidateObject(obj, new ValidationContext(obj), true);
-
-            _perfilRepository.Incluir(obj);
-
-            return obj.Id > 0 ? true : false;
-        }
-
-        public ICollection<Perfil> Pesquisar(string value)
-        {
-            return _perfilRepository.Pesquisar(value);
-        }
+        return obj.Id > 0 ? true : false;
     }
+
+    public ICollection<Perfil> BuscarPerfil() => _repository.BuscarTodos();
+    
+    public List<Perfil> BuscarPerfilList() => _repository.BuscarPerfilList();    
+
+    public Perfil BuscarPorId(int id)
+    {
+        if (id == 0)
+            throw new Exception(Mensagens.PERFIL_BUSCAR_ID_ZERADO);
+
+        return _repository.BuscarPorId(id);
+    }
+
+    public bool Excluir(Perfil obj)
+    {
+        if (obj.Id == 0)
+            throw new Exception(Mensagens.PERFIL_EXCLUIR_ID_ZERADO);
+
+        _repository.Excluir(obj);
+
+        return obj.Id > 0 ? true : false;
+    }
+
+    public bool Incluir(Perfil obj)
+    {
+        Validator.ValidateObject(obj, new ValidationContext(obj), true);
+
+        _repository.Incluir(obj);
+
+        return obj.Id > 0 ? true : false;
+    }
+
+    public ICollection<Perfil> Pesquisar(string value) => _repository.Pesquisar(value);    
 }

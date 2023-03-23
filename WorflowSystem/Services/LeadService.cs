@@ -3,106 +3,92 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using Worflow.Core;
 using Worflow.Dados.Interfaces;
+using Worflow.Enum;
 using Worflow.Models;
 using Worflow.Repository;
 
-namespace Worflow.Services
+namespace Worflow.Services;
+
+public class LeadService : ILeadService
 {
-    public class LeadService : ILeadService
+    private readonly ILeadRepository _repository;      
+
+    public LeadService(ILeadRepository leadRepository) => (_repository) = (leadRepository);
+    
+    public bool Alterar(Lead obj)
     {
-        ILeadRepository _leadRepository;      
+        var lead = _repository.BuscarPorId(obj.Id);
 
-        public LeadService(ILeadRepository leadRepository)
-        {
-            _leadRepository = leadRepository;           
-        }
-        public bool Alterar(Lead obj)
-        {
-            var lead = _leadRepository.BuscarPorId(obj.Id);
-            lead.StatusId = obj.StatusId;
-            _leadRepository.Alterar(lead);
+        lead.StatusId = obj.StatusId;
+        
+        _repository.Alterar(lead);
 
-            return obj.Id > 0 ? true : false;
-        }
-
-        public ICollection<Lead> BuscarLeads()
-        {
-            return _leadRepository.BuscarTodos();
-        }
-
-        public bool Excluir(Lead obj)
-        {
-            if (obj.Id == 0)
-                throw new Exception("Erro ao excluir Lead: Detalhes: Id não pode ser zerado");
-
-            _leadRepository.Excluir(obj);
-
-            return obj.Id > 0 ? true : false;
-        }
-
-        public bool Incluir(Lead obj, string[] produtos)
-        {
-            try
-            {
-                Validator.ValidateObject(obj, new ValidationContext(obj), true);
-
-                SetObservacao(ref obj);
-
-                _leadRepository.Incluir(SetListaLeads(obj, produtos));
-
-                return true;
-            }
-            catch (Exception ex)
-            {
-                throw new Exception("Erro ao incluir Lead");               
-            }            
-        }
-
-        private List<Lead> SetListaLeads(Lead obj, string[] produtos)
-        {
-            List<Lead> lead = new List<Lead>();
-
-            foreach (var produtoId in produtos)
-            {
-                lead.Add(new Lead()
-                {
-                    DataAgendada = obj.DataAgendada,
-                    ClienteId = obj.ClienteId,
-                    Observacao = obj.Observacao,
-                    StatusId = obj.StatusId,
-                    UsuarioId = obj.UsuarioId,
-                    ProdutoId = int.Parse(produtoId),
-                    SegmentoId = obj.SegmentoId
-                    
-                 });                
-            }
-
-            return lead;
-        }
-
-        public ICollection<Lead> Pesquisar(string value)
-        {
-           return ConversaoTipos.IsNumber(value) ? _leadRepository.PesquisarPorId(int.Parse(value)) : _leadRepository.Pesquisar(value);         
-        }       
-
-        private void SetObservacao(ref Lead lead)
-        {
-            lead.Observacao = lead.Observacao == null ? "" : lead.Observacao;
-        }
-
-        public LeadCotacao BuscarLeadCotacaoPorId(int id)
-        {
-            LeadCotacao leadCotacao = new LeadCotacao(_leadRepository.BuscarPorId(id), new Cotacao(id));
-
-            return leadCotacao;
-        }
-
-        public Lead BuscarPorId(int id)
-        {
-            if (id == 0)
-                throw new Exception("Erro ao buscar Lead por id: Detalhes: Id não pode ser zerado");
-
-            return _leadRepository.BuscarPorId(id);
-        }       
+        return obj.Id > 0 ? true : false;
     }
+
+    public ICollection<Lead> BuscarLeads() => _repository.BuscarTodos();
+    
+    public bool Excluir(Lead obj)
+    {
+        if (obj.Id == 0)
+            throw new Exception(Mensagens.LEAD_EXCLUIR_ID_ZERADO);
+
+        _repository.Excluir(obj);
+
+        return obj.Id > 0 ? true : false;
+    }
+
+    public bool Incluir(Lead obj, string[] produtos)
+    {
+        try
+        {
+            Validator.ValidateObject(obj, new ValidationContext(obj), true);
+
+            SetObservacao(ref obj);
+
+            _repository.Incluir(SetListaLeads(obj, produtos));
+
+            return true;
+        }
+        catch (Exception ex)
+        {
+            throw new Exception(Mensagens.LEAD_INCLUIR_ERRO);               
+        }            
+    }
+
+    private List<Lead> SetListaLeads(Lead obj, string[] produtos)
+    {
+        List<Lead> lead = new List<Lead>();
+
+        foreach (var produtoId in produtos)
+        {
+            lead.Add(new Lead()
+            {
+                DataAgendada = obj.DataAgendada,
+                ClienteId = obj.ClienteId,
+                Observacao = obj.Observacao,
+                StatusId = obj.StatusId,
+                UsuarioId = obj.UsuarioId,
+                ProdutoId = int.Parse(produtoId),
+                SegmentoId = obj.SegmentoId
+                
+             });                
+        }
+
+        return lead;
+    }
+
+    public ICollection<Lead> Pesquisar(string value) => ConversaoTipos.IsNumber(value) ? _repository.PesquisarPorId(int.Parse(value)) : _repository.Pesquisar(value);                        
+
+    private void SetObservacao(ref Lead lead) => lead.Observacao = lead.Observacao == null ? "" : lead.Observacao;        
+
+    public LeadCotacao BuscarLeadCotacaoPorId(int id) => new LeadCotacao(_repository.BuscarPorId(id), new Cotacao(id));
+    
+    public Lead BuscarPorId(int id)
+    {
+        if (id == 0)
+            throw new Exception(Mensagens.LEAD_BUSCAR_ID_ZERADO);
+
+        return _repository.BuscarPorId(id);
+    }       
 }

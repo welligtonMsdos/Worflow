@@ -8,7 +8,7 @@ using Xunit;
 
 namespace Worflow.Tests.Business;
 
-public class UsuarioBusiness : ITests
+public class UsuarioBusiness : ITests, ITestsPesquisar
 {
     private UsuarioService service;
     public UsuarioBusiness()
@@ -51,5 +51,20 @@ public class UsuarioBusiness : ITests
         service = new UsuarioService(repository.Object);
 
         return service.BuscarUsuarios().Count;
+    }
+
+    public bool PesquisarValido()
+    {
+        var entidade = new List<Usuario>();
+
+        entidade.Add(new UsuarioGeneratorBuilder().Get());
+
+        var repository = new Mock<IUsuarioRepository>();
+
+        repository.Setup(x => x.Pesquisar(entidade.First().Nome)).Returns(entidade);
+
+        service = new UsuarioService(repository.Object);
+
+        return service.Pesquisar(entidade.First().Nome).Count > 0;
     }
 }

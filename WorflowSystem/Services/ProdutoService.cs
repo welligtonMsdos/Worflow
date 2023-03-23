@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using Worflow.Dados.Interfaces;
+using Worflow.Enum;
 using Worflow.Models;
 using Worflow.Repository;
 
@@ -9,11 +10,8 @@ namespace Worflow.Services;
 
 public class ProdutoService : IProdutoService
 {
-    IProdutoRepository _repository;
-    public ProdutoService(IProdutoRepository produtoRepository)
-    {
-        _repository = produtoRepository;
-    }
+    private readonly IProdutoRepository _repository;
+    public ProdutoService(IProdutoRepository produtoRepository) => (_repository) = (produtoRepository);    
 
     public bool Alterar(Produto obj)
     {
@@ -27,25 +25,19 @@ public class ProdutoService : IProdutoService
     public Produto BuscarPorId(int id)
     {
         if (id == 0)
-            throw new Exception("Erro ao buscar produto por id: Detalhes: Id não pode ser zerado");
+            throw new Exception(Mensagens.PRODUTO_BUSCAR_ID_ZERADO);
 
         return _repository.BuscarPorId(id);
     }
 
-    public ICollection<Produto> BuscarProdutos()
-    {
-        return _repository.BuscarTodos();
-    }
+    public ICollection<Produto> BuscarProdutos() => _repository.BuscarTodos();    
 
-    public ICollection<ProdutoSegmento> BuscarProdutosPorSegmento(int segmentoId)
-    {
-        return _repository.BuscarProdutosPorSegmento(segmentoId);
-    }
+    public ICollection<ProdutoSegmento> BuscarProdutosPorSegmento(int segmentoId) => _repository.BuscarProdutosPorSegmento(segmentoId);    
 
     public bool Excluir(Produto obj)
     {
         if (obj.Id == 0)
-            throw new Exception("Erro ao excluir produto: Detalhes: Id não pode ser zerado");
+            throw new Exception(Mensagens.PRODUTO_EXCLUIR_ID_ZERADO);
 
         _repository.Excluir(obj);
 
@@ -61,8 +53,5 @@ public class ProdutoService : IProdutoService
         return obj.Id > 0 ? true : false;
     }
 
-    public ICollection<Produto> Pesquisar(string value)
-    {
-        return _repository.Pesquisar(value);
-    }
+    public ICollection<Produto> Pesquisar(string value) => _repository.Pesquisar(value);    
 }

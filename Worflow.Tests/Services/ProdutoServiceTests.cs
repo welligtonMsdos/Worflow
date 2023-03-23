@@ -1,10 +1,10 @@
 ﻿using Moq;
 using Worflow.Dados.Interfaces.Builder;
+using Worflow.Enum;
 using Worflow.Models;
 using Worflow.Repository;
 using Worflow.Services;
 using Worflow.Tests.Business;
-using Worflow.Tests.Enum;
 using Worflow.Tests.Interfaces;
 using Xunit;
 
@@ -14,8 +14,8 @@ public class ProdutoServiceTests
 {
     private readonly ITests _tests;
     private ProdutoService service;
-    private string buscar = Mensagens.ProdutoEditarIdZerado;
-    private string excluir = Mensagens.ProdutoExcluirIdZerado;
+    private const string BUSCAR = Mensagens.PRODUTO_BUSCAR_ID_ZERADO;
+    private const string EXCLUIR = Mensagens.PRODUTO_EXCLUIR_ID_ZERADO;
 
     public ProdutoServiceTests()
     {
@@ -27,7 +27,7 @@ public class ProdutoServiceTests
     public void Buscar_GetTodos() => Assert.True(_tests.GetTodos() > 0);
 
     [Fact]
-    public void BuscarPorId_EnviandoZero() => Assert.Equal(buscar, _tests.BuscarIdZerado());
+    public void BuscarPorId_EnviandoZero() => Assert.Equal(BUSCAR, _tests.BuscarIdZerado());
 
     [Fact]
     public void BuscarPorId_EnviandoIdValido() => Assert.True(_tests.BuscarIdValido());
@@ -39,7 +39,7 @@ public class ProdutoServiceTests
     public void Alterar_AlterandoValido() => Assert.True(_tests.Alterar());
 
     [Fact]
-    public void Excluir_EnviandoIdZero() => Assert.Equal(excluir, _tests.ExcluirIdZerado());
+    public void Excluir_EnviandoIdZero() => Assert.Equal(EXCLUIR, _tests.ExcluirIdZerado());
 
     [Fact]
     public void Excluir_ExcluindoValido() => Assert.True(_tests.ExcluirIdValido());

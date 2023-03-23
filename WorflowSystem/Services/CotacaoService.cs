@@ -4,90 +4,81 @@ using System.Collections.Generic;
 using System.Linq;
 using Worflow.Dados.Interfaces;
 using Worflow.Dtos;
+using Worflow.Enum;
 using Worflow.Models;
 using Worflow.Repository;
 using Worflow.ValidatorFluent;
 
-namespace Worflow.Services
+namespace Worflow.Services;
+
+public class CotacaoService : ICotacaoService
 {
-    public class CotacaoService : ICotacaoService
+    ICotacaoRepository _repository;
+    public CotacaoService(ICotacaoRepository cotacaoRepository) => (_repository) = (cotacaoRepository);
+    
+    public bool Alterar(Cotacao obj)
     {
-        ICotacaoRepository _cotacaoRepository;
-        public CotacaoService(ICotacaoRepository cotacaoRepository)
-        {
-            _cotacaoRepository = cotacaoRepository;
-        }
+        _repository.Alterar(obj);
 
-        public bool Alterar(Cotacao obj)
-        {
-            _cotacaoRepository.Alterar(obj);
+        return true;
+    }
 
-            return true;
-        }
+    public ICollection<Cotacao> BuscarCotacoes() => _repository.BuscarTodos();    
 
-        public ICollection<Cotacao> BuscarCotacoes()
-        {
-            return _cotacaoRepository.BuscarTodos();
-        }              
+    public ICollection<Cotacao> BuscarCotacoesPorLeadId(int leadId) => _repository.BuscarCotacoesPorLeadId(leadId);
+    
+    public SeguradoraDto BuscarDadosSeguradora(int leadId)
+    {
+        var listaCotacoes = _repository.BuscarCotacoesPorLeadId(leadId);
 
-        public ICollection<Cotacao> BuscarCotacoesPorLeadId(int leadId)
-        {
-            return _cotacaoRepository.BuscarCotacoesPorLeadId(leadId);
-        }
+        var cotacao = listaCotacoes.Where(x => x.StatusFinalizada).FirstOrDefault();   
 
-        public SeguradoraDto BuscarDadosSeguradora(int leadId)
-        {
-            var listaCotacoes = _cotacaoRepository.BuscarCotacoesPorLeadId(leadId);
+        SeguradoraDto seguradoraDto = cotacao == null ? 
+                                                      new SeguradoraDto("Seguradora","0,00") :
+                                                      new SeguradoraDto(cotacao.Seguradora.Nome, cotacao.Valor.ToString());
 
-            var cotacao = listaCotacoes.Where(x => x.StatusFinalizada).FirstOrDefault();   
+        return seguradoraDto;
+    }
 
-            SeguradoraDto seguradoraDto = cotacao == null ? 
-                                                          new SeguradoraDto("Seguradora","0,00") :
-                                                          new SeguradoraDto(cotacao.Seguradora.Nome, cotacao.Valor.ToString());
+    public Cotacao BuscarPorId(int id)
+    {
+        if (id == 0)
+            throw new Exception(Mensagens.COTACAO_BUSCAR_ID_ZERADO);
 
-            return seguradoraDto;
-        }
+        return _repository.BuscarPorId(id);
+    }
 
-        public Cotacao BuscarPorId(int id)
-        {
-            if (id == 0)
-                throw new Exception("Erro ao buscar cotação por id: Detalhes: Id não pode ser zerado");
+    public bool Excluir(Cotacao obj)
+    {
+        if (obj.Id == 0)
+            throw new Exception(Mensagens.COTACAO_EXLUCIR_ID_ZERADO);
 
-            return _cotacaoRepository.BuscarPorId(id);
-        }
+        _repository.Excluir(obj);
 
-        public bool Excluir(Cotacao obj)
-        {
-            if (obj.Id == 0)
-                throw new Exception("Erro ao excluir cotação: Detalhes: Id não pode ser zerado");
+        return true;
+    }
 
-            _cotacaoRepository.Excluir(obj);
+    public bool Incluir(Cotacao obj)
+    {
+        obj.Ativo = true;
 
-            return true;
-        }
+        _repository.Incluir(obj);
 
-        public bool Incluir(Cotacao obj)
-        {
-            obj.Ativo = true;
+        return true;
+    }
 
-            _cotacaoRepository.Incluir(obj);
+    public string IsCotacaoValid(string dataEmissao, string dataVencimento, decimal valor, int leadId, int seguradoraId, int cotacaoId, string statusCotacao)
+    {
+        Cotacao cotacao = new Cotacao(cotacaoId, dataEmissao, dataVencimento, valor, leadId, seguradoraId, statusCotacao);
 
-            return true;
-        }
+        CotacaoValidator validator = new CotacaoValidator();
 
-        public string IsCotacaoValid(string dataEmissao, string dataVencimento, decimal valor, int leadId, int seguradoraId, int cotacaoId, string statusCotacao)
-        {
-            Cotacao cotacao = new Cotacao(cotacaoId, dataEmissao, dataVencimento, valor, leadId, seguradoraId, statusCotacao);
+        ValidationResult results = validator.Validate(cotacao);
 
-            CotacaoValidator validator = new CotacaoValidator();
+        if (!results.IsValid) return results.ToString("~");
 
-            ValidationResult results = validator.Validate(cotacao);
+        Alterar(cotacao);
 
-            if (!results.IsValid) return results.ToString("~");
-
-            Alterar(cotacao);
-
-            return "OK";
-        }
+        return "OK";
     }
 }
