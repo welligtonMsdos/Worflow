@@ -1,15 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using Worflow.Models;
 
-namespace Worflow.Dados.Interfaces
+namespace Worflow.Dados.Interfaces;
+
+public interface IProdutoService
 {
-    public interface IProdutoService
-    {
-        ICollection<Produto> BuscarProdutos();
-        ICollection<ProdutoSegmento> BuscarProdutosPorSegmento(int segmentoId);
-        Produto BuscarPorId(int id);
-    }
+    ICollection<Produto> BuscarProdutos();
+    ICollection<ProdutoSegmento> BuscarProdutosPorSegmento(int segmentoId);
+    Produto BuscarPorId(int id);
+    ICollection<Produto> Pesquisar(string value);
+    bool Incluir(Produto obj);
+    bool Alterar(Produto obj);
+    bool Excluir(Produto obj);
 }

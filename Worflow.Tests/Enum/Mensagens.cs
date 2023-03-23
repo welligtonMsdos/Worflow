@@ -19,4 +19,6 @@ public static class Mensagens
     public const string UsuarioSelecionePerfil = "Selecione um perfil";
     public const string SegmentoEditarIdZerado = "Erro ao buscar segmento por id: Detalhes: Id não pode ser zerado";
     public const string SegmentoExcluirIdZerado = "Erro ao excluir segmento: Detalhes: Id não pode ser zerado";
+    public const string ProdutoEditarIdZerado = "Erro ao buscar produto por id: Detalhes: Id não pode ser zerado";
+    public const string ProdutoExcluirIdZerado = "Erro ao excluir produto: Detalhes: Id não pode ser zerado";
 }
