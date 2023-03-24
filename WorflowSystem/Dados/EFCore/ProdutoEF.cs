@@ -8,12 +8,9 @@ namespace Worflow.Dados.EFCore;
 
 public class ProdutoEF : IProdutoRepository
 {
-    AppDbContext _context;
+    private readonly AppDbContext _context;
 
-    public ProdutoEF(AppDbContext context)
-    {
-        _context = context;
-    }
+    public ProdutoEF(AppDbContext context) => (_context) = (context);    
 
     public void Alterar(Produto obj)
     {

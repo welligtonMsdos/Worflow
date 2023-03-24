@@ -8,7 +8,7 @@ using Worflow.Repository;
 
 namespace Worflow.Services;
 
-public class AnexoService : IServiceDefault<Anexo>
+public class AnexoService : IAnexoService
 {
     private readonly IAnexoRepository _repository;
 

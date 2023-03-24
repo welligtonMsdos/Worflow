@@ -23,7 +23,7 @@ public class CotacaoService : ICotacaoService
         return true;
     }
 
-    public ICollection<Cotacao> BuscarCotacoes() => _repository.BuscarTodos();    
+    public ICollection<Cotacao> BuscarTodos() => _repository.BuscarTodos();    
 
     public ICollection<Cotacao> BuscarCotacoesPorLeadId(int leadId) => _repository.BuscarCotacoesPorLeadId(leadId);
     
@@ -81,4 +81,6 @@ public class CotacaoService : ICotacaoService
 
         return "OK";
     }
+
+    public ICollection<Cotacao> Pesquisar(string value) => _repository.Pesquisar(value);    
 }

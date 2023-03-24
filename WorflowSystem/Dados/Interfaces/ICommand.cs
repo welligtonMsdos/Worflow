@@ -1,9 +1,8 @@
-﻿namespace Worflow.Dados.Interfaces
+﻿namespace Worflow.Dados.Interfaces;
+
+public interface ICommand<T> 
 {
-    public interface ICommand<T> 
-    {
-        void Incluir(T obj);
-        void Alterar(T obj);
-        void Excluir(T obj);
-    }
+    void Incluir(T obj);
+    void Alterar(T obj);
+    void Excluir(T obj);
 }

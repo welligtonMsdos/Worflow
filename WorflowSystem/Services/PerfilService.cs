@@ -22,9 +22,7 @@ public class PerfilService : IPerfilService
         return obj.Id > 0 ? true : false;
     }
 
-    public ICollection<Perfil> BuscarPerfil() => _repository.BuscarTodos();
-    
-    public List<Perfil> BuscarPerfilList() => _repository.BuscarPerfilList();    
+    public ICollection<Perfil> BuscarTodos() => _repository.BuscarTodos();
 
     public Perfil BuscarPorId(int id)
     {

@@ -1,9 +1,8 @@
 ﻿using System.Collections.Generic;
 
-namespace Worflow.Dados.Interfaces
+namespace Worflow.Dados.Interfaces;
+
+public interface IQueryDescription<T>
 {
-    public interface IQueryDescription<T>
-    {
-        ICollection<T> BuscarPorDescricao(string descricao);
-    }
+    ICollection<T> BuscarPorDescricao(string descricao);
 }

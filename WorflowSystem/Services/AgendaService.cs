@@ -1,96 +1,103 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using Worflow.Dados.Interfaces;
+using Worflow.Enum;
 using Worflow.Models;
 using Worflow.Repository;
 
-namespace Worflow.Services
+namespace Worflow.Services;
+
+public class AgendaService : IAgendaService
 {
-    public class AgendaService : IAgendaService
+    private readonly IAgendaRepository _repository;
+
+    public AgendaService(IAgendaRepository repository) => (_repository) = (repository);
+    
+    public bool Alterar(Agenda obj)
     {
-        IAgendaRepository _agendaRepository;
+        AgendaDefault(ref obj);
 
-        public AgendaService(IAgendaRepository agendaRepository)
-        {
-            _agendaRepository = agendaRepository;
-        }
+        Validator.ValidateObject(obj, new ValidationContext(obj), true);
 
-        public void Alterar(Agenda obj)
-        {
-            AgendaDefault(ref obj);
+        _repository.Alterar(obj);
 
-            _agendaRepository.Alterar(obj);
-        }
-
-        public ICollection<Agenda> BuscarAgenda()
-        {
-            return _agendaRepository.BuscarTodos();
-        }
-
-        public List<DatasAgenda> BuscarDatas()
-        {
-            return SetarDatasAgenda(ListarDatas());
-        }
-
-        public ICollection<Agenda> BuscarHorarios(DateTime data)
-        {
-            return _agendaRepository.BuscarHorarios(data);
-        }
-
-        public Agenda BuscarPorId(int id)
-        {
-            return _agendaRepository.BuscarPorId(id);
-        }
-
-        public void Excluir(Agenda obj)
-        {
-            _agendaRepository.Excluir(obj);
-        }
-
-        public void Incluir(Agenda obj)
-        {
-            AgendaDefault(ref obj);
-
-            _agendaRepository.Incluir(obj);
-        }
-
-        private void AgendaDefault(ref Agenda agenda)
-        {
-            agenda.Ativo = true;
-            agenda.LeadId = 1;
-            agenda.UsuarioId = 1;
-        }
-
-        private List<Agenda> ListarDatas()
-        {
-            var query = _agendaRepository.BuscarDatas();
-
-            List<Agenda> listaAgenda = new List<Agenda>();
-
-            foreach (IGrouping<DateTime, Agenda> group in query)
-            {
-                foreach (Agenda agenda in group)
-                {
-                    listaAgenda.Add(new Agenda(agenda.DataAgendada));
-                    break;
-                }
-            }
-
-            return listaAgenda;
-        }
-
-        private List<DatasAgenda> SetarDatasAgenda(List<Agenda> listaAgenda)
-        {
-            List<DatasAgenda> listaDatasAgenda = new List<DatasAgenda>();
-
-            listaAgenda.ForEach(delegate (Agenda agenda)
-            {
-                listaDatasAgenda.Add(new DatasAgenda(agenda.DataAgendada.ToShortDateString(), 
-                                                     "collapse" + agenda.DataAgendada.ToShortDateString().Replace("/", "")));
-            });
-
-            return listaDatasAgenda;
-        }
+        return obj.Id > 0 ? true : false;
     }
+
+    public ICollection<Agenda> BuscarTodos() => _repository.BuscarTodos();
+
+    public List<DatasAgenda> BuscarDatas() => SetarDatasAgenda(ListarDatas());        
+
+    public ICollection<Agenda> BuscarHorarios(DateTime data) => _repository.BuscarHorarios(data);        
+
+    public Agenda BuscarPorId(int id)
+    {
+        if (id == 0)
+            throw new Exception(Mensagens.AGENDA_BUSCAR_ID_ZERADO);
+
+        return _repository.BuscarPorId(id);
+    }
+
+    public bool Excluir(Agenda obj)
+    {
+        if (obj.Id == 0)
+            throw new Exception(Mensagens.AGENDA_EXCLUIR_ID_ZERADO);
+
+        _repository.Excluir(obj);
+
+        return obj.Id > 0 ? true : false;
+    }
+
+    public bool Incluir(Agenda obj)
+    {
+        AgendaDefault(ref obj);
+
+        Validator.ValidateObject(obj, new ValidationContext(obj), true);
+
+        _repository.Incluir(obj);
+
+        return obj.Id > 0 ? true : false;
+    }
+
+    private void AgendaDefault(ref Agenda agenda)
+    {
+        agenda.Ativo = true;
+        agenda.LeadId = 1;
+        agenda.UsuarioId = 1;
+    }
+
+    private List<Agenda> ListarDatas()
+    {
+        var query = _repository.BuscarDatas();
+
+        List<Agenda> listaAgenda = new List<Agenda>();
+
+        foreach (IGrouping<DateTime, Agenda> group in query)
+        {
+            foreach (Agenda agenda in group)
+            {
+                listaAgenda.Add(new Agenda(agenda.DataAgendada));
+                break;
+            }
+        }
+
+        return listaAgenda;
+    }
+
+    private List<DatasAgenda> SetarDatasAgenda(List<Agenda> listaAgenda)
+    {
+        List<DatasAgenda> listaDatasAgenda = new List<DatasAgenda>();
+
+        listaAgenda.ForEach(delegate (Agenda agenda)
+        {
+            listaDatasAgenda.Add(new DatasAgenda(agenda.DataAgendada.ToShortDateString(), 
+                                                 "collapse" + agenda.DataAgendada.ToShortDateString().Replace("/", "")));
+        });
+
+        return listaDatasAgenda;
+    }
+
+    public ICollection<Agenda> Pesquisar(string value) => _repository.Pesquisar(value);        
 }

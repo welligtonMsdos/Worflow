@@ -1,9 +1,8 @@
 ﻿using System.Collections.Generic;
 
-namespace Worflow.Dados.Interfaces
+namespace Worflow.Dados.Interfaces;
+
+public interface IQueryPesquisa<T>
 {
-    public interface IQueryPesquisa<T>
-    {
-        ICollection<T> Pesquisar(string value);
-    }
+    ICollection<T> Pesquisar(string value);
 }

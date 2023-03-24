@@ -30,7 +30,7 @@ public class SeguradoraService: ISeguradoraService
         return _repository.BuscarPorId(id);
     }
 
-    public ICollection<Seguradora> BuscarSeguradoras() => _repository.BuscarTodos();
+    public ICollection<Seguradora> BuscarTodos() => _repository.BuscarTodos();
     
     public bool Excluir(Seguradora obj)
     {

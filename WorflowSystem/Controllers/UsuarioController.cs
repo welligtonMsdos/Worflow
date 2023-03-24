@@ -20,7 +20,7 @@ namespace Worflow.Controllers
         }
         public IActionResult ListarUsuarios()
         {
-            var usuarios = _usuarioService.BuscarUsuarios();
+            var usuarios = _usuarioService.BuscarTodos();
 
             return View(usuarios);
         }
@@ -46,7 +46,7 @@ namespace Worflow.Controllers
         {
             var usuario = _usuarioService.BuscarPorId(id);
 
-            ViewBag.Perfil = _perfilService.BuscarPerfilList();
+            ViewBag.Perfil = _perfilService.BuscarTodos();
 
             return View(usuario);
         }
@@ -69,7 +69,7 @@ namespace Worflow.Controllers
         {
             var usuario = new Usuario();
 
-            ViewBag.Perfil = _perfilService.BuscarPerfilList();
+            ViewBag.Perfil = _perfilService.BuscarTodos();
 
             return View(usuario);
         }

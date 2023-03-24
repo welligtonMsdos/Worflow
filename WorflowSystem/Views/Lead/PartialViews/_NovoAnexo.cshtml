@@ -11,21 +11,25 @@
 
             @using (Html.BeginForm("EnviarArquivo", "Lead", FormMethod.Post, new { enctype = "multipart/form-data", data_val_form_id = "FormUpload", id = "FormUpload" }))
             {
-                <div class="col-11">
+                <div class="row mb-3">
 
-                    <div class="mb-3">
+                    <div class="col-10">
 
-                        <input class="form-control" name="listFiles" type="file" id="anexos" required multiple>
+                        <div class="mb-3">
+
+                            <input class="form-control" name="listFiles" type="file" id="anexos" required multiple>
+
+                        </div>
 
                     </div>
 
-                </div>
+                    <div class="col-1">
 
-                <div class="col-1">
+                        <button id="btnEnviarAnexo" type="button" class="btn btn-Acoes-v2">Anexar</button>
 
-                    <button id="btnEnviarAnexo" type="button" class="btn btn-Acoes-v2">Anexar</button>
+                    </div>
 
-                </div>
+                </div>                
             }
 
         </div>

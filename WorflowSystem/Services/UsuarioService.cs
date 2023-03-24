@@ -31,7 +31,7 @@ public class UsuarioService : IUsuarioService
         return _repository.BuscarPorId(id);
     }
 
-    public ICollection<Usuario> BuscarUsuarios() => _repository.BuscarTodos();        
+    public ICollection<Usuario> BuscarTodos() => _repository.BuscarTodos();        
 
     public bool Excluir(Usuario obj)
     {

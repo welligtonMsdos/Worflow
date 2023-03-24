@@ -31,7 +31,7 @@ public class SegmentoService : ISegmentoService
         return _repository.BuscarPorId(id);
     }       
 
-    public ICollection<Segmento> BuscarSegmentos() => _repository.BuscarTodos();    
+    public ICollection<Segmento> BuscarTodos() => _repository.BuscarTodos();    
 
     public bool Excluir(Segmento obj)
     {

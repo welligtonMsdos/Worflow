@@ -1,10 +1,9 @@
 ﻿using System.Collections.Generic;
 
-namespace Worflow.Dados.Interfaces
+namespace Worflow.Dados.Interfaces;
+
+public interface IQuery<T>
 {
-    public interface IQuery<T>
-    {
-        ICollection<T> BuscarTodos();
-        T BuscarPorId(int id);
-    }
+    ICollection<T> BuscarTodos();
+    T BuscarPorId(int id);
 }

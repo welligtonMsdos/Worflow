@@ -4,58 +4,56 @@ using System.Linq;
 using Worflow.Models;
 using Worflow.Repository;
 
-namespace Worflow.Dados.EFCore
+namespace Worflow.Dados.EFCore;
+
+public class ClienteEF : IClienteRepository
 {
-    public class ClienteEF : IClienteRepository
+    private readonly AppDbContext _context;
+
+    public ClienteEF(AppDbContext context) => (_context) = (context);
+    
+    public void Alterar(Cliente obj)
     {
-        AppDbContext _context;
+        _context.Clientes.Update(obj);
+        _context.SaveChanges();
+    }
 
-        public ClienteEF(AppDbContext context)
-        {
-            _context = context;
-        }
+    public Cliente BuscarPorId(int id)
+    {
+        return _context.Clientes
+            .Include(e => e.Endereco)
+            .First(c => c.Id == id);
+    }
 
-        public void Alterar(Cliente obj)
-        {
-            _context.Clientes.Update(obj);
-            _context.SaveChanges();
-        }
+    public ICollection<Cliente> BuscarTodos()
+    {
+        return _context.Clientes
+            .Include(e => e.Endereco)
+            .OrderBy(x => x.Fantasia)
+            .ToList();
+    }
 
-        public Cliente BuscarPorId(int id)
-        {
-            return _context.Clientes.Include(e => e.Endereco).First(c => c.Id == id);
-        }
+    public void Excluir(Cliente obj)
+    {
+        _context.Clientes.Remove(obj);
+        _context.SaveChanges();
+    }
 
-        public ICollection<Cliente> BuscarTodos()
-        {
-            return _context.Clientes
-                .Include(e => e.Endereco)
-                .OrderBy(x => x.Fantasia)
-                .ToList();
-        }
+    public void Incluir(Cliente obj)
+    {
+        _context.Clientes.Add(obj);
+        _context.SaveChanges();
+    }
 
-        public void Excluir(Cliente obj)
-        {
-            _context.Clientes.Remove(obj);
-            _context.SaveChanges();
-        }
+    public ICollection<Cliente> Pesquisar(string value)
+    {
+        if (value == null)
+            return BuscarTodos();
 
-        public void Incluir(Cliente obj)
-        {
-            _context.Clientes.Add(obj);
-            _context.SaveChanges();
-        }
-
-        public ICollection<Cliente> Pesquisar(string value)
-        {
-            if (value == null)
-                return BuscarTodos();
-
-            return _context.Clientes
-               .Include(x => x.Endereco)
-               .Where(x => x.CNPJ.Contains(value))
-               .OrderBy(x => x.RazaoSocial)
-               .ToList();
-        }
+        return _context.Clientes
+           .Include(x => x.Endereco)
+           .Where(x => x.CNPJ.Contains(value))
+           .OrderBy(x => x.RazaoSocial)
+           .ToList();
     }
 }

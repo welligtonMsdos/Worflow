@@ -5,7 +5,7 @@ using X.PagedList;
 
 namespace Worflow.Repository
 {
-    public interface ICotacaoRepository: IQuery<Cotacao>, ICommand<Cotacao>
+    public interface ICotacaoRepository: IQuery<Cotacao>, ICommand<Cotacao>, IQueryPesquisa<Cotacao>
     {
         ICollection<Cotacao> BuscarCotacoesPorLeadId(int leadId);       
     }

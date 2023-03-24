@@ -2,6 +2,6 @@
 
 namespace Worflow.Dados.Interfaces;
 
-public interface IUsuarioService: IServiceDefault<Usuario>
+public interface IAnexoService: IServiceDefault<Anexo>
 {
 }

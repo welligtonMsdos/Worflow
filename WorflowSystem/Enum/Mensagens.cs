@@ -31,5 +31,14 @@ public static class Mensagens
     public const string ANEXO_BUSCAR_ID_ZERADO = "Erro ao buscar anexo por id: Detalhes: Id não pode ser zerado";
     public const string ANEXO_EXCLUIR_ID_ZERADO = "Erro ao excluir anexo: Detalhes: Id não pode ser zerado";
 
+    public const string ENDERECO_BUSCAR_ID_ZERADO = "Erro ao buscar endereço por id: Detalhes: Id não pode ser zerado";
+    public const string ENDERECO_EXCLUIR_ID_ZERADO = "Erro ao excluir endereço: Detalhes: Id não pode ser zerado";
+
+    public const string CLIENTE_BUSCAR_ID_ZERADO = "Erro ao buscar cliente por id: Detalhes: Id não pode ser zerado";
+    public const string CLIENTE_EXCLUIR_ID_ZERADO = "Erro ao excluir cliente: Detalhes: Id não pode ser zerado";
+
+    public const string AGENDA_BUSCAR_ID_ZERADO = "Erro ao buscar cliente por id: Detalhes: Id não pode ser zerado";
+    public const string AGENDA_EXCLUIR_ID_ZERADO = "Erro ao excluir cliente: Detalhes: Id não pode ser zerado";
+
     public const string REFERENCE = "Object reference not set to an instance of an object.";
 }

@@ -18,10 +18,21 @@ public class AnexoEF : IAnexoRepository
         _context.SaveChanges();
     }
 
-    public Anexo BuscarPorId(int id) => _context.Anexo.Include(x => x.Usuario).Where(x => x.Id == id).First();
+    public Anexo BuscarPorId(int id) 
+    { 
+        return _context.Anexo
+            .Include(x => x.Usuario)
+            .Where(x => x.Id == id)
+            .First(); 
+    }
 
-    public ICollection<Anexo> BuscarTodos() => _context.Anexo.Include(x => x.Usuario).OrderBy(x=>x.DataCriacao).ToList();
-    
+    public ICollection<Anexo> BuscarTodos() 
+    { 
+        return _context.Anexo
+            .Include(x => x.Usuario)
+            .OrderBy(x => x.DataCriacao)
+            .ToList(); 
+    }    
 
     public void Excluir(Anexo obj)
     {
@@ -35,5 +46,11 @@ public class AnexoEF : IAnexoRepository
         _context.SaveChanges();
     }
 
-    public ICollection<Anexo> Pesquisar(string value) => _context.Anexo.Include(x => x.Usuario).Where(x => x.Nome.Contains(value)).ToList();   
+    public ICollection<Anexo> Pesquisar(string value) 
+    { 
+        return _context.Anexo
+            .Include(x => x.Usuario)
+            .Where(x => x.Nome.Contains(value))
+            .ToList(); 
+    }
 }

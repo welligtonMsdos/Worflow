@@ -13,7 +13,7 @@ public class LeadService : ILeadService
 {
     private readonly ILeadRepository _repository;      
 
-    public LeadService(ILeadRepository leadRepository) => (_repository) = (leadRepository);
+    public LeadService(ILeadRepository repository) => (_repository) = (repository);
     
     public bool Alterar(Lead obj)
     {
@@ -26,7 +26,7 @@ public class LeadService : ILeadService
         return obj.Id > 0 ? true : false;
     }
 
-    public ICollection<Lead> BuscarLeads() => _repository.BuscarTodos();
+    public ICollection<Lead> BuscarTodos() => _repository.BuscarTodos();
     
     public bool Excluir(Lead obj)
     {
@@ -90,5 +90,14 @@ public class LeadService : ILeadService
             throw new Exception(Mensagens.LEAD_BUSCAR_ID_ZERADO);
 
         return _repository.BuscarPorId(id);
-    }       
+    }
+
+    public bool Incluir(Lead obj)
+    {
+        Validator.ValidateObject(obj, new ValidationContext(obj), true);
+
+        _repository.Incluir(obj);
+
+        return obj.Id > 0 ? true : false;
+    }
 }

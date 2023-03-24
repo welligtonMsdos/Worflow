@@ -18,7 +18,7 @@ namespace Worflow.Controllers
 
         public IActionResult ListarEnderecos()
         {
-            var enderecos = _enderecoService.BuscarEnderecos();
+            var enderecos = _enderecoService.BuscarTodos();
             return View(enderecos);
         }
 

@@ -46,7 +46,7 @@ namespace Worflow.Controllers
             lead.StatusId = 1;
             lead.UsuarioId = 1;
 
-            ViewBag.Segmentos = _segmentoService.BuscarSegmentos();
+            ViewBag.Segmentos = _segmentoService.BuscarTodos();
 
             return View(lead);
         }
@@ -80,7 +80,7 @@ namespace Worflow.Controllers
 
         public IActionResult ListarLead(int pagina = 1)
         {       
-            var leads = _leadService.BuscarLeads();
+            var leads = _leadService.BuscarTodos();
 
             return View(leads);
         }
@@ -102,7 +102,7 @@ namespace Worflow.Controllers
 
             ViewBag.Status = _statusService.BuscarStatus(leadCotacao.Lead);
 
-            ViewBag.Seguradoras = _seguradoraService.BuscarSeguradoras();           
+            ViewBag.Seguradoras = _seguradoraService.BuscarTodos();           
 
             ViewBag.StatusSeguradora = _cotacaoService.BuscarDadosSeguradora(id);
 
@@ -220,7 +220,7 @@ namespace Worflow.Controllers
         {
             var cotacao = _cotacaoService.BuscarPorId(cotacaoId);
 
-            ViewBag.Seguradoras = _seguradoraService.BuscarSeguradoras();
+            ViewBag.Seguradoras = _seguradoraService.BuscarTodos();
 
             ViewBag.Opcoes = Util.GetOpcoesAprovadaNegada();            
 
@@ -231,7 +231,7 @@ namespace Worflow.Controllers
         {
             var cotacao = _cotacaoService.BuscarPorId(cotacaoId);
 
-            ViewBag.Seguradoras = _seguradoraService.BuscarSeguradoras();
+            ViewBag.Seguradoras = _seguradoraService.BuscarTodos();
 
             return PartialView("~/Views/Lead/PartialViews/_ExcluirCotacao.cshtml", cotacao);
         }

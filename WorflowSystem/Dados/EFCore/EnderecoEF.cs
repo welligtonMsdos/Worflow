@@ -3,57 +3,54 @@ using System.Linq;
 using Worflow.Models;
 using Worflow.Repository;
 
-namespace Worflow.Dados.EFCore
+namespace Worflow.Dados.EFCore;
+
+public class EnderecoEF : IEnderecoRepository
 {
-    public class EnderecoEF : IEnderecoRepository
+    private readonly AppDbContext _context;
+
+    public EnderecoEF(AppDbContext context) => (_context) = (context);
+    
+    public void Alterar(Endereco obj)
     {
-        AppDbContext _context;
+        _context.Update(obj);
+        _context.SaveChanges();
+    }
 
-        public EnderecoEF(AppDbContext context)
-        {
-            _context = context;
-        }
-        public void Alterar(Endereco obj)
-        {
-            _context.Update(obj);
-            _context.SaveChanges();
-        }
+    public Endereco BuscarPorId(int id)
+    {
+        return _context.Enderecos.First(e => e.Id == id);
+    }
 
-        public Endereco BuscarPorId(int id)
-        {
-            return _context.Enderecos.First(e => e.Id == id);
-        }
+    public ICollection<Endereco> BuscarTodos()
+    {
+        return _context.Enderecos
+            .OrderBy(x => x.Logadouro)
+            .ToList();
+    }
 
-        public ICollection<Endereco> BuscarTodos()
-        {
-            return _context.Enderecos
-                .OrderBy(x => x.Logadouro)
-                .ToList();
-        }
+    public void Excluir(Endereco obj)
+    {
+        _context.Remove(obj);
+        _context.SaveChanges();
+    }
 
-        public void Excluir(Endereco obj)
-        {
-            _context.Remove(obj);
-            _context.SaveChanges();
-        }
+    public void Incluir(Endereco obj)
+    {
+        _context.Add(obj);
+        _context.SaveChanges();
+    }
 
-        public void Incluir(Endereco obj)
-        {
-            _context.Add(obj);
-            _context.SaveChanges();
-        }
+    public ICollection<Endereco> Pesquisar(string value)
+    {
+        if (value == null)
+            return BuscarTodos();
 
-        public ICollection<Endereco> Pesquisar(string value)
-        {
-            if (value == null)
-                return BuscarTodos();
-
-            return _context.Enderecos
-               .Where(x => x.Logadouro.Contains(value) || 
-                           x.Bairro.Contains(value) || 
-                           x.Cidade.Contains(value))
-               .OrderBy(x => x.Logadouro)
-               .ToList();
-        }
+        return _context.Enderecos
+           .Where(x => x.Logadouro.Contains(value) || 
+                       x.Bairro.Contains(value) || 
+                       x.Cidade.Contains(value))
+           .OrderBy(x => x.Logadouro)
+           .ToList();
     }
 }

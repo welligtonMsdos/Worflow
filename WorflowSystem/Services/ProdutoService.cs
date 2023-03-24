@@ -30,7 +30,7 @@ public class ProdutoService : IProdutoService
         return _repository.BuscarPorId(id);
     }
 
-    public ICollection<Produto> BuscarProdutos() => _repository.BuscarTodos();    
+    public ICollection<Produto> BuscarTodos() => _repository.BuscarTodos();    
 
     public ICollection<ProdutoSegmento> BuscarProdutosPorSegmento(int segmentoId) => _repository.BuscarProdutosPorSegmento(segmentoId);    
 
