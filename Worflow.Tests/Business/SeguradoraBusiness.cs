@@ -49,7 +49,7 @@ public class SeguradoraBusiness : ITests
 
         service = new SeguradoraService(repository.Object);
 
-        return service.BuscarSeguradoras().Count;
+        return service.BuscarTodos().Count;
     }
 
     public bool Incluir() => service.Incluir(new SeguradoraGeneratorBuilder().Post());

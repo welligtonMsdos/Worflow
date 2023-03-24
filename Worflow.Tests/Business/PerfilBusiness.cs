@@ -48,7 +48,7 @@ public class PerfilBusiness : ITests
 
         service = new PerfilService(repository.Object);
 
-        return service.BuscarPerfil().Count;
+        return service.BuscarTodos().Count;
     }
 
     public bool Incluir() => service.Incluir(new PerfilGeneratorBuilder().Post());

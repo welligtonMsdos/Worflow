@@ -39,7 +39,7 @@ public class CotacaoBusiness : ITests
 
         service = new CotacaoService(_cotacaoRepository.Object);
 
-        return service.BuscarCotacoes().Count;        
+        return service.BuscarTodos().Count;        
     }
 
     public bool BuscarIdValido()

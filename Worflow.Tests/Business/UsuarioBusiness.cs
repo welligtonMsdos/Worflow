@@ -50,7 +50,7 @@ public class UsuarioBusiness : ITests, ITestsPesquisar
 
         service = new UsuarioService(repository.Object);
 
-        return service.BuscarUsuarios().Count;
+        return service.BuscarTodos().Count;
     }
 
     public bool PesquisarValido()

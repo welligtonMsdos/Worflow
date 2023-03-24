@@ -51,6 +51,6 @@ public class SegmentoBusiness: ITests
 
         service = new SegmentoService(repository.Object);
 
-        return service.BuscarSegmentos().Count;
+        return service.BuscarTodos().Count;
     }
 }

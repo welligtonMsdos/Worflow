@@ -51,6 +51,6 @@ public class ProdutoBusiness: ITests
 
         service = new ProdutoService(repository.Object);
 
-        return service.BuscarProdutos().Count;
+        return service.BuscarTodos().Count;
     }
 }

@@ -60,7 +60,7 @@ namespace Worflow.Tests.Business
 
             service = new LeadService(repository.Object);
 
-            return service.BuscarLeads().Count;
+            return service.BuscarTodos().Count;
         }
 
         public bool Incluir()
