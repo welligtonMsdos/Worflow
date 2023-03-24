@@ -28,5 +28,8 @@ public static class Mensagens
     public const string PRODUTO_BUSCAR_ID_ZERADO = "Erro ao buscar produto por id: Detalhes: Id não pode ser zerado";
     public const string PRODUTO_EXCLUIR_ID_ZERADO = "Erro ao excluir produto: Detalhes: Id não pode ser zerado";
 
+    public const string ANEXO_BUSCAR_ID_ZERADO = "Erro ao buscar anexo por id: Detalhes: Id não pode ser zerado";
+    public const string ANEXO_EXCLUIR_ID_ZERADO = "Erro ao excluir anexo: Detalhes: Id não pode ser zerado";
+
     public const string REFERENCE = "Object reference not set to an instance of an object.";
 }

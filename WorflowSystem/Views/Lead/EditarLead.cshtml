@@ -212,11 +212,10 @@
 
                                 </div>
 
-                            </div>    
+                            </div>
 
-                            <div id="partialCotacoes">                               
-
-                            </div>                           
+                            <div id="partialCotacoes">
+                            </div>
 
                         </div>
 
@@ -231,21 +230,30 @@
                         </button>
                     </h2>
                     <div id="acc_arquivo_lead" class="accordion-collapse collapse show" aria-labelledby="acc_arquivo" data-bs-parent="#acc">
+
                         <div class="accordion-body">
 
                             <div class="row mb-3">
+                                <div class="col-1">
+                                    <button id="novoAnexo" data-bs-toggle="modal" data-bs-target="#addAnexo" type="button" class="btn btn-Acoes-v2">Novo Anexo</button>
+                                </div>
+                            </div>
+
+
+                           @* <div class="row mb-3">
 
                                 <div class="col-11">
                                     <div class="mb-3">
-                                        <input class="form-control" name="ListFiles" type="file" id="formFileMultiple" multiple>
+                                        <input class="form-control" name="file" type="file">
                                     </div>
                                 </div>
 
                                 <div class="col-1">
-                                    <button id="btnEnviarAnexo" type="button" class="btn btn-Acoes-v2">Anexar</button>
+                                    <button id="btnEnviarAnexo" type="submit" class="btn btn-Acoes-v2">Anexar</button>
                                 </div>
 
-                            </div>
+                            </div>*@
+
 
                         </div>
                     </div>
@@ -347,10 +355,14 @@
 
 </form>
 
-<div class="modal fade" id="cotacoes" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">         
+<div class="modal fade" id="cotacoes" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
 
     @await Html.PartialAsync("~/Views/Lead/PartialViews/_NovaCotacao.cshtml", Model.Cotacao)
 
+</div>
+
+<div class="modal fade" id="addAnexo" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    @await Html.PartialAsync("~/Views/Lead/PartialViews/_NovoAnexo.cshtml", Model.Cotacao)
 </div>
 
 @section Scripts {

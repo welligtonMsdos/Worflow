@@ -43,5 +43,6 @@ namespace Worflow.Models
         public Perfil Perfil { get; set; }      
         public ICollection<Lead> Lead { get; set; }
         public ICollection<Agenda> Agenda { get; set; }
+        public ICollection<Anexo> Anexo { get; set; }
     }
 }

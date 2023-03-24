@@ -2,6 +2,8 @@
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.IO;
+using System.Threading.Tasks;
 using Worflow.Core;
 using Worflow.Dados.Interfaces;
 using Worflow.Models;
@@ -141,6 +143,18 @@ namespace Worflow.Controllers
             }
 
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+        }
+
+        public PartialViewResult EnviarArquivo(Arquivo arquivo)
+        {
+            var arquivos = arquivo.listFiles.Count > 0 ? arquivo.listFiles : null;
+
+            foreach(var file in arquivos)
+            {
+                string extensao = Path.GetExtension(file.FileName);
+            }
+
+            return PartialView("");
         }
 
         #region Cotação

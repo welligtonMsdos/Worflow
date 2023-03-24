@@ -1,0 +1,35 @@
+﻿
+<div class="modal-dialog modal-lg">
+    <div class="modal-content">
+
+        <div class="modal-header">
+            <h3><i class="fa-regular fa-plus" style="color: var(--corPrincipal); margin-right: 5px"></i>Novo Anexo</h3>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+
+        <div class="modal-body">
+
+            @using (Html.BeginForm("EnviarArquivo", "Lead", FormMethod.Post, new { enctype = "multipart/form-data", data_val_form_id = "FormUpload", id = "FormUpload" }))
+            {
+                <div class="col-11">
+
+                    <div class="mb-3">
+
+                        <input class="form-control" name="listFiles" type="file" id="anexos" required multiple>
+
+                    </div>
+
+                </div>
+
+                <div class="col-1">
+
+                    <button id="btnEnviarAnexo" type="button" class="btn btn-Acoes-v2">Anexar</button>
+
+                </div>
+            }
+
+        </div>
+
+    </div>
+
+</div>

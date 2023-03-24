@@ -117,7 +117,7 @@ function atualizarCotacao(leadId) {
    
     var DataEmissao = $('#DataEmissao').val();
     var DataVencimento = $('#DataVencimento').val();
-    var Valor = $('#Valor').val();
+    var Valor = stringToDecimal($('#Valor').val());
     var SeguradoraId = $('#SeguradoraId').val();
     var CotacaoId = $('#CotacaoId').val();    
     var StatusCotacao = $('#Opcoes').val();
@@ -174,5 +174,9 @@ function excluirCotacao(cotacaoId) {
             toastr.error('Erro.', 'Cotação');   
         }
     })
+}
+
+function stringToDecimal(valor) {
+    return parseFloat(valor);
 }
 
