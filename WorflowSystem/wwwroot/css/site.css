@@ -64,10 +64,12 @@ body {
 }
 
 :root {
-    --corPrincipal: #F5A600;
-    --corSecundario: #162837;
+    --corPrincipal: #107C0F;
+    --corSecundario: #061F3F;
+    /*--corPrincipal: #F5A600;
+    --corSecundario: #162837;*/
     --corTercearia: #E56565;
-    --textoPrincipal: #fff;
+    --textoPrincipal: #fff;    
     --textoSecundario: #000;
 }
 
