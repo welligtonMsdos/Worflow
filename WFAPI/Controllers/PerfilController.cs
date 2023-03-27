@@ -34,7 +34,7 @@ public class PerfilController : Controller
     [HttpGet]
     public IEnumerable<ReadPerfilDto> BuscarTodos()
     {
-        return _mapper.Map<List<ReadPerfilDto>>(_perfilService.BuscarPerfilList());
+        return _mapper.Map<List<ReadPerfilDto>>(_perfilService.BuscarTodos());
     }
 
     /// <summary>

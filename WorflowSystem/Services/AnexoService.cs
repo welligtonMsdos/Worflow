@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.IO;
 using Worflow.Dados.Interfaces;
 using Worflow.Enum;
 using Worflow.Models;
@@ -31,6 +32,11 @@ public class AnexoService : IAnexoService
         return _repository.BuscarPorId(id);
     }
 
+    public ICollection<Anexo> BuscarPorLeadId(int leadId)
+    {
+        return _repository.BuscarPorLeadId(leadId);
+    }
+
     public ICollection<Anexo> BuscarTodos() => _repository.BuscarTodos();        
 
     public bool Excluir(Anexo obj)
@@ -50,6 +56,34 @@ public class AnexoService : IAnexoService
         _repository.Incluir(obj);
 
         return obj.Id > 0 ? true : false;
+    }
+
+    public bool IncluirArquivo(Arquivo arquivo, int leadId)
+    {
+        if (arquivo.listFiles == null) throw new Exception(Mensagens.ANEXO_ARQUIVO_INVALIDO);
+
+        var arquivos = arquivo.listFiles.Count > 0 ? arquivo.listFiles : null;
+
+        try
+        { 
+            foreach (var file in arquivos)
+            {
+                using (var target = new MemoryStream())
+                {
+                    file.CopyToAsync(target).Wait();
+
+                    byte[] documento = target.ToArray();                   
+
+                    Incluir(new Anexo(documento, file.ContentType, file.FileName, leadId));
+                }
+            }
+
+            return true;
+        }
+        catch (Exception)
+        {
+            return false;
+        }
     }
 
     public ICollection<Anexo> Pesquisar(string value) => _repository.Pesquisar(value);         

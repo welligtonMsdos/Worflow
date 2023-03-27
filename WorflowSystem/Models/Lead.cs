@@ -48,5 +48,6 @@ namespace Worflow.Models
         public ICollection<Agenda> Agenda { get; set; }
         public ICollection<Cotacao> Cotacao { get; set; }
         public ICollection<Historico> Historico { get; set; }
+        public ICollection<Anexo> Anexo { get; set; }
     }
 }

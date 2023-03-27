@@ -2,6 +2,8 @@
     var leadId = $('#LeadId').val();
 
     buscarCotacao(leadId);   
+
+
 })
 
 function abrirDetalheCotacao(cotacaoId) {    

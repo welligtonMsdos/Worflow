@@ -235,8 +235,11 @@
 
                             <div class="row mb-3">
                                 <div class="col-2">
-                                    <button id="novoAnexo" data-bs-toggle="modal" data-bs-target="#addAnexo" type="button" class="btn btn-Acoes-v2">Novo Anexo</button>
+                                    <button id="novoAnexo" data-bs-toggle="modal" data-bs-target="#addAnexo" type="button" class="btn btn-Acoes"><i class="fa-solid fa-upload"></i> Novo Anexo</button>
                                 </div>
+                            </div>
+
+                            <div id="partialAnexo">
                             </div>
 
                         </div>
@@ -347,7 +350,7 @@
 
 <div class="modal fade" id="addAnexo" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
 
-    @await Html.PartialAsync("~/Views/Lead/PartialViews/_NovoAnexo.cshtml", Model.Cotacao)
+    @await Html.PartialAsync("~/Views/Lead/PartialViews/_NovoAnexo.cshtml", Model.Lead)
 
 </div>
 

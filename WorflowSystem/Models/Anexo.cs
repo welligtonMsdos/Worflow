@@ -5,14 +5,18 @@ namespace Worflow.Models;
 
 public class Anexo
 {
-    public Anexo(int id, byte[] documento, string extensao, string nome, int usuarioId)
+    public Anexo()
     {
-        Id = id;
+        
+    }
+    public Anexo(byte[] documento, string extensao, string nome, int leadId)
+    {
         Documento = documento;
-        Extensao = extensao;
+        Extensao = extensao.Replace("application/","");
         Nome = nome;
         DataCriacao = DateTime.Now;
-        UsuarioId = usuarioId;
+        UsuarioId = 1;
+        LeadId = leadId;
     }
 
     [Key]
@@ -29,4 +33,6 @@ public class Anexo
 
     public int UsuarioId { get; set; }
     public Usuario Usuario { get; set; }
+    public int LeadId { get; set; }
+    public Lead Lead { get; set; }
 }

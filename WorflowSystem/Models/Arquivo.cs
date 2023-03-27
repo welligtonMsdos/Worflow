@@ -5,6 +5,6 @@ namespace Worflow.Models;
 
 public class Arquivo
 {
-   public List<IFormFile> listFiles { get; set; }
-
+    public List<IFormFile> listFiles { get; set; }
+    public int LeadId { get; set; }
 }

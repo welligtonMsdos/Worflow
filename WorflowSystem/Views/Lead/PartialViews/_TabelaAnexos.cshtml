@@ -1,0 +1,78 @@
+﻿@model IEnumerable<Worflow.Models.Anexo>
+
+<div class="row mb-3">
+
+    <div class="col-12">
+
+        <table class="table" id="tableAnexo">
+
+            <thead class="tableCabecalho">
+                <tr>
+                    <th scope="col">Nome</th>
+
+                    <th scope="col">Extensão</th>
+
+                    <th scope="col">Data Criação</th>                    
+
+                    <th></th>
+                </tr>
+            </thead>
+
+            <tbody>
+
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                           @Html.DisplayFor(modelItem => item.Nome)                           
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Extensao)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.DataCriacao)
+                        </td>
+                        
+                        <td style="text-align:end">
+
+                            <button type="button" class="btn btn-Acoes mb-2" >
+                                <i class="fa-solid fa-download"></i>
+                            </button>
+
+                            <button type="button" class="btn btn-Excluir mb-2">
+                                <i class="fa-regular fa-trash-can"></i>
+                            </button>
+                         
+                        </td>
+                    </tr>
+                }
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+</div>
+
+@*<div class="modal fade" id="ExcluirCotacao" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+
+    <div id="partialExcluirCotacao">
+    </div>
+
+</div>
+
+<div class="modal fade" id="EditarCotacao" tabindex="-2" aria-labelledby="exampleModalLabel2" aria-hidden="true">
+
+    <div id="partialEditarCotacao">
+    </div>
+
+</div>
+
+<div class="modal fade" id="DetalhesCotacoes" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">   
+   
+    <div id="partialDetalhesCotacoes">
+    </div>
+
+</div>*@
+

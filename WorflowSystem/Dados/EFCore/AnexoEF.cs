@@ -22,14 +22,26 @@ public class AnexoEF : IAnexoRepository
     { 
         return _context.Anexo
             .Include(x => x.Usuario)
+            .Include(x => x.Lead)
             .Where(x => x.Id == id)
             .First(); 
+    }
+
+    public ICollection<Anexo> BuscarPorLeadId(int leadId)
+    {
+        return _context.Anexo
+           .Include(x => x.Usuario)     
+           .Include(x => x.Lead)
+           .Where(x => x.LeadId == leadId)
+           .OrderBy(x => x.DataCriacao)
+           .ToList();
     }
 
     public ICollection<Anexo> BuscarTodos() 
     { 
         return _context.Anexo
             .Include(x => x.Usuario)
+            .Include(x => x.Lead)
             .OrderBy(x => x.DataCriacao)
             .ToList(); 
     }    
@@ -50,6 +62,7 @@ public class AnexoEF : IAnexoRepository
     { 
         return _context.Anexo
             .Include(x => x.Usuario)
+            .Include(x => x.Lead)
             .Where(x => x.Nome.Contains(value))
             .ToList(); 
     }

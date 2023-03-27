@@ -21,12 +21,13 @@ namespace Worflow.Controllers
         IStatusService _statusService;
         ICotacaoService _cotacaoService;
         ISeguradoraService _seguradoraService;
+        private readonly IAnexoService _anexoService;
        
 
         public LeadController(ILeadService leadService, ISegmentoService segmentoService,
                               IProdutoService produtoService, IClienteService clienteService,
                               IStatusService statusService, ICotacaoService cotacaoService,
-                              ISeguradoraService seguradoraService)
+                              ISeguradoraService seguradoraService, IAnexoService anexoService)
         {
             _leadService = leadService;
             _segmentoService = segmentoService;
@@ -34,7 +35,8 @@ namespace Worflow.Controllers
             _clienteService = clienteService;
             _statusService = statusService;
             _cotacaoService = cotacaoService;
-            _seguradoraService = seguradoraService;           
+            _seguradoraService = seguradoraService;
+            _anexoService = anexoService;
         }
 
         [Route("CreateLead")]
@@ -145,16 +147,18 @@ namespace Worflow.Controllers
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
 
-        public PartialViewResult EnviarArquivo(Arquivo arquivo)
+        public IActionResult EnviarArquivo(Arquivo arquivo)
         {
-            var arquivos = arquivo.listFiles.Count > 0 ? arquivo.listFiles : null;
+            int leadId = int.Parse(Request.Form["Id"]);
 
-            foreach(var file in arquivos)
-            {
-                string extensao = Path.GetExtension(file.FileName);
-            }
+            _anexoService.IncluirArquivo(arquivo, leadId);
 
-            return PartialView("");
+            return PartialView("~/Views/Lead/PartialViews/_TabelaAnexos.cshtml", _anexoService.BuscarPorLeadId(leadId));
+        }
+
+        public IActionResult BuscarAnexo(int leadId)
+        {
+            return PartialView("~/Views/Lead/PartialViews/_TabelaAnexos.cshtml", _anexoService.BuscarPorLeadId(leadId));
         }
 
         #region Cotação

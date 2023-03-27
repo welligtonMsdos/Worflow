@@ -30,5 +30,10 @@ public class AnexoMap : IEntityTypeConfiguration<Anexo>
               .WithMany(p => p.Anexo)
               .HasForeignKey(p => p.UsuarioId)
               .OnDelete(DeleteBehavior.NoAction);
+
+        builder.HasOne(p => p.Lead)
+              .WithMany(p => p.Anexo)
+              .HasForeignKey(p => p.LeadId)
+              .OnDelete(DeleteBehavior.NoAction);
     }
 }

@@ -34,7 +34,7 @@ namespace WFAPI.Controllers
         [HttpGet]
         public IEnumerable<ReadUsuarioDto> BuscarTodos()
         {
-            return _mapper.Map<List<ReadUsuarioDto>>(_usuarioService.BuscarUsuarios());
+            return _mapper.Map<List<ReadUsuarioDto>>(_usuarioService.BuscarTodos());
         }
 
         /// <summary>

@@ -32,7 +32,7 @@ public class SeguradoraController : Controller
     [HttpGet]
     public IEnumerable<ReadSeguradoraDto> BuscarTodos()
     {
-        return _mapper.Map<List<ReadSeguradoraDto>>(_service.BuscarSeguradoras());
+        return _mapper.Map<List<ReadSeguradoraDto>>(_service.BuscarTodos());
     }
 
     /// <summary>

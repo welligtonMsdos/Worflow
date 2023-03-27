@@ -1,4 +1,5 @@
-﻿
+﻿@model Worflow.Models.Lead
+
 <div class="modal-dialog modal-lg">
     <div class="modal-content">
 
@@ -11,6 +12,8 @@
 
             @using (Html.BeginForm("EnviarArquivo", "Lead", FormMethod.Post, new { enctype = "multipart/form-data", data_val_form_id = "FormUpload", id = "FormUpload" }))
             {
+                @Html.HiddenFor(model => model.Id, new { @class = "hid-id", @id="LeadId" })
+
                 <div class="row mb-3">
 
                     <div class="col-10">
@@ -25,7 +28,7 @@
 
                     <div class="col-1">
 
-                        <button id="btnEnviarAnexo" type="button" class="btn btn-Acoes-v2">Anexar</button>
+                        <button id="btnEnviarAnexo" type="button" class="btn btn-Acoes-v2" data-bs-dismiss="modal">Anexar</button>
 
                     </div>
 
