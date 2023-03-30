@@ -1,13 +1,17 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
+using System.Reflection;
 using System.Threading.Tasks;
 using Worflow.Core;
 using Worflow.Dados.Interfaces;
 using Worflow.Models;
+using Worflow.Services;
 using WorflowSystem.Models;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace Worflow.Controllers
 {
@@ -159,6 +163,47 @@ namespace Worflow.Controllers
         public IActionResult BuscarAnexo(int leadId)
         {
             return PartialView("~/Views/Lead/PartialViews/_TabelaAnexos.cshtml", _anexoService.BuscarPorLeadId(leadId));
+        }
+
+        public FileResult DownloadAnexo(int id)
+        {
+            try
+            {
+                var arquivo = _anexoService.BuscarPorId(id);
+
+                return File(arquivo.Documento, "application/" + arquivo.Extensao, arquivo.Nome);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(string.Format("Falha em: {0} [{1}{2}]", 
+                    GetType().FullName, 
+                    MethodBase.GetCurrentMethod().Name, 
+                    ex.Message));
+
+                return null;
+            }
+          
+        }
+
+        public IActionResult BuscarExcluirAnexo(int anexoId)
+        {
+            var anexo = _anexoService.BuscarPorId(anexoId);            
+
+            return PartialView("~/Views/Lead/PartialViews/_ExcluirAnexo.cshtml", anexo);
+        }
+
+        public IActionResult ExcluirAnexo(int anexoId, int leadId)
+        {
+            if (anexoId > 0)
+            {
+                _anexoService.Excluir(_anexoService.BuscarPorId(anexoId));
+
+                var anexos = _anexoService.BuscarPorLeadId(leadId);
+
+                return PartialView("~/Views/Lead/PartialViews/_TabelaAnexos.cshtml", anexos);
+            }
+
+            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
 
         #region Cotação

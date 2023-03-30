@@ -11,8 +11,13 @@ public class Anexo
     }
     public Anexo(byte[] documento, string extensao, string nome, int leadId)
     {
+        extensao = extensao.Contains("wordprocessing") ? "msword" : 
+            extensao.Contains("spreadsheet") ? "xlsx" :
+            extensao.Contains("text/plain") ? "txt" :
+            extensao.Replace("application/", "");
+
         Documento = documento;
-        Extensao = extensao.Replace("application/","");
+        Extensao = extensao;
         Nome = nome;
         DataCriacao = DateTime.Now;
         UsuarioId = 1;

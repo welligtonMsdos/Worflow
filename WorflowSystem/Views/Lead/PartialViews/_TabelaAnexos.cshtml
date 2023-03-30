@@ -33,15 +33,17 @@
                             @Html.DisplayFor(modelItem => item.DataCriacao)
                         </td>
                         
-                        <td style="text-align:end">
+                        <td style="text-align:end">                           
 
-                            <button type="button" class="btn btn-Acoes mb-2" >
+                            <button type="button" class="btn btn-Acoes mb-2" onclick="location.href='@Url.Action("DownloadAnexo", "Lead", new { id = item.Id })'">
+
                                 <i class="fa-solid fa-download"></i>
+                                
                             </button>
 
-                            <button type="button" class="btn btn-Excluir mb-2">
+                            <button type="button" class="btn btn-Excluir mb-2" onclick="abrirExcluirAnexo(@item.Id)">
                                 <i class="fa-regular fa-trash-can"></i>
-                            </button>
+                            </button>                                                 
                          
                         </td>
                     </tr>
@@ -55,24 +57,10 @@
 
 </div>
 
-@*<div class="modal fade" id="ExcluirCotacao" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
 
-    <div id="partialExcluirCotacao">
+<div class="modal fade" id="ExcluirAnexo" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+
+    <div id="partialExcluirAnexo">
     </div>
 
 </div>
-
-<div class="modal fade" id="EditarCotacao" tabindex="-2" aria-labelledby="exampleModalLabel2" aria-hidden="true">
-
-    <div id="partialEditarCotacao">
-    </div>
-
-</div>
-
-<div class="modal fade" id="DetalhesCotacoes" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">   
-   
-    <div id="partialDetalhesCotacoes">
-    </div>
-
-</div>*@
-

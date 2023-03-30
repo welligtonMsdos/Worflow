@@ -55,3 +55,44 @@ $("#novoAnexo").click(function () {
     $el.unwrap();
 });
 
+function abrirExcluirAnexo(anexoId) {
+    $.ajax({
+        type: "GET",
+        url: '/Lead/BuscarExcluirAnexo',
+        data: {
+            anexoId: anexoId
+        },
+        cache: false,
+        async: false,
+        success: function (data) {
+
+            $('#partialExcluirAnexo').html(data);
+
+            $('#ExcluirAnexo').modal('show');
+        }
+    })
+}
+
+function excluirAnexo(anexoId) {   
+
+    var leadId = $('#LeadId').val();
+
+    $.ajax({
+        type: "GET",
+        url: '/Lead/ExcluirAnexo',
+        data: {
+            anexoId: anexoId,
+            leadId: leadId
+        },
+        cache: false,
+        async: false,
+        success: function (data) {
+            $('#partialAnexo').html(data);
+            toastr.success('Anexo excluído com sucesso!');
+        },
+        error: function (data) {
+            toastr.error('Erro.', 'Anexo');
+        }
+    })
+}
+
