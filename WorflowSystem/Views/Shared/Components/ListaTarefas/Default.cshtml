@@ -25,13 +25,14 @@
                             <label>@item.Comentario</label>
                         </div>
 
-                        <div class="col-4 col-md-4 col-sm-1 d-grid gap-2 d-sm-flex d-md-flex justify-content-md-end">
-                            <a asp-action="EditarAgenda" asp-route-agendaID="@item.Id" class="btn btn-sm btn-outline-primary rounded-circle">
-                                <i class="fa fa-pencil-square"></i>
-                            </a>
+                        <div class="col-4 col-md-4 col-sm-1 d-grid gap-2 d-sm-flex d-md-flex justify-content-md-end">                           
 
-                            <button class="btn btn-sm btn-outline-danger rounded-circle">
-                                <i class="fa fa-times-circle" disable></i>
+                            <button type="button" class="btn btn-Acoes mb-2">
+                                <i class="fa fa-pencil-square"></i>
+                            </button>
+
+                            <button type="button" class="btn btn-Excluir mb-2">
+                                <i class="fa-regular fa-trash-can"></i>
                             </button>
 
                         </div>
