@@ -1,8 +1,9 @@
-﻿using Worflow.Models;
+﻿using Worflow.Dados.Builder.Interfaces;
+using Worflow.Models;
 
-namespace Worflow.Dados.Interfaces.Builder;
+namespace Worflow.Dados.Builder;
 
-public class SegmentoGeneratorBuilder: ISegmentoBuilder, IDadosBuilder<Segmento>
+public class SegmentoGeneratorBuilder : ISegmentoBuilder, IDadosBuilder<Segmento>
 {
     private Segmento segmento;
     public SegmentoGeneratorBuilder()

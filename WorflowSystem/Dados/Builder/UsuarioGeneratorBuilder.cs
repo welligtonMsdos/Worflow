@@ -1,8 +1,9 @@
-﻿using Worflow.Models;
+﻿using Worflow.Dados.Builder.Interfaces;
+using Worflow.Models;
 
-namespace Worflow.Dados.Interfaces.Builder;
+namespace Worflow.Dados.Builder;
 
-public class UsuarioGeneratorBuilder: IUsuarioBuilder, IDadosBuilder<Usuario>
+public class UsuarioGeneratorBuilder : IUsuarioBuilder, IDadosBuilder<Usuario>
 {
     private Usuario usuario;
     public UsuarioGeneratorBuilder()
@@ -13,14 +14,14 @@ public class UsuarioGeneratorBuilder: IUsuarioBuilder, IDadosBuilder<Usuario>
     public int Id => 1;
 
     public void DadosUsuario() => usuario = new Usuario(0, "João da Silva", "JOAVA", 1);
-    
+
     public Usuario DeleteNotValid()
     {
         usuario.Id = 0;
         return usuario;
     }
 
-    public Usuario DeleteValid() => Get();    
+    public Usuario DeleteValid() => Get();
 
     public Usuario Get()
     {
@@ -30,5 +31,5 @@ public class UsuarioGeneratorBuilder: IUsuarioBuilder, IDadosBuilder<Usuario>
 
     public Usuario Post() => usuario;
 
-    public Usuario Put() => Get();    
+    public Usuario Put() => Get();
 }

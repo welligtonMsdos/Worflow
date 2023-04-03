@@ -1,4 +1,4 @@
-﻿namespace Worflow.Dados.Interfaces.Builder;
+﻿namespace Worflow.Dados.Builder.Interfaces;
 
 public interface ISeguradoraBuilder
 {

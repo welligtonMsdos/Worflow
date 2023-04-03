@@ -1,8 +1,9 @@
-﻿using Worflow.Models;
+﻿using Worflow.Dados.Builder.Interfaces;
+using Worflow.Models;
 
-namespace Worflow.Dados.Interfaces.Builder;
+namespace Worflow.Dados.Builder;
 
-public class ProdutoGeneratorBuilder: IProdutoBuilder, IDadosBuilder<Produto>
+public class ProdutoGeneratorBuilder : IProdutoBuilder, IDadosBuilder<Produto>
 {
     private Produto produto;
     public ProdutoGeneratorBuilder()

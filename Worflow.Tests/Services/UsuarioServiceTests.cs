@@ -1,6 +1,6 @@
 ﻿using Moq;
 using System.ComponentModel.DataAnnotations;
-using Worflow.Dados.Interfaces.Builder;
+using Worflow.Dados.Builder;
 using Worflow.Enum;
 using Worflow.Models;
 using Worflow.Repository;

@@ -1,6 +1,7 @@
-﻿using Worflow.Models;
+﻿using Worflow.Dados.Builder.Interfaces;
+using Worflow.Models;
 
-namespace Worflow.Dados.Interfaces.Builder;
+namespace Worflow.Dados.Builder;
 
 public class SeguradoraGeneratorBuilder : ISeguradoraBuilder, IDadosBuilder<Seguradora>
 {
@@ -12,7 +13,7 @@ public class SeguradoraGeneratorBuilder : ISeguradoraBuilder, IDadosBuilder<Segu
     }
     public int Id => 1;
 
-    public void DadosSeguradora() => seguradora = new Seguradora(Id, "Porto");    
+    public void DadosSeguradora() => seguradora = new Seguradora(Id, "Porto");
 
     public Seguradora DeleteNotValid()
     {
@@ -21,7 +22,7 @@ public class SeguradoraGeneratorBuilder : ISeguradoraBuilder, IDadosBuilder<Segu
     }
 
     public Seguradora DeleteValid() => Get();
-    
+
     public Seguradora Get()
     {
         seguradora.Id = Id;
@@ -30,5 +31,5 @@ public class SeguradoraGeneratorBuilder : ISeguradoraBuilder, IDadosBuilder<Segu
 
     public Seguradora Post() => seguradora;
 
-    public Seguradora Put() => Get();    
+    public Seguradora Put() => Get();
 }

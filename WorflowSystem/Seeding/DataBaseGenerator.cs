@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Linq;
+using Worflow.BuilderModels;
 using Worflow.Dados.EFCore;
 using Worflow.Models;
 
@@ -9,7 +10,7 @@ namespace Worflow.Seeding
     public static class DataBaseGenerator
     {
         public static void Seed()
-        {          
+        {
             var options = new DbContextOptions<AppDbContext>();
 
             using (var ctx = new AppDbContext(options))
@@ -29,11 +30,28 @@ namespace Worflow.Seeding
         {
             if (ctx.Enderecos.ToList().Count() == 0)
             {
-                List<Endereco> lstEndereco = new List<Endereco>();
-                lstEndereco.Add(new Endereco("01310200", "Av.Paulista", "1578", "Bela Vista", "São Paulo", "SP"));
-                lstEndereco.Add(new Endereco("04094050", "Av.Pedro Álvares Cabral", "s/n", "Vila Mariana", "São Paulo", "SP"));
+                List<Endereco> lstEndereco = new List<Endereco>();               
 
-                lstEndereco.ForEach(delegate (Endereco endereco) {
+                lstEndereco.Add(new EnderecoBuilder()                                   
+                                    .Cep("01310200")
+                                    .Logadouro("Av.Paulista")
+                                    .Numero("1578")
+                                    .Bairro("Bela Vista")
+                                    .Cidade("São Paulo")
+                                    .Uf("SP")
+                                    .Build());
+
+                lstEndereco.Add(new EnderecoBuilder()
+                                    .Cep("04094050")
+                                    .Logadouro("Av.Pedro Álvares Cabral")
+                                    .Numero("s/n")
+                                    .Bairro("Vila Mariana")
+                                    .Cidade("São Paulo")
+                                    .Uf("SP")
+                                    .Build());
+
+                lstEndereco.ForEach(delegate (Endereco endereco)
+                {
                     ctx.Add(endereco);
                     ctx.SaveChanges();
                 });
@@ -42,34 +60,35 @@ namespace Worflow.Seeding
 
         private static void AddCliente(AppDbContext ctx)
         {
-            if(ctx.Clientes.ToList().Count() == 0)
+            if (ctx.Clientes.ToList().Count() == 0)
             {
                 List<Cliente> ltsCliente = new List<Cliente>();
-                ltsCliente.Add(new Cliente(
-                    GetEndereco(ctx),
-                    "60664745000187",
-                    "Museu de arte moderna de São Paulo Assis Chateubriand",
-                    "MASP",
-                    "0102",
-                    "45678",
-                    "contabil_fiscal@masp.org.br",
-                    "1131495959"
-                ));
+
+                ltsCliente.Add(new ClienteBuilder()
+                    .Endereco(GetEndereco(ctx))
+                    .Cnpj("60664745000187")
+                    .RazaoSocial("Museu de arte moderna de São Paulo Assis Chateubriand")
+                    .Fantasia("MASP")
+                    .Agencia("0102")
+                    .Conta("45678")
+                    .Email("contabil_fiscal@masp.org.br")
+                    .Telefone("1131495959")
+                    .Build());
 
                 ltsCliente.ForEach(delegate (Cliente cliente)
                 {
                     ctx.Add(cliente);
                     ctx.SaveChanges();
                 });
-            }          
+            }
         }
 
         private static void AddLead(AppDbContext ctx)
         {
-            if(ctx.Lead.ToList().Count() == 0)
+            if (ctx.Lead.ToList().Count() == 0)
             {
                 List<Lead> ltsLead = new List<Lead>();
-                ltsLead.Add(new Lead(GetUsuario(ctx), GetCliente(ctx), GetProduto(ctx),  GetSegmento(ctx), GetStatus(ctx)));
+                ltsLead.Add(new Lead(GetUsuario(ctx), GetCliente(ctx), GetProduto(ctx), GetSegmento(ctx), GetStatus(ctx)));
 
                 ltsLead.ForEach(delegate (Lead lead)
                 {

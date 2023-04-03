@@ -1,6 +1,7 @@
-﻿using Worflow.Models;
+﻿using Worflow.Dados.Builder.Interfaces;
+using Worflow.Models;
 
-namespace Worflow.Dados.Interfaces.Builder;
+namespace Worflow.Dados.Builder;
 
 public class PerfilGeneratorBuilder : IPerfilBuilder, IDadosBuilder<Perfil>
 {
@@ -13,7 +14,7 @@ public class PerfilGeneratorBuilder : IPerfilBuilder, IDadosBuilder<Perfil>
 
     public int Id { get => 1; }
 
-    public void DadosPerfil() => perfil = new Perfil(Id, "Admin");    
+    public void DadosPerfil() => perfil = new Perfil(Id, "Admin");
 
     public Perfil DeleteNotValid()
     {
@@ -21,7 +22,7 @@ public class PerfilGeneratorBuilder : IPerfilBuilder, IDadosBuilder<Perfil>
         return perfil;
     }
 
-    public Perfil DeleteValid() => Get();    
+    public Perfil DeleteValid() => Get();
 
     public Perfil Get()
     {
@@ -31,5 +32,5 @@ public class PerfilGeneratorBuilder : IPerfilBuilder, IDadosBuilder<Perfil>
 
     public Perfil Post() => perfil;
 
-    public Perfil Put() => Get();    
+    public Perfil Put() => Get();
 }

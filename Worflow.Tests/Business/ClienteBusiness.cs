@@ -8,15 +8,15 @@ using Xunit;
 
 namespace Worflow.Tests.Business;
 
-internal class EnderecoBusiness : ITests
+public class ClienteBusiness : ITests
 {
-    private EnderecoService service;
-    private EnderecoGeneratorBuilder builder;
+    private ClienteService service;
+    private ClienteGeneratorBuilder builder;
 
-    public EnderecoBusiness()
+    public ClienteBusiness()
     {
-        service = new EnderecoService(new Mock<IEnderecoRepository>().Object);
-        builder = new EnderecoGeneratorBuilder();        
+        service = new ClienteService(new Mock<IClienteRepository>().Object);
+        builder = new ClienteGeneratorBuilder();
     }
 
     public bool Alterar() => service.Alterar(builder.Put());
@@ -25,11 +25,11 @@ internal class EnderecoBusiness : ITests
     {
         var entidade = builder.Get();
 
-        var repository = new Mock<IEnderecoRepository>();
+        var repository = new Mock<IClienteRepository>();
 
         repository.Setup(x => x.BuscarPorId(entidade.Id)).Returns(entidade);
 
-        service = new EnderecoService(repository.Object);
+        service = new ClienteService(repository.Object);
 
         return service.BuscarPorId(entidade.Id).Id > 0;
     }
@@ -42,15 +42,15 @@ internal class EnderecoBusiness : ITests
 
     public int GetTodos()
     {
-        List<Endereco> entidade = new List<Endereco>();
+        List<Cliente> entidade = new List<Cliente>();
 
         entidade.Add(builder.Get());
 
-        var repository = new Mock<IEnderecoRepository>();
+        var repository = new Mock<IClienteRepository>();
 
         repository.Setup(x => x.BuscarTodos()).Returns(entidade);
 
-        service = new EnderecoService(repository.Object);
+        service = new ClienteService(repository.Object);
 
         return service.BuscarTodos().Count;
     }

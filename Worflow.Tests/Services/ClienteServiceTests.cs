@@ -10,17 +10,17 @@ using Xunit;
 
 namespace Worflow.Tests.Services;
 
-public class ProdutoServiceTests
+public class ClienteServiceTests
 {
     private readonly ITests _tests;
-    private ProdutoService service;
-    private const string BUSCAR = Mensagens.PRODUTO_BUSCAR_ID_ZERADO;
-    private const string EXCLUIR = Mensagens.PRODUTO_EXCLUIR_ID_ZERADO;
+    private ClienteService service;
+    private const string BUSCAR = Mensagens.CLIENTE_BUSCAR_ID_ZERADO;
+    private const string EXCLUIR = Mensagens.CLIENTE_EXCLUIR_ID_ZERADO;
 
-    public ProdutoServiceTests()
+    public ClienteServiceTests()
     {
-        _tests = new ProdutoBusiness();
-        service = new ProdutoService(new Mock<IProdutoRepository>().Object);
+        _tests = new ClienteBusiness();
+        service = new ClienteService(new Mock<IClienteRepository>().Object);
     }
 
     [Fact]
@@ -47,17 +47,17 @@ public class ProdutoServiceTests
     [Fact]
     public void Pesquisar_PesquisandoValido()
     {
-        var entidade = new List<Produto>();
+        var entidade = new List<Cliente>();
 
-        entidade.Add(new ProdutoGeneratorBuilder().Get());
+        entidade.Add(new ClienteGeneratorBuilder().Get());
 
-        var repository = new Mock<IProdutoRepository>();
+        var repository = new Mock<IClienteRepository>();
 
-        repository.Setup(x => x.Pesquisar(entidade.First().Descricao)).Returns(entidade);
+        repository.Setup(x => x.Pesquisar(entidade.First().Fantasia)).Returns(entidade);
 
-        service = new ProdutoService(repository.Object);
+        service = new ClienteService(repository.Object);
 
-        var result = service.Pesquisar(entidade.First().Descricao);
+        var result = service.Pesquisar(entidade.First().Fantasia);
 
         Assert.True(result.Count > 0);
     }

@@ -1,7 +1,8 @@
-﻿namespace Worflow.Dados.Interfaces.Builder
+﻿namespace Worflow.Dados.Builder.Interfaces
 {
     public interface ILeadBuilder
-    {       
+    {
+        void Endereco();
         void Cliente();
         void Usuario();
         void Produto();

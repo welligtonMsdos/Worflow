@@ -6,25 +6,25 @@ namespace Worflow.Models
 {
     public class Endereco
     {
-        public Endereco()
-        {
+        //public Endereco()
+        //{
 
-        }
+        //}
 
-        public Endereco(string cep, string logadouro, string numero, string bairro, string cidade, string uf)
-        {
-            CEP = cep;
-            Logadouro = logadouro;
-            Numero = numero;
-            Bairro = bairro;
-            Cidade = cidade;
-            UF = uf;
-        }
+        //public Endereco(string cep, string logadouro, string numero, string bairro, string cidade, string uf)
+        //{
+        //    CEP = cep;
+        //    Logadouro = logadouro;
+        //    Numero = numero;
+        //    Bairro = bairro;
+        //    Cidade = cidade;
+        //    UF = uf;
+        //}
 
-        public Endereco(int id, string cep, string logadouro, string numero, string bairro, string cidade, string uf):this(cep, logadouro, numero,bairro,cidade,uf)
-        {
-            this.Id = id;            
-        }
+        //public Endereco(int id, string cep, string logadouro, string numero, string bairro, string cidade, string uf):this(cep, logadouro, numero,bairro,cidade,uf)
+        //{
+        //    this.Id = id;            
+        //}
 
         [Key]
         [DatabaseGeneratedAttribute(DatabaseGeneratedOption.Identity)]

@@ -1,10 +1,5 @@
 ﻿using Moq;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Worflow.Dados.Interfaces.Builder;
+using Worflow.Dados.Builder;
 using Worflow.Enum;
 using Worflow.Models;
 using Worflow.Repository;

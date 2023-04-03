@@ -1,14 +1,18 @@
-﻿using Worflow.Models;
+﻿using Worflow.BuilderModels;
+using Worflow.Dados.Builder.Interfaces;
+using Worflow.Models;
 
-namespace Worflow.Dados.Interfaces.Builder;
+namespace Worflow.Dados.Builder;
 
 public class LeadGeneratorBuilder : ILeadBuilder, IDadosBuilder<Lead>
 {
     private Lead _lead;
+    private Endereco endereco;
 
     public LeadGeneratorBuilder()
     {
         _lead = new Lead();
+        Endereco();
         Cliente();
         Produto();
         Segmento();
@@ -16,21 +20,21 @@ public class LeadGeneratorBuilder : ILeadBuilder, IDadosBuilder<Lead>
         Usuario();
     }
 
-    public int Id => 1;   
+    public int Id => 1;
 
     public void Cliente()
-    {
-        Endereco endereco = new Endereco(1, "01310200", "Av.Paulista", "1578", "Bela Vista", "São Paulo", "SP");
-
-        Cliente cliente = new Cliente(1,
-                endereco,
-                "60664745000187",
-                "Museu de arte moderna de São Paulo Assis Chateubriand",
-                "MASP",
-                "0102",
-                "45678",
-                "contabil_fiscal@masp.org.br",
-                "1131495959");
+    {        
+        Cliente cliente = new ClienteBuilder()
+            .Id(Id)
+            .Endereco(endereco)
+            .Cnpj("60664745000187")
+            .RazaoSocial("Museu de arte moderna de São Paulo Assis Chateubriand")
+            .Fantasia("MASP")
+            .Agencia("0102")
+            .Conta("45678")
+            .Email("contabil_fiscal@masp.org.br")
+            .Telefone("1131495959")
+            .Build();
 
         _lead.Cliente = cliente;
         _lead.ClienteId = 1;
@@ -43,6 +47,19 @@ public class LeadGeneratorBuilder : ILeadBuilder, IDadosBuilder<Lead>
     }
 
     public Lead DeleteValid() => Get();
+
+    public void Endereco()
+    {
+        endereco = new EnderecoBuilder()
+              .Id(Id)
+              .Cep("01310200")
+              .Logadouro("Av.Paulista")
+              .Numero("1578")
+              .Bairro("Bela Vista")
+              .Cidade("Cidade")
+              .Uf("SP")
+              .Build();
+    }
 
     public Lead Get()
     {
@@ -60,7 +77,7 @@ public class LeadGeneratorBuilder : ILeadBuilder, IDadosBuilder<Lead>
         _lead.ProdutoId = 1;
     }
 
-    public Lead Put() => Get(); 
+    public Lead Put() => Get();
 
     public void Segmento()
     {
@@ -78,8 +95,8 @@ public class LeadGeneratorBuilder : ILeadBuilder, IDadosBuilder<Lead>
 
     public void Usuario()
     {
-        Usuario usuario = new Usuario(1,"João Silva","JOAVA",1);
+        Usuario usuario = new Usuario(1, "João Silva", "JOAVA", 1);
         _lead.Usuario = usuario;
         _lead.UsuarioId = 1;
-    }     
+    }
 }

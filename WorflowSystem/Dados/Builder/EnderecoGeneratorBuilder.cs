@@ -1,6 +1,8 @@
-﻿using Worflow.Models;
+﻿using Worflow.BuilderModels;
+using Worflow.Dados.Builder.Interfaces;
+using Worflow.Models;
 
-namespace Worflow.Dados.Interfaces.Builder;
+namespace Worflow.Dados.Builder;
 
 public class EnderecoGeneratorBuilder : IEnderecoBuilder, IDadosBuilder<Endereco>
 {
@@ -12,7 +14,15 @@ public class EnderecoGeneratorBuilder : IEnderecoBuilder, IDadosBuilder<Endereco
 
     public void DadosEndereco()
     {
-        endereco = new Endereco("01020000", "Rua do centro", "100", "Bairro", "Cidade", "SP");
+        endereco = new EnderecoBuilder()
+            .Id(Id)
+            .Cep("01020000")
+            .Logadouro("Rua do centro")
+            .Numero("100")
+            .Bairro("Bairro")
+            .Cidade("Cidade")
+            .Uf("UF")
+            .Build();
     }
 
     public Endereco DeleteNotValid()
