@@ -25,6 +25,13 @@ public class StatusService : IStatusService
         return obj.Id > 0 ? true : false;
     }
 
+    public int BuscarPorcentagem(Lead lead)
+    {
+        RecuperaStatusAtual(lead.StatusId);
+
+        return statusLeadRepository.Porcentagem(); 
+    }
+
     public Status BuscarPorId(int id)
     {
         if (id == 0)

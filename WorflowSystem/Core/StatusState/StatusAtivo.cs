@@ -5,10 +5,7 @@ namespace Worflow.Core.StatusState;
 
 public class StatusAtivo : IStatusLead
 {
-    public bool ModoStatus()
-    {
-        return true;
-    }
+    public int Porcentagem() => 10;
 
     public List<int> ProximoStatus()
     {

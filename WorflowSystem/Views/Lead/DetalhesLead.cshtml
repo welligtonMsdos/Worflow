@@ -18,6 +18,11 @@
             @Html.HiddenFor(model => model.Cliente.Id, new { id = "clienteId" })
             @Html.HiddenFor(model => model.Cliente.EnderecoId, new { id = "leadEnderecoId" })
 
+            <div class="progress">
+                <div class="progress-bar" role="progressbar" aria-label="Success example" style="width:@ViewBag.Porcentagem; background-color:var(--corPrincipal)"
+                     aria-valuenow="25" aria-valuemin="0" aria-valuemax="100" disabled></div>
+            </div>
+
             <fieldset disabled>
 
                 <div class="row mb-3">

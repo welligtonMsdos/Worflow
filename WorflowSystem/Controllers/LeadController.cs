@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.CodeAnalysis.Elfie.Serialization;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -112,6 +113,8 @@ namespace Worflow.Controllers
 
             ViewBag.StatusSeguradora = _cotacaoService.BuscarDadosSeguradora(id);
 
+            ViewBag.Porcentagem = _statusService.BuscarPorcentagem(leadCotacao.Lead) + "%";
+
             return View(leadCotacao);
         }
 
@@ -134,6 +137,8 @@ namespace Worflow.Controllers
         public ActionResult DetalhesLead(int id)
         {
             var lead = _leadService.BuscarPorId(id);
+
+            ViewBag.Porcentagem = _statusService.BuscarPorcentagem(lead) + "%";
 
             return View(lead);
         }

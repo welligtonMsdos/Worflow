@@ -1,6 +1,5 @@
 ﻿$(document).ready(function () {
 
-
     $('#tabela-leads').DataTable({
         "searching": false,
         "paging": true,
