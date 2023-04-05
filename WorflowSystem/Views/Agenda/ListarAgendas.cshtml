@@ -57,9 +57,11 @@
                                                 </button>
                                             </div>
 
-                                            <div class="col-2 d-grid gap-2 d-md-flex justify-content-md-end">
+                                            <div class="col-2 d-grid gap-2 d-md-flex justify-content-md-end">                                              
 
-                                                <a asp-action="CreateAgenda" asp-route-dataTarefa="@item.Datas" class="btn btn-Acoes">Nova Tarefa</a>
+                                                <button type="button" class="btn btn-Acoes" data-bs-toggle="modal" data-bs-target="#novaTarefa" onclick="novaTarefa('@item.Datas')">
+                                                    Nova Tarefa
+                                                </button>
 
                                             </div>
                                         </div>
@@ -88,8 +90,18 @@
 
 </div>
 
+<div class="modal fade" id="novaTarefa" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+
+    @await Html.PartialAsync("~/Views/Agenda/PartialViews/_NovaTarefa.cshtml", new Worflow.Models.Agenda());
+
+</div>
+
 @section Scripts {
     @{
         await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+
+    @{
+        await Html.RenderPartialAsync("_AgendaScriptsPartial");
     }
 }

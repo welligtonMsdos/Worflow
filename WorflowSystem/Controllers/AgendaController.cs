@@ -3,6 +3,7 @@ using System;
 using System.Diagnostics;
 using Worflow.Dados.Interfaces;
 using Worflow.Models;
+using Worflow.Services;
 using WorflowSystem.Models;
 
 namespace Worflow.Controllers
@@ -24,18 +25,32 @@ namespace Worflow.Controllers
             return View(datas);
         }
      
-        public IActionResult CreateAgenda(string dataTarefa)
-        {
-            Agenda agenda = new Agenda(DateTime.Parse(dataTarefa));
+        //public IActionResult CreateAgenda(string dataTarefa)
+        //{
+        //    Agenda agenda = new Agenda(DateTime.Parse(dataTarefa));
 
-            return View(agenda);
-        }
+        //    return View(agenda);
+        //}
       
-        [Route("InserirAgenda")]
-        public ActionResult InserirAgenda(Agenda agenda)
+        //[Route("InserirAgenda")]
+        //public ActionResult InserirAgenda(Agenda agenda)
+        //{
+        //    if (ModelState.IsValid)
+        //    {
+        //        _agendaService.Incluir(agenda);
+
+        //        return RedirectToAction(nameof(ListarAgendas));
+        //    }
+
+        //    return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+        //}
+                      
+        public IActionResult InserirTarefa(string data, string horario, string comentario)
         {
             if (ModelState.IsValid)
             {
+                var agenda = new Agenda(data, horario, comentario);
+
                 _agendaService.Incluir(agenda);
 
                 return RedirectToAction(nameof(ListarAgendas));
@@ -43,7 +58,7 @@ namespace Worflow.Controllers
 
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
-     
+
         public ActionResult EditarAgenda(int agendaID)
         {
             var agenda = _agendaService.BuscarPorId(agendaID);

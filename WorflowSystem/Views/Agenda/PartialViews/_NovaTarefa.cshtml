@@ -1,0 +1,61 @@
+﻿@model Worflow.Models.Agenda
+
+<div class="modal-dialog">
+    <div class="modal-content">
+
+        <div class="modal-header">
+            <h3><i class="fa-regular fa-plus" style="color: var(--corPrincipal); margin-right: 5px"></i>Nova Tarefa</h3>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+
+        <div class="modal-body">
+
+            <form>
+
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                @Html.HiddenFor(model => Model.Id, new { @class = "hid-id", @id="tarefaId" })
+
+                <div class="row mb-3">
+                    <div class="col-6">
+                        <label asp-for="DataAgendada" class="control-label"></label>
+                        <input asp-for="DataAgendada" id="data" type="text" class="form-control" readonly />
+                        <span asp-validation-for="DataAgendada" class="text-danger"></span>
+                    </div>
+
+                    <div class="col-6">
+                        <label asp-for="Horario" class="control-label"></label>
+                        <input asp-for="Horario" id="horario" type="time" class="form-control" />
+                        <span asp-validation-for="Horario" class="text-danger"></span>
+                    </div>
+
+                </div>
+
+                <div class="row mb-3">
+                    <div class="col-12">
+
+                        <label asp-for="Comentario" class="control-label"></label>
+                        <textarea class="form-control" id="comentario" asp-for="Comentario" rows="3"></textarea>
+                        <span asp-validation-for="Comentario" class="text-danger"></span>
+
+                    </div>
+                </div>
+
+                <div class="row mb-3">
+
+                    <div class="col-12 d-grid gap-2 d-md-flex justify-content-md-end">
+
+                        <input type="submit" value="Salvar" class="btn btn-Acoes" onclick="inserirTarefa()" />
+
+                    </div>
+
+                </div>
+
+            </form>
+
+        </div>
+
+    </div>
+
+</div>
+

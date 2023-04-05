@@ -16,6 +16,13 @@ namespace Worflow.Models
             DataAgendada = data;
         }
 
+        public Agenda(string dataAgendada, string horario, string comentario)
+        {
+            DataAgendada = DateTime.Parse(dataAgendada);
+            Horario = horario;
+            Comentario = comentario;      
+        }
+
         [Key]
         [DatabaseGeneratedAttribute(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
