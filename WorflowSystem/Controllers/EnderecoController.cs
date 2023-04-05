@@ -2,6 +2,7 @@
 using System.Diagnostics;
 using Worflow.Dados.Interfaces;
 using Worflow.Models;
+using Worflow.Services;
 using WorflowSystem.Models;
 
 namespace Worflow.Controllers
@@ -20,6 +21,13 @@ namespace Worflow.Controllers
         {
             var enderecos = _enderecoService.BuscarTodos();
             return View(enderecos);
+        }      
+
+        public ActionResult BuscarEndereco(string cep)
+        {
+            var endereco = _enderecoService.BuscarEnderecoPorCep(cep); 
+
+            return Json(endereco);
         }
 
         [Route("PesquisarEnderecos")]

@@ -1,6 +1,9 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Net.Http;
+using WFAPI.Models;
 using Worflow.Dados.Interfaces;
 using Worflow.Enum;
 using Worflow.Models;
@@ -21,6 +24,25 @@ public class EnderecoService : IEnderecoService
         _repository.Alterar(obj);
 
         return obj.Id > 0 ? true : false;
+    }
+
+    public Address BuscarEnderecoPorCep(string cep)
+    {
+        var endereco = new Address();
+
+        using(var httpClient = new HttpClient())
+        {
+            var result = httpClient.GetAsync($"https://localhost:44396/Address/{cep}").GetAwaiter().GetResult();
+
+            var content = result.Content.ReadAsStringAsync().GetAwaiter().GetResult();
+
+            if(result.StatusCode == System.Net.HttpStatusCode.OK)
+            {
+                endereco = (Address)JsonConvert.DeserializeObject(content, typeof(Address));
+            }
+        }
+
+        return endereco;
     }
 
     public Endereco BuscarPorId(int id)
