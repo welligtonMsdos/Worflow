@@ -1,4 +1,7 @@
-﻿using Worflow.Dados.EFCore;
+﻿using WFAPI.Interfaces;
+using WFAPI.Rest;
+using WFAPI.Services;
+using Worflow.Dados.EFCore;
 using Worflow.Dados.Interfaces;
 using Worflow.Repository;
 using Worflow.Services;
@@ -22,6 +25,8 @@ public static class DependencyInjection
      
         services.AddTransient<ISeguradoraRepository, SeguradoraEF>();
         services.AddTransient<ISeguradoraService, SeguradoraService>();
+
+       
 
         return services;
     }

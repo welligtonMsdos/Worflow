@@ -1,6 +1,9 @@
 using Microsoft.OpenApi.Models;
 using System.Reflection;
 using WFAPI;
+using WFAPI.Interfaces;
+using WFAPI.Rest;
+using WFAPI.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -27,6 +30,10 @@ builder.Services.AddSwaggerGen(c =>
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
 builder.Services.AddInterfaces(builder.Configuration);
+
+builder.Services.AddSingleton<IAddressService, AddressService>();
+
+builder.Services.AddSingleton<IBrasilApi, BrasilApiRest>();
 
 var app = builder.Build();
 
