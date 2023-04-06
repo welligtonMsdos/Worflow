@@ -1,4 +1,10 @@
-﻿function changeSegmento(value) {
+﻿$(document).ready(function () {
+
+    $('#comboSegmento').select2();
+
+})
+
+function changeSegmento(value) {
     var id = $('#comboSegmento').val();
 
     $.ajax
