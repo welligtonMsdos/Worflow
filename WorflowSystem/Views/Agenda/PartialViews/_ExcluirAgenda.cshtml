@@ -1,0 +1,30 @@
+﻿@model Worflow.Models.Agenda
+
+<div class="modal-dialog">
+    <div class="modal-content">
+
+        <div class="modal-header">
+            <h3 class="modal-title" id="exampleModalLabel">Excluir Agenda</h3>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+
+        <form>
+
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            @Html.HiddenFor(model => Model.Id, new { @class = "hid-id", @id="AgendaId" })
+            @Html.HiddenFor(model => Model.LeadId, new { @class = "hid-id", @id="LeadId" })
+
+            <div class="modal-body">
+                <h5>Deseja realmente excluir<i class="fa-regular fa-question ml-2" style="color: var(--corPrincipal); margin-right: 5px"></i></h5>
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-Acoes mr-4" data-bs-dismiss="modal">Não</button>
+                <button type="submit" class="btn btn-Acoes" onclick="excluirAgenda(@Model.Id)" data-bs-dismiss="modal">Sim</button>
+            </div>
+
+        </form>
+
+    </div>
+</div>

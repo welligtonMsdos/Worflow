@@ -6,6 +6,8 @@ using Worflow.Dados.Interfaces;
 using Worflow.Enum;
 using Worflow.Models;
 using Worflow.Repository;
+using Worflow.ValidatorFluent;
+using ValidationResult = FluentValidation.Results.ValidationResult;
 
 namespace Worflow.Services;
 
@@ -54,7 +56,7 @@ public class AgendaService : IAgendaService
     {
         AgendaDefault(ref obj);
 
-        Validator.ValidateObject(obj, new ValidationContext(obj), true);
+        System.ComponentModel.DataAnnotations.Validator.ValidateObject(obj, new System.ComponentModel.DataAnnotations.ValidationContext(obj), true);
 
         _repository.Incluir(obj);
 
@@ -99,5 +101,35 @@ public class AgendaService : IAgendaService
         return listaDatasAgenda;
     }
 
-    public ICollection<Agenda> Pesquisar(string value) => _repository.Pesquisar(value);        
+    public ICollection<Agenda> Pesquisar(string value) => _repository.Pesquisar(value);
+   
+    public string AgendaPut(string data, string horario, string comentario, int agendaId)
+    {
+        Agenda agenda = new Agenda(agendaId, data, horario, comentario);
+
+        AgendaValidator validator = new AgendaValidator();
+
+        ValidationResult results = validator.Validate(agenda);
+
+        if (!results.IsValid) return results.ToString("~");
+
+        Alterar(agenda);
+
+        return "OK";
+    }
+
+    public string AgendaPost(string data, string horario, string comentario)
+    {
+        Agenda agenda = new Agenda(data, horario, comentario);
+
+        AgendaValidator validator = new AgendaValidator();
+
+        ValidationResult results = validator.Validate(agenda);
+
+        if (!results.IsValid) return results.ToString("~");
+
+        Incluir(agenda);
+
+        return "OK";
+    }
 }

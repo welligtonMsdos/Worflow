@@ -25,13 +25,13 @@
                             <label>@item.Comentario</label>
                         </div>
 
-                        <div class="col-4 col-md-4 col-sm-1 d-grid gap-2 d-sm-flex d-md-flex justify-content-md-end">                           
+                        <div class="col-4 col-md-4 col-sm-1 d-grid gap-2 d-sm-flex d-md-flex justify-content-md-end">
 
-                            <button type="button" class="btn btn-Acoes mb-2">
+                            <button type="button" class="btn btn-Acoes mb-2" onclick="abrirEditarAgenda(@item.Id)">
                                 <i class="fa fa-pencil-square"></i>
                             </button>
 
-                            <button type="button" class="btn btn-Excluir mb-2">
+                            <button type="button" class="btn btn-Excluir mb-2" onclick="abrirExcluirAgenda(@item.Id)">
                                 <i class="fa-regular fa-trash-can"></i>
                             </button>
 
@@ -43,3 +43,6 @@
     }
 
 </div>
+
+
+

@@ -1,6 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Diagnostics;
+using Worflow.Core;
+using Worflow.Dados.EFCore;
 using Worflow.Dados.Interfaces;
 using Worflow.Models;
 using Worflow.Services;
@@ -23,68 +25,31 @@ namespace Worflow.Controllers
             var datas = _agendaService.BuscarDatas();
 
             return View(datas);
-        }
-     
-        //public IActionResult CreateAgenda(string dataTarefa)
-        //{
-        //    Agenda agenda = new Agenda(DateTime.Parse(dataTarefa));
-
-        //    return View(agenda);
-        //}
-      
-        //[Route("InserirAgenda")]
-        //public ActionResult InserirAgenda(Agenda agenda)
-        //{
-        //    if (ModelState.IsValid)
-        //    {
-        //        _agendaService.Incluir(agenda);
-
-        //        return RedirectToAction(nameof(ListarAgendas));
-        //    }
-
-        //    return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
-        //}
-                      
+        }   
+        
         public IActionResult InserirTarefa(string data, string horario, string comentario)
         {
-            if (ModelState.IsValid)
-            {
-                var agenda = new Agenda(data, horario, comentario);
+            string result = _agendaService.AgendaPost(data, horario, comentario);
 
-                _agendaService.Incluir(agenda);
+            if (!result.Equals("OK")) return Json(new { IsCreated = false, ErrorMessage = result });
 
-                return RedirectToAction(nameof(ListarAgendas));
-            }
-
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+            return RedirectToAction(nameof(ListarAgendas));
         }
 
-        public ActionResult EditarAgenda(int agendaID)
+        public IActionResult AtualizarAgenda(string data, string horario, string comentario, int agendaId)
         {
-            var agenda = _agendaService.BuscarPorId(agendaID);
+            string result = _agendaService.AgendaPut(data, horario, comentario, agendaId);
 
-            return View(agenda);
+            if (!result.Equals("OK")) return Json(new { IsCreated = false, ErrorMessage = result });
+
+            return RedirectToAction(nameof(ListarAgendas));
         }
-      
-        [Route("AtualizarAgenda")]      
-        public ActionResult AtualizarAgenda(Agenda agenda)
-        {
-            if (ModelState.IsValid)
-            {
-                _agendaService.Alterar(agenda);
 
-                return RedirectToAction(nameof(ListarAgendas));
-            }
-
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
-        }
-       
-        [Route("ExcluirAgenda")]
-        public ActionResult ExcluirAgenda(int id)
+        public IActionResult ExcluirAgenda(int agendaId)
         {
-            if (id > 0)
+            if (agendaId > 0)
             {
-                var agenda = _agendaService.BuscarPorId(id);
+                var agenda = _agendaService.BuscarPorId(agendaId);
 
                 _agendaService.Excluir(agenda);
 
@@ -92,6 +57,27 @@ namespace Worflow.Controllers
             }
 
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+        }
+
+        public IActionResult BuscarEditarAgenda(int agendaId)
+        {
+            var agenda = _agendaService.BuscarPorId(agendaId);
+            
+            return PartialView("~/Views/Agenda/PartialViews/_EditarAgenda.cshtml", agenda);
+        }
+
+        public IActionResult BuscarExcluirAgenda(int agendaId)
+        {
+            var agenda = _agendaService.BuscarPorId(agendaId);           
+
+            return PartialView("~/Views/Agenda/PartialViews/_ExcluirAgenda.cshtml", agenda);
+        }
+
+        public ActionResult EditarAgenda(int agendaID)
+        {
+            var agenda = _agendaService.BuscarPorId(agendaID);
+
+            return View(agenda);
         }
     }
 }
