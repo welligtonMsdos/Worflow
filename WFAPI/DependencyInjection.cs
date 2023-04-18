@@ -14,6 +14,18 @@ public static class DependencyInjection
         services.AddTransient<IAgendaRepository, AgendaEF>();
         services.AddTransient<IAgendaService, AgendaService>();
 
+        services.AddTransient<IClienteRepository, ClienteEF>();
+        services.AddTransient<IClienteService, ClienteService>();
+
+        services.AddTransient<ICotacaoRepository, CotacaoEF>();
+        services.AddTransient<ICotacaoService, CotacaoService>();
+
+        services.AddTransient<IEnderecoRepository, EnderecoEF>();
+        services.AddTransient<IEnderecoService, EnderecoService>();
+
+        services.AddTransient<ILeadRepository, LeadEF>();
+        services.AddTransient<ILeadService, LeadService>();
+
         services.AddTransient<IPerfilRepository, PerfilEF>();
         services.AddTransient<IPerfilService, PerfilService>();
 
@@ -24,9 +36,7 @@ public static class DependencyInjection
         services.AddTransient<IStatusService, StatusService>();
      
         services.AddTransient<ISeguradoraRepository, SeguradoraEF>();
-        services.AddTransient<ISeguradoraService, SeguradoraService>();
-
-       
+        services.AddTransient<ISeguradoraService, SeguradoraService>();       
 
         return services;
     }

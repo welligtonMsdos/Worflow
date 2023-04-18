@@ -13,7 +13,7 @@ public class AgendaController : Controller
     private readonly IAgendaService _service;
     private readonly IMapper _mapper;
 
-    public AgendaController(IAgendaService agendaService, IMapper mapper) => (_service,_mapper) = (agendaService,mapper);
+    public AgendaController(IAgendaService service, IMapper mapper) => (_service,_mapper) = (service,mapper);
 
     [HttpGet]
     public IEnumerable<ReadAgendaDto> BuscarTodos()
