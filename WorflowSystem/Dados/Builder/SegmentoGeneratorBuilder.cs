@@ -3,18 +3,13 @@ using Worflow.Models;
 
 namespace Worflow.Dados.Builder;
 
-public class SegmentoGeneratorBuilder : ISegmentoBuilder, IDadosBuilder<Segmento>
+public class SegmentoGeneratorBuilder : IDadosBuilder<Segmento>
 {
     private Segmento segmento;
-    public SegmentoGeneratorBuilder()
-    {
-        DadosSegmento();
-    }
-
+    public SegmentoGeneratorBuilder() => Dados();
     public int Id => 1;
 
-    public void DadosSegmento() => segmento = new Segmento(1, "Agro");
-
+    public void Dados() => segmento = new Segmento(1, "Agro");
     public Segmento DeleteNotValid()
     {
         segmento.Id = 0;

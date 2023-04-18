@@ -3,17 +3,14 @@ using Worflow.Models;
 
 namespace Worflow.Dados.Builder;
 
-public class SeguradoraGeneratorBuilder : ISeguradoraBuilder, IDadosBuilder<Seguradora>
+public class SeguradoraGeneratorBuilder : IDadosBuilder<Seguradora>
 {
     private Seguradora seguradora;
 
-    public SeguradoraGeneratorBuilder()
-    {
-        DadosSeguradora();
-    }
+    public SeguradoraGeneratorBuilder() => Dados();
     public int Id => 1;
 
-    public void DadosSeguradora() => seguradora = new Seguradora(Id, "Porto");
+    public void Dados() => seguradora = new Seguradora(Id, "Porto");   
 
     public Seguradora DeleteNotValid()
     {

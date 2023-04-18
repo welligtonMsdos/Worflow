@@ -3,18 +3,13 @@ using Worflow.Models;
 
 namespace Worflow.Dados.Builder;
 
-public class ProdutoGeneratorBuilder : IProdutoBuilder, IDadosBuilder<Produto>
+public class ProdutoGeneratorBuilder : IDadosBuilder<Produto>
 {
     private Produto produto;
-    public ProdutoGeneratorBuilder()
-    {
-        DadosProduto();
-    }
-
+    public ProdutoGeneratorBuilder() => Dados();
     public int Id => 1;
 
-    public void DadosProduto() => produto = new Produto(Id, "Garantia");
-
+    public void Dados() => produto = new Produto(Id, "Garantia");
     public Produto DeleteNotValid()
     {
         produto.Id = 0;

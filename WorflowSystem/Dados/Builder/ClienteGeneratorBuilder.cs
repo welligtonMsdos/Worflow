@@ -7,14 +7,16 @@ namespace Worflow.Dados.Builder;
 public class ClienteGeneratorBuilder : IClienteBuilder, IDadosBuilder<Cliente>
 {
     private Endereco endereco;
-    private Cliente cliente;   
+    private Cliente cliente;
 
-    public ClienteGeneratorBuilder()
+    public ClienteGeneratorBuilder() => Dados();
+    public int Id => 1;
+
+    public void Dados()
     {
         DadosEndereco();
         DadosCliente();
     }
-    public int Id => 1;
 
     public void DadosCliente()
     {

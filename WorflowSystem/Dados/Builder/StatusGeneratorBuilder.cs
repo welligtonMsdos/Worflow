@@ -3,18 +3,15 @@ using Worflow.Models;
 
 namespace Worflow.Dados.Builder;
 
-public class StatusGeneratorBuilder : IStatusBuilder, IDadosBuilder<Status>
+public class StatusGeneratorBuilder : IDadosBuilder<Status>
 {
     private Status status;
 
-    public StatusGeneratorBuilder()
-    {
-        DadosStatus();
-    }
+    public StatusGeneratorBuilder() => Dados();
 
     public int Id => 1;
 
-    public void DadosStatus() => status = new Status(Id, "Inicio");
+    public void Dados() => status = new Status(Id, "Inicio");
 
     public Status DeleteNotValid()
     {

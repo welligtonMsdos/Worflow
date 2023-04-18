@@ -4,26 +4,26 @@ using Worflow.Models;
 
 namespace Worflow.Dados.Builder;
 
-public class EnderecoGeneratorBuilder : IEnderecoBuilder, IDadosBuilder<Endereco>
+public class EnderecoGeneratorBuilder : IDadosBuilder<Endereco>
 {
     private Endereco endereco;
 
     public int Id => 1;
 
-    public EnderecoGeneratorBuilder() => DadosEndereco();
+    public EnderecoGeneratorBuilder() => Dados();
 
-    public void DadosEndereco()
+    public void Dados()
     {
         endereco = new EnderecoBuilder()
-            .Id(Id)
-            .Cep("01020000")
-            .Logadouro("Rua do centro")
-            .Numero("100")
-            .Bairro("Bairro")
-            .Cidade("Cidade")
-            .Uf("UF")
-            .Build();
-    }
+             .Id(Id)
+             .Cep("01020000")
+             .Logadouro("Rua do centro")
+             .Numero("100")
+             .Bairro("Bairro")
+             .Cidade("Cidade")
+             .Uf("UF")
+             .Build();
+    }   
 
     public Endereco DeleteNotValid()
     {
@@ -41,5 +41,5 @@ public class EnderecoGeneratorBuilder : IEnderecoBuilder, IDadosBuilder<Endereco
 
     public Endereco Post() => endereco;
 
-    public Endereco Put() => Get();
+    public Endereco Put() => Get();   
 }

@@ -12,5 +12,7 @@ public interface IDadosBuilder<T>
 
     T DeleteNotValid();
 
+    void Dados();
+
     public int Id { get; }
 }

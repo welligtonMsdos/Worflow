@@ -3,17 +3,14 @@ using Worflow.Models;
 
 namespace Worflow.Dados.Builder;
 
-public class UsuarioGeneratorBuilder : IUsuarioBuilder, IDadosBuilder<Usuario>
+public class UsuarioGeneratorBuilder : IDadosBuilder<Usuario>
 {
     private Usuario usuario;
-    public UsuarioGeneratorBuilder()
-    {
-        DadosUsuario();
-    }
+    public UsuarioGeneratorBuilder() => Dados();
 
     public int Id => 1;
 
-    public void DadosUsuario() => usuario = new Usuario(0, "João da Silva", "JOAVA", 1);
+    public void Dados() => usuario = new Usuario(0, "João da Silva", "JOAVA", 1);
 
     public Usuario DeleteNotValid()
     {

@@ -9,9 +9,13 @@ public class LeadGeneratorBuilder : ILeadBuilder, IDadosBuilder<Lead>
     private Lead _lead;
     private Endereco endereco;
 
-    public LeadGeneratorBuilder()
+    public LeadGeneratorBuilder() => Dados();
+    public int Id => 1;
+
+    public void Dados()
     {
         _lead = new Lead();
+
         Endereco();
         Cliente();
         Produto();
@@ -20,7 +24,18 @@ public class LeadGeneratorBuilder : ILeadBuilder, IDadosBuilder<Lead>
         Usuario();
     }
 
-    public int Id => 1;
+    public void Endereco()
+    {
+        endereco = new EnderecoBuilder()
+              .Id(Id)
+              .Cep("01310200")
+              .Logadouro("Av.Paulista")
+              .Numero("1578")
+              .Bairro("Bela Vista")
+              .Cidade("Cidade")
+              .Uf("SP")
+              .Build();
+    }
 
     public void Cliente()
     {        
@@ -40,35 +55,6 @@ public class LeadGeneratorBuilder : ILeadBuilder, IDadosBuilder<Lead>
         _lead.ClienteId = 1;
     }
 
-    public Lead DeleteNotValid()
-    {
-        _lead.Id = 0;
-        return _lead;
-    }
-
-    public Lead DeleteValid() => Get();
-
-    public void Endereco()
-    {
-        endereco = new EnderecoBuilder()
-              .Id(Id)
-              .Cep("01310200")
-              .Logadouro("Av.Paulista")
-              .Numero("1578")
-              .Bairro("Bela Vista")
-              .Cidade("Cidade")
-              .Uf("SP")
-              .Build();
-    }
-
-    public Lead Get()
-    {
-        _lead.Id = Id;
-        return _lead;
-    }
-
-    public Lead Post() => _lead;
-
     public void Produto()
     {
         Produto produto = new Produto(1, "Garantia");
@@ -76,8 +62,6 @@ public class LeadGeneratorBuilder : ILeadBuilder, IDadosBuilder<Lead>
         _lead.Produto = produto;
         _lead.ProdutoId = 1;
     }
-
-    public Lead Put() => Get();
 
     public void Segmento()
     {
@@ -99,4 +83,22 @@ public class LeadGeneratorBuilder : ILeadBuilder, IDadosBuilder<Lead>
         _lead.Usuario = usuario;
         _lead.UsuarioId = 1;
     }
+
+    public Lead DeleteNotValid()
+    {
+        _lead.Id = 0;
+        return _lead;
+    }
+
+    public Lead DeleteValid() => Get();   
+
+    public Lead Get()
+    {
+        _lead.Id = Id;
+        return _lead;
+    }
+
+    public Lead Post() => _lead;    
+
+    public Lead Put() => Get();
 }

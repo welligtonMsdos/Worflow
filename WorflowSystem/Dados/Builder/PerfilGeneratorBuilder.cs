@@ -3,19 +3,13 @@ using Worflow.Models;
 
 namespace Worflow.Dados.Builder;
 
-public class PerfilGeneratorBuilder : IPerfilBuilder, IDadosBuilder<Perfil>
+public class PerfilGeneratorBuilder : IDadosBuilder<Perfil>
 {
     private Perfil perfil;
 
-    public PerfilGeneratorBuilder()
-    {
-        DadosPerfil();
-    }
-
+    public PerfilGeneratorBuilder() => Dados();
     public int Id { get => 1; }
-
-    public void DadosPerfil() => perfil = new Perfil(Id, "Admin");
-
+    public void Dados() => perfil = new Perfil(Id, "Admin");
     public Perfil DeleteNotValid()
     {
         perfil.Id = 0;
