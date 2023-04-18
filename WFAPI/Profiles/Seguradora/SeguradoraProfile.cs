@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
 using WFAPI.Dtos.Seguradora;
 
-namespace WFAPI.Profiles.SeguradoraProfile;
+namespace WFAPI.Profiles.Seguradora;
 
 public class SeguradoraProfile: Profile
 {
