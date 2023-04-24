@@ -1,0 +1,33 @@
+﻿<div class="row">
+    
+    <div class="col col-lg-12">
+                
+        <canvas id="grafico_barras" width="400" height="150">
+
+        </canvas>
+
+    </div>
+
+</div>
+
+<div class="row">
+
+    <div class="col col-lg-6">
+               
+       <canvas id="grafico_pizza" width="200" height="200"> 
+
+       </canvas>
+
+    </div>
+
+</div>
+
+<script src="https://code.jquery.com/jquery-1.9.1.js"></script>
+
+@section Scripts {    
+
+    @{
+        await Html.RenderPartialAsync("_DashboardScriptsPartial");
+    }
+
+}
