@@ -73,7 +73,7 @@ body {
     --textoSecundario: #000;
 }
 
-.texto__padrao{
+.texto__padrao {
     color: var(--corPrincipal);
 }
 
@@ -233,3 +233,7 @@ ul.timeline > li:before{
         background-color: var(--corPrincipal);
         color: var(--textoSecundario);
     }
+
+.fc-center > h2{
+    color: var(--corPrincipal);
+}

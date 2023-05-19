@@ -1,0 +1,47 @@
+﻿<html>
+<head>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/2.6.1/fullcalendar.min.css" type="text/css" rel="stylesheet" />
+</head>
+
+<body>
+
+    <div class="container">
+
+        <div class="row">
+            <div class="col-xs-12">
+                <br />
+
+                <div id="calendar">
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+
+
+    <script src="~/lib/agenda/js/moment.min.js"></script>
+    <script src="~/lib/agenda/js/jquery.min.js"></script>
+    <script src="~/lib/agenda/js/jquery-ui.custom.min.js"></script>
+    <script src="~/lib/agenda/js/fullcalendar.js"></script>
+    <script src="~/lib/agenda/js/pt-br.js"></script>
+
+
+    <script>
+        $(document).ready(function(){
+            $('#calendar').fullCalendar({
+                locale: 'pt-br',
+                header:{
+                    left: 'prev,next today',
+                    center: 'title',
+                    right: 'month,agendaWeek,agendaDay'
+                },
+                editable: true,
+                eventLimit: true,
+                events: '@Url.Action("EventAll","Agenda")'
+            })
+        })
+    </script>
+
+</body>
+</html>

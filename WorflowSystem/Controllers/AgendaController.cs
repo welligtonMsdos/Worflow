@@ -1,11 +1,9 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using System;
+using System.Collections.Generic;
 using System.Diagnostics;
-using Worflow.Core;
-using Worflow.Dados.EFCore;
+using System.Linq;
 using Worflow.Dados.Interfaces;
-using Worflow.Models;
-using Worflow.Services;
+using Worflow.Dtos;
 using WorflowSystem.Models;
 
 namespace Worflow.Controllers
@@ -14,11 +12,26 @@ namespace Worflow.Controllers
     public class AgendaController : Controller
     {
         IAgendaService _agendaService;
+        IEventService _eventService;
 
-        public AgendaController(IAgendaService agendaService)
+        public AgendaController(IAgendaService agendaService, IEventService eventService)
         {
             _agendaService = agendaService;
+            _eventService = eventService;
         }
+
+        public IActionResult BuscarCalendar()
+        {
+            return PartialView("~/Views/Agenda/PartialViews/_Calendar.cshtml");
+        }
+
+        public IActionResult EventAll()
+        {
+            var events = _eventService.BuscarTodos();    
+
+            return new JsonResult(events);
+        }
+
 
         public IActionResult ListarAgendas()
         {

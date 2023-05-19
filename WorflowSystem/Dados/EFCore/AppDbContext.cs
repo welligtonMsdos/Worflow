@@ -24,10 +24,11 @@ public class AppDbContext : DbContext
     public DbSet<Cotacao> Cotacoes { get; set; }
     public DbSet<Historico> Historico { get; set; }
     public DbSet<Anexo> Anexo { get; set; }
+    public DbSet<Event> Event { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {            
-       optionsBuilder.UseSqlServer("Data Source=DESKTOP-TK7GSO1\\SQLEXPRESS;Initial Catalog=BDWorflow;Integrated Security=True;Trust Server Certificate=true");         
+       optionsBuilder.UseSqlServer("Data Source=DESKTOP-TK7GSO1\\SQLEXPRESS;Initial Catalog=BDWorflow;Integrated Security=True;Trust Server Certificate=true"); 
     }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -46,5 +47,6 @@ public class AppDbContext : DbContext
         modelBuilder.ApplyConfiguration(new CotacaoMap());
         modelBuilder.ApplyConfiguration(new HistoricoMap());
         modelBuilder.ApplyConfiguration(new AnexoMap());
+        modelBuilder.ApplyConfiguration(new EventMap());
     }
 }
